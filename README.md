@@ -10,5 +10,6 @@ Because the license requires it, here is a list of changes made:
 * Removed background selection as it was problematic
 * Remove autotip error reporting
 * Updated default settings
+* Fully disabled the `(BETA)` improvements
 
 This fork is maintained by [RDIL](https://rdil.rocks)
