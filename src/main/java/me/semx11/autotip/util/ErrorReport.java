@@ -20,56 +20,7 @@ public class ErrorReport {
         ErrorReport.autotip = autotip;
     }
 
-    public static void reportException(Throwable t) {
-        Autotip.LOGGER.error(t.getMessage(), t);
-        try {
-            URL url = new URL("https://api.autotip.pro/error_report.php");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("POST");
-            conn.setDoOutput(true);
-
-            JsonObjectBuilder builder = JsonObjectBuilder.newBuilder()
-                    .addString("username", autotip.getGameProfile().getName())
-                    .addString("uuid", autotip.getGameProfile().getId())
-                    .addString("v", autotip.getVersion())
-                    .addString("mc", autotip.getMcVersion())
-                    .addString("os", System.getProperty("os.name"))
-                    .addString("forge", "hyperium")
-                    .addString("stackTrace", ExceptionUtils.getStackTrace(t))
-                    .addNumber("time", System.currentTimeMillis());
-
-            if (autotip.isInitialized()) {
-                EventClientConnection event = autotip.getEvent(EventClientConnection.class);
-                builder.addString("sessionKey", autotip.getSessionManager().getKey())
-                        .addString("serverIp", event.getServerIp());
-            }
-
-            byte[] jsonBytes = builder.build().toString().getBytes(StandardCharsets.UTF_8);
-
-            conn.setFixedLengthStreamingMode(jsonBytes.length);
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setRequestProperty("User-Agent", "Autotip v" + autotip.getVersion());
-            conn.connect();
-
-            try (OutputStream out = conn.getOutputStream()) {
-                out.write(jsonBytes);
-            }
-
-            InputStream input;
-            if (conn.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
-                input = conn.getInputStream();
-            } else {
-                input = conn.getErrorStream();
-            }
-            String json = IOUtils.toString(input, StandardCharsets.UTF_8);
-            Autotip.LOGGER.info("Error JSON: " + json);
-
-        } catch (IOException e) {
-            // Hmm... what would happen if I were to report this one?
-            e.printStackTrace();
-        }
-    }
+    public static void reportException(Throwable t) {}
 
     private static class JsonObjectBuilder {
 
