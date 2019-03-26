@@ -16,16 +16,13 @@
  */
 
 package club.sk1er.website.api.requests;
-
 import cc.hyperium.utils.JsonHolder;
 
 public class HypixelApiFriendObject {
     private final JsonHolder data;
     private int ord = -1;
-
     public HypixelApiFriendObject(JsonHolder data) {
         this.data = data;
-
         switch (data.optString("rank")) {
             case "ADMIN":
                 ord = 1;
@@ -73,8 +70,7 @@ public class HypixelApiFriendObject {
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof HypixelApiFriendObject &&
-                ((HypixelApiFriendObject) obj).getUuid().equals(getUuid());
+        return obj instanceof HypixelApiFriendObject && ((HypixelApiFriendObject) obj).getUuid().equals(getUuid());
     }
 
     public long getLogoff() {
