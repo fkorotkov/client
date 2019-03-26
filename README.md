@@ -9,5 +9,6 @@ Because the license requires it, here is a list of changes made:
 * Disabled tray icon
 * Removed background selection as it was problematic
 * Remove autotip error reporting
+* Updated default settings
 
 This fork is maintained by [RDIL](https://rdil.rocks)
