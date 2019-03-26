@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.launch;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.internal.addons.AddonBootstrap;
 import net.minecraft.launchwrapper.ITweaker;
@@ -25,7 +24,6 @@ import net.minecraft.launchwrapper.LaunchClassLoader;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
-
 import java.io.File;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
@@ -39,19 +37,13 @@ import java.util.Map;
  * @since 10/02/2018 4:11 PM
  */
 public class HyperiumTweaker implements ITweaker {
-
+    private boolean OPTIFINE = false;
     public static HyperiumTweaker INSTANCE;
-
     private ArrayList<String> args = new ArrayList<>();
-
     private boolean isRunningForge = Launch.classLoader.getTransformers().stream()
         .anyMatch(p -> p.getClass().getName().contains("fml"));
-
-    private boolean isRunningOptifine = Launch.classLoader.getTransformers().stream()
-        .anyMatch(p -> p.getClass().getName().contains("optifine"));
-
+    OPTIFINE = Launch.classLoader.getTransformers().stream().anyMatch(p -> p.getClass().getName().contains("optifine"));
     private boolean FORGE = false;
-    private boolean OPTIFINE = false;
 
     public HyperiumTweaker() {
         INSTANCE = this;
@@ -61,7 +53,6 @@ public class HyperiumTweaker implements ITweaker {
     public void acceptOptions(List<String> args, File gameDir, final File assetsDir,
                               String profile) {
         this.args.addAll(args);
-
         addArg("gameDir", gameDir);
         addArg("assetsDir", assetsDir);
         addArg("version", profile);
@@ -74,32 +65,22 @@ public class HyperiumTweaker implements ITweaker {
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        //classLoader.addClassLoaderExclusion("org.apache.logging.log4j.simple.")
-
-        Hyperium.LOGGER.info("[Addons] Loading Addons...");
-
         Hyperium.LOGGER.info("Initialising Bootstraps...");
         MixinBootstrap.init();
         AddonBootstrap.INSTANCE.init();
-
         Hyperium.LOGGER.info("Applying transformers...");
         //classLoader.registerTransformer("cc.hyperium.mods.memoryfix.ClassTransformer")
 
         // Excludes packages from classloader
         MixinEnvironment environment = MixinEnvironment.getDefaultEnvironment();
         Mixins.addConfiguration("mixins.hyperium.json");
-
         if (this.isRunningForge) {
             this.FORGE = true;
             environment.setObfuscationContext("searge"); // Switch's to forge searge mappings
         }
-
-        if (this.isRunningOptifine) {
-            this.OPTIFINE = true;
-
+        if (this.OPTIFINE) {
             environment.setObfuscationContext("notch"); // Switch's to notch mappings
         }
-
         if (environment.getObfuscationContext() == null) {
             environment.setObfuscationContext("notch"); // Switch's to notch mappings
         }
