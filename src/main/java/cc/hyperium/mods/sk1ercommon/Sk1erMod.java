@@ -23,7 +23,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import org.apache.commons.io.IOUtils;
-
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -95,8 +94,9 @@ public class Sk1erMod {
 
     public String rawWithAgent(String url) {
         System.out.println("[Sk1erMod] Fetching " + url);
-        if (!Hyperium.INSTANCE.isAcceptedTos())
+        if (!Hyperium.INSTANCE.isAcceptedTos()) {
             return new JsonHolder().put("success", false).put("cause", "TOS_NOT_ACCEPTED").toString();
+        }
         url = url.replace(" ", "%20");
         try {
             URL u = new URL(url);
@@ -109,7 +109,6 @@ public class Sk1erMod {
             connection.setDoOutput(true);
             InputStream is = connection.getInputStream();
             return IOUtils.toString(is, Charset.forName("UTF-8"));
-
         } catch (Exception e) {
             e.printStackTrace();
         }
