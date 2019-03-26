@@ -15,7 +15,6 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /**
  * Contains String Constants of the mod
  */
@@ -29,7 +28,7 @@ val MODID
 
 val VERSION
     @JvmName("getVersion")
-    get() = "1.1"
+    get() = "2.0"
 
 val AUTHORS
     @JvmName("getAuthors")
