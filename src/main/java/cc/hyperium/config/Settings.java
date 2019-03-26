@@ -550,9 +550,6 @@ public class Settings {
     public static boolean BROWSER_DOWNLOAD = false;
 
     @ConfigOpt
-    public static long TOTAL_PLAYTIME = 0;
-
-    @ConfigOpt
     @ToggleSetting(name = "gui.settings.victoryroyale", category = VICTORYROYALE, mods = true)
     public static boolean VICTORY_ROYALE = false;
 
