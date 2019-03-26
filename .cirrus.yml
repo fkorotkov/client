@@ -10,9 +10,7 @@ test_task:
     fingerprint_script:
       - cat build.gradle
       - cat settings.gradle
-      - cat gradle/wrapper/gradle-wrapper.properties
-      - echo $OS
-      - echo $CI
+      - echo $OS $CI
     populate_script: ./gradlew setupDecompWorkspace
   build_script:
     - ./gradlew build
