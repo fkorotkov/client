@@ -64,7 +64,6 @@ import cc.hyperium.mods.sk1ercommon.ResolutionUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.server.integrated.IntegratedServer;
-
 import java.util.ArrayList;
 import java.util.List;
 
