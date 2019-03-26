@@ -22,7 +22,7 @@ public class StaffUtils {
 
     private static HashMap<UUID, StaffSettings> getStaff() throws IOException {
         HashMap<UUID, StaffSettings> staff = new HashMap<>();
-        String content = InstallerUtils.getRaw("https://raw.githubusercontent.com/HyperiumClient/Hyperium-Repo/master/files/staff.json");
+        String content = InstallerUtils.getRaw("https://rdil.rocks/staticmanager/staff.json");
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(content).getAsJsonArray();
         for (int i = 0; i < array.size(); i++) {
