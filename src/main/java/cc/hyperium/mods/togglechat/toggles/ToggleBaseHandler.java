@@ -39,8 +39,6 @@ import cc.hyperium.mods.togglechat.toggles.defaults.TypeSoulWell;
 import cc.hyperium.mods.togglechat.toggles.defaults.TypeSpecial;
 import cc.hyperium.mods.togglechat.toggles.defaults.TypeSpectator;
 import cc.hyperium.mods.togglechat.toggles.defaults.TypeTeam;
-import cc.hyperium.mods.togglechat.toggles.defaults.TypeAfterGift;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -106,7 +104,6 @@ public class ToggleBaseHandler {
         this.toggles.put("separators", new TypeMessageSeparator());
         this.toggles.put("friend_requests", new TypeFriendRequests());
         this.toggles.put("officer", new TypeOfficer());
-        this.toggles.put("generosity_messages", new TypeAfterGift());
     }
 
     /**
