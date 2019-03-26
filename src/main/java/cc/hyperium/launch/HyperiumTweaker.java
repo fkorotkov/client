@@ -14,7 +14,6 @@
  *     You should have received a copy of the GNU Lesser General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package cc.hyperium.launch;
 import cc.hyperium.Hyperium;
 import cc.hyperium.internal.addons.AddonBootstrap;
@@ -34,7 +33,7 @@ import java.util.Map;
  * Contains utilities used to subscribe and invoke events
  *
  * @author Kevin
- * @since 10/02/2018 4:11 PM
+ * @since 10/02/2018
  */
 public class HyperiumTweaker implements ITweaker {
     private boolean OPTIFINE = false;
@@ -42,9 +41,8 @@ public class HyperiumTweaker implements ITweaker {
     private ArrayList<String> args = new ArrayList<>();
     private boolean isRunningForge = Launch.classLoader.getTransformers().stream()
         .anyMatch(p -> p.getClass().getName().contains("fml"));
-    OPTIFINE = Launch.classLoader.getTransformers().stream().anyMatch(p -> p.getClass().getName().contains("optifine"));
+    this.OPTIFINE = Launch.classLoader.getTransformers().stream().anyMatch(p -> p.getClass().getName().contains("optifine"));
     private boolean FORGE = false;
-
     public HyperiumTweaker() {
         INSTANCE = this;
     }
