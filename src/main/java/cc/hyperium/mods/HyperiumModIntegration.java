@@ -32,7 +32,6 @@ import cc.hyperium.mods.levelhead.Levelhead;
 import cc.hyperium.mods.motionblur.MotionBlurMod;
 import cc.hyperium.mods.nickhider.NickHider;
 import cc.hyperium.mods.oldanimations.OldAnimations;
-import cc.hyperium.mods.playtime.PlayTime;
 import cc.hyperium.mods.spotify.SpotifyControls;
 import cc.hyperium.mods.tabtoggle.TabToggleMod;
 import cc.hyperium.mods.timechanger.TimeChanger;
@@ -59,7 +58,6 @@ public class HyperiumModIntegration {
     private final MotionBlurMod motionBlur;
     private final OldAnimations oldanimations;
     private final AutofriendMod autofriend;
-    private final PlayTime playTime;
     private final FortniteCompassMod fncompass;
     private final TabToggleMod tabToggle;
     private final ItemPhysicMod itemPhysicMod;
@@ -113,9 +111,6 @@ public class HyperiumModIntegration {
 
         //Autofriend implementation
         this.autofriend = ((AutofriendMod) new AutofriendMod().init());
-
-        //Play Time addon port
-        this.playTime = (PlayTime) new PlayTime().init();
 
         this.fncompass = (FortniteCompassMod) new FortniteCompassMod().init();
 
@@ -184,10 +179,6 @@ public class HyperiumModIntegration {
 
     public AutofriendMod getAutofriend() {
         return autofriend;
-    }
-
-    public PlayTime getPlayTime() {
-        return playTime;
     }
 
     public FortniteCompassMod getFncompass() {
