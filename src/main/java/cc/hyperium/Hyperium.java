@@ -207,12 +207,10 @@ public class Hyperium {
             EventBus.INSTANCE.register(minigameListener);
             EventBus.INSTANCE.register(new ToggleSprintContainer());
             EventBus.INSTANCE.register(notification);
-
             EventBus.INSTANCE.register(CompactChat.getInstance());
             EventBus.INSTANCE.register(CONFIG.register(FPSLimiter.getInstance()));
             EventBus.INSTANCE.register(confirmation);
             EventBus.INSTANCE.register(new BlurHandler());
-            EventBus.INSTANCE.register(new CommandUpdate());
             EventBus.INSTANCE.register(new ThankWatchdog());
 
             // Register statistics tracking.
