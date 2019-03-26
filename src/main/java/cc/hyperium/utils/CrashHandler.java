@@ -80,19 +80,6 @@ public class CrashHandler {
         sp.getHorizontalScrollBar().setBounds(b.x, b.y + (b.height - 5), b.width, 5);
         UIManager.put("ScrollBar.width", 5);
 
-        JButton report = new JButton("REPORT BUG TO HYPERIUM DEV TEAM");
-        report.setBackground(Color.WHITE);
-        report.setForeground(Colors.DARK);
-        report.setFocusPainted(false);
-        report.setBorderPainted(false);
-        report.setBounds(c.getWidth() / 2 - 150, c.getHeight() - 25, 300, 20);
-        report.setFont(f);
-        report.addActionListener(e -> {
-            //TODO: Report
-        });
-        //c.add(report);
-        //TODO: Uncomment this when backend is done
-
         dialog.repaint();
     }
 
