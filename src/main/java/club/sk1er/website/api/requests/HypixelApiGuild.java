@@ -1,10 +1,8 @@
 package club.sk1er.website.api.requests;
-
 import cc.hyperium.utils.JsonHolder;
 import club.sk1er.website.utils.WebsiteUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -16,9 +14,7 @@ import java.util.List;
 public class HypixelApiGuild implements HypixelApiObject {
     private JsonHolder guild;
     private List<GuildRank> ranks;
-
     public HypixelApiGuild(JsonHolder master) {
-
         this.guild = master == null ? new JsonHolder() : master;
     }
 
@@ -48,9 +44,11 @@ public class HypixelApiGuild implements HypixelApiObject {
     }
 
     public String getFormatedTag() {
-        if (!getTag().isEmpty())
+        if (!getTag().isEmpty()) {
             return (getRoot().has("tagColor") ? WebsiteUtils.getColor(getRoot().optString("tagColor")) : "§7") + "[" + getTag() + "]";
-        return "";
+        } else {
+            return "";
+        }
     }
 
     public String getTag() {
@@ -106,11 +104,11 @@ public class HypixelApiGuild implements HypixelApiObject {
     }
 
     public List<String> getMembersUUID() {
-        ArrayList<String> meme = new ArrayList<>();
+        ArrayList<String> builtArray = new ArrayList<>();
         for (JsonElement element : getMembers()) {
-            meme.add(new JsonHolder(element.getAsJsonObject()).optString("uuid"));
+            builtArray.add(new JsonHolder(element.getAsJsonObject()).optString("uuid"));
         }
-        return meme;
+        return builtArray;
     }
 
     public int getLevelPosition() {
@@ -147,7 +145,6 @@ public class HypixelApiGuild implements HypixelApiObject {
             ranks.add(new GuildRank("GUILDMASTER", Integer.MAX_VALUE));
             ranks.add(new GuildRank("OFFICER", 4));
             ranks.add(new GuildRank("MEMBER", 3));
-
             for (JsonElement element : getRoot().optJSONArray("ranks")) {
                 JsonHolder holder = new JsonHolder(element.getAsJsonObject());
                 ranks.add(new GuildRank(holder.optString("name"), holder.optInt("priority")));
@@ -183,9 +180,7 @@ public class HypixelApiGuild implements HypixelApiObject {
     public class GuildRank {
         private String name;
         private int priority;
-
         public GuildRank(String name, int priority) {
-
             this.name = name;
             this.priority = priority;
         }
