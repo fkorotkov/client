@@ -24,7 +24,6 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import org.apache.commons.io.FileUtils;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -78,12 +77,14 @@ public class NickHider {
 
     public String getPseudo(String input) {
         int i = input.hashCode() + getPseudo_key().hashCode();
-        if (i < 0)
+        if (i < 0) {
             i = -i;
+        }
 
         int size = namesDatabase.size();
-        if (size == 0)
+        if (size == 0) {
             return "Player-error";
+        }
 
         return "Player-" + namesDatabase.get(i % size);
     }
@@ -97,7 +98,7 @@ public class NickHider {
         });
         sk1erMod.checkStatus();
         Multithreading.runAsync(() -> {
-            String s = sk1erMod.rawWithAgent("https://sk1er.club/words.txt?uuid=" + Minecraft.getMinecraft().getSession().getProfile().getId());
+            String s = sk1erMod.rawWithAgent("https://sk1er.club/words.txt");
             namesDatabase.addAll(Arrays.asList(s.split("\n")));
         });
         if (suggestedConfigurationFile.exists()) {
