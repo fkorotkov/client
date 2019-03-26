@@ -34,7 +34,6 @@ object CTJS {
 
     init {
         EventBus.INSTANCE.register(this)
-
         reflections = Reflections("com.chattriggers.ctjs")
     }
 
@@ -47,24 +46,21 @@ object CTJS {
         pictures.mkdirs()
         assetsDir = pictures
 
-        Multithreading.runAsync(thread {   loadConfig() })
+        Multithreading.runAsync(thread {
+            loadConfig()
+        })
 
         AnnotationHandler.subscribeAutomatic()
-
         UriScheme.installUriScheme()
         UriScheme.createSocketListener()
     }
 
     @InvokeEvent
     fun init(event: InitializationEvent) {
-        Multithreading.runAsync(thread { ModuleManager.load(true) })
-
-        registerHooks()
-
         Multithreading.runAsync(thread {
-            val sha256uuid = DigestUtils.sha256Hex(Player.getUUID())
-            FileLib.getUrlContent("https://www.chattriggers.com/tracker/?uuid=$sha256uuid")
+            ModuleManager.load(true)
         })
+        registerHooks()
 
         (Client.getMinecraft().renderManager as IMixinRenderManager).skinMap.values.forEach {
             (it as IMixinRenderLivingEntity<*>).callAddLayer(LayerCape(it))
@@ -86,7 +82,6 @@ object CTJS {
             ).asJsonObject
 
             Config.load(obj)
-
             return true
         } catch (exception: Exception) {
             val place = File(this.configLocation, "ChatTriggers.json")
@@ -94,7 +89,6 @@ object CTJS {
             place.createNewFile()
             saveConfig()
         }
-
         return false
     }
 
@@ -107,7 +101,5 @@ object CTJS {
     }
 
     @JvmStatic
-    fun loadIntoJVM() {
-        
-    }
+    fun loadIntoJVM() {}
 }
