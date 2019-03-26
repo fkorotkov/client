@@ -1,5 +1,4 @@
 package cc.hyperium.gui.hyperium;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.Metadata;
 import cc.hyperium.config.Category;
@@ -10,7 +9,6 @@ import cc.hyperium.gui.MaterialTextField;
 import cc.hyperium.gui.hyperium.components.AbstractTab;
 import cc.hyperium.gui.hyperium.tabs.SettingsTab;
 import cc.hyperium.gui.hyperium.tabs.ShopTab;
-import cc.hyperium.gui.hyperium.tabs.UpdateTab;
 import cc.hyperium.handlers.handlers.SettingsHandler;
 import cc.hyperium.mixinsimp.client.GlStateModifier;
 import cc.hyperium.mods.sk1ercommon.ResolutionUtil;
@@ -24,7 +22,6 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-
 import java.awt.Color;
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -99,7 +96,6 @@ public class HyperiumMainGui extends HyperiumGui {
 
         tabs = Arrays.asList(
             new SettingsTab(this),
-            new UpdateTab(this),
             new ShopTab(this)
         );
         scollMultiplier = 2;
@@ -130,16 +126,16 @@ public class HyperiumMainGui extends HyperiumGui {
     @Override
     protected void pack() {
         show = false;
-        int yg = (height / 10);  // Y grid
-        int xg = (width / 11);   // X grid
+        int yg = (height / 10); // Y grid
+        int xg = (width / 11);  // X grid
         searchField = new MaterialTextField(xg * 10 - 110, yg + (yg / 2 - 10), 100, 20,
             I18n.format("tabs.searchbar"), font);
     }
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        int yg = (height / 10);  // Y grid
-        int xg = (width / 11);   // X grid
+        int yg = (height / 10); // Y grid
+        int xg = (width / 11);  // X grid
 
         if (Minecraft.getMinecraft().theWorld == null) {
             renderHyperiumBackground(ResolutionUtil.current());
@@ -200,15 +196,6 @@ public class HyperiumMainGui extends HyperiumGui {
         if (currentAlert != null) {
             currentAlert.render(font, this.width, height);
         }
-
-        if (!isLatestVersion() && !show && Settings.UPDATE_NOTIFICATIONS && !Metadata
-            .isDevelopment() && !((UpdateTab) tabs.get(1)).isBusy()) {
-            System.out.println("[Update Notifications] Sending alert...");
-            Alert alert = new Alert(Icons.ERROR.getResource(), () -> setTab(2),
-                I18n.format("alert.update.message"));
-            alerts.add(alert);
-            show = true;
-        }
     }
 
     @Override
@@ -222,15 +209,14 @@ public class HyperiumMainGui extends HyperiumGui {
         // Set user's GUI scale to normal whilst the GUI is open.
         initialGuiScale = Minecraft.getMinecraft().gameSettings.guiScale;
         Minecraft.getMinecraft().gameSettings.guiScale = 2;
-
         super.show();
     }
 
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         super.mouseClicked(mouseX, mouseY, mouseButton);
-        int yg = (height / 10);  // Y grid
-        int xg = (width / 11);   // X grid
+        int yg = (height / 10); // Y grid
+        int xg = (width / 11);  // X grid
 
         int w = yg * 88 / 144;
         int x = this.width / 2 - w - 10;
@@ -336,10 +322,7 @@ public class HyperiumMainGui extends HyperiumGui {
     @Override
     public void onGuiClosed() {
         super.onGuiClosed();
-
-        // Save all settings.
         Hyperium.CONFIG.save();
-
         Minecraft.getMinecraft().gameSettings.guiScale = initialGuiScale;
     }
 
@@ -359,7 +342,6 @@ public class HyperiumMainGui extends HyperiumGui {
      * Important alerts and announcements from Hyperium team
      */
     public static class Alert {
-
         private ResourceLocation icon;
         private Runnable action;
         private String title;
