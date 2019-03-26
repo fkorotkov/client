@@ -4,6 +4,6 @@ test_task:
   auto_cancellation: false
   setup_workspace_script:
     - echo $CIRRUS_BUILD_ID > $CIRRUS_WORKING_DIR/src/main/resources/build.txt
-    - gradle setupDecompWorkspace
+    - ./gradlew setupDecompWorkspace
   build_script:
-    - gradle build
+    - ./gradlew build
