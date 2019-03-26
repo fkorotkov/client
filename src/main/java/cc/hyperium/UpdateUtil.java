@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium;
-
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.io.File;
@@ -40,11 +39,10 @@ public class UpdateUtil {
         final String sha1 = toHex(checksum(file, "SHA1")).toLowerCase();
         final String sha2 = toHex(checksum(file, "SHA-256")).toLowerCase();
         JTextArea textarea = new JTextArea("Size: " + size + "\n" +
-            "Sha1: " + sha1 + " \n" +
-            "Sha256: " + sha2);
+            "SHA1: " + sha1 + " \n" +
+            "SHA256: " + sha2);
         textarea.setEditable(true);
         JOptionPane.showMessageDialog(null, textarea, "Done", JOptionPane.ERROR_MESSAGE);
-
     }
 
     private static String toHex(final byte[] bytes) {
