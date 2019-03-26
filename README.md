@@ -7,5 +7,6 @@ Because the license requires it, here is a list of changes made:
 * Fixed OS X Discord RP bug
 * Removed playtime addon
 * Disabled tray icon
+* Removed background selection as it was problematic
 
 This fork is maintained by [RDIL](https://rdil.rocks)
