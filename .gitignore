@@ -9,14 +9,13 @@ ehthumbs_vista.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 *.cab
-*.msi
-*.msix
 *.msm
 *.msp
 *.lnk
 *.iml
 build/
 .gradle/
+settings.gradle
 out/
 run/
 src/api/
