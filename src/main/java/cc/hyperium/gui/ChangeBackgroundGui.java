@@ -20,7 +20,6 @@ package cc.hyperium.gui;
 import cc.hyperium.Hyperium;
 import cc.hyperium.config.Settings;
 import cc.hyperium.mods.sk1ercommon.Multithreading;
-import javafx.stage.FileChooser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -57,13 +56,7 @@ public class ChangeBackgroundGui extends GuiScreen {
         this.downloadUrlField = new GuiTextField(0, Minecraft.getMinecraft().fontRendererObj, width / 4, height / 2 - 10, width / 2, 20);
         this.downloadUrlField.setFocused(true);
         this.downloadUrlField.setMaxStringLength(150);
-        this.buttonList.add(new GuiButton(1, width / 2 - 150 / 2, height / 2 + 20, 150, 15, I18n.format("button.changebackground.seturl")));
-        this.buttonList.add(new GuiButton(2, width / 2 - 150 / 2, height / 2 + 40, 150, 15, I18n.format("button.changebackground.choosefile")));
-        this.buttonList.add(new GuiButton(3, width / 2 - 150 / 2, height / 2 + 60, 150, 15, I18n.format("button.changebackground.resetbackground")));
         this.buttonList.add(new GuiButton(4, width / 2 - 150 / 2, height / 2 + 80, 150, 15, I18n.format("gui.cancel")));
-        if(Minecraft.getMinecraft().isFullScreen()) {
-            Minecraft.getMinecraft().toggleFullscreen();
-        }
     }
 
     @Override
@@ -76,12 +69,6 @@ public class ChangeBackgroundGui extends GuiScreen {
         this.downloadUrlField.textboxKeyTyped(typedChar, keyCode);
         if (keyCode == Keyboard.KEY_ESCAPE) {
             Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(this.prevGui);
-            if(Minecraft.getMinecraft().isFullScreen()) {
-                Minecraft.getMinecraft().toggleFullscreen();
-            }
-        }
-        if (keyCode == Keyboard.KEY_RETURN) {
-            handleDownload();
         }
         super.keyTyped(typedChar, keyCode);
     }
@@ -99,95 +86,13 @@ public class ChangeBackgroundGui extends GuiScreen {
         }
         if (button.id == 4) {
             Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(prevGui);
-            if(Minecraft.getMinecraft().isFullScreen()) {
-                Minecraft.getMinecraft().toggleFullscreen();
-            }
         }
         super.actionPerformed(button);
     }
 
-    private void handleResetBackground() {
-        statusText = I18n.format("gui.changebackground.working");
-        File file = new File(Minecraft.getMinecraft().mcDataDir, "customImage.png");
-        if (file.exists()) {
-            file.delete();
-        }
-        Settings.BACKGROUND = "4";
-        statusText = I18n.format("gui.changebackground.done");
-        Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(prevGui);
-    }
-
-    private void handleChooseFile() {
-        FileDialog dialog = new FileDialog((Frame) null, I18n.format("gui.changebackground.selectimage"), FileDialog.LOAD);
-        dialog.setFile("*.jpg;*.jpeg;*.png");
-        dialog.setVisible(true);
-        if (dialog.getFiles().length != 0) {
-            String filename = dialog.getFiles()[0].getAbsolutePath();
-            if (!filename.isEmpty()) {
-                statusText = I18n.format("gui.changebackground.working");
-                InputStream input = null;
-                OutputStream output = null;
-                try {
-                    input = new FileInputStream(filename);
-                    output = new FileOutputStream(new File(Minecraft.getMinecraft().mcDataDir, "customImage.png"));
-                    IOUtils.copy(input, output);
-                    Settings.BACKGROUND = "CUSTOM";
-                    statusText = I18n.format("gui.changebackground.done");
-                    Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(prevGui);
-                } catch (FileNotFoundException e) {
-                    statusText = "Invalid path";
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    statusText = "Unknown error";
-                }
-            }
-        }
-    }
-
-    private void handleDownload() {
-        String text = this.downloadUrlField.getText().toLowerCase().trim();
-
-        if (text.isEmpty()) {
-            this.statusText = I18n.format("gui.changebackground.urlempty");
-            return;
-        }
-
-        if (text.startsWith("https")) {
-            text = text.replaceFirst("https", "http");
-        }
-
-        if (!(text.endsWith(".png") || text.endsWith(".jpg") || text.endsWith(".jpeg")) || !text.startsWith("http")) {
-            this.statusText = I18n.format("gui.changebackground.invalidurl");
-            return;
-        }
-
-        URL url;
-        URLConnection con;
-        DataInputStream dis;
-        FileOutputStream fos;
-        byte[] fileData;
-        try {
-            this.statusText = I18n.format("gui.changebackground.working");
-            url = new URL(downloadUrlField.getText());
-            con = url.openConnection();
-            con.addRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.4; en-US; rv:1.9.2.2) Gecko/20100316 Firefox/3.6.2");
-            dis = new DataInputStream(con.getInputStream());
-            fileData = new byte[con.getContentLength()];
-            for (int q = 0; q < fileData.length; q++) {
-                fileData[q] = dis.readByte();
-            }
-            dis.close();
-            fos = new FileOutputStream(new File(Minecraft.getMinecraft().mcDataDir, "customImage.png"));
-            fos.write(fileData);
-            Settings.BACKGROUND = "CUSTOM";
-            this.statusText = I18n.format("gui.changebackground.done");
-            Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(prevGui);
-            fos.close();
-        } catch (Exception m) {
-            this.statusText = I18n.format("gui.changebackground.downloaderror");
-            m.printStackTrace();
-        }
-    }
+    private void handleResetBackground() {}
+    private void handleChooseFile() {}
+    private void handleDownload() {}
 
 
     @Override
