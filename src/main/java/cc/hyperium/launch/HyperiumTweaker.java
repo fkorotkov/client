@@ -36,13 +36,14 @@ import java.util.Map;
  * @since 10/02/2018
  */
 public class HyperiumTweaker implements ITweaker {
-    private boolean OPTIFINE = false;
     public static HyperiumTweaker INSTANCE;
     private ArrayList<String> args = new ArrayList<>();
     private boolean isRunningForge = Launch.classLoader.getTransformers().stream()
         .anyMatch(p -> p.getClass().getName().contains("fml"));
-    this.OPTIFINE = Launch.classLoader.getTransformers().stream().anyMatch(p -> p.getClass().getName().contains("optifine"));
+    private boolean isRunningOptifine = Launch.classLoader.getTransformers().stream()
+        .anyMatch(p -> p.getClass().getName().contains("optifine"));
     private boolean FORGE = false;
+    private boolean OPTIFINE = false;
     public HyperiumTweaker() {
         INSTANCE = this;
     }
@@ -72,6 +73,7 @@ public class HyperiumTweaker implements ITweaker {
         // Excludes packages from classloader
         MixinEnvironment environment = MixinEnvironment.getDefaultEnvironment();
         Mixins.addConfiguration("mixins.hyperium.json");
+        this.OPTIFINE = this.isRunningOptifine;
         if (this.isRunningForge) {
             this.FORGE = true;
             environment.setObfuscationContext("searge"); // Switch's to forge searge mappings
@@ -82,7 +84,6 @@ public class HyperiumTweaker implements ITweaker {
         if (environment.getObfuscationContext() == null) {
             environment.setObfuscationContext("notch"); // Switch's to notch mappings
         }
-
         try {
             classLoader.addURL(new File(System.getProperty("java.home"), "lib/ext/nashorn.jar").toURI().toURL());
         } catch (MalformedURLException e) {
