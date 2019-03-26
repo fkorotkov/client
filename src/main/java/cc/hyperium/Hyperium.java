@@ -73,7 +73,6 @@ import cc.hyperium.netty.UniversalNetty;
 import cc.hyperium.network.LoginReplyHandler;
 import cc.hyperium.network.NetworkHandler;
 import cc.hyperium.purchases.PurchaseApi;
-import cc.hyperium.tray.TrayManager;
 import cc.hyperium.utils.HyperiumScheduler;
 import cc.hyperium.utils.LaunchUtil;
 import cc.hyperium.utils.StaffUtils;
@@ -225,16 +224,6 @@ public class Hyperium {
             SplashProgress.setProgress(7, I18n.format("splashprogress.startinghyperium"));
             LOGGER.info("[Hyperium] Started!");
             Display.setTitle("Hyperium " + Metadata.getVersion());
-
-            TrayManager trayManager = new TrayManager();
-
-            SplashProgress.setProgress(8, I18n.format("splashprogress.initializingtrayicon"));
-            try {
-                trayManager.init();
-            } catch (Exception e) {
-                e.printStackTrace();
-                LOGGER.warn("[Tray] Failed to hookup TrayIcon");
-            }
 
             // instance does not need to be saved as shit is static ^.^
             SplashProgress.setProgress(9, I18n.format("splashprogress.registeringconfiguration"));
