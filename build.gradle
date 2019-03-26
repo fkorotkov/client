@@ -15,7 +15,6 @@
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// For those who want the bleeding edge
 buildscript {
     ext.kotlin_version = '1.2.61'
     repositories {
@@ -59,7 +58,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 compileJava.options.encoding = 'UTF-8'
 
-version = "1.0"
+version = "2.0"
 group = "cc.hyperium"
 archivesBaseName = "Hyperium"
 
