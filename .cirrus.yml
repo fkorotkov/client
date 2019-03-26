@@ -12,6 +12,7 @@ test_task:
     populate_script: ./gradlew setupDecompWorkspace
   build_script:
     - ./gradlew build
-  cleanup_before_cache_script:
-    - rm -rf ~/.gradle/caches/$GRADLE_VERSION/
-    - find ~/.gradle/caches/ -name "*.lock" -type f -delete
+  always:
+    cleanup_before_cache_script:
+      - rm -rf ~/.gradle/caches/$GRADLE_VERSION/
+      - find ~/.gradle/caches/ -name "*.lock" -type f -delete
