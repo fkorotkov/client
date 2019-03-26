@@ -17,12 +17,10 @@
 
 package cc.hyperium.config;
 
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -33,7 +31,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Sk1er
+ * @author Sk1er, RDIL
  */
 public class DefaultConfig {
 
