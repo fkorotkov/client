@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.cosmetics;
-
 import cc.hyperium.cosmetics.companions.dragon.DragonCompanion;
 import cc.hyperium.cosmetics.companions.hamster.HamsterCompanion;
 import cc.hyperium.cosmetics.hats.ModelHatFez;
@@ -26,7 +25,6 @@ import cc.hyperium.cosmetics.wings.WingsCosmetic;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.purchases.EnumPurchaseType;
 import net.minecraft.util.ResourceLocation;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +32,6 @@ import java.util.List;
  * Created by mitchellkatz on 3/17/18. Designed for production use on Sk1er.club
  */
 public class HyperiumCosmetics {
-
     private final List<AbstractCosmetic> cosmeticList = new ArrayList<>();
     private final FlipCosmetic flipCosmetic;
     private final Deadmau5Cosmetic deadmau5Cosmetic;
@@ -46,10 +43,6 @@ public class HyperiumCosmetics {
     private final CosmeticHat topHatCosmetic = new CosmeticHat(false, EnumPurchaseType.HAT_TOPHAT).setModel(new ModelHatTophat(), new ResourceLocation("textures/cosmetics/hats/tophat.png"));
     private final CosmeticHat fezCosmetic = new CosmeticHat(false, EnumPurchaseType.HAT_FEZ).setModel(new ModelHatFez(), new ResourceLocation("textures/cosmetics/hats/fez.png"));
     private final CosmeticHat legoCosmetic = new CosmeticHat(false, EnumPurchaseType.HAT_LEGO).setModel(new ModelHatLego(), new ResourceLocation("textures/cosmetics/hats/lego.png"));
-
-    /**
-     * Hyperium Cosmetics - Default Constructor/Cosmetic Registry
-     */
     public HyperiumCosmetics() {
         registerCosmetic(buttCosmetic = new ButtCosmetic());
         registerCosmetic(flipCosmetic = new FlipCosmetic());
@@ -63,15 +56,12 @@ public class HyperiumCosmetics {
         registerCosmetic(legoCosmetic);
 
     }
-
     public List<AbstractCosmetic> getCosmeticList() {
         return cosmeticList;
     }
-
     public DragonCompanion getDragonCompanion() {
         return dragonCompanion;
     }
-
     /**
      * Register Cosmetic - Register a Cosmetic Class
      *
@@ -81,15 +71,9 @@ public class HyperiumCosmetics {
         cosmeticList.add(cosmetic);
         EventBus.INSTANCE.register(cosmetic);
     }
-
     public HamsterCompanion getHamsterCompanion() {
         return hamsterCompanion;
     }
-
-    /**
-     * EnumCosmeticType - Used to distinguish cosmetics
-     * and their types
-     */
     public enum EnumCosmeticType {
         DAB,
         BUTT,
@@ -102,7 +86,6 @@ public class HyperiumCosmetics {
         HAT_FEZ,
         HAT_LEGO
     }
-
     /**
      * Get Cosmetic - Get a specific cosmetic from Enum Value
      *
@@ -110,9 +93,7 @@ public class HyperiumCosmetics {
      * @return - Given Abstract Cosmetic Class
      */
     public AbstractCosmetic getCosmetic(EnumCosmeticType givenType) {
-
         switch (givenType) {
-
             case BUTT:
                 return this.buttCosmetic;
             case FLIP:
@@ -129,27 +110,20 @@ public class HyperiumCosmetics {
                 return this.fezCosmetic;
             default:
                 return null;
-
         }
-
     }
-
     public ButtCosmetic getButtCosmetic() {
         return this.buttCosmetic;
     }
-
     public DragonCosmetic getDragonCosmetic() {
         return this.dragonCosmetic;
     }
-
     public FlipCosmetic getFlipCosmetic() {
         return this.flipCosmetic;
     }
-
     public Deadmau5Cosmetic getDeadmau5Cosmetic() {
         return this.deadmau5Cosmetic;
     }
-
     public WingsCosmetic getWingsCosmetic() {
         return this.wingsCosmetic;
     }
