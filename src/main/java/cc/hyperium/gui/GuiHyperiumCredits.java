@@ -14,7 +14,6 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -51,7 +50,7 @@ public class GuiHyperiumCredits extends HyperiumGui {
         drawDefaultBackground();
         FontRenderer fr = Minecraft.getMinecraft().fontRendererObj;
         GlStateManager.scale(2f, 2f, 2f);
-        drawCenteredString(fr, err.isEmpty() ? (contributors.isEmpty() ? "Loading contributors..." : "Contributors") : "Error: " + err, width / 4, 20 + offY / 2, 0xFFFFFF);
+        drawCenteredString(fr, err.isEmpty() ? (contributors.isEmpty() ? "Please wait" : "Jailbreak Contributors") : "Error: " + err, width / 4, 20 + offY / 2, 0xFFFFFF);
         GlStateManager.scale(0.5f, 0.5f, 0.5f);
         int x = width / 2 - 100;
         AtomicInteger y = new AtomicInteger(70 + offY);
@@ -66,20 +65,19 @@ public class GuiHyperiumCredits extends HyperiumGui {
     }
 
     @Override
-    protected void pack() {
-
-    }
+    protected void pack() {}
 
     @Override
     public void handleMouseInput() throws IOException {
         super.handleMouseInput();
         int i = Mouse.getEventDWheel();
 
-        if (i < 0)
+        if (i < 0) {
             offY -= 10;
-        else if (i > 0)
+        }
+        else if (i > 0) {
             offY += 10;
-
+        }
     }
 
     @Override
@@ -91,10 +89,10 @@ public class GuiHyperiumCredits extends HyperiumGui {
 
     private static void fetch(int tries) {
         try {
-            String content = IOUtils.toString(URI.create("https://api.github.com/repos/HyperiumClient/Hyperium/stats/contributors"), Charset.forName("UTF-8"));
+            String content = IOUtils.toString(URI.create("https://api.github.com/repos/RDIL/Hyperium-Jailbreak/stats/contributors"), Charset.forName("UTF-8"));
             JsonParser parser = new JsonParser();
             JsonArray a = parser.parse(content).getAsJsonArray();
-            StreamSupport.stream(a.spliterator(), false).map(JsonElement::getAsJsonObject).filter(o -> o.has("total") & o.get("total").getAsInt() > 20).sorted(Comparator.comparingLong(o -> ((JsonObject) o).get("total").getAsInt()).reversed()).forEach(o -> {
+            StreamSupport.stream(a.spliterator(), false).map(JsonElement::getAsJsonObject).filter(o -> o.has("total")).sorted(Comparator.comparingLong(o -> ((JsonObject) o).get("total").getAsInt()).reversed()).forEach(o -> {
                 JsonObject con = o.get("author").getAsJsonObject();
                 try {
                     BufferedImage bi = ImageIO.read(new URL(con.get("avatar_url").getAsString() + "&size=20"));
@@ -113,11 +111,9 @@ public class GuiHyperiumCredits extends HyperiumGui {
                 }
             });
         } catch (Exception e) {
-            e.printStackTrace();
-            if (tries < 5)
+            if (tries < 5) {
                 fetch(tries + 1);
-            else
-                err = e.getMessage();
+            }
         }
     }
 
