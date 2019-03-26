@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium;
-
 import cc.hyperium.addons.InternalAddons;
 import cc.hyperium.commands.HyperiumCommandHandler;
 import cc.hyperium.commands.defaults.CommandBrowse;
@@ -107,20 +106,13 @@ public class Hyperium {
      * The hyperium instance
      */
     public static final Hyperium INSTANCE = new Hyperium();
-    /**
-     * Instance of the global mod LOGGER
-     */
     public final static Logger LOGGER = LogManager.getLogger(Metadata.getModid());
     /**
      * The Hyperium configuration folder
      */
     public static final File folder = new File("hyperium");
 
-    /**
-     * Instance of default CONFIG
-     */
     public static final DefaultConfig CONFIG = new DefaultConfig(new File(folder, "CONFIG.json"));
-
     public static int BUILD_ID = -1;
     public static boolean IS_BETA;
     private static boolean updateQueue = false;
