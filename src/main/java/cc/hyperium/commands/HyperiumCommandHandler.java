@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.commands;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.event.InvokeEvent;
 import cc.hyperium.event.SendChatMessageEvent;
@@ -27,7 +26,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.command.CommandBase;
 import net.minecraft.util.EnumChatFormatting;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -44,29 +42,19 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-/**
- * This is our custom client-side command implementation, it handles most of the
- * command logic and other firing methods. Commands should be register by doing
- * <i>Hyperium.INSTANCE.getHandlers().getHyperiumCommandHandler().registerCommand({@link BaseCommand})</i>
- */
-public class HyperiumCommandHandler {
 
+public class HyperiumCommandHandler {
     // If a command is in this
     private final Set<String> disabledCommands = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
-
     private final Map<String, BaseCommand> commands = new HashMap<>();
-
     private final GeneralChatHandler chatHandler;
     private final Minecraft mc;
-
     private String[] latestAutoComplete;
-
     public boolean runningCommand = false;
 
     public HyperiumCommandHandler() {
         this.mc = Minecraft.getMinecraft();
         this.chatHandler = GeneralChatHandler.instance();
-
         loadDisabledCommands();
     }
 
@@ -78,7 +66,6 @@ public class HyperiumCommandHandler {
             // It is one of our commands, we'll cancel the event so it isn't
             // sent to the server, and we'll close the currently opened gui
             event.setCancelled(true);
-
             if (runningCommand) {
                 this.mc.displayGuiScreen(null);
                 runningCommand = false;
@@ -193,9 +180,7 @@ public class HyperiumCommandHandler {
             input.equalsIgnoreCase("disablecommand") || input.equalsIgnoreCase("hyperium")) {
             return false;
         }
-
         input = input.trim();
-
         if (isCommandDisabled(input)) {
             this.disabledCommands.remove(input);
             return false;
@@ -214,7 +199,6 @@ public class HyperiumCommandHandler {
             return;
         if (leftOfCursor.charAt(0) == '/') {
             leftOfCursor = leftOfCursor.substring(1);
-
             if (mc.currentScreen instanceof GuiChat) {
                 List<String> completions = getTabCompletionOptions(leftOfCursor);
                 if (completions != null && !completions.isEmpty()) {
@@ -223,7 +207,6 @@ public class HyperiumCommandHandler {
                             completions.set(i, EnumChatFormatting.GRAY + "/" + completions.get(i) + EnumChatFormatting.RESET);
                         }
                     }
-
                     Collections.sort(completions);
                     latestAutoComplete = completions.toArray(new String[0]);
                 }
@@ -237,7 +220,6 @@ public class HyperiumCommandHandler {
     private List<String> getTabCompletionOptions(String input) {
         String[] astring = input.split(" ", -1);
         String s = astring[0];
-
         if (astring.length == 1) {
             List<String> list = Lists.newArrayList();
 
@@ -306,8 +288,6 @@ public class HyperiumCommandHandler {
         disabledCommands.add("lobby");
         disabledCommands.add("hub");
         disabledCommands.add("spawn");
-
-
     }
 
     public void saveDisabledCommands() {
@@ -335,8 +315,7 @@ public class HyperiumCommandHandler {
 
             writer.close();
             fileWriter.close();
-        } catch (IOException ignored) {
-        }
+        } catch (IOException ignored) {}
     }
 
     public Map<String, BaseCommand> getCommands() {
