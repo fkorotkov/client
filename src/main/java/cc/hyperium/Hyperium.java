@@ -38,7 +38,6 @@ import cc.hyperium.commands.defaults.CommandQuests;
 import cc.hyperium.commands.defaults.CommandResize;
 import cc.hyperium.commands.defaults.CommandStatistics;
 import cc.hyperium.commands.defaults.CommandStats;
-import cc.hyperium.commands.defaults.CommandUpdate;
 import cc.hyperium.commands.defaults.CustomLevelheadCommand;
 import cc.hyperium.config.DefaultConfig;
 import cc.hyperium.config.Settings;
@@ -326,7 +325,6 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandBrowse());
         hyperiumCommandHandler.registerCommand(new CommandNameHistory());
         hyperiumCommandHandler.registerCommand(new CommandDebug());
-        hyperiumCommandHandler.registerCommand(new CommandUpdate());
         hyperiumCommandHandler.registerCommand(new CommandCoords());
         hyperiumCommandHandler.registerCommand(new CommandLogs());
         hyperiumCommandHandler.registerCommand(new CommandPing());
