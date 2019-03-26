@@ -87,7 +87,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.jetbrains.annotations.Contract;
 import org.lwjgl.opengl.Display;
-
+import org.cef.OS;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -182,8 +182,6 @@ public class Hyperium {
                 e.printStackTrace();
             }
 
-            System.out.println("[VERSION] Hyperium build ID: " + BUILD_ID);
-
             try {
                 Class.forName("net.minecraft.dispenser.BehaviorProjectileDispense"); // check for random MC class
                 isDevEnv = true;
@@ -264,8 +262,9 @@ public class Hyperium {
             //Multithreading.runAsync(Spotify::load);
 
             Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
-
-            richPresenceManager.load();
+            if (!OS.isMacintosh()) {
+            	richPresenceManager.load();
+	    }
 
             if (acceptedTos) {
                 sk1erMod = new Sk1erMod("hyperium", Metadata.getVersion(), object -> {
