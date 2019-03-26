@@ -1,9 +1,7 @@
 package club.sk1er.website.api.requests;
-
 import cc.hyperium.utils.JsonHolder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,14 +9,15 @@ import java.util.List;
  * Created by mitchellkatz on 6/4/17.
  */
 public class HypixelApiFriends implements HypixelApiObject {
-
     private JsonHolder master;
 
     public HypixelApiFriends(JsonHolder o) {
-        if (o != null)
+        if (o != null) {
             this.master = o;
-        else
+        }
+        else {
             master = new JsonHolder();
+        }
     }
 
     @Override
@@ -48,5 +47,4 @@ public class HypixelApiFriends implements HypixelApiObject {
     public int getCount() {
         return getFriends().size();
     }
-
 }
