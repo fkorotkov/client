@@ -11,5 +11,7 @@ Because the license requires it, here is a list of changes made:
 * Remove autotip error reporting
 * Updated default settings
 * Fully disabled the `(BETA)` improvements
+* Code cleanups
+* Updated some menus
 
 This fork is maintained by [RDIL](https://rdil.rocks)
