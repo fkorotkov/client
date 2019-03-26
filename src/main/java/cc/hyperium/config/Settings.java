@@ -18,11 +18,9 @@
 package cc.hyperium.config;
 
 import cc.hyperium.Hyperium;
-
 import cc.hyperium.styles.ButtonStyle;
 import cc.hyperium.styles.ButtonType;
 import cc.hyperium.styles.GuiStyle;
-
 import static cc.hyperium.config.Category.ANIMATIONS;
 import static cc.hyperium.config.Category.BUTTONS;
 import static cc.hyperium.config.Category.CHROMAHUD;
@@ -76,7 +74,7 @@ public class Settings {
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;fastchatEnabled")
     @ToggleSetting(name = "gui.settings.fastchat", category = INTEGRATIONS)
-    public static boolean FASTCHAT = false;
+    public static boolean FASTCHAT = true;
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;shinyPotsEnabled")
     @ToggleSetting(name = "gui.settings.shinypotions", category = ANIMATIONS)
@@ -126,16 +124,8 @@ public class Settings {
     @ToggleSetting(name = "gui.settings.holdperspectivekey")
     public static boolean PERSPECTIVE_HOLD = false;
 
-    @ConfigOpt
-    @ToggleSetting(category = IMPROVEMENTS, name = "gui.settings.optimizeditemrenderer")
     public static boolean OPTIMIZED_ITEM_RENDERER = false;
-
-    @ConfigOpt
-    @ToggleSetting(name = "gui.settings.optimizedtextureloading", category = IMPROVEMENTS)
     public static boolean OPTIMIZED_TEXTURE_LOADING = false;
-
-    @ConfigOpt
-    @ToggleSetting(name = "gui.settings.optimizedfontrenderer", category = IMPROVEMENTS)
     public static boolean OPTIMIZED_FONT_RENDERER = false;
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;windowedFullScreen")
@@ -339,12 +329,8 @@ public class Settings {
     @ToggleSetting(category = HYPIXEL, name = "gui.settings.pingondm")
     public static boolean PING_ON_DM = true;
 
-    @ConfigOpt
-    @ToggleSetting(category = IMPROVEMENTS, name = "Improved Particle Handling (BETA)")
-    public static boolean IMPROVE_PARTICLES = true;
+    public static boolean IMPROVE_PARTICLES = false;
 
-    @ConfigOpt
-    @ToggleSetting(category = IMPROVEMENTS, name = "Improved Entity Handling (BETA)")
     public static boolean IMPROVE_ENTITY_HANDLING = false;
 
     public static boolean IMPROVE_PARTICLE_RUN = false; /* any reason why this isnt used at all? */
@@ -419,7 +405,7 @@ public class Settings {
 
     @ConfigOpt
     @ToggleSetting(name = "gui.settings.fastworldswitching", category = IMPROVEMENTS)
-    public static boolean FAST_WORLD_LOADING = false;
+    public static boolean FAST_WORLD_LOADING = true;
     @ConfigOpt
     public static int MAX_WORLD_PARTICLES_INT = 10000;
 
@@ -611,16 +597,6 @@ public class Settings {
     @ConfigOpt
     @ToggleSetting(name = "gui.settings.disablelightning", category = IMPROVEMENTS)
     public static boolean DISABLE_LIGHTNING = false;
-
-    /*
-
-    For whoever tries to implement this, purpose is for when DISABLE_LIGHTNING is enabled, if the player still wants Lightning Bolts in UHC only, they will have to turn this on
-    have fun trying to add it lol - asbyth
-
-    @ConfigOpt
-    //@ToggleSetting(name = "gui.settings.keeplightinguhc", category = IMPROVEMENTS)
-    public static boolean UHC_LIGHTNING = false;
-    */
 
     @ConfigOpt
     @ToggleSetting(name = "gui.settings.disablearmorstands", category = IMPROVEMENTS)
