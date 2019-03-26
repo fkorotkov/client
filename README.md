@@ -13,5 +13,6 @@ Because the license requires it, here is a list of changes made:
 * Fully disabled the `(BETA)` improvements
 * Code cleanups
 * Updated some menus
+* Removed update tab
 
 This fork is maintained by [RDIL](https://rdil.rocks)
