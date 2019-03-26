@@ -16,14 +16,12 @@
  */
 
 package club.sk1er.website.api.requests;
-
 import cc.hyperium.handlers.handlers.data.HypixelAPI;
 import cc.hyperium.utils.JsonHolder;
 import club.sk1er.website.utils.WebsiteUtils;
 import com.google.gson.JsonArray;
 import net.hypixel.api.GameType;
 import net.hypixel.api.util.ILeveling;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -33,12 +31,9 @@ import java.util.concurrent.ExecutionException;
  * @author Sk1er
  */
 public class HypixelApiPlayer implements HypixelApiObject {
-
     public static final DateFormat DMY = new SimpleDateFormat("dd/MM, YYYY");
     public static final DateFormat DMYHHMMSS = new SimpleDateFormat("dd/MM, YYYY HH:mm:ss");
-
     private final JsonHolder player;
-
     public HypixelApiPlayer(JsonHolder holder) {
         this.player = holder;
     }
@@ -129,7 +124,6 @@ public class HypixelApiPlayer implements HypixelApiObject {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
@@ -190,16 +184,17 @@ public class HypixelApiPlayer implements HypixelApiObject {
     public String getRankForMod() {
         if (isStaff() || isYouTuber()) {
             String string = getRoot().optString("rank");
-            if (!string.equalsIgnoreCase("normal"))
+            if (!string.equalsIgnoreCase("normal")) {
                 return string;
-        } else if (getRoot().has("newPackageRank"))
+            }
+        } else if (getRoot().has("newPackageRank")) {
             return getRoot().optString("newPackageRank");
-        else if (getRoot().has("packageRank"))
+        }
+        else if (getRoot().has("packageRank")) {
             return getRoot().optString("packageRank");
+        }
         return "NONE";
     }
-
-
 
     public String getDisplayString() {
         return getRoot().optString("display");
@@ -228,7 +223,6 @@ public class HypixelApiPlayer implements HypixelApiObject {
         VIP_PLUS,
         VIP,
         NONE;
-
         static Rank get(String in) {
             for (Rank rank : values()) {
                 if (rank.name().equalsIgnoreCase(in))
@@ -242,4 +236,3 @@ public class HypixelApiPlayer implements HypixelApiObject {
         }
     }
 }
-
