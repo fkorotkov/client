@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.mods.browser;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.commands.CommandException;
@@ -44,7 +43,6 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.apache.commons.lang3.tuple.MutableTriple;
 import org.apache.commons.lang3.tuple.Triple;
 import org.lwjgl.input.Keyboard;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -71,7 +69,7 @@ public class BrowserMod extends AbstractMod implements IDisplayHandler, IJSQuery
     public GuiConfig hudBrowser;
     public volatile Map<Integer, Triple<KeyEvent, KeyEvent, String>> keyPressesMap = new HashMap<>();
     @ConfigOpt
-    public String homePage = "https://hyperium.cc";
+    public String homePage = "https://github.com/RDIL/Hyperium-Jailbreak";
     public GuiBrowser browserGui;
     private MCEF mcef;
     private API api;
@@ -85,10 +83,8 @@ public class BrowserMod extends AbstractMod implements IDisplayHandler, IJSQuery
         EventBus.INSTANCE.register(this);
 
         api = MCEFApi.getAPI();
-
         mcef = new MCEF();
         mcef.init();
-
         Hyperium.INSTANCE.getHandlers().getKeybindHandler().registerKeyBinding(new BrowserBind());
 
         if (api != null) {
@@ -101,18 +97,15 @@ public class BrowserMod extends AbstractMod implements IDisplayHandler, IJSQuery
         Multithreading.runAsync(() -> {
             if (Settings.BROWSER_DOWNLOAD) {
                 long start = System.currentTimeMillis();
-                JFrame jFrame = new JFrame("Hyperium Keycode Initializer (Please ignore)");
+                JFrame jFrame = new JFrame("Ignore me");
                 jFrame.add(new JPanel());
                 jFrame.setSize(300, 300);
-
                 JTextField jTextField = new JTextField();
                 jTextField.setSize(300, 300);
-
                 jTextField.addKeyListener(new KeyListener() {
 
                     @Override
-                    public void keyTyped(KeyEvent e) {
-                    }
+                    public void keyTyped(KeyEvent e) {}
 
                     @Override
                     public void keyPressed(KeyEvent e) {
@@ -172,7 +165,6 @@ public class BrowserMod extends AbstractMod implements IDisplayHandler, IJSQuery
 
                         currentKeyTriple = new MutableTriple<>();
                         currentKey = key;
-
                         jFrame.toFront();
                         jFrame.setState(Frame.NORMAL);
 
@@ -262,7 +254,6 @@ public class BrowserMod extends AbstractMod implements IDisplayHandler, IJSQuery
                         } else {
                             delayedRunnableQueue.add(() -> {
                                 showBrowser();
-
                                 String url = command.getRight()
                                     .replace("%QUERY%", String.join("%20", args));
                                 if (backup == null) {
