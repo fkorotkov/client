@@ -1,10 +1,9 @@
 
 # Hyperium Disclaimers
-menu.left=حقوق الطبع والنشر 2019 Hyperium Dev Team
+menu.left=حقوق الطبع والنشر 2019 Hyperium Devs + jumbo
 menu.right=لا ينتمي إلى آب Mojang
 
 # Hyperium Buttons
-button.menu.changebackground=تغيير خلفية القائمة
 button.menu.cosmeticshop=متجر الجماليات
 button.ingame.hyperiumsettings=إعدادات Hyperium
 button.ingame.hyperiumcredits=رصيد Hyperium
@@ -12,8 +11,6 @@ button.ingame.joinhypixel=الدخول إلى Hypixel
 button.ingame.fixhypixelsession=إصلاح سيرفر Hypixel
 button.ingame.serverlist=قائمة السيرفرات
 button.changebackground.seturl=تحديد الرابط
-button.changebackground.choosefile=اختيار ملف
-button.changebackground.resetbackground=اعادة تعيين الخلفية
 
 # Hyperium Disclaimer
 disclaimer.line1=من خلال المتابعة ، فإنك تقر بهذا البرنامج %s
@@ -183,7 +180,7 @@ gui.settings.showdragonhead=إظهار رأس التنين
 gui.settings.wingsheight=ارتفاع أجنحة
 gui.settings.showwings=إظهار الأجنحة
 gui.settings.wingsscale=مقياس أجنحة
-gui.settings.showchromahud=إظهار ChromaHud
+gui.settings.showchromahud=إظهار ChromaHUD
 gui.settings.mainmenustyle=نمط القائمة الرئيسية
 gui.settings.pausemenustyle=نمط القائمة وقفه
 gui.settings.spotifynotifications=إخطارات Spotify

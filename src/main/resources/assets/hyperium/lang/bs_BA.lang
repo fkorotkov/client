@@ -1,10 +1,9 @@
 
 # Hyperium Disclaimers
-menu.left=Copyright 2019 Hyperium Dev Tim
+menu.left=Copyright 2019 Hyperium Devs + jumbo
 menu.right=Nismo dio Mojang AB-a
 
 # Hyperium Buttons
-button.menu.changebackground=Promjeni Pozadinu
 button.menu.cosmeticshop=Kozmetička prodavnica
 button.ingame.hyperiumsettings=Hyperium Postavci
 button.ingame.hyperiumcredits=Hyperium Krediti
@@ -12,8 +11,6 @@ button.ingame.joinhypixel=Igraj Hypixel
 button.ingame.fixhypixelsession=Popravi Hypixel-ov session
 button.ingame.serverlist=Lista Servera
 button.changebackground.seturl=Postavi URL
-button.changebackground.choosefile=Odaberite datoteku
-button.changebackground.resetbackground=Resetuj pozadinu
 
 # Hyperium Disclaimer
 disclaimer.line1=Ako nastaviš, ti znaš da je Hyperium %s
@@ -56,7 +53,6 @@ gui.ingamemenu.playercount.now=Online sada: %s
 gui.ingamemenu.playercount.lastday=Zadnji dan: %s
 gui.ingamemenu.playercount.lastweek=Prošli tjedan: %s
 gui.ingamemenu.playercount.alltime=Sve vrijeme: %s
-
 
 # Hyperium Alerts
 alert.update.message=Hyperium Update! Kliknite ovdje za download.

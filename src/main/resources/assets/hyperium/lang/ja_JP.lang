@@ -1,10 +1,8 @@
-
 # Hyperium Disclaimers
-menu.left=Copyright 2019 Hyperium 開発チーム
+menu.left=Copyright 2019 Hyperium 開発チーム + jumbo
 menu.right=Mojang ABとは提携していません
 
 # Hyperium Buttons
-button.menu.changebackground=背景変更
 button.menu.cosmeticshop=アクセサリーショップ
 button.ingame.hyperiumsettings=Hyperium 設定
 button.ingame.hyperiumcredits=貢献者
@@ -12,8 +10,6 @@ button.ingame.joinhypixel=Hypixelにログイン
 button.ingame.fixhypixelsession=Hypixelのセッションを修復
 button.ingame.serverlist=サーバーリスト
 button.changebackground.seturl=URLセット
-button.changebackground.choosefile=ファイル選択
-button.changebackground.resetbackground=背景リセット
 
 # Hyperium Disclaimer
 disclaimer.line1=続行するにはこのクライアントの使用が%sであることに同意する必要があります。
@@ -266,4 +262,3 @@ message.alreadypurchased=Already purchased %s
 message.invalidparticle=Invalid current particle type
 message.invalidanimation=Invalid animation type
 message.purchase=Purchase %s
-
