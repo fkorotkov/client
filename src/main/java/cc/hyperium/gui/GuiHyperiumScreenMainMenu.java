@@ -358,7 +358,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
         this.buttonList.add(new GuiButton(2, this.width / 2 - getIntendedWidth(175), this.height / 2 - getIntendedHeight(55), getIntendedWidth(110), getIntendedHeight(110), ""));
         this.buttonList.add(new GuiButton(15, this.width / 2 + getIntendedWidth(65), this.height / 2 - getIntendedHeight(55), getIntendedWidth(110), getIntendedHeight(110), ""));
         this.buttonList.add(new GuiButton(100, this.width / 2 - 100, this.height / 2 - getIntendedHeight(-60), I18n.format("button.menu.cosmeticshop")));
-        this.buttonList.add(new GuiButton(17, this.width / 2 - 100, this.height / 2 - getIntendedHeight(-95), I18n.format("button.menu.changebackground")));
     }
 
     public void addDefaultStyleSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
@@ -379,7 +378,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 56 + 12 + 24 - 5, 98, 20, I18n.format("menu.options")));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 56 + 12 + 24 - 5, 98, 20, I18n.format("menu.quit")));
         this.buttonList.add(new GuiButton(100, this.width / 2 - 100, j + 78 + 12 + 24 - 5, 98, 20, I18n.format("button.menu.cosmeticshop")));
-        this.buttonList.add(new GuiButton(17, this.width / 2 + 2, j + 78 + 12 + 24 - 5, 98, 20, I18n.format("button.menu.changebackground")));
     }
 
     @Override
