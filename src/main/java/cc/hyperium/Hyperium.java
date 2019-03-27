@@ -97,21 +97,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-/**
- * Hyperium Client
- */
 public class Hyperium {
-
-    /**
-     * The hyperium instance
-     */
     public static final Hyperium INSTANCE = new Hyperium();
     public final static Logger LOGGER = LogManager.getLogger(Metadata.getModid());
     /**
      * The Hyperium configuration folder
      */
     public static final File folder = new File("hyperium");
-
     public static final DefaultConfig CONFIG = new DefaultConfig(new File(folder, "CONFIG.json"));
     public static int BUILD_ID = -1;
     public static boolean IS_BETA;
@@ -134,11 +126,10 @@ public class Hyperium {
     private NetworkHandler networkHandler;
     private boolean firstLaunch = false;
     private HyperiumScheduler scheduler;
+    private AutoGG autogg = new AutoGG();
 
     @InvokeEvent
     public void preinit(PreInitializationEvent event) {
-        EventBus.INSTANCE.register(new AutoGG());
-
         /* register language files */
         HyperiumLocale.registerHyperiumLang("af_ZA");
         HyperiumLocale.registerHyperiumLang("ar_SA");
@@ -149,7 +140,7 @@ public class Hyperium {
 
     @InvokeEvent(priority = Priority.HIGH)
     public void init(InitializationEvent event) {
-
+        EventBus.INSTANCE.register(autogg);
         try {
             Multithreading.runAsync(() -> {
                 networkHandler = new NetworkHandler();
@@ -209,14 +200,13 @@ public class Hyperium {
             CONFIG.register(new ToggleSprintContainer());
 
             SplashProgress.setProgress(7, I18n.format("splashprogress.startinghyperium"));
-            LOGGER.info("[Hyperium] Started!");
             Display.setTitle("Hyperium " + Metadata.getVersion());
 
             // instance does not need to be saved as shit is static ^.^
             SplashProgress.setProgress(9, I18n.format("splashprogress.registeringconfiguration"));
             Settings.register();
             Hyperium.CONFIG.register(new ColourOptions());
-            //Register commands.
+            // Register commands.
             SplashProgress.setProgress(10, I18n.format("splashprogress.registeringcommands"));
             registerCommands();
             EventBus.INSTANCE.register(PurchaseApi.getInstance());
@@ -240,7 +230,7 @@ public class Hyperium {
             Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
             if (!OS.isMacintosh()) {
             	richPresenceManager.load();
-	    }
+	        }
 
             if (acceptedTos) {
                 sk1erMod = new Sk1erMod("hyperium", Metadata.getVersion(), object -> {
@@ -267,7 +257,6 @@ public class Hyperium {
                 EventBus.INSTANCE.register(FontFixValues.INSTANCE);
                 if (Settings.PERSISTENT_CHAT) {
                     File file = new File(folder, "chat.txt");
-
                     if (file.exists()) {
                         try {
                             FileReader fr = new FileReader(file);
@@ -293,7 +282,6 @@ public class Hyperium {
             try {
                 Class.forName("optifine.OptiFineTweaker");
                 optifineInstalled = true;
-                System.out.println("Optifine is currently installed.");
             } catch (ClassNotFoundException e) {
                 optifineInstalled = false;
             }
@@ -302,9 +290,6 @@ public class Hyperium {
         }
     }
 
-    /**
-     * register the commands
-     */
     private void registerCommands() {
         HyperiumCommandHandler hyperiumCommandHandler = getHandlers().getHyperiumCommandHandler();
         hyperiumCommandHandler.registerCommand(new CommandConfigGui());
@@ -359,6 +344,10 @@ public class Hyperium {
         if (updateQueue) {
             LaunchUtil.launch();
         }
+    }
+
+    public AutoGG getAutogg() {
+        return this.autogg;
     }
 
     public GeneralStatisticsTracking getStatTrack() {
