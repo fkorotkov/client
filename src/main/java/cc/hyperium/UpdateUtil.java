@@ -34,7 +34,6 @@ public class UpdateUtil {
         String fileName = "Hyperium";
         String ver = JOptionPane.showInputDialog(null, "Enter version", "");
         final File file = new File("build\\libs\\" + fileName + "-" + ver + ".jar");
-        System.out.println(file.getAbsolutePath());
         final long size = file.length();
         final String sha1 = toHex(checksum(file, "SHA1")).toLowerCase();
         final String sha2 = toHex(checksum(file, "SHA-256")).toLowerCase();
@@ -54,6 +53,9 @@ public class UpdateUtil {
         return r.toString();
     }
 
+    /**
+     * Get a file's checksum.
+     */
     private static byte[] checksum(final File input, final String name) {
         try (final InputStream in = new FileInputStream(input)) {
             final MessageDigest digest = MessageDigest.getInstance(name);
@@ -64,7 +66,6 @@ public class UpdateUtil {
             }
             return digest.digest();
         } catch (Exception e) {
-            e.printStackTrace();
             return null;
         }
     }
