@@ -15,7 +15,7 @@ test_task:
     populate_script: ./gradlew setupDecompWorkspace
   build_script:
     - ./gradlew build
-  build_artifacts:
+  jar_artifacts:
     path: $CIRRUS_WORKING_DIR/build/libs/*.*
   always:
     cleanup_before_cache_script:
