@@ -1,6 +1,6 @@
 # Jailbroken Hyperium
 
-Jailbroken Hyperium is a fork of [HyperiumClient](https://hyperium.cc) with minor enhancements and misc. fixes.
+Jailbroken Hyperium is a fork of [HyperiumClient](https://hyperium.cc) with enhancements and misc. fixes.
 
 Because the license requires it, here is a list of changes made:
 * Replaced Travis CI with Cirrus CI
@@ -13,8 +13,7 @@ Because the license requires it, here is a list of changes made:
 * Fully disabled the `(BETA)` improvements
 * Code cleanups
 * Updated some menus
-* Removed update tab
-* Enabled NickHider extended use (`/nickhider myname`)
+* Removed update and shop tab
 
 This fork is maintained by [RDIL](https://rdil.rocks). Questions should be put in [GitHub issues](https://github.com/RDIL/Hyperium-Jailbreak/issues).
 
