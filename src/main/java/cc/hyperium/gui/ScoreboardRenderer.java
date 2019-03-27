@@ -1,5 +1,4 @@
 package cc.hyperium.gui;
-
 import cc.hyperium.config.ConfigOpt;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.event.RenderScoreboardEvent;
@@ -14,7 +13,6 @@ import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.EnumChatFormatting;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,9 +25,7 @@ public class ScoreboardRenderer {
     @ConfigOpt
     private double xLocation = 1.0D;
     @ConfigOpt
-
     private double yLocation = .5D;
-
 
     public void render(ScoreObjective objective, ScaledResolution resolution) {
         RenderScoreboardEvent renderEvent = new RenderScoreboardEvent(this.xLocation, this.yLocation, objective, resolution);
@@ -38,7 +34,6 @@ public class ScoreboardRenderer {
             Scoreboard scoreboard = objective.getScoreboard();
             Collection<Score> collection = scoreboard.getSortedScores(objective);
             List<Score> list = Lists.newArrayList(collection.stream().filter(p_apply_1_ -> p_apply_1_.getPlayerName() != null && !p_apply_1_.getPlayerName().startsWith("#")).collect(Collectors.toList()));
-
 
             if (list.size() > 15) {
                 collection = Lists.newArrayList(Iterables.skip(list, collection.size() - 15));
@@ -71,7 +66,6 @@ public class ScoreboardRenderer {
                 this.getFontRenderer().drawString(s1, l1, k, 553648127);
                 this.getFontRenderer().drawString(s2, l - this.getFontRenderer().getStringWidth(s2), k, 553648127);
 
-
                 if (j == collection.size()) {
                     String s3 = objective.getDisplayName();
                     RenderUtils.drawRect(l1 - 2, k - this.getFontRenderer().FONT_HEIGHT - 1, l, k - 1, 1610612736);
@@ -101,5 +95,4 @@ public class ScoreboardRenderer {
     private FontRenderer getFontRenderer() {
         return Minecraft.getMinecraft().fontRendererObj;
     }
-
 }
