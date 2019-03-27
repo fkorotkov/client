@@ -44,7 +44,7 @@ public class CustomLevelheadConfigurer extends HyperiumGui {
             if (!jsonHolder.optBoolean("levelhead")) {
                 if (Minecraft.getMinecraft().currentScreen instanceof CustomLevelheadConfigurer) {
                     mc.displayGuiScreen(null);
-                    GeneralChatHandler.instance().sendMessage("You must purchase Custom Levelhead to use this!");
+                    GeneralChatHandler.instance().sendMessage("You must purchase Custom Levelhead to use!");
                 }
             }
         });
