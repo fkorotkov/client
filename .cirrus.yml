@@ -16,7 +16,7 @@ test_task:
   build_script:
     - ./gradlew build
   jar_artifacts:
-    path: $CIRRUS_WORKING_DIR/build/libs/*.*
+    path: ./build/libs/**
   always:
     cleanup_before_cache_script:
       - rm -rf ~/.gradle/caches/$GRADLE_VERSION/
