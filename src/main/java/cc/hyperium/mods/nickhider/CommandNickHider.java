@@ -19,8 +19,6 @@ public class CommandNickHider implements BaseCommand {
     @Override
     public void onExecute(String[] args) throws CommandException {
         if (args.length == 0) {
-            sendMessage("!! NickHider is jailbroken. You can now use:");
-            sendMessage("/nickhider myname <Alternate name instead of your own one>");
             sendMessage("Nick hider status: " + (NickHider.INSTANCE.isEnabled() ? EnumChatFormatting.GREEN + "Enabled" : EnumChatFormatting.RED + "Disabled"));
             sendMessage("Hide others " + (NickHider.INSTANCE.isSelfOnly() ? EnumChatFormatting.RED + "No" : EnumChatFormatting.GREEN + "Yes"));
             sendMessage("Skins: " + (NickHider.INSTANCE.isHideSkins() ? EnumChatFormatting.RED + "Off" : EnumChatFormatting.GREEN + "On"));
