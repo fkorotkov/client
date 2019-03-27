@@ -38,7 +38,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -197,10 +196,12 @@ public class CrashReportGUI extends JDialog {
         c.add(report);
         c.add(restart);
         c.add(exit);
-        if (error != null)
+        if (error != null) {
             c.add(error);
-        if (discord != null)
+        }
+        if (discord != null) {
             c.add(discord);
+        }
     }
 
     private boolean sendReport() {
