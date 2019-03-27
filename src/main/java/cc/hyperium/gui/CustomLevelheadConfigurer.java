@@ -1,6 +1,5 @@
 package cc.hyperium.gui;
 
-import cc.hyperium.Hyperium;
 import cc.hyperium.handlers.handlers.chat.GeneralChatHandler;
 import cc.hyperium.mods.sk1ercommon.Multithreading;
 import cc.hyperium.mods.sk1ercommon.ResolutionUtil;
@@ -13,7 +12,6 @@ import cc.hyperium.utils.UUIDUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
-
 import java.awt.Color;
 import java.io.IOException;
 import java.util.List;
@@ -135,10 +133,7 @@ public class CustomLevelheadConfigurer extends HyperiumGui {
                 i += 10;
             }
             drawCenteredString(fontRendererObj, ChatColor.YELLOW + "It will be reviewed by a Hyperium Admin soon!", width / 2, i, Color.WHITE.getRGB());
-
-
         }
-
     }
 
     @Override
