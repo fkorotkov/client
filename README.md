@@ -13,7 +13,7 @@ Because the license requires it, here is a list of changes made:
 * Fully disabled the `(BETA)` improvements
 * Code cleanups
 * Updated some menus
-* Removed update tab
+* Removed update and shop tab
 * Enabled NickHider extended use (`/nickhider myname`)
 
 This fork is maintained by [RDIL](https://rdil.rocks). Questions should be put in [GitHub issues](https://github.com/RDIL/Hyperium-Jailbreak/issues).
