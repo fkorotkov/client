@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.gui;
-
 import cc.hyperium.C;
 import cc.hyperium.Hyperium;
 import cc.hyperium.config.Settings;
@@ -35,7 +34,6 @@ import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
-
 import javax.imageio.ImageIO;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -47,7 +45,6 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 public abstract class HyperiumGui extends GuiScreen {
-
     public static ResourceLocation background = new ResourceLocation("textures/material/backgrounds/1.png");
     public static ResourceLocation bgDynamicTexture = null;
     public static File customImage = new File(Minecraft.getMinecraft().mcDataDir, "customImage.png");
@@ -100,10 +97,12 @@ public abstract class HyperiumGui extends GuiScreen {
             throw new IllegalArgumentException("String cannot be null and cannot have a length less than or equal to 0.");
         } else {
             if (font == null) {
-                if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().fontRendererObj != null)
+                if (Minecraft.getMinecraft() != null && Minecraft.getMinecraft().fontRendererObj != null) {
                     font = Minecraft.getMinecraft().fontRendererObj;
-                else
+                }
+                else {
                     throw new IllegalStateException("Param \"font\" is null and default font renderer could not be used!");
+                }
             }
 
             // Everything should be fine and dandy if you're at this point...
@@ -155,7 +154,6 @@ public abstract class HyperiumGui extends GuiScreen {
 
         int startColor = Color.HSBtoRGB(System.currentTimeMillis() % 5000L / 5000.0f, 0.8f, 0.8f);
         int endColor = Color.HSBtoRGB((System.currentTimeMillis() + 500) % 5000L / 5000.0f, 0.8f, 0.8f);
-
         float f1 = (float) (startColor >> 16 & 255) / 255.0F;
         float f2 = (float) (startColor >> 8 & 255) / 255.0F;
         float f3 = (float) (startColor & 255) / 255.0F;
@@ -198,10 +196,12 @@ public abstract class HyperiumGui extends GuiScreen {
     @Override
     public void updateScreen() {
         ScaledResolution current = ResolutionUtil.current();
-        if (current == null)
+        if (current == null) {
             return;
-        if (lastResolution.getScaledWidth() != current.getScaledWidth() || lastResolution.getScaledHeight() != current.getScaledHeight() || lastResolution.getScaleFactor() != current.getScaleFactor())
+        }
+        if (lastResolution.getScaledWidth() != current.getScaledWidth() || lastResolution.getScaledHeight() != current.getScaledHeight() || lastResolution.getScaleFactor() != current.getScaleFactor()) {
             rePack();
+        }
 
         this.lastResolution = current;
         super.updateScreen();
@@ -217,7 +217,6 @@ public abstract class HyperiumGui extends GuiScreen {
     public void initGui() {
         super.initGui();
         rePack();
-
         loadCustomBackground();
     }
 
@@ -255,8 +254,6 @@ public abstract class HyperiumGui extends GuiScreen {
         } else if (i > 0) {
             offset -= 11 * scollMultiplier;
         }
-
-
     }
 
     public void setDrawAlpha(boolean drawAlpha) {
