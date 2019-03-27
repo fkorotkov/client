@@ -16,8 +16,6 @@
  */
 
 package cc.hyperium.utils.mods;
-
-
 import cc.hyperium.utils.ChatColor;
 import com.chattriggers.ctjs.triggers.TriggerType;
 import com.chattriggers.ctjs.utils.Cancellable;
@@ -28,8 +26,6 @@ import net.minecraft.event.ClickEvent;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.IChatComponent;
-import org.apache.logging.log4j.LogManager;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -110,14 +106,14 @@ public class AsyncScreenshotSaver implements Runnable {
             ImageIO.write(bufferedimage, "png", file2);
             if (!upload) {
                 IChatComponent ichatcomponent = new ChatComponentText(
-                    ChatColor.RED + "[Hyperium] " + ChatColor.WHITE + "Captured to " + ChatColor.UNDERLINE + file2.getName());
+                    ChatColor.WHITE + "Captured to " + ChatColor.UNDERLINE + file2.getName()
+                );
                 ichatcomponent.getChatStyle().setChatClickEvent(new ClickEvent(ClickEvent.Action.OPEN_FILE, file2.getCanonicalPath()));
                 Minecraft.getMinecraft().thePlayer.addChatMessage(ichatcomponent);
             } else {
                 new ImgurUploader("649f2fb48e59767", file2).run();
             }
         } catch (Exception exception) {
-            LogManager.getLogger().warn("Couldn't save screenshot", exception);
             Minecraft.getMinecraft().thePlayer.addChatMessage(new ChatComponentTranslation("screenshot.failure", exception.getMessage()));
         }
     }
