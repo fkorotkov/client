@@ -167,11 +167,8 @@
  */
 
 package cc.hyperium.gui;
-
 import cc.hyperium.Hyperium;
 import com.mojang.realmsclient.gui.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.resources.I18n;
 
