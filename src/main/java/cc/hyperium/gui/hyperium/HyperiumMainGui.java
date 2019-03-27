@@ -8,7 +8,7 @@ import cc.hyperium.gui.Icons;
 import cc.hyperium.gui.MaterialTextField;
 import cc.hyperium.gui.hyperium.components.AbstractTab;
 import cc.hyperium.gui.hyperium.tabs.SettingsTab;
-import cc.hyperium.gui.hyperium.tabs.ShopTab;
+//import cc.hyperium.gui.hyperium.tabs.ShopTab;
 import cc.hyperium.handlers.handlers.SettingsHandler;
 import cc.hyperium.mixinsimp.client.GlStateModifier;
 import cc.hyperium.mods.sk1ercommon.ResolutionUtil;
@@ -95,8 +95,8 @@ public class HyperiumMainGui extends HyperiumGui {
         }
 
         tabs = Arrays.asList(
-            new SettingsTab(this),
-            new ShopTab(this)
+            new SettingsTab(this)
+            //new ShopTab(this)
         );
         scollMultiplier = 2;
         setTab(tabIndex);
@@ -338,9 +338,6 @@ public class HyperiumMainGui extends HyperiumGui {
         searchField.keyTyped(typedChar, keyCode);
     }
 
-    /**
-     * Important alerts and announcements from Hyperium team
-     */
     public static class Alert {
         private ResourceLocation icon;
         private Runnable action;
