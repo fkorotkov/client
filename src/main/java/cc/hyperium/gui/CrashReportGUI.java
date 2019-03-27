@@ -90,7 +90,6 @@ public class CrashReportGUI extends JDialog {
             HttpClient hc = HttpClients.createDefault();
             HttpPost post = new HttpPost("https://hastebin.com/documents");
             post.setEntity(new StringEntity(txt));
-
             HttpResponse response = hc.execute(post);
             String result = EntityUtils.toString(response.getEntity());
             return "https://hastebin.com/" + new JsonParser().parse(result).getAsJsonObject().get("key").getAsString();
@@ -119,14 +118,12 @@ public class CrashReportGUI extends JDialog {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         JLabel crash = new JLabel("Game crash");
         crash.setHorizontalAlignment(SwingConstants.CENTER);
         crash.setBounds(0, 2, 200, 40);
         crash.setBackground(new Color(30, 30, 30));
         crash.setForeground(Color.WHITE);
         crash.setFont(f);
-
         String t = report == null ? "Crash unknown" : report.getDescription();
         JLabel desc = new JLabel(t);
         desc.setHorizontalAlignment(SwingConstants.CENTER);
@@ -134,7 +131,6 @@ public class CrashReportGUI extends JDialog {
         desc.setBackground(new Color(30, 30, 30));
         desc.setForeground(Color.WHITE);
         desc.setFont(resize(t, 190, f, desc));
-
         JButton report = new JButton("REPORT");
         report.setUI(new BasicButtonUI());
         report.setBackground(new Color(255, 254, 254));
@@ -190,7 +186,6 @@ public class CrashReportGUI extends JDialog {
             handle = 1;
             dispose();
         });
-
         c.add(crash);
         c.add(desc);
         c.add(report);
@@ -198,9 +193,6 @@ public class CrashReportGUI extends JDialog {
         c.add(exit);
         if (error != null) {
             c.add(error);
-        }
-        if (discord != null) {
-            c.add(discord);
         }
     }
 
@@ -216,8 +208,6 @@ public class CrashReportGUI extends JDialog {
             if (addons.get().isEmpty())
                 addons.set("none");
             String hurl = null;
-
-            System.out.println("Report: " + report);
 
             if (report != null) {
                 StringBuilder sb = new StringBuilder();
@@ -237,9 +227,9 @@ public class CrashReportGUI extends JDialog {
                 hurl = haste(sb.toString());
             }
 
-            if (report != null && hurl == null)
+            if (report != null && hurl == null) {
                 return false;
-
+            }
             NettyClient client = NettyClient.getClient();
             if (client != null)
                 client.write(ServerCrossDataPacket.build(new JsonHolder().put("crash_report", true).put("internal", true).put("crash",
@@ -262,16 +252,18 @@ public class CrashReportGUI extends JDialog {
                 AddonBootstrap.INSTANCE.getAddonManifests().forEach(m -> addons.getAndUpdate(a -> a + m.getName() + ", "));
             } catch (Exception ex) {
                 ex.printStackTrace();
-                // Addons bootstrap might not be initialized
             }
-            if (addons.get().isEmpty())
+            if (addons.get().isEmpty()) {
                 addons.set("none");
+            }
             String hurl = null;
-            if (report != null)
+            if (report != null) {
                 hurl = haste(report.getCompleteReport());
+            }
 
-            if (report != null && hurl == null)
+            if (report != null && hurl == null) {
                 return false;
+            }
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection((hurl == null ? "Report unavailable" : hurl) + "\n\nHyperium: " + Metadata.getVersion() + "\nAddons: " + addons.get()), null);
             return true;
         } catch (Exception ex) {
@@ -281,8 +273,9 @@ public class CrashReportGUI extends JDialog {
     }
 
     private Font resize(String s, int width, Font f, JLabel l) {
-        if (l.getFontMetrics(f).stringWidth(s) > width)
+        if (l.getFontMetrics(f).stringWidth(s) > width) {
             return resize(s, width, f.deriveFont(f.getSize() - 1f), l);
+        }
         return f;
     }
 }
