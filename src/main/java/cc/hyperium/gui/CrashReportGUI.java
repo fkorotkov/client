@@ -1,5 +1,4 @@
 package cc.hyperium.gui;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.Metadata;
 import cc.hyperium.installer.InstallerMain;
@@ -21,7 +20,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,7 +47,6 @@ import java.util.concurrent.atomic.AtomicReference;
  */
 public class CrashReportGUI extends JDialog {
     private CrashReport report;
-
     private UpdateUtils update = UpdateUtils.INSTANCE;
 
     private int handle = 0; // 0 - // Force stop, 1 - Soft shutdown, 2 - Restart
@@ -62,14 +59,11 @@ public class CrashReportGUI extends JDialog {
         setTitle("Hyperium Crash Report");
         setSize(200, 300);
         setResizable(false);
-
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 
         Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         setLocation(d.width / 2 - getWidth() / 2, d.height / 2 - getHeight() / 2);
-
         initComponents();
-
         setAlwaysOnTop(true);
 
         this.setVisible(true);
@@ -89,7 +83,7 @@ public class CrashReportGUI extends JDialog {
 
     public static void main(String[] args) {
         // For testing
-        handle(CrashReport.makeCrashReport(null, "Developer Debug"));
+        handle(CrashReport.makeCrashReport(null, "Debug"));
     }
 
     public static String haste(String txt) {
@@ -99,7 +93,6 @@ public class CrashReportGUI extends JDialog {
             post.setEntity(new StringEntity(txt));
 
             HttpResponse response = hc.execute(post);
-
             String result = EntityUtils.toString(response.getEntity());
             return "https://hastebin.com/" + new JsonParser().parse(result).getAsJsonObject().get("key").getAsString();
         } catch (IOException e) {
@@ -112,12 +105,11 @@ public class CrashReportGUI extends JDialog {
         Container c = getContentPane();
         c.setBackground(new Color(30, 30, 30));
         c.setLayout(null);
-
         Font f;
         try {
             f = Font.createFont(Font.TRUETYPE_FONT, InstallerMain.class.getResourceAsStream("/assets/hyperium/fonts/Montserrat-Regular.ttf")).deriveFont(12.0F);
         } catch (FontFormatException | IOException e) {
-            f = Font.getFont("Arial"); //backup
+            f = Font.getFont("Arial"); // backup
             e.printStackTrace();
         }
         JLabel error = null;
@@ -135,23 +127,6 @@ public class CrashReportGUI extends JDialog {
         crash.setBackground(new Color(30, 30, 30));
         crash.setForeground(Color.WHITE);
         crash.setFont(f);
-        JButton discord = null;
-        try {
-            discord = new JButton(new ImageIcon(ImageIO.read(getClass().getResourceAsStream("/assets/hyperium/icons/discord.png")).getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
-            discord.setBounds(40, 13, 20, 20);
-            discord.setBackground(new Color(30, 30, 30));
-            discord.setBorderPainted(false);
-            discord.setFocusPainted(false);
-            discord.addActionListener(e -> {
-                try {
-                    Desktop.getDesktop().browse(new URL("https://hyperium.cc/discord").toURI());
-                } catch (IOException | URISyntaxException e1) {
-                    e1.printStackTrace();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         String t = report == null ? "Crash unknown" : report.getDescription();
         JLabel desc = new JLabel(t);
