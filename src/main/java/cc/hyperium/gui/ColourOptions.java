@@ -6,7 +6,6 @@ import cc.hyperium.gui.main.components.OverlayButton;
 import cc.hyperium.gui.main.components.OverlayLabel;
 import cc.hyperium.gui.main.components.OverlaySlider;
 import cc.hyperium.mods.glintcolorizer.Colors;
-
 import java.lang.reflect.Field;
 
 public class ColourOptions extends HyperiumOverlay {
@@ -17,7 +16,6 @@ public class ColourOptions extends HyperiumOverlay {
     public static int accent_g = 255;
     @ConfigOpt
     public static int accent_b = 0;
-
 
     public static boolean toggle = true;
 

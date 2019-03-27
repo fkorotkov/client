@@ -81,9 +81,9 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.crash.CrashReport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jetbrains.annotations.Contract;
 import org.lwjgl.opengl.Display;
 import org.cef.OS;
+import rocks.rdil.jailbreak.Jailbreak;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -100,9 +100,6 @@ import java.nio.file.StandardCopyOption;
 public class Hyperium {
     public static final Hyperium INSTANCE = new Hyperium();
     public final static Logger LOGGER = LogManager.getLogger(Metadata.getModid());
-    /**
-     * The Hyperium configuration folder
-     */
     public static final File folder = new File("hyperium");
     public static final DefaultConfig CONFIG = new DefaultConfig(new File(folder, "CONFIG.json"));
     public static int BUILD_ID = -1;
@@ -122,20 +119,18 @@ public class Hyperium {
     public boolean isDevEnv;
     private Sk1erMod sk1erMod;
     private NettyClient client;
-    private InternalAddons internalAddons;
     private NetworkHandler networkHandler;
     private boolean firstLaunch = false;
     private HyperiumScheduler scheduler;
+    private InternalAddons internalAddons;
     private AutoGG autogg = new AutoGG();
+    private Jailbreak J = new Jailbreak();
 
     @InvokeEvent
     public void preinit(PreInitializationEvent event) {
-        /* register language files */
-        HyperiumLocale.registerHyperiumLang("af_ZA");
-        HyperiumLocale.registerHyperiumLang("ar_SA");
-        HyperiumLocale.registerHyperiumLang("bs_BA");
+        /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-        HyperiumLocale.registerHyperiumLang("ja_JP");
+        J.debug();
     }
 
     @InvokeEvent(priority = Priority.HIGH)
@@ -161,7 +156,6 @@ public class Hyperium {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             try {
                 Class.forName("net.minecraft.dispenser.BehaviorProjectileDispense"); // check for random MC class
                 isDevEnv = true;
@@ -341,17 +335,7 @@ public class Hyperium {
 
         LOGGER.info("Shutting down Hyperium..");
 
-        if (updateQueue) {
-            LaunchUtil.launch();
-        }
-    }
-
-    public AutoGG getAutogg() {
-        return this.autogg;
-    }
-
-    public GeneralStatisticsTracking getStatTrack() {
-        return this.statTrack;
+        if (updateQueue) { LaunchUtil.launch(); }
     }
 
     public HyperiumHandlers getHandlers() {
@@ -437,7 +421,6 @@ public class Hyperium {
         }
     }
 
-    @Contract(pure = true)
     private String quoteSpaces(String argument) {
         if (argument.contains(" ")) {
             return "\"" + argument + "\"";
@@ -452,10 +435,6 @@ public class Hyperium {
 
     public HyperiumCosmetics getCosmetics() {
         return cosmetics;
-    }
-
-    public InternalAddons getInternalAddons() {
-        return internalAddons;
     }
 
     public NetworkHandler getNetworkHandler() {
@@ -476,9 +455,5 @@ public class Hyperium {
 
     public boolean isDevEnv() {
         return this.isDevEnv;
-    }
-
-    public HyperiumScheduler getScheduler() {
-        return scheduler;
     }
 }

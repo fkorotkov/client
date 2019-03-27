@@ -182,7 +182,6 @@ public class GuiHyperiumScreen extends GuiScreen {
         drawRect(width - 155, 10, width - 10, 49, 0x33000000);
         drawRect(width - 156, 9, width - 9, 50, 0x33000000);
 
-
         /* Fetch player credit count */
         if (!Hyperium.INSTANCE.isDevEnv()) {
             if (PurchaseApi.getInstance() != null && PurchaseApi.getInstance().getSelf() != null) {

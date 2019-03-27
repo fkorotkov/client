@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.gui;
-
 import cc.hyperium.config.Settings;
 import cc.hyperium.event.HypixelFriendRequestEvent;
 import cc.hyperium.event.HypixelPartyInviteEvent;
@@ -28,7 +27,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import org.lwjgl.input.Keyboard;
-
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -69,8 +67,9 @@ public class ConfirmationPopup {
             return;
         }
 
-        if (currentConfirmation.render())
+        if (currentConfirmation.render()) {
             currentConfirmation = confirmations.poll();
+        }
     }
 
     @InvokeEvent

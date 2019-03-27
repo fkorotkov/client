@@ -77,7 +77,5 @@ public class CustomFontButton extends GuiButton {
     }
 
     @Override
-    public void playPressSound(SoundHandler soundHandlerIn) {
-        // Do nothing
-    }
+    public void playPressSound(SoundHandler soundHandlerIn) {}
 }

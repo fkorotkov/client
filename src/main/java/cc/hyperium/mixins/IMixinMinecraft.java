@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 
 @Mixin(Minecraft.class)
 public interface IMixinMinecraft {
-
     @Accessor
     void setDisplayWidth(int width);
 

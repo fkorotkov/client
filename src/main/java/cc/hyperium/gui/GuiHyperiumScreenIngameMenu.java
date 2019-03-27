@@ -21,12 +21,10 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.server.MinecraftServer;
-
 import java.io.IOException;
 import java.text.DecimalFormat;
 
 public class GuiHyperiumScreenIngameMenu extends GuiHyperiumScreen {
-
     private static JsonHolder data = new JsonHolder();
     private final DecimalFormat formatter = new DecimalFormat("#,###");
     private long lastUpdate = 0L;
@@ -36,7 +34,6 @@ public class GuiHyperiumScreenIngameMenu extends GuiHyperiumScreen {
     @Override
     public void initGui() {
         super.initGui();
-
         this.buttonList.clear();
         int i = -16;
 

@@ -16,33 +16,23 @@
  */
 
 package cc.hyperium.config;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.styles.ButtonStyle;
 import cc.hyperium.styles.ButtonType;
 import cc.hyperium.styles.GuiStyle;
-import static cc.hyperium.config.Category.ANIMATIONS;
-import static cc.hyperium.config.Category.BUTTONS;
-import static cc.hyperium.config.Category.CHROMAHUD;
-import static cc.hyperium.config.Category.COSMETICS;
-import static cc.hyperium.config.Category.GENERAL;
-import static cc.hyperium.config.Category.HYPIXEL;
-import static cc.hyperium.config.Category.IMPROVEMENTS;
-import static cc.hyperium.config.Category.INTEGRATIONS;
-import static cc.hyperium.config.Category.ITEM_PHYSIC;
-import static cc.hyperium.config.Category.MENUS;
-import static cc.hyperium.config.Category.MISC;
-import static cc.hyperium.config.Category.REACH;
-import static cc.hyperium.config.Category.TOGGLESPRINT;
-import static cc.hyperium.config.Category.VANILLA_ENHANCEMENTS;
-import static cc.hyperium.config.Category.VICTORYROYALE;
+import static cc.hyperium.config.Category.*;
 
 /*
  * Created by Cubxity on 03/06/2018
  */
 public class Settings {
 
-    public static final Settings INSTANCE = new Settings();
+    public static final Settings INSTANCE =
+            new Settings();
+
+    @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;JailbreakFPSMode")
+    @ToggleSetting(name = "gui.settings.FPS", category = INTEGRATIONS)
+    private static boolean FPS = false;
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;discordRPEnabled")
     @ToggleSetting(name = "gui.settings.discordrp", category = INTEGRATIONS)
@@ -286,7 +276,6 @@ public class Settings {
 
     @ConfigOpt
     @SelectorSetting(name = "gui.settings.maxparticles", category = COSMETICS, items = {"200"})
-    // Items configured in override
     public static String MAX_PARTICLE_STRING = "200";
 
     @ConfigOpt
@@ -294,7 +283,6 @@ public class Settings {
 
     @ConfigOpt
     @SelectorSetting(name = "gui.settings.headitemscale", category = ANIMATIONS, items = {"1.0", "1.25", "1.5", "1.75", "2.0", "2.5"})
-    // Items configured in override
     public static String HEAD_SCALE_FACTOR_STRING = "1.0";
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.BackgroundSettings;renderOverInventory")
@@ -614,8 +602,7 @@ public class Settings {
     @ToggleSetting(name = "gui.settings.confirmquit", category = MISC)
     public static boolean CONFIRM_QUIT = false;
 
-    private Settings() {
-    }
+    private Settings() {}
 
     public static void register() {
         Hyperium.CONFIG.register(INSTANCE);
