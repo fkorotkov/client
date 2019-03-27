@@ -1,5 +1,4 @@
 package me.semx11.autotip.universal;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
  * @author Semx11
  */
 public class ReflectionUtil {
-
     private static Map<String, Class<?>> loadedClasses = new HashMap<>();
     private static Map<Class<?>, Map<Class<?>[], Constructor<?>>> loadedConstructors = new HashMap<>();
     private static Map<Class<?>, Map<String, Method>> loadedMethods = new HashMap<>();
@@ -27,7 +25,6 @@ public class ReflectionUtil {
                 return loadedClasses.get(className);
             }
         }
-
         Exception err = null;
         for (String className : classNames) {
             try {
@@ -45,7 +42,6 @@ public class ReflectionUtil {
         if (!loadedConstructors.containsKey(clazz)) {
             loadedConstructors.put(clazz, new HashMap<>());
         }
-
         Map<Class<?>[], Constructor<?>> clazzConstructors = loadedConstructors.get(clazz);
 
         if (clazzConstructors.containsKey(params)) {
@@ -59,7 +55,6 @@ public class ReflectionUtil {
         } catch (NoSuchMethodException e) {
             throw new UnableToFindConstructorException(params, e);
         }
-
         clazzConstructors.put(params, constructor);
         loadedConstructors.put(clazz, clazzConstructors);
         return constructor;
@@ -69,15 +64,12 @@ public class ReflectionUtil {
         if (!loadedMethods.containsKey(clazz)) {
             loadedMethods.put(clazz, new HashMap<>());
         }
-
         Map<String, Method> clazzMethods = loadedMethods.get(clazz);
-
         Exception err = null;
         for (String methodName : methodNames) {
             if (clazzMethods.containsKey(methodName)) {
                 return clazzMethods.get(methodName);
             }
-
             try {
                 Method method = clazz.getMethod(methodName, params);
                 method.setAccessible(true);
@@ -104,7 +96,6 @@ public class ReflectionUtil {
             if (clazzFields.containsKey(fieldName)) {
                 return clazzFields.get(fieldName);
             }
-
             try {
                 Field field = clazz.getDeclaredField(fieldName);
                 field.setAccessible(true);
@@ -125,17 +116,13 @@ public class ReflectionUtil {
         if (!loadedEnums.containsKey(clazz)) {
             loadedEnums.put(clazz, new HashMap<>());
         }
-
         Map<String, Enum<?>> clazzEnums = loadedEnums.get(clazz);
-
         if (clazzEnums.containsKey(enumName.toUpperCase())) {
             return clazzEnums.get(enumName.toUpperCase());
         }
-
         if (clazz.getEnumConstants().length == 0) {
             throw new UnableToFindEnumException(enumName);
         }
-
         Enum<?> theEnum = null;
         for (Object o : clazz.getEnumConstants()) {
             Enum<?> anEnum = (Enum<?>) o;
@@ -148,71 +135,51 @@ public class ReflectionUtil {
         if (theEnum == null) {
             throw new UnableToFindEnumException(enumName);
         }
-
         loadedEnums.put(clazz, clazzEnums);
         return theEnum;
     }
 
     public static class UnableToFindMethodException extends RuntimeException {
-
         private static final long serialVersionUID = 2646222778476346499L;
-
         UnableToFindMethodException(String[] methodNames, Exception e) {
             super("Could not find methods: " + String.join(", ", methodNames), e);
         }
-
     }
 
     public static class UnableToFindClassException extends RuntimeException {
-
         private static final long serialVersionUID = 3898634214210207487L;
-
         UnableToFindClassException(String[] classNames, Exception e) {
             super("Could not find classes: " + String.join(", ", classNames), e);
         }
-
     }
 
     public static class UnableToAccessFieldException extends RuntimeException {
-
         private static final long serialVersionUID = 3624431716334716913L;
-
         UnableToAccessFieldException(String[] fieldNames, Exception e) {
             super("Could not access fields: " + String.join(", ", fieldNames), e);
         }
-
     }
 
     public static class UnableToFindFieldException extends RuntimeException {
-
         private static final long serialVersionUID = 6746871885265039462L;
-
         UnableToFindFieldException(String[] fieldNames, Exception e) {
             super("Could not find fields: " + String.join(", ", fieldNames), e);
         }
-
     }
 
     public static class UnableToFindEnumException extends RuntimeException {
-
         private static final long serialVersionUID = -6759637615386333754L;
-
         UnableToFindEnumException(String enumName) {
             super("Could not find enum: " + enumName);
         }
-
     }
 
     public static class UnableToFindConstructorException extends RuntimeException {
-
         private static final long serialVersionUID = 601263623563010837L;
-
         UnableToFindConstructorException(Class<?>[] params, Exception e) {
             super("Could not find params: " + String.join(", ", Arrays.stream(params)
                     .map(Class::getSimpleName)
                     .collect(Collectors.toList())), e);
         }
-
     }
-
 }
