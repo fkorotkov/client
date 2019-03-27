@@ -1,5 +1,4 @@
 package cc.hyperium.mods.nickhider;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.event.InvokeEvent;
@@ -41,7 +40,7 @@ import java.util.stream.Collectors;
 
 public class NickHider {
     public static final String MOD_ID = "nick_hider";
-    public static final String MOD_NAME = "Sk1er nick Hider";
+    public static final String MOD_NAME = "Sk1er NickHider Cracked";
     public static final String VERSION = "3.0";
     @Instance
     public static NickHider INSTANCE;
@@ -54,47 +53,38 @@ public class NickHider {
     private Sk1erMod sk1erMod;
     private NickHiderConfig config;
     private boolean forceDown = false;
-    private boolean extendedUse = false;
+    private boolean extendedUse = true;
     private String override = null;
-
     public NickHider() {
         INSTANCE = this;
     }
-
     public Set<String> getUsedNicks() {
         return usedNicks;
     }
-
     public String getPseudo_key() {
         return config.getPseudo_key();
     }
-
     public void setPseudo_key(String pseudo_key) {
         config.setPseudo_key(pseudo_key);
     }
-
     private List<String> namesDatabase = new ArrayList<>();
-
     public String getPseudo(String input) {
         int i = input.hashCode() + getPseudo_key().hashCode();
         if (i < 0) {
             i = -i;
         }
-
         int size = namesDatabase.size();
         if (size == 0) {
             return "Player-error";
         }
-
         return "Player-" + namesDatabase.get(i % size);
     }
 
     public void init() {
         sk1erMod = new Sk1erMod(MOD_ID, VERSION, object -> {
-            if (!object.optBoolean("enabled"))
+            if (!object.optBoolean("enabled")) {
                 forceDown = true;
-            if (object.optBoolean("extended"))
-                extendedUse = true;
+            }
         });
         sk1erMod.checkStatus();
         Multithreading.runAsync(() -> {
@@ -105,24 +95,19 @@ public class NickHider {
             try {
                 FileReader baseReader = new FileReader(this.suggestedConfigurationFile);
                 BufferedReader bufferedReader = new BufferedReader(baseReader);
-
                 StringBuilder lines = new StringBuilder();
 
                 for (String line : bufferedReader.lines().collect(Collectors.toList())) {
                     lines.append(line);
                 }
-
                 baseReader.close();
                 bufferedReader.close();
-
                 boolean broken = false;
-
                 try {
                     new JsonParser().parse(lines.toString().trim());
                 } catch (JsonParseException e) {
                     broken = true;
                 }
-
                 if (!broken) {
                     this.config = new Gson().fromJson(lines.toString().trim(), NickHiderConfig.class);
                 }
@@ -155,8 +140,9 @@ public class NickHider {
     @InvokeEvent
     public void bookCheck(RenderEvent event) {
         GuiScreen currentScreen = Minecraft.getMinecraft().currentScreen;
-        if (currentScreen == null)
+        if (currentScreen == null) {
             return;
+        }
 
         if (currentScreen instanceof GuiScreenBook) {
             NBTTagList bookPages = ((MixinGuiScreenBook) currentScreen).getBookPages();
@@ -169,13 +155,9 @@ public class NickHider {
                         String nick = matcher.group("nick");
                         remap(nick, override == null ? Minecraft.getMinecraft().getSession().getProfile().getName() : override);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                } catch (Exception ignored) {}
             }
-
         }
-
     }
 
     public void setOwnName(String name) {
@@ -189,8 +171,9 @@ public class NickHider {
     public String out(String chat) {
         if (isEnabled()) {
             for (Nick nick : nicks) {
-                if (!nick.oldName.equalsIgnoreCase(Minecraft.getMinecraft().getSession().getUsername()))
+                if (!nick.oldName.equalsIgnoreCase(Minecraft.getMinecraft().getSession().getUsername())) {
                     chat = Pattern.compile(nick.newName, Pattern.CASE_INSENSITIVE).matcher(chat).replaceAll(nick.oldName);
+                }
             }
         }
         return chat;
@@ -222,15 +205,18 @@ public class NickHider {
 
     @InvokeEvent
     public void profileCheck(TickEvent event) {
-        if (!isEnabled())
+        if (!isEnabled()) {
             return;
+        }
 
         EntityPlayerSP thePlayer = Minecraft.getMinecraft().thePlayer;
-        if (thePlayer == null)
+        if (thePlayer == null) {
             return;
+        }
         NetHandlerPlayClient sendQueue = thePlayer.sendQueue;
-        if (sendQueue == null)
+        if (sendQueue == null) {
             return;
+        }
 
         UUID id = Minecraft.getMinecraft().getSession().getProfile().getId();
         String name = Minecraft.getMinecraft().getSession().getProfile().getName();
@@ -244,8 +230,6 @@ public class NickHider {
                 remap(gameProfile.getName(), getPseudo(gameProfile.getName()));
             }
         }
-
-
     }
 
     public boolean isHideSkins() {
@@ -315,11 +299,9 @@ public class NickHider {
     }
 
     class Nick {
-
         public Pattern pattern;
         public String oldName;
         public String newName;
-
         public Nick(Pattern pattern, String oldName, String newName) {
             this.pattern = pattern;
             this.oldName = oldName;
