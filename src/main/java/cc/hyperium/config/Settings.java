@@ -32,7 +32,7 @@ public class Settings {
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;JailbreakFPSMode")
     @ToggleSetting(name = "gui.settings.FPS", category = INTEGRATIONS)
-    private static boolean FPS = false;
+    public static boolean FPS = false;
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;discordRPEnabled")
     @ToggleSetting(name = "gui.settings.discordrp", category = INTEGRATIONS)
