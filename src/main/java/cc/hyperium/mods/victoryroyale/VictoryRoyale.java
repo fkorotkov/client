@@ -1,5 +1,4 @@
 package cc.hyperium.mods.victoryroyale;
-
 import cc.hyperium.config.Settings;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.event.InvokeEvent;
@@ -19,7 +18,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -37,7 +35,9 @@ public class VictoryRoyale extends AbstractMod {
 
     @Override
     public AbstractMod init() {
-        EventBus.INSTANCE.register(this);
+        if(!Settings.FPS) {
+            EventBus.INSTANCE.register(this);
+        }
         INSTANCE = this;
         return this;
     }
