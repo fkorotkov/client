@@ -124,13 +124,13 @@ public class Hyperium {
     private HyperiumScheduler scheduler;
     private InternalAddons internalAddons;
     private AutoGG autogg = new AutoGG();
-    private Jailbreak J = new Jailbreak();
 
     @InvokeEvent
     public void preinit(PreInitializationEvent event) {
         /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-        J.debug();
+	Jailbreak jailbreak = new Jailbreak();
+        jailbreak.debug();
     }
 
     @InvokeEvent(priority = Priority.HIGH)
