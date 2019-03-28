@@ -1,5 +1,4 @@
 package cc.hyperium.mods.fortnitecompass;
-
 import cc.hyperium.config.Settings;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.event.InvokeEvent;
@@ -15,7 +14,6 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import org.lwjgl.opengl.GL11;
-
 import java.awt.*;
 
 public class FortniteCompassMod extends AbstractMod {
@@ -35,7 +33,9 @@ public class FortniteCompassMod extends AbstractMod {
     @Override
     public AbstractMod init() {
         this.fr = mc.fontRendererObj;
-        EventBus.INSTANCE.register(this);
+        if(!Settings.FPS) {
+            EventBus.INSTANCE.register(this);
+        }
         return this;
     }
 
