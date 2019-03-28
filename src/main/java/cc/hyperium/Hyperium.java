@@ -54,7 +54,6 @@ import cc.hyperium.gui.ConfirmationPopup;
 import cc.hyperium.gui.NotificationCenter;
 import cc.hyperium.handlers.HyperiumHandlers;
 import cc.hyperium.handlers.handlers.stats.PlayerStatsGui;
-import cc.hyperium.integrations.watchdog.ThankWatchdog;
 import cc.hyperium.mixinsimp.client.resources.HyperiumLocale;
 import cc.hyperium.mixinsimp.renderer.FontFixValues;
 import cc.hyperium.mods.HyperiumModIntegration;
@@ -186,7 +185,6 @@ public class Hyperium {
             EventBus.INSTANCE.register(CONFIG.register(FPSLimiter.getInstance()));
             EventBus.INSTANCE.register(confirmation);
             EventBus.INSTANCE.register(new BlurHandler());
-            EventBus.INSTANCE.register(new ThankWatchdog());
 
             // Register statistics tracking.
             EventBus.INSTANCE.register(statTrack);
