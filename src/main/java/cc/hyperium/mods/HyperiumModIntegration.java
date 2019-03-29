@@ -86,17 +86,6 @@ public class HyperiumModIntegration {
             this.keystrokesMod = ((KeystrokesMod) new KeystrokesMod().init());
             this.timeChanger = ((TimeChanger) new TimeChanger().init());
             this.motionBlur = ((MotionBlurMod) new MotionBlurMod().init());
-        } else {
-            this.autofriend = null;
-            this.fncompass = null;
-            this.itemPhysicMod = null;
-            this.browserMod = null;
-            this.glintcolorizer = null;
-            this.chunkAnimator = null;
-            this.blockOverlay = null;
-            this.keystrokesMod = null;
-            this.timeChanger = null;
-            this.motionBlur = null;
         }
     }
 
