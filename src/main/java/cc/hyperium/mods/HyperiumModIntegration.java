@@ -129,9 +129,9 @@ public class HyperiumModIntegration {
         return blockOverlay;
     }
 
-    public SpotifyControls getSpotifyControls() {
-        return spotifyControls;
-    }
+    //public SpotifyControls getSpotifyControls() {
+    //    return spotifyControls;
+    //}
 
     public MotionBlurMod getMotionBlur() {
         return motionBlur;
