@@ -1,5 +1,5 @@
 package com.chattriggers.ctjs.loader;
-
+import cc.hyperium.config.Settings;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -11,6 +11,8 @@ public class UriScheme {
     private static final int PORT = 21965;
 
     public static void main(String[] args) {
+        if (Settings.FPS) return;
+
         if (args.length < 1) {
             System.out.println("[ChatTriggers] No URL found, aborting...");
             return;
@@ -23,9 +25,6 @@ public class UriScheme {
         }
 
         String url = args[0];
-
-        System.out.println("[ChatTriggers] Trying to work with URL: " + url);
-
         String module = url.substring(PROTOCOL.length()).replace("/", "");
 
         try {
