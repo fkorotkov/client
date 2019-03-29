@@ -1,5 +1,4 @@
 package cc.hyperium.mixinsimp.renderer;
-
 import cc.hyperium.config.Settings;
 import cc.hyperium.mixins.renderer.IMixinRenderItem;
 import cc.hyperium.mixins.renderer.IMixinRenderItem2;
@@ -27,7 +26,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -90,59 +88,38 @@ public class HyperiumRenderItem {
                 GlStateManager.translate(-0.5F, -0.5F, -0.5F);
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 GlStateManager.enableRescaleNormal();
-
-                // BigHead implementation
-                if (isHead) {
-                    GlStateManager.scale(headScale, headScale, headScale);
-                }
-
+                if (isHead) GlStateManager.scale(headScale, headScale, headScale);
                 TileEntityItemStackRenderer.instance.renderByItem(stack);
-
-                // BigHead implementation
-                if (isHead) {
-                    GlStateManager.scale(1.0 / headScale, 1.0 / headScale, 1.0 / headScale);
-                }
+                if (isHead) GlStateManager.scale(1.0 / headScale, 1.0 / headScale, 1.0 / headScale);
             } else {
                 // Used to detect if the item has a already had an effect rendered
                 boolean renderedAsPotion = false;
-
                 GlStateManager.translate(-0.5F, -0.5F, -0.5F);
 
-                // We want to render our potion effect before
-                // the item is renderer so the effect doesn't obscure the item
+                // We want to render our potion effect before the item is rendered so it doesn't obscure the item
                 if (Settings.SHINY_POTS && isInv && stack.getItem() != null && stack.getItem() instanceof ItemPotion) {
                     renderPot(model); // Use our renderer instead of the normal one
-
                     renderedAsPotion = true;
                 }
 
                 // BigHead implementation
-                if (isHead) {
-                    GlStateManager.scale(headScale, headScale, headScale);
-                }
+                if (isHead) GlStateManager.scale(headScale, headScale, headScale);
 
                 // Normal item renderer
                 ((IMixinRenderItem2) parent).callRenderModel(model, stack);
 
                 // Prevent double-rendering of the items effects
-                if (!renderedAsPotion && stack.hasEffect()) {
-                    this.renderEffect(model); // Render the item with the normal effects
-                }
+                if (!renderedAsPotion && stack.hasEffect()) this.renderEffect(model);
 
                 // BigHead implementation
-                if (isHead) {
-                    GlStateManager.scale(1.0 / headScale, 1.0 / headScale, 1.0 / headScale);
-                }
+                if (isHead) GlStateManager.scale(1.0 / headScale, 1.0 / headScale, 1.0 / headScale);
             }
-
             GlStateManager.popMatrix();
         }
     }
 
     /**
      * Basically the same as the above method, but does not include the depth code
-     *
-     * @param model the model
      */
     public void renderPot(IBakedModel model) {
         GlStateManager.depthMask(false);
@@ -173,18 +150,12 @@ public class HyperiumRenderItem {
     }
 
     /**
-     * Normal code for rendering an effect/enchantment on an item
-     *
-     * @param model the model of the item
+     * Normal rendering for an effect/enchantment on an item
      */
     private void renderEffect(IBakedModel model) {
-        if (Settings.DISABLE_ENCHANT_GLINT) {
-            return;
-        }
+        if (Settings.DISABLE_ENCHANT_GLINT) return;
         GlStateManager.depthMask(false);
-
-        GlStateManager.depthFunc(514); // This is for render depth
-
+        GlStateManager.depthFunc(514);
         GlStateManager.disableLighting();
         GlStateManager.blendFunc(768, 1);
         ((IMixinRenderItem) parent).getTextureManager().bindTexture(RES_ITEM_GLINT);
@@ -206,9 +177,7 @@ public class HyperiumRenderItem {
         GlStateManager.matrixMode(5888);
         GlStateManager.blendFunc(770, 771);
         GlStateManager.enableLighting();
-
-        GlStateManager.depthFunc(515); // Changes back to the normal depth
-
+        GlStateManager.depthFunc(515);
         GlStateManager.depthMask(true);
         ((IMixinRenderItem) parent).getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
     }
@@ -240,21 +209,11 @@ public class HyperiumRenderItem {
 
         ((IMixinRenderItem) parent).callRenderQuads(worldrenderer, model.getGeneralQuads(), color, stack);
         tessellator.draw();
-
-        if (Settings.OPTIMIZED_ITEM_RENDERER) {
-            GL11.glEndList();
-
-            if (itemHash != null) {
-                itemCache.put(itemHash, i);
-            }
-        }
     }
 
     private class RemovalListener implements CacheWriter<ItemHash, Integer> {
-
         @Override
-        public void write(@Nonnull ItemHash key, @Nonnull Integer value) {
-        }
+        public void write(@Nonnull ItemHash key, @Nonnull Integer value) {}
 
         @Override
         public void delete(@Nonnull ItemHash key, @Nullable Integer value, @Nonnull RemovalCause cause) {
