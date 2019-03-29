@@ -87,7 +87,7 @@ public class HyperiumModIntegration {
         this.motionBlur = (MotionBlurMod) new MotionBlurMod();
         if (!Settings.FPS) {
             this.autofriend.init();
-            this.fncompass.init()
+            this.fncompass.init();
             this.itemPhysicMod.init();
             this.browserMod.init();
             this.glintcolorizer.init();
