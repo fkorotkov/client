@@ -1,5 +1,4 @@
 package cc.hyperium.mixinsimp.renderer;
-
 import cc.hyperium.event.InvokeEvent;
 import cc.hyperium.event.TickEvent;
 import cc.hyperium.handlers.handlers.chat.GeneralChatHandler;
@@ -12,7 +11,6 @@ import net.minecraft.client.renderer.GLAllocation;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.SharedDrawable;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -36,10 +34,8 @@ public class FontFixValues {
     public FontFixValues() {
         Multithreading.schedule(() -> {
             try {
-                if (drawable == null) {
-                    return;
-                }
-                if (!drawable.isCurrent())
+                if (drawable == null) return;
+                if (!drawable.isCurrent()) {
                     try {
                         drawable.makeCurrent();
                     } catch (LWJGLException e) {
@@ -48,12 +44,12 @@ public class FontFixValues {
                         } catch (LWJGLException e1) {
                             drawable = null;
                             e.printStackTrace();
-                            GeneralChatHandler.instance().sendMessage("Something went wrong with Enhanced Font Renderer. If this issue persists, please open a ticket in the Hyperium Discord using -new in the #commands channel.");
                         }
                         return;
                     } catch (IllegalStateException ex) {
                         ex.printStackTrace();
                     }
+                }
                 Integer integer;
                 int i = 0;
                 while ((integer = glRemoval.poll()) != null) {
@@ -61,9 +57,7 @@ public class FontFixValues {
                     GLAllocation.deleteDisplayLists(integer);
                 }
                 drawable.releaseContext();
-
             } catch (Exception e) {
-                e.printStackTrace();
                 if (drawable != null) {
                     try {
                         drawable.releaseContext();
@@ -71,11 +65,8 @@ public class FontFixValues {
                         e1.printStackTrace();
                     }
                 }
-
-
             }
         }, 1, 1, TimeUnit.SECONDS);
-        System.out.println("STARTED");
     }
 
     public Queue<Integer> getGlRemoval() {
@@ -95,7 +86,6 @@ public class FontFixValues {
         }
     }
 
-
     @Nullable
     public CachedString get(StringHash key) {
         return stringCache.getIfPresent(key);
@@ -107,15 +97,12 @@ public class FontFixValues {
 
     private class RemovalListener implements CacheWriter<StringHash, CachedString> {
         @Override
-        public void write(@Nonnull StringHash key, @Nonnull CachedString value) {
-        }
+        public void write(@Nonnull StringHash key, @Nonnull CachedString value) {}
 
         @Override
         public void delete(@Nonnull StringHash key, @Nullable CachedString value, @Nonnull RemovalCause cause) {
             if (value == null) return;
-
             glRemoval.add(value.getListId());
-
         }
     }
 }
