@@ -14,6 +14,9 @@ test_task:
       cat build.gradle
       cat gradle/wrapper/gradle-wrapper.properties
     populate_script: ./gradlew setupDecompWorkspace
+  wrapper_cache:
+    folder: /home/gradle/.gradle/wrapper/dists/
+    fingerprint_script: ls
   build_script:
     - ./gradlew build
   jar_artifacts:
