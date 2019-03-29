@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.commands.defaults;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.gui.CrashReportGUI;
@@ -31,13 +30,11 @@ import cc.hyperium.purchases.PurchaseApi;
 import cc.hyperium.utils.JsonHolder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.util.List;
 
 public class CommandDebug implements BaseCommand {
-
     private static final Gson printer = new GsonBuilder().setPrettyPrinting().create();
 
     private static void tryChromaHUD(StringBuilder builder) {
@@ -80,7 +77,6 @@ public class CommandDebug implements BaseCommand {
         }
     }
 
-
     private static void tryLocation(StringBuilder builder) {
         try {
             builder.append("Location: ").append(Hyperium.INSTANCE.getHandlers().getLocationHandler().getLocation());
@@ -92,10 +88,7 @@ public class CommandDebug implements BaseCommand {
     public static String get() {
         StringBuilder builder = new StringBuilder();
         PurchaseApi api = PurchaseApi.getInstance();
-
-        if (api == null) {
-            return "";
-        }
+        if (api == null) return "";
 
         HyperiumPurchase self = PurchaseApi.getInstance().getSelf();
         builder.append("\n");
@@ -108,8 +101,7 @@ public class CommandDebug implements BaseCommand {
         builder.append("\n");
         builder.append("\n");
         HypixelDetector instance = HypixelDetector.getInstance();
-        if (instance != null)
-            builder.append("Hypixel: ").append(instance.isHypixel());
+        if (instance != null) builder.append("Hypixel: ").append(instance.isHypixel());
         builder.append("\n");
         builder.append("\n");
         builder.append("\n\n");
@@ -137,11 +129,8 @@ public class CommandDebug implements BaseCommand {
         builder.append("\n");
         builder.append("Levelhead");
         builder.append("\n");
-
-
         return builder.toString();
     }
-
 
     @Override
     public String getName() {
@@ -157,13 +146,12 @@ public class CommandDebug implements BaseCommand {
     public void onExecute(String[] args) {
         if (args.length == 1 && args[0].equalsIgnoreCase("log")) {
             Hyperium.INSTANCE.getNetworkHandler().setLog(true);
-            GeneralChatHandler.instance().sendMessage("Enable logging, please restart your game to begin. It will be auto disabled after the next launch");
+            GeneralChatHandler.instance().sendMessage("Enabled logging, please restart your game to begin. It will be auto disabled after next launch.");
             return;
         }
         String message = get();
         String haste = CrashReportGUI.haste(message);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(haste), null);
-        GeneralChatHandler.instance().sendMessage("Link copied (" + haste + ")");
-
+        GeneralChatHandler.instance().sendMessage("Link copied: " + haste);
     }
 }
