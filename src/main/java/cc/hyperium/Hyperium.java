@@ -128,13 +128,12 @@ public class Hyperium {
     public void preinit(PreInitializationEvent event) {
         /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-	Jailbreak jailbreak = new Jailbreak();
-        jailbreak.debug();
+	Jailbreak j = new Jailbreak();
+        j.debug();
     }
 
     @InvokeEvent(priority = Priority.HIGH)
     public void init(InitializationEvent event) {
-        EventBus.INSTANCE.register(autogg);
         try {
             Multithreading.runAsync(() -> {
                 networkHandler = new NetworkHandler();
@@ -162,17 +161,18 @@ public class Hyperium {
                 isDevEnv = false;
             }
 
-            cosmetics = new HyperiumCosmetics();
+            if(!Settings.FPS) cosmetics = new HyperiumCosmetics();
 
             // Creates the accounts dir
             firstLaunch = new File(folder.getAbsolutePath() + "/accounts").mkdirs();
 
-            // Has the user accepted the TOS of the client?
+            // Has the user accepted the TOS?
             this.acceptedTos = new File(
                 folder.getAbsolutePath() + "/accounts/" + Minecraft.getMinecraft().getSession()
                     .getPlayerID() + ".lck").exists();
 
             SplashProgress.setProgress(5, I18n.format("splashprogress.loadinghandlers"));
+            EventBus.INSTANCE.register(autogg);
             handlers = new HyperiumHandlers();
             handlers.postInit();
 
@@ -192,7 +192,7 @@ public class Hyperium {
             CONFIG.register(new ToggleSprintContainer());
 
             SplashProgress.setProgress(7, I18n.format("splashprogress.startinghyperium"));
-            Display.setTitle("Hyperium " + Metadata.getVersion());
+            Display.setTitle("HyperiumJailbreak");
 
             // instance does not need to be saved as shit is static ^.^
             SplashProgress.setProgress(9, I18n.format("splashprogress.registeringconfiguration"));
@@ -210,10 +210,7 @@ public class Hyperium {
             Multithreading.runAsync(() -> {
                 try {
                     StaffUtils.clearCache();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    LOGGER.warn("[Staff] Failed to fetch staff");
-                }
+                } catch (IOException ignored) {}
 
             });
 
@@ -222,7 +219,7 @@ public class Hyperium {
             Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
             if (!OS.isMacintosh()) {
             	richPresenceManager.load();
-	        }
+	    }
 
             if (acceptedTos) {
                 sk1erMod = new Sk1erMod("hyperium", Metadata.getVersion(), object -> {
@@ -295,7 +292,7 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandResize());
         hyperiumCommandHandler.registerCommand(new CommandGarbageCollect());
         hyperiumCommandHandler.registerCommand(new CommandMessage());
-        hyperiumCommandHandler.registerCommand(new CommandParticleAuras());
+        if(!Settings.FPS) hyperiumCommandHandler.registerCommand(new CommandParticleAuras());
         hyperiumCommandHandler.registerCommand(new CommandDisableCommand());
         hyperiumCommandHandler.registerCommand(new AutofriendCommand());
         hyperiumCommandHandler.registerCommand(new CommandQuests());
@@ -366,7 +363,6 @@ public class Hyperium {
     public String getLaunchCommand(boolean copyNatives) {
         StringBuilder cmd = new StringBuilder();
         String[] command = System.getProperty("sun.java.command").split(" ");
-
         String javaPath = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
         cmd.append(quoteSpaces(javaPath) + " ");
 
@@ -377,7 +373,6 @@ public class Hyperium {
                 if (copyNatives) {
                     copyNatives(nativePath, hyperiumNativeFolder);
                 }
-
                 cmd.append(quoteSpaces("-Djava.library.path=" + hyperiumNativeFolder.getAbsolutePath())).append(" ");
             } else if (!s.contains("agent")) {
                 cmd.append(quoteSpaces(s)).append(" ");
