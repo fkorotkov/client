@@ -75,17 +75,27 @@ public class HyperiumModIntegration {
         nickHider.init();
         this.tabToggle = (TabToggleMod) new TabToggleMod().init();
         this.victoryRoyale = (VictoryRoyale) new VictoryRoyale().init();
+        this.autofriend = (AutofriendMod) new AutofriendMod();
+        this.fncompass = (FortniteCompassMod) new FortniteCompassMod();
+        this.itemPhysicMod = (ItemPhysicMod) new ItemPhysicMod();
+        this.browserMod = (BrowserMod) new BrowserMod();
+        this.glintcolorizer = (GlintColorizer) new GlintColorizer();
+        this.chunkAnimator = (ChunkAnimator) new ChunkAnimator();
+        this.blockOverlay = (BlockOverlay) new BlockOverlay();
+        this.keystrokesMod = (KeystrokesMod) new KeystrokesMod();
+        this.timeChanger = (TimeChanger) new TimeChanger();
+        this.motionBlur = (MotionBlurMod) new MotionBlurMod();
         if (!Settings.FPS) {
-            this.autofriend = ((AutofriendMod) new AutofriendMod().init());
-            this.fncompass = (FortniteCompassMod) new FortniteCompassMod().init();
-            this.itemPhysicMod = (ItemPhysicMod) new ItemPhysicMod().init();
-            this.browserMod = (BrowserMod) new BrowserMod().init();
-            this.glintcolorizer = ((GlintColorizer) new GlintColorizer().init());
-            this.chunkAnimator = (ChunkAnimator) new ChunkAnimator().init();
-            this.blockOverlay = ((BlockOverlay) new BlockOverlay().init());
-            this.keystrokesMod = ((KeystrokesMod) new KeystrokesMod().init());
-            this.timeChanger = ((TimeChanger) new TimeChanger().init());
-            this.motionBlur = ((MotionBlurMod) new MotionBlurMod().init());
+            this.autofriend.init();
+            this.fncompass.init()
+            this.itemPhysicMod.init();
+            this.browserMod.init();
+            this.glintcolorizer.init();
+            this.chunkAnimator.init();
+            this.blockOverlay.init();
+            this.keystrokesMod.init();
+            this.timeChanger.init();
+            this.motionBlur.init();
         }
     }
 
