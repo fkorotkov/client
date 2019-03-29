@@ -65,7 +65,7 @@ public class HyperiumCosmetics {
     /**
      * Register Cosmetic - Register a Cosmetic Class
      *
-     * @param cosmetic - Given Cosmetic Class
+     * @param cosmetic - Cosmetic Class
      */
     private void registerCosmetic(AbstractCosmetic cosmetic) {
         cosmeticList.add(cosmetic);
