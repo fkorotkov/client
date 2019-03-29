@@ -16,7 +16,7 @@
  */
 
 package cc.hyperium.mods;
-
+import cc.hyperium.config.Settings;
 import cc.hyperium.mods.autofriend.AutofriendMod;
 import cc.hyperium.mods.autogg.AutoGG;
 import cc.hyperium.mods.blockoverlay.BlockOverlay;
@@ -39,10 +39,6 @@ import cc.hyperium.mods.togglechat.ToggleChatMod;
 import cc.hyperium.mods.victoryroyale.VictoryRoyale;
 import me.semx11.autotip.Autotip;
 
-/**
- * Basic inbuilt mod handler, including many community mods such as ChromaHUD, LevelHead and
- * ToggleChat
- */
 public class HyperiumModIntegration {
     private final KeystrokesMod keystrokesMod;
     private final TimeChanger timeChanger;
@@ -66,63 +62,42 @@ public class HyperiumModIntegration {
     private final ChunkAnimator chunkAnimator;
 
     public HyperiumModIntegration() {
-        // ChromaHUD implementation
         this.chromaHUD = ((ChromaHUD) new ChromaHUD().init());
-
-        // LevelHead implementation
         this.levelhead = ((Levelhead) new Levelhead().init());
-
-        // ToggleChat implementation
         this.toggleChat = ((ToggleChatMod) new ToggleChatMod().init());
-
-        // TimeChanger implementation
-        this.timeChanger = ((TimeChanger) new TimeChanger().init());
-
-        // KeystrokesMod implementation
-        this.keystrokesMod = ((KeystrokesMod) new KeystrokesMod().init());
-
-        // Autotip implementation
         this.autotip = new Autotip();
         autotip.init();
-
-        // AutoGG implementation
         this.autogg = ((AutoGG) new AutoGG().init());
-
-        // HGames implementation
         this.hgames = ((HGames) new HGames().init());
-
-        // Old Animations implementation
-
         this.oldanimations = ((OldAnimations) new OldAnimations().init());
-
-        // Block Overlay implementation
-        this.blockOverlay = ((BlockOverlay) new BlockOverlay().init());
-
-        // Spotify Controls Implementation
-        this.spotifyControls = ((SpotifyControls) new SpotifyControls().init());
-
-        //Motion Blur
-        this.motionBlur = ((MotionBlurMod) new MotionBlurMod().init());
-
-        // Glint Colorizer implementation
-        this.glintcolorizer = ((GlintColorizer) new GlintColorizer().init());
+        //this.spotifyControls = ((SpotifyControls) new SpotifyControls().init());
         NickHider nickHider = new NickHider();
         nickHider.init();
-
-        //Autofriend implementation
-        this.autofriend = ((AutofriendMod) new AutofriendMod().init());
-
-        this.fncompass = (FortniteCompassMod) new FortniteCompassMod().init();
-
         this.tabToggle = (TabToggleMod) new TabToggleMod().init();
-
-        this.itemPhysicMod = (ItemPhysicMod) new ItemPhysicMod().init();
-
-        this.browserMod = (BrowserMod) new BrowserMod().init();
-
         this.victoryRoyale = (VictoryRoyale) new VictoryRoyale().init();
-
-        this.chunkAnimator = (ChunkAnimator) new ChunkAnimator().init();
+        if (!Settings.FPS) {
+            this.autofriend = ((AutofriendMod) new AutofriendMod().init());
+            this.fncompass = (FortniteCompassMod) new FortniteCompassMod().init();
+            this.itemPhysicMod = (ItemPhysicMod) new ItemPhysicMod().init();
+            this.browserMod = (BrowserMod) new BrowserMod().init();
+            this.glintcolorizer = ((GlintColorizer) new GlintColorizer().init());
+            this.chunkAnimator = (ChunkAnimator) new ChunkAnimator().init();
+            this.blockOverlay = ((BlockOverlay) new BlockOverlay().init());
+            this.keystrokesMod = ((KeystrokesMod) new KeystrokesMod().init());
+            this.timeChanger = ((TimeChanger) new TimeChanger().init());
+            this.motionBlur = ((MotionBlurMod) new MotionBlurMod().init());
+        } else {
+            this.autofriend = null;
+            this.fncompass = null;
+            this.itemPhysicMod = null;
+            this.browserMod = null;
+            this.glintcolorizer = null;
+            this.chunkAnimator = null;
+            this.blockOverlay = null;
+            this.keystrokesMod = null;
+            this.timeChanger = null;
+            this.motionBlur = null;
+        }
     }
 
     public KeystrokesMod getKeystrokesMod() {
