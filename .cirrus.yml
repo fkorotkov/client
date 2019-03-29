@@ -16,7 +16,7 @@ test_task:
     populate_script: ./gradlew setupDecompWorkspace
   wrapper_cache:
     folder: /home/gradle/.gradle/wrapper/dists/
-    fingerprint_script: ls /home/gradle/.gradle/wrapper/dists/gradle-4.0.2-bin/be99721vbppnjuga6pbz1stgj
+    fingerprint_script: find /home/gradle/.gradle/wrapper/dists -exec echo {} \;
   build_script:
     - ./gradlew build
   jar_artifacts:
