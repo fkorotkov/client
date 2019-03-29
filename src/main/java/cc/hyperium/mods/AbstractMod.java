@@ -18,7 +18,6 @@
 package cc.hyperium.mods;
 
 import org.apache.commons.lang3.StringUtils;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -27,7 +26,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * to be turned on and off by the user
  */
 public abstract class AbstractMod {
-
     /**
      * The init method where all events and commands should
      * be registered. Use this to load configs as well
@@ -87,7 +85,7 @@ public abstract class AbstractMod {
         }
 
         /**
-         * Getter for the mod instance
+         * Get the mod instance
          *
          * @return the mod instance
          */
@@ -96,7 +94,7 @@ public abstract class AbstractMod {
         }
 
         /**
-         * Getter for the identifier of the mod
+         * Get the identifier of the mod
          *
          * @return the identifier for the mod
          */
@@ -105,7 +103,7 @@ public abstract class AbstractMod {
         }
 
         /**
-         * Getter for the version of the mod
+         * Get the version of the mod
          *
          * @return the mod version
          */
@@ -114,7 +112,7 @@ public abstract class AbstractMod {
         }
 
         /**
-         * Getter for the author of the mod
+         * Get the author of the mod
          *
          * @return the author of the mod
          */
@@ -123,7 +121,7 @@ public abstract class AbstractMod {
         }
 
         /**
-         * Getter for the mods display name
+         * Get the mods display name
          *
          * @return the display name
          */
@@ -132,7 +130,7 @@ public abstract class AbstractMod {
         }
 
         /**
-         * Setter for the mods display name for the configuration menu
+         * Set the mods display name for the configuration menu
          *
          * @param name the display name to be set
          */
