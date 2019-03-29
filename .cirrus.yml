@@ -10,8 +10,9 @@ test_task:
     - echo $CIRRUS_BUILD_ID > $CIRRUS_WORKING_DIR/src/main/resources/build.txt
   gradle_cache:
     folder: ~/.gradle/caches
-    fingerprint_script:
-      - cat build.gradle
+    fingerprint_script: |
+      cat build.gradle
+      cat gradle/wrapper/gradle-wrapper.properties
     populate_script: ./gradlew setupDecompWorkspace
   build_script:
     - ./gradlew build
