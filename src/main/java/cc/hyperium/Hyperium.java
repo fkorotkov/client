@@ -211,7 +211,6 @@ public class Hyperium {
                 try {
                     StaffUtils.clearCache();
                 } catch (IOException ignored) {}
-
             });
 
             //Multithreading.runAsync(Spotify::load);
@@ -294,7 +293,7 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandMessage());
         if(!Settings.FPS) hyperiumCommandHandler.registerCommand(new CommandParticleAuras());
         hyperiumCommandHandler.registerCommand(new CommandDisableCommand());
-        hyperiumCommandHandler.registerCommand(new AutofriendCommand());
+        if(!Settings.FPS) hyperiumCommandHandler.registerCommand(new AutofriendCommand());
         hyperiumCommandHandler.registerCommand(new CommandQuests());
         hyperiumCommandHandler.registerCommand(new CommandGuild());
         hyperiumCommandHandler.registerCommand(new CommandStatistics());
