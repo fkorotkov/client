@@ -18,6 +18,7 @@ class AddonManifest {
     /**
      * Version of the addon
      * <i>Preferred versioning number pattern is <b>MAJOR.MINOR.PATCH</b></i>
+     * (following <a href="https://semver.org">Semantic Versioning</a>)
      * MAJOR - version when you make incompatible API changes.
      * MINOR - version when you add functionality in a backwards-compatible manner.
      * PATCH - version when you make backwards-compatible bug fixes.
@@ -31,12 +32,10 @@ class AddonManifest {
      *
      * @return desc
      */
-
     val desc: String? = null
 
     /**
      * Main Class of an addon
-     * e.g.com.example.ExampleAddon
      *
      * @return main-class
      */
