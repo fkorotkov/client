@@ -56,7 +56,7 @@ object AddonBootstrap {
     private val loader = DefaultAddonLoader()
 
     /**
-     * Method of loading the addon if inside of the development environment
+     * Method of loading the addon if inside of the dev env
      */
     private val workspaceLoader = WorkspaceAddonLoader()
 
@@ -75,9 +75,6 @@ object AddonBootstrap {
      */
     val addonManifests = ArrayList<AddonManifest>()
 
-    /**
-     *
-     */
     val pendingManifests = ArrayList<AddonManifest>()
 
     /**
@@ -93,7 +90,6 @@ object AddonBootstrap {
         jars = modDirectory.listFiles()!!
                 .filter { it.name.toLowerCase().endsWith(".jar") }
                 .toCollection(ArrayList())
-
     }
 
     /**
@@ -204,10 +200,6 @@ object AddonBootstrap {
      * Phase the bootstrap is currently in
      */
     enum class Phase {
-
-        /**
-         * It aint started lol?
-         */
         NOT_STARTED,
 
         /**
@@ -222,7 +214,7 @@ object AddonBootstrap {
         INIT,
 
         /**
-         * If this all phases goes successfully it will end up on the defaulted phase
+         * If this all phases goes successfully it will end up at default
          */
         DEFAULT;
     }
