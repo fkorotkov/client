@@ -60,4 +60,4 @@ val DEVELOPMENT
  */
 val BLACKLISTED
     @JvmName("getBlacklisted")
-    get() = arrayOf("AutoFriend", "Custom Crosshair Addon", "Tab Toggle", "SidebarAddon", "BossbarAddon", "Auto Cheating", "Auto Dab", "FortniteCompassMod", "Item Physic", "Tab Toggle")
+    get() = arrayOf("AutoFriend", "Custom Crosshair Addon", "Tab Toggle", "SidebarAddon", "BossbarAddon", "Auto Cheating", "Auto Dab", "FortniteCompassMod", "Item Physic")
