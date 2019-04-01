@@ -5,13 +5,8 @@
 Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
-*.stackdump
 [Dd]esktop.ini
 $RECYCLE.BIN/
-*.cab
-*.msm
-*.msp
-*.lnk
 *.iml
 build/
 .gradle/
@@ -23,9 +18,7 @@ src/test/
 .idea/
 gradle/
 gradlew
-src/main/java/cc/hyperium/addons/sidebar/versions/UpdateChecker.java
 .DS_Store
-.AppleDB
 .AppleDesktop
 Network Trash Folder
 Temporary Items
@@ -38,4 +31,3 @@ Temporary Items
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
-.com.apple.timemachine.donotpresent
