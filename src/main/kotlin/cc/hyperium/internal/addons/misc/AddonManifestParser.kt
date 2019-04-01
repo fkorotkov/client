@@ -17,15 +17,7 @@ import java.util.jar.JarFile
  * @author Kevin Brewster
  */
 class AddonManifestParser {
-
-    /**
-     * Manifest json
-     */
     private var json: JsonObject? = null
-
-    /**
-     * Gson instance
-     */
     private val gson = Gson()
 
     /**
@@ -60,8 +52,9 @@ class AddonManifestParser {
             e.printStackTrace()
             throw AddonLoadException("Exception reading manifest")
         } finally {
-            if (jarInputStream != null)
+            if (jarInputStream != null) {
                 jarInputStream.close()
+            }
             jar.close()
         }
     }
@@ -69,7 +62,7 @@ class AddonManifestParser {
     /**
      * Used when parsing an addon.jsons string
      *
-     * @param contents The addons json (addon.json)
+     * @param contents The addon.json
      */
     constructor(contents: String) {
         val parser = JsonParser()
@@ -84,9 +77,6 @@ class AddonManifestParser {
         this.json = json
     }
 
-    /**
-     * Gets the AddonManifest instance
-     */
     fun getAddonManifest(): AddonManifest {
         return gson.fromJson(json, AddonManifest::class.java)
     }
