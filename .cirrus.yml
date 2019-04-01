@@ -6,7 +6,7 @@ container:
 test_task:
   auto_cancellation: true
   env:
-    GH_TOKEN: ENCRYPTED[4a1baf42ed717adfab076e8cb95e45cd430ffedf6912da4997992073ca1b8695470d1e3cc962843bfc0bff3
+    GH_TOKEN: ENCRYPTED[4a1baf42ed717adfab076e8cb95e45cd430ffedf6912da4997992073ca1b8695470d1e3cc962843bfc0bff3]
   setup_workspace_script:
     - chmod +x ./gradlew
     - echo $CIRRUS_BUILD_ID > $CIRRUS_WORKING_DIR/src/main/resources/build.txt
