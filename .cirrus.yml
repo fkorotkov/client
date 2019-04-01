@@ -1,7 +1,7 @@
 container:
   image: gradle:jdk8
-  cpu: 4
-  memory: 10G
+  cpu: 6
+  memory: 12G
 
 test_task:
   auto_cancellation: true
