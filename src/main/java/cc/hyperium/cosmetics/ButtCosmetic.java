@@ -15,10 +15,10 @@ public class ButtCosmetic extends AbstractCosmetic {
 
     @InvokeEvent(priority = Priority.HIGH)
     public void preCopy(PreCopyPlayerModelAnglesEvent event) {
-
         boolean b = event.getModel() instanceof IMixinModelPlayer;
-        if (!b)
+        if (!b) {
             return;
+        }
         boolean purchasedBy = isPurchasedBy(event.getEntity().getUniqueID());
         if (!purchasedBy) {
             ((IMixinModelPlayer) event.getModel()).getButt().showModel = false;
