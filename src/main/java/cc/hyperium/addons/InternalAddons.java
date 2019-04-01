@@ -1,5 +1,5 @@
 package cc.hyperium.addons;
-
+import cc.hyperium.config.Settings;
 import cc.hyperium.addons.bossbar.BossbarAddon;
 import cc.hyperium.addons.customcrosshair.CustomCrosshairAddon;
 import cc.hyperium.addons.sidebar.SidebarAddon;
@@ -11,9 +11,14 @@ public class InternalAddons {
     private final BossbarAddon bossbarAddon;
 
     public InternalAddons() {
-        this.customCrosshairAddon = ((CustomCrosshairAddon) new CustomCrosshairAddon().init());
-        this.sidebarAddon = ((SidebarAddon) new SidebarAddon().init());
-        this.bossbarAddon = ((BossbarAddon) new BossbarAddon().init());
+        this.customCrosshairAddon = (CustomCrosshairAddon) new CustomCrosshairAddon();
+        this.sidebarAddon = (SidebarAddon) new SidebarAddon();
+        this.bossbarAddon = (BossbarAddon) new BossbarAddon();
+        if (!Settings.FPS) {
+            this.customCrosshairAddon.init();
+        }
+        this.sidebarAddon.init();
+        this.bossbarAddon.init();
     }
 
     public CustomCrosshairAddon getCustomCrosshairAddon() {
