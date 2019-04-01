@@ -22,16 +22,12 @@ import cc.hyperium.event.ChatEvent;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.event.HypixelGetCoinsEvent;
 import cc.hyperium.event.InvokeEvent;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class GeneralStatisticsTracking {
-
     public static final DateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-
-    // These can be put in a HUD or printed in a command somewhere.
 
     @ConfigOpt
     public static int lifetimeCoins = 0;
@@ -49,7 +45,6 @@ public class GeneralStatisticsTracking {
         // Check how much the time has changed since the last use.
         checkTimes();
 
-
         String line = event.getChat().getUnformattedText();
         if (line.startsWith("+") && line.contains("coins")) {
             int coins = Integer.parseInt(line.split("\\+")[1].split(" coins")[0]);
@@ -59,7 +54,6 @@ public class GeneralStatisticsTracking {
             lifetimeCoins += coins;
             monthlyCoins += coins;
             dailyCoins += coins;
-            //System.out.println("Lifetime coins earned: " + lifetimeCoins);
         }
     }
 
