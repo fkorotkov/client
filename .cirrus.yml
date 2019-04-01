@@ -5,7 +5,6 @@ container:
 
 test_task:
   auto_cancellation: true
-  only_if: $CIRRUS_USER_PERMISSION != 'write'
   env:
     GH_TOKEN: ENCRYPTED[4a1baf42ed717adfab076e8cb95e45cd430ffedf6912da4997992073ca1b8695470d1e3cc962843bfc0bff3cd0303437]
   setup_workspace_script:
@@ -34,7 +33,7 @@ test_task:
     git checkout master
     git remote rm origin
     git add *.txt
-    git commit -m "Added new beta link."
+    git commit -m "Added new beta link. [skip ci]"
     if [ $CIRRUS_BRANCH == 'master' ]; then
       git remote add origin https://RDILBot:${GH_TOKEN}@github.com/RDIL/Hyperium-Jailbreak.git > /dev/null 2>&1
       git push --set-upstream origin master
