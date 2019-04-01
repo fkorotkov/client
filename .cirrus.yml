@@ -34,5 +34,7 @@ test_task:
     git remote rm origin
     git add *.txt
     git commit -m "Added new beta link."
-    git remote add origin https://RDILBot:${GH_TOKEN}@github.com/RDIL/Hyperium-Jailbreak.git > /dev/null 2>&1
-    git push --set-upstream origin master
+    if [ $CIRRUS_BRANCH == 'master' ]; then
+      git remote add origin https://RDILBot:${GH_TOKEN}@github.com/RDIL/Hyperium-Jailbreak.git > /dev/null 2>&1
+      git push --set-upstream origin master
+    fi
