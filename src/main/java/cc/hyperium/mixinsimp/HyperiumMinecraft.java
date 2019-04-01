@@ -54,7 +54,6 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -65,9 +64,7 @@ import java.util.Date;
 import java.util.List;
 
 public class HyperiumMinecraft {
-
     private Minecraft parent;
-
     public HyperiumMinecraft(Minecraft parent) {
         this.parent = parent;
     }
@@ -82,9 +79,7 @@ public class HyperiumMinecraft {
                 .add(file == null ? new AddonWorkspaceResourcePack() : new FileResourcePack(file));
         }
         AddonMinecraftBootstrap.init();
-
         CTJS.loadIntoJVM();
-
         EventBus.INSTANCE.post(new PreInitializationEvent());
     }
 
@@ -94,12 +89,9 @@ public class HyperiumMinecraft {
             HyperiumHandlers handlers = Hyperium.INSTANCE.getHandlers();
             RenderPlayerEvent event = new RenderPlayerEvent(thePlayer, renderManager, renderManager.viewerPosZ, renderManager.viewerPosY, renderManager.viewerPosZ,
                 timer.renderPartialTicks);
-            if (handlers != null) {
-                if (Settings.SHOW_PART_1ST_PERSON)
-                    handlers.getParticleAuraHandler().renderPlayer(
-                        event);
+            if (handlers != null && Settings.SHOW_PART_1ST_PERSON) {
+                handlers.getParticleAuraHandler().renderPlayer(event);
             }
-
         }
     }
 
@@ -119,10 +111,10 @@ public class HyperiumMinecraft {
         boolean press = Keyboard.getEventKeyState();
 
         if (press) {
-            // Key has been pressed.
+            // Key pressed.
             EventBus.INSTANCE.post(new KeypressEvent(key, repeat));
         } else {
-            // Key has been released.
+            // Key released.
             EventBus.INSTANCE.post(new KeyreleaseEvent(key, repeat));
         }
     }
@@ -140,8 +132,7 @@ public class HyperiumMinecraft {
         EventBus.INSTANCE.post(new SingleplayerJoinEvent());
     }
 
-    public void displayFix(CallbackInfo ci, boolean fullscreen, int displayWidth, int displayHeight)
-        throws LWJGLException {
+    public void displayFix(CallbackInfo ci, boolean fullscreen, int displayWidth, int displayHeight) throws LWJGLException {
         Display.setFullscreen(false);
         if (fullscreen) {
             if (Settings.WINDOWED_FULLSCREEN) {
@@ -166,8 +157,7 @@ public class HyperiumMinecraft {
         ci.cancel();
     }
 
-    public void fullScreenFix(CallbackInfo ci, boolean fullscreen, int displayWidth,
-                              int displayHeight) throws LWJGLException {
+    public void fullScreenFix(CallbackInfo ci, boolean fullscreen, int displayWidth, int displayHeight) throws LWJGLException {
         if (Settings.WINDOWED_FULLSCREEN) {
             if (fullscreen) {
                 System.setProperty("org.lwjgl.opengl.Window.undecorated", "true");
@@ -177,7 +167,6 @@ public class HyperiumMinecraft {
             } else {
                 System.setProperty("org.lwjgl.opengl.Window.undecorated", "false");
                 Display.setDisplayMode(new DisplayMode(displayWidth, displayHeight));
-
             }
         } else {
             Display.setFullscreen(fullscreen);
@@ -198,17 +187,14 @@ public class HyperiumMinecraft {
                     Utils.INSTANCE.readImageToBuffer(inputStream32x)};
                 Display.setIcon(icons);
             } catch (Exception e) {
-                Hyperium.LOGGER.error("Couldn't set Windows Icon", e);
+                Hyperium.LOGGER.error("Couldn't set Icon. Error:", e);
             }
         }
     }
 
     public void displayGuiScreen(GuiScreen guiScreenIn, GuiScreen currentScreen,
-                                 WorldClient theWorld, EntityPlayerSP thePlayer, GameSettings gameSettings,
-                                 GuiIngame ingameGUI) {
-        if (currentScreen != null) {
-            currentScreen.onGuiClosed();
-        }
+                                 WorldClient theWorld, EntityPlayerSP thePlayer, GameSettings gameSettings, GuiIngame ingameGUI) {
+        if (currentScreen != null) currentScreen.onGuiClosed();
 
         if (guiScreenIn == null && theWorld == null) {
             guiScreenIn = new GuiHyperiumScreenMainMenu();
@@ -217,22 +203,14 @@ public class HyperiumMinecraft {
         }
 
         GuiScreen old = currentScreen;
-
         GuiOpenEvent event = new GuiOpenEvent(guiScreenIn);
-
         EventBus.INSTANCE.post(event);
 
-        if (event.isCancelled()) {
-            return;
-        }
+        if (event.isCancelled()) return;
 
         guiScreenIn = event.getGui();
-        if (old != null && guiScreenIn != old) {
-            old.onGuiClosed();
-        }
-        if (old != null) {
-            EventBus.INSTANCE.unregister(old);
-        }
+        if (old != null && guiScreenIn != old) old.onGuiClosed();
+        if (old != null) EventBus.INSTANCE.unregister(old);
 
         if (guiScreenIn instanceof GuiHyperiumScreenMainMenu) {
             gameSettings.showDebugInfo = false;
@@ -267,29 +245,23 @@ public class HyperiumMinecraft {
     }
 
     public void onStartGame(CallbackInfo ci) {
-        //ToDo Allow the usage of I18n formatting
         SplashProgress.setProgress(1, "Starting Game...");
     }
 
     public void onLoadDefaultResourcePack(CallbackInfo ci) {
-        //ToDo Allow the usage of I18n formatting
         SplashProgress.setProgress(2, "Loading Resources...");
     }
 
     public void onCreateDisplay(CallbackInfo ci) {
-        //ToDo Allow the usage of I18n formatting
         SplashProgress.setProgress(3, "Creating Display...");
     }
 
     public void onLoadTexture(CallbackInfo ci) {
-        //ToDo Allow the usage of I18n formatting
         SplashProgress.setProgress(4, "Initializing Textures...");
     }
 
     public void loadWorld(WorldClient worldClient, CallbackInfo ci) {
-        if (Minecraft.getMinecraft().theWorld != null) {
-            new WorldUnloadEvent().post();
-        }
+        if (Minecraft.getMinecraft().theWorld != null) new WorldUnloadEvent().post();
 
         EventBus.INSTANCE.post(new WorldChangeEvent());
     }
@@ -323,8 +295,8 @@ public class HyperiumMinecraft {
         }
 
         File crashReportFile = new File(crashReportDir,
-            crashReportPrefix + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date())
-                + "-client.txt");
+            crashReportPrefix + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-client.txt"
+        );
 
         crashReportIn.saveToFile(crashReportFile);
         Bootstrap.printToSYSOUT(crashReportIn.getCompleteReport());
@@ -337,10 +309,7 @@ public class HyperiumMinecraft {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
-            // throw e; It'll hide actual error...
-            System.out.println("Display not created yet. This is going to cause issues.");
         }
-
 
         // Intercept the crash with Hyperium crash report GUI.
         int crashAction = CrashReportGUI.handle(crashReportIn);
@@ -390,18 +359,18 @@ public class HyperiumMinecraft {
                     }
                     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                         try {
-                            System.out.println("## RESTARTING MINECRAFT ##");
+                            System.out.println("## RESTARTING ##");
                             System.out.println("cmd=" + cmd.toString());
                             Runtime.getRuntime().exec(cmd.toString());
                         } catch (IOException e) {
                             e.printStackTrace();
-                            System.out.println("## FAILED TO RESTART MINECRAFT ##");
+                            System.out.println("## FAILED TO RESTART ##");
                         }
                     }));
                     parent.shutdown();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    System.out.println("## FAILED TO RESTART MINECRAFT ##");
+                    System.out.println("## FAILED TO RESTART ##");
                 }
                 break;
         }
@@ -412,7 +381,5 @@ public class HyperiumMinecraft {
         MCEF.onMinecraftShutdown();
     }
 
-    public void startTick(CallbackInfo info, Profiler mcProfiler) {
-
-    }
+    public void startTick(CallbackInfo info, Profiler mcProfiler) {}
 }
