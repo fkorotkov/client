@@ -19,6 +19,7 @@ test_task:
     populate_script: |
       ./gradlew setupDecompWorkspace
   build_script: |
+    ./gradlew test
     ./gradlew build
   jar_artifacts:
     path: ./build/libs/**
