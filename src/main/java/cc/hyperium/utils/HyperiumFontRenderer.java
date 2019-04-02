@@ -16,14 +16,12 @@
  */
 
 package cc.hyperium.utils;
-
 import cc.hyperium.installer.InstallerMain;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.StringUtils;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
-
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 
 public class HyperiumFontRenderer {
-
     public final int FONT_HEIGHT = 9;
     private final int[] colorCodes = new int[32];
     private final float kerning;
@@ -68,9 +65,7 @@ public class HyperiumFontRenderer {
             int green = (i >> 1 & 1) * 170 + shadow;
             int blue = (i & 1) * 170 + shadow;
 
-            if (i == 6) {
-                red += 85;
-            }
+            if (i == 6) red += 85;
 
             if (i >= 16) {
                 red /= 4;
@@ -102,9 +97,7 @@ public class HyperiumFontRenderer {
             int green = (i >> 1 & 1) * 170 + shadow;
             int blue = (i & 1) * 170 + shadow;
 
-            if (i == 6) {
-                red += 85;
-            }
+            if (i == 6) red += 85;
 
             if (i >= 16) {
                 red /= 4;
@@ -138,7 +131,6 @@ public class HyperiumFontRenderer {
     }
 
     public void drawStringScaled(String text, int givenX, int givenY, int color, double givenScale) {
-
         GL11.glPushMatrix();
         GL11.glTranslated(givenX, givenY, 0);
         GL11.glScaled(givenScale, givenScale, givenScale);
@@ -148,8 +140,7 @@ public class HyperiumFontRenderer {
     }
 
     public int drawString(String text, float x, float y, int color) {
-        if (text == null)
-            return 0;
+        if (text == null) return 0;
 
         x *= 2.0F;
         y *= 2.0F;
@@ -170,24 +161,17 @@ public class HyperiumFontRenderer {
         boolean blend = GL11.glIsEnabled(GL11.GL_BLEND);
         boolean lighting = GL11.glIsEnabled(GL11.GL_LIGHTING);
         boolean texture = GL11.glIsEnabled(GL11.GL_TEXTURE_2D);
-        if (!blend)
-            GL11.glEnable(GL11.GL_BLEND);
-        if (lighting)
-            GL11.glDisable(GL11.GL_LIGHTING);
-        if (texture)
-            GL11.glDisable(GL11.GL_TEXTURE_2D);
+        if (!blend) GL11.glEnable(GL11.GL_BLEND);
+        if (lighting) GL11.glDisable(GL11.GL_LIGHTING);
+        if (texture) GL11.glDisable(GL11.GL_TEXTURE_2D);
 
         int currentColor = color;
         char[] characters = text.toCharArray();
 
         int index = 0;
         for (char c : characters) {
-            if (c == '\r') {
-                x = originalX;
-            }
-            if (c == '\n') {
-                y += getHeight(Character.toString(c)) * 2.0F;
-            }
+            if (c == '\r') x = originalX;
+            if (c == '\n') y += getHeight(Character.toString(c)) * 2.0F;
             if (c != '\247' && (index == 0 || index == characters.length - 1 || characters[index - 1] != '\247')) {
                 //Line causing error
                 unicodeFont.drawString(x, y, Character.toString(c), new org.newdawn.slick.Color(currentColor));
@@ -197,20 +181,15 @@ public class HyperiumFontRenderer {
             } else if (c == '\247' && index != characters.length - 1) {
                 int codeIndex = "0123456789abcdefg".indexOf(text.charAt(index + 1));
                 if (codeIndex < 0) continue;
-
                 currentColor = this.colorCodes[codeIndex];
             }
-
             index++;
         }
 
         GL11.glScaled(2.0F, 2.0F, 2.0F);
-        if (texture)
-            GL11.glEnable(GL11.GL_TEXTURE_2D);
-        if (lighting)
-            GL11.glEnable(GL11.GL_LIGHTING);
-        if (!blend)
-            GL11.glDisable(GL11.GL_BLEND);
+        if (texture) GL11.glEnable(GL11.GL_TEXTURE_2D);
+        if (lighting) GL11.glEnable(GL11.GL_LIGHTING);
+        if (!blend) GL11.glDisable(GL11.GL_BLEND);
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glPopMatrix();
         return (int) x / 2;
@@ -235,13 +214,11 @@ public class HyperiumFontRenderer {
      * @param givenScale - Given Scale
      */
     public void drawCenteredTextScaled(String text, int givenX, int givenY, int color, double givenScale) {
-
         GL11.glPushMatrix();
         GL11.glTranslated(givenX, givenY, 0);
         GL11.glScaled(givenScale, givenScale, givenScale);
         drawCenteredString(text, 0, 0, color);
         GL11.glPopMatrix();
-
     }
 
     public void drawCenteredStringWithShadow(String text, float x, float y, int color) {
@@ -250,8 +227,7 @@ public class HyperiumFontRenderer {
     }
 
     public float getWidth(String s) {
-        if (cachedStringWidth.size() > 1000)
-            cachedStringWidth.clear();
+        if (cachedStringWidth.size() > 1000) cachedStringWidth.clear();
         return cachedStringWidth.computeIfAbsent(s, e -> {
             float width = 0.0F;
             String str = StringUtils.stripControlCodes(s);
@@ -356,12 +332,7 @@ public class HyperiumFontRenderer {
     }
 
     public void drawSplitString(ArrayList<String> lines, int x, int y, int color) {
-        drawString(
-            String.join("\n\r", lines),
-            x,
-            y,
-            color
-        );
+        drawString(String.join("\n\r", lines), x, y, color);
     }
 
     public List<String> splitString(String text, int wrapWidth) {
