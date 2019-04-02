@@ -1,5 +1,4 @@
 package cc.hyperium.utils;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.Metadata;
 import com.google.common.base.Charsets;
@@ -9,13 +8,11 @@ import org.apache.commons.io.IOUtils;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.HttpClients;
-
 import java.io.IOException;
 
 /**
  * @author Cubxity
  */
-
 public class UpdateUtils {
     private static final HttpClient client = HttpClients.createDefault();
     public static UpdateUtils INSTANCE = new UpdateUtils();
@@ -38,16 +35,13 @@ public class UpdateUtils {
     public boolean isAbsoluteLatest() {
         JsonObject json = apiUtils.getJson();
         int version = apiUtils.getVersion(json);
-
         return version <= Metadata.getVersionID();
     }
 
     public boolean isBeta() {
         for (JsonElement element : apiUtils.getJson().get("versions").getAsJsonArray()) {
             JsonHolder holder = new JsonHolder(element.getAsJsonObject());
-            if (holder.optInt("id") == Metadata.getVersionID()) {
-                return holder.optBoolean("beta");
-            }
+            if (holder.optInt("id") == Metadata.getVersionID()) return holder.optBoolean("beta");
         }
         return false;
     }
