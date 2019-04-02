@@ -26,12 +26,10 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.ResourceLocation;
-
 import java.awt.Color;
 import java.awt.Font;
 
 public class SplashProgress {
-
     public static final int DEFAULT_MAX = 13;
     public static int MAX = DEFAULT_MAX;
     public static int PROGRESS = 0;
@@ -39,15 +37,10 @@ public class SplashProgress {
     public static boolean CANCEL_IF_MAX = true;
     private static ResourceLocation splash;
     private static TextureManager ctm;
-    /**
-     * FontRenderer for drawing splash screen
-     */
     private static HyperiumFontRenderer sfr;
 
     public static void update() {
-        if (Minecraft.getMinecraft() == null || Minecraft.getMinecraft().getLanguageManager() == null) {
-            return;
-        }
+        if (Minecraft.getMinecraft() == null || Minecraft.getMinecraft().getLanguageManager() == null) return;
         drawSplash(Minecraft.getMinecraft().getTextureManager());
     }
 
@@ -58,10 +51,7 @@ public class SplashProgress {
     }
 
     public static void drawSplash(TextureManager tm) {
-        if (ctm == null) {
-            ctm = tm;
-        }
-
+        if (ctm == null) ctm = tm;
         ScaledResolution scaledresolution = new ScaledResolution(Minecraft.getMinecraft());
         int i = scaledresolution.getScaleFactor();
         Framebuffer framebuffer = new Framebuffer(scaledresolution.getScaledWidth() * i, scaledresolution.getScaledHeight() * i, true);
@@ -77,10 +67,7 @@ public class SplashProgress {
         GlStateManager.disableDepth();
         GlStateManager.enableTexture2D();
 
-        if (splash == null) {
-            splash = new ResourceLocation("textures/hyperium-splash.png");
-        }
-
+        if (splash == null) splash = new ResourceLocation("textures/hyperium-splash.png");
         tm.bindTexture(splash);
 
         GlStateManager.resetColor();
@@ -96,13 +83,8 @@ public class SplashProgress {
     }
 
     private static void drawProgress() {
-        if (Minecraft.getMinecraft().gameSettings == null || Minecraft.getMinecraft().getTextureManager() == null) {
-            return;
-        }
-
-        if (sfr == null) {
-            sfr = new HyperiumFontRenderer("Arial", Font.PLAIN, 20);
-        }
+        if (Minecraft.getMinecraft().gameSettings == null || Minecraft.getMinecraft().getTextureManager() == null) return;
+        if (sfr == null) sfr = new HyperiumFontRenderer("Arial", Font.PLAIN, 20);
 
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 
@@ -110,7 +92,6 @@ public class SplashProgress {
         double calc = (nProgress / MAX) * sr.getScaledWidth();
 
         Gui.drawRect(0, sr.getScaledHeight() - 35, sr.getScaledWidth(), sr.getScaledHeight(), new Color(0, 0, 0, 50).getRGB());
-
         GlStateManager.resetColor();
         GlStateModifier.INSTANCE.reset();
         sfr.drawString(CURRENT, 20, sr.getScaledHeight() - 25, 0xffffffff);
