@@ -1,1 +1,1 @@
-https://api.cirrus-ci.com/v1/artifact/task/5661585551917056/jar/build/libs/Hyperium-2.0.jar
+https://api.cirrus-ci.com/v1/artifact/task/5696823309107200/jar/build/libs/Hyperium-2.0.jar
