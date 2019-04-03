@@ -1,10 +1,9 @@
-container:
-  image: gradle:jdk8
-  cpu: 6
-  memory: 12G
-
 test_task:
   auto_cancellation: true
+  container:
+    image: gradle:jdk8
+    cpu: 8
+    memory: 12G
   env:
     GH_TOKEN: ENCRYPTED[4a1baf42ed717adfab076e8cb95e45cd430ffedf6912da4997992073ca1b8695470d1e3cc962843bfc0bff3cd0303437]
   setup_workspace_script: |
@@ -16,8 +15,9 @@ test_task:
     fingerprint_script: |
       cat build.gradle
       cat gradle/wrapper/gradle-wrapper.properties
+      cat settings.gradle
     populate_script: |
-      ./gradlew setupDecompWorkspace
+      ./gradlew setupDevWorkspace
   build_script: |
     ./gradlew test
     ./gradlew build
