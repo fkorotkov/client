@@ -8,15 +8,10 @@ import cc.hyperium.mixinsimp.renderer.FontFixValues;
 import cc.hyperium.mixinsimp.renderer.StringHash;
 import cc.hyperium.mods.nickhider.NickHider;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -91,7 +86,7 @@ public abstract class MixinFontRenderer {
 
     @Overwrite
     private void renderStringAtPos(String text, boolean shadow) {
-        //Should help fix issues
+        // Should help fix issues
         GlStateModifier.INSTANCE.reset();
 
         if (FontFixValues.INSTANCE == null) FontFixValues.INSTANCE = new FontFixValues();
