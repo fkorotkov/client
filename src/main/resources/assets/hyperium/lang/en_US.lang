@@ -52,7 +52,7 @@ gui.ingamemenu.playercount.lastday=Last Day: %s
 gui.ingamemenu.playercount.lastweek=Last Week: %s
 gui.ingamemenu.playercount.alltime=All Time: %s
 
-# Hyperium PurchaseCarousel Text
+# Hyperium Purchase Carousel Text
 gui.purchase.purchased=Purchased
 gui.purchase.purchase=Purchase
 gui.purchase.active=Active
@@ -214,7 +214,7 @@ gui.settings.disableitemframes=Disable Item Frames
 gui.settings.confirmdisconnect=Confirm Disconnect
 gui.settings.confirmquit=Confirm Quit
 gui.settings.hotbarkeys=Hotbar Keys
-gui.settings.FPS=FPS Mode (Requires Restart)
+gui.settings.FPS=FPS Mode (Activates After Restart)
 
 # Hyperium Splash Progress
 splashprogress.startinggame=Starting Game...
@@ -236,7 +236,7 @@ gui.namehistory.text=NAME HISTORY
 gui.confirmdisconnect.text=Are you sure you want to disconnect?
 gui.confirmquit.text=Are you sure you want to quit?
 
-#Hyperium Chat Message
+# Hyperium Chat Message
 message.insufficientcredits=Insufficient credits
 message.attemptingpurchase=Attempting to purchase %s
 message.alreadypurchased=Already purchased %s
