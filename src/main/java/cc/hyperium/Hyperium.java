@@ -169,7 +169,7 @@ public class Hyperium {
             EventBus.INSTANCE.register(CompactChat.getInstance());
             EventBus.INSTANCE.register(CONFIG.register(FPSLimiter.getInstance()));
             EventBus.INSTANCE.register(confirmation);
-            EventBus.INSTANCE.register(new BlurHandler());
+            if (!Settings.FPS) EventBus.INSTANCE.register(new BlurHandler());
 
             // Register statistics tracking.
             EventBus.INSTANCE.register(statTrack);
