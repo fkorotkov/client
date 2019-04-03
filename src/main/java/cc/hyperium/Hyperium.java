@@ -82,6 +82,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 import org.cef.OS;
+import rocks.rdil.jailbreak.plugin.ThankWatchdog;
 import rocks.rdil.jailbreak.Jailbreak;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -128,7 +129,7 @@ public class Hyperium {
     public void preinit(PreInitializationEvent event) {
         /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-	Jailbreak j = new Jailbreak();
+        Jailbreak j = new Jailbreak();
         j.debug();
     }
 
@@ -161,7 +162,10 @@ public class Hyperium {
                 isDevEnv = false;
             }
 
-            if(!Settings.FPS) cosmetics = new HyperiumCosmetics();
+            if(!Settings.FPS) {
+                cosmetics = new HyperiumCosmetics();
+                ThankWatchdog w = new ThankWatchdog();
+            }
 
             // Creates the accounts dir
             firstLaunch = new File(folder.getAbsolutePath() + "/accounts").mkdirs();

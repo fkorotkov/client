@@ -19,7 +19,7 @@ package cc.hyperium.integrations.spotify;
 
 import cc.hyperium.Hyperium;
 import cc.hyperium.config.Settings;
-import cc.hyperium.integrations.os.OsHelper;
+import cc.hyperium.integrations.OsHelper;
 import cc.hyperium.integrations.spotify.impl.SpotifyInformation;
 import cc.hyperium.mods.sk1ercommon.Multithreading;
 import com.google.gson.Gson;
