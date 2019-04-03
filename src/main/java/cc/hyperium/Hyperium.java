@@ -18,26 +18,7 @@
 package cc.hyperium;
 import cc.hyperium.addons.InternalAddons;
 import cc.hyperium.commands.HyperiumCommandHandler;
-import cc.hyperium.commands.defaults.CommandBrowse;
-import cc.hyperium.commands.defaults.CommandClearChat;
-import cc.hyperium.commands.defaults.CommandConfigGui;
-import cc.hyperium.commands.defaults.CommandCoords;
-import cc.hyperium.commands.defaults.CommandDebug;
-import cc.hyperium.commands.defaults.CommandDisableCommand;
-import cc.hyperium.commands.defaults.CommandGarbageCollect;
-import cc.hyperium.commands.defaults.CommandGuild;
-import cc.hyperium.commands.defaults.CommandKeybinds;
-import cc.hyperium.commands.defaults.CommandLogs;
-import cc.hyperium.commands.defaults.CommandMessage;
-import cc.hyperium.commands.defaults.CommandNameHistory;
-import cc.hyperium.commands.defaults.CommandParticleAuras;
-import cc.hyperium.commands.defaults.CommandParty;
-import cc.hyperium.commands.defaults.CommandPing;
-import cc.hyperium.commands.defaults.CommandQuests;
-import cc.hyperium.commands.defaults.CommandResize;
-import cc.hyperium.commands.defaults.CommandStatistics;
-import cc.hyperium.commands.defaults.CommandStats;
-import cc.hyperium.commands.defaults.CustomLevelheadCommand;
+import cc.hyperium.commands.defaults.*;
 import cc.hyperium.config.DefaultConfig;
 import cc.hyperium.config.Settings;
 import cc.hyperium.cosmetics.HyperiumCosmetics;
@@ -82,6 +63,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
 import org.cef.OS;
+import rocks.rdil.jailbreak.plugin.ThankWatchdog;
 import rocks.rdil.jailbreak.Jailbreak;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -128,7 +110,7 @@ public class Hyperium {
     public void preinit(PreInitializationEvent event) {
         /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-	Jailbreak j = new Jailbreak();
+        Jailbreak j = new Jailbreak();
         j.debug();
     }
 
@@ -161,7 +143,10 @@ public class Hyperium {
                 isDevEnv = false;
             }
 
-            if(!Settings.FPS) cosmetics = new HyperiumCosmetics();
+            if(!Settings.FPS) {
+                cosmetics = new HyperiumCosmetics();
+                ThankWatchdog w = new ThankWatchdog();
+            }
 
             // Creates the accounts dir
             firstLaunch = new File(folder.getAbsolutePath() + "/accounts").mkdirs();
@@ -184,7 +169,7 @@ public class Hyperium {
             EventBus.INSTANCE.register(CompactChat.getInstance());
             EventBus.INSTANCE.register(CONFIG.register(FPSLimiter.getInstance()));
             EventBus.INSTANCE.register(confirmation);
-            EventBus.INSTANCE.register(new BlurHandler());
+            if (!Settings.FPS) EventBus.INSTANCE.register(new BlurHandler());
 
             // Register statistics tracking.
             EventBus.INSTANCE.register(statTrack);

@@ -8,15 +8,10 @@ import cc.hyperium.mixinsimp.renderer.FontFixValues;
 import cc.hyperium.mixinsimp.renderer.StringHash;
 import cc.hyperium.mods.nickhider.NickHider;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.GLAllocation;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
-import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
-import org.lwjgl.opengl.GL11;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -91,7 +86,7 @@ public abstract class MixinFontRenderer {
 
     @Overwrite
     private void renderStringAtPos(String text, boolean shadow) {
-        //Should help fix issues
+        // Should help fix issues
         GlStateModifier.INSTANCE.reset();
 
         if (FontFixValues.INSTANCE == null) FontFixValues.INSTANCE = new FontFixValues();
@@ -265,25 +260,31 @@ public abstract class MixinFontRenderer {
 
     /**
      * @author Sk1er
-     * @reason Optimized Font Renderer
      */
     @Overwrite
     public int getStringWidth(String text) {
-        if (text == null) {return 0;}
-        HyperiumHandlers handlers = Hyperium.INSTANCE.getHandlers();
-        if (handlers != null) {f (FontRendererData.INSTANCE.stringWidthCache.size() > handlers.getConfigOptions().stringCacheSize) FontRendererData.INSTANCE.stringWidthCache.clear();}
-        return FontRendererData.INSTANCE.stringWidthCache.computeIfAbsent(text, (text1) -> {
-            int i = 0;
-            boolean flag = false;
-            for (int j = 0; j < text.length(); ++j) {
-                char c0 = text.charAt(j);
-                int k = this.getCharWidth(c0);
-                if (k < 0 && j < text.length() - 1) {
-                    ++j;
-                    c0 = text.charAt(j);
-                    if (c0 != 108 && c0 != 76) {
-                        if (c0 == 114 || c0 == 82) {flag = false;}
-                        else{flag = true;}
+        if (text == null) {
+            return 0;
+        } else {
+            HyperiumHandlers handlers = Hyperium.INSTANCE.getHandlers();
+            if (handlers != null && FontRendererData.INSTANCE.stringWidthCache.size() > handlers.getConfigOptions().stringCacheSize) FontRendererData.INSTANCE.stringWidthCache.clear();
+            return FontRendererData.INSTANCE.stringWidthCache.computeIfAbsent(text, (text1) -> {
+                int i = 0;
+                boolean flag = false;
+                for (int j = 0; j < text.length(); ++j) {
+                    char c0 = text.charAt(j);
+                    int k = this.getCharWidth(c0);
+                    if (k < 0 && j < text.length() - 1) {
+                        ++j;
+                        c0 = text.charAt(j);
+
+                        if (c0 != 108 && c0 != 76) {
+                            if (c0 == 114 || c0 == 82) {
+                                flag = false;
+                            }
+                        } else {
+                            flag = true;
+                        }
                         k = 0;
                     }
                     i += k;
@@ -291,6 +292,7 @@ public abstract class MixinFontRenderer {
                 }
                 return i;
             });
+
         }
     }
 }
