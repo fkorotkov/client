@@ -269,9 +269,9 @@ public abstract class MixinFontRenderer {
      */
     @Overwrite
     public int getStringWidth(String text) {
-        if (text == null) return 0;
+        if (text == null) {return 0;}
         HyperiumHandlers handlers = Hyperium.INSTANCE.getHandlers();
-        if (handlers != null) f (FontRendererData.INSTANCE.stringWidthCache.size() > handlers.getConfigOptions().stringCacheSize) FontRendererData.INSTANCE.stringWidthCache.clear();
+        if (handlers != null) {f (FontRendererData.INSTANCE.stringWidthCache.size() > handlers.getConfigOptions().stringCacheSize) FontRendererData.INSTANCE.stringWidthCache.clear();}
         return FontRendererData.INSTANCE.stringWidthCache.computeIfAbsent(text, (text1) -> {
             int i = 0;
             boolean flag = false;
@@ -282,8 +282,8 @@ public abstract class MixinFontRenderer {
                     ++j;
                     c0 = text.charAt(j);
                     if (c0 != 108 && c0 != 76) {
-                        if (c0 == 114 || c0 == 82) flag = false;
-                        else flag = true;
+                        if (c0 == 114 || c0 == 82) {flag = false;}
+                        else{flag = true;}
                         k = 0;
                     }
                     i += k;
