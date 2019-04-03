@@ -50,7 +50,7 @@ public class HypixelAPI {
     public HypixelAPI() {
         Multithreading.schedule(this::updatePersonalData, 10L, 305, TimeUnit.SECONDS);
         INSTANCE = this;
-        Multithreading.runAsync(() -> { getQuests(true); })
+        Multithreading.runAsync(() -> {getQuests(true);});
     }
 
     @InvokeEvent
@@ -86,9 +86,7 @@ public class HypixelAPI {
             friendsForCurrentUser.clear();
 
             data.getFriends().forEach(
-                friend -> friendsForCurrentUser.add(
-                    Utils.dashMeUp(new JsonHolder(friend.getAsJsonObject()).optString("uuid"))
-                )
+                friend -> friendsForCurrentUser.add(Utils.dashMeUp(new JsonHolder(friend.getAsJsonObject()).optString("uuid")))
             );
         });
     }
