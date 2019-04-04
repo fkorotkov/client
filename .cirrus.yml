@@ -25,14 +25,14 @@ test_task:
     path: ./build/libs/**
   upload_beta_build_link_script: |
     chmod -x ./gradlew
+    git config --global user.email "support@rdil.rocks"
+    git config --global user.name "RDIL Bot"
     if [ $CIRRUS_BRANCH == 'master' ]; then
-      rm -rf beta.txt
-      echo 'https://api.cirrus-ci.com/v1/artifact/task/'${CIRRUS_BUILD_ID}'/jar/build/libs/Hyperium-2.0.jar' > beta.txt
-      git config --global user.email "support@rdil.rocks"
-      git config --global user.name "RDIL Bot"
       git pull
       git checkout master
       git remote rm origin
+      rm -rf beta.txt
+      echo 'https://api.cirrus-ci.com/v1/artifact/task/'${CIRRUS_BUILD_ID}'/jar/build/libs/Hyperium-2.0.jar' > beta.txt
       git add *.txt
       git commit -m "Added new beta link. [skip ci]"
       git remote add origin https://RDILBot:${GH_TOKEN}@github.com/RDIL/Hyperium-Jailbreak.git > /dev/null 2>&1
