@@ -141,7 +141,7 @@ jar {
     manifest.attributes(
             //"MixinConfigs": 'mixins.hyperium.json, mixins.ctjs.json',
             "MixinConfigs": 'mixins.hyperium.json',
-            "TweakClass": 'cc.hyperium.launch.HyperiumTweaker',
+            "TweakClass": 'rocks.rdil.jailbreak.Tweaker',
             "TweakOrder": 0,
             "Manifest-Version": 1.0,
             'Main-Class': 'cc.hyperium.installer.InstallerStart'
