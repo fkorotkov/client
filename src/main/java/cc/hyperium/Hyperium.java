@@ -106,7 +106,7 @@ public class Hyperium {
     private InternalAddons internalAddons;
     private AutoGG autogg = new AutoGG();
     public Jailbreak j = new Jailbreak();
-	public static final String brand = "HyperiumJailbreak";
+    public static final String brand = "HyperiumJailbreak";
 
     @InvokeEvent
     public void preinit(PreInitializationEvent event) {
