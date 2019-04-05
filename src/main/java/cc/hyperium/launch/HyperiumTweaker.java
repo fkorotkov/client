@@ -14,7 +14,7 @@
  *     You should have received a copy of the GNU Lesser General Public License
  *     along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package rocks.rdil.jailbreak;
+package cc.hyperium.launch;
 import cc.hyperium.Hyperium;
 import cc.hyperium.internal.addons.AddonBootstrap;
 import net.minecraft.launchwrapper.ITweaker;
@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Tweaker implements ITweaker {
-    public static Tweaker INSTANCE;
+public class HyperiumTweaker implements ITweaker {
+    public static HyperiumTweaker INSTANCE;
     private ArrayList<String> args = new ArrayList<>();
     private boolean isRunningForge = Launch.classLoader.getTransformers().stream()
         .anyMatch(p -> p.getClass().getName().contains("fml"));
@@ -38,7 +38,7 @@ public class Tweaker implements ITweaker {
         .anyMatch(p -> p.getClass().getName().contains("optifine"));
     private boolean FORGE = false;
     private boolean OPTIFINE = false;
-    public Tweaker() {
+    public HyperiumTweaker() {
         INSTANCE = this;
     }
 
