@@ -80,7 +80,7 @@ import java.nio.file.StandardCopyOption;
 
 public class Hyperium {
     public static final Hyperium INSTANCE = new Hyperium();
-    public final static Logger LOGGER = LogManager.getLogger(Metadata.getModid());
+    public static final Logger LOGGER = LogManager.getLogger(Metadata.getModid());
     public static final File folder = new File("hyperium");
     public static final DefaultConfig CONFIG = new DefaultConfig(new File(folder, "CONFIG.json"));
     public static int BUILD_ID = -1;
@@ -105,17 +105,17 @@ public class Hyperium {
     private HyperiumScheduler scheduler;
     private InternalAddons internalAddons;
     private AutoGG autogg = new AutoGG();
+    public Jailbreak j = new Jailbreak();
+	public static final String brand = "HyperiumJailbreak";
 
     @InvokeEvent
     public void preinit(PreInitializationEvent event) {
-        /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-        Jailbreak j = new Jailbreak();
-        j.debug();
     }
 
     @InvokeEvent(priority = Priority.HIGH)
     public void init(InitializationEvent event) {
+        this.j.debug();
         try {
             Multithreading.runAsync(() -> {
                 networkHandler = new NetworkHandler();
@@ -177,7 +177,7 @@ public class Hyperium {
             CONFIG.register(new ToggleSprintContainer());
 
             SplashProgress.setProgress(7, I18n.format("splashprogress.startinghyperium"));
-            Display.setTitle("HyperiumJailbreak");
+            Display.setTitle(this.brand);
 
             // instance does not need to be saved as shit is static ^.^
             SplashProgress.setProgress(9, I18n.format("splashprogress.registeringconfiguration"));
