@@ -5,7 +5,7 @@ test_task:
     cpu: 8
     memory: 12G
   env:
-    GH_TOKEN: ENCRYPTED[4a1baf42ed717adfab076e8cb95e45cd430ffedf6912da4997992073ca1b8695470d1e3cc962843bfc0bff3cd0303437]
+    GH_TOKEN: ENCRYPTED[1e5598b3d4539404270fde8fb3bfb50045d8b5d4e58b73e542bd6b9906ed3644c220550820a872b599e9e945b06d47b7]
   setup_workspace_script: |
     chmod +x ./gradlew
     rm -rf $CIRRUS_WORKING_DIR/src/main/resources/build.txt
