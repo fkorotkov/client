@@ -1,5 +1,4 @@
 package cc.hyperium.utils;
-
 import cc.hyperium.utils.staff.StaffSettings;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -21,7 +20,7 @@ public class StaffUtils {
 
     private static HashMap<UUID, StaffSettings> getStaff() throws IOException {
         HashMap<UUID, StaffSettings> staff = new HashMap<>();
-        String content = InstallerUtils.getRaw("https://raw.githubusercontent.com/RDIL/Hyperium-Jailbreak/master/staff.json");
+        String content = InstallerUtils.getRaw("https://raw.githubusercontent.com/hyperiumjailbreak/client/master/staff.json");
         JsonParser parser = new JsonParser();
         JsonArray array = parser.parse(content).getAsJsonArray();
         for (int i = 0; i < array.size(); i++) {
