@@ -13,8 +13,7 @@ test_task:
     fingerprint_script: |
       cat build.gradle
       cat gradle/wrapper/gradle-wrapper.properties
-    populate_script: |
-      ./gradlew setupDevWorkspace
+    populate_script: ./gradlew setupDevWorkspace
   build_script: |
     ./gradlew test
     ./gradlew build
