@@ -48,7 +48,6 @@ public class MixinItemRenderer {
     private float prevEquippedProgress;
     private HyperiumItemRenderer hyperiumItemRenderer = new HyperiumItemRenderer((ItemRenderer) (Object) this);
 
-
     /**
      * @author Cubxity
      * @reason 1.7 animations
@@ -57,7 +56,6 @@ public class MixinItemRenderer {
     private void transformFirstPersonItem(float equipProgress, float swingProgress) {
         hyperiumItemRenderer.transformFirstPersonItem(equipProgress, swingProgress);
     }
-
 
     /**
      * @author CoalOres
