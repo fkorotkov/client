@@ -72,8 +72,8 @@ public abstract class MixinEntityPlayer extends EntityLivingBase implements IMix
     }
 
     /**
-     * @author - CoalOres
-     * @reason - Add 1.7 Sneaking Animation
+     * @author CoalOres
+     * @reason 1.7 Sneaking Animation
      */
     @Overwrite
     public float getEyeHeight() {
@@ -81,8 +81,8 @@ public abstract class MixinEntityPlayer extends EntityLivingBase implements IMix
     }
 
     /**
-     * @author - Sk1er
-     * @reason - Get the users username
+     * @author Sk1er
+     * @reason Get the users username
      */
     @Overwrite
     public IChatComponent getDisplayName() {
