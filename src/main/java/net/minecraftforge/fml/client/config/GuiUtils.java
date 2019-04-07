@@ -26,7 +26,6 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -151,7 +150,6 @@ public class GuiUtils {
         int yPasses = canvasHeight / fillerHeight;
         int remainderHeight = canvasHeight % fillerHeight;
 
-        // Draw Border
         // Top Left
         drawTexturedModalRect(x, y, u, v, leftBorder, topBorder, zLevel);
         // Top Right
@@ -220,9 +218,7 @@ public class GuiUtils {
             for (String textLine : textLines) {
                 int textLineWidth = font.getStringWidth(textLine);
 
-                if (textLineWidth > tooltipTextWidth) {
-                    tooltipTextWidth = textLineWidth;
-                }
+                if (textLineWidth > tooltipTextWidth) tooltipTextWidth = textLineWidth;
             }
 
             boolean needsWrap = false;
@@ -253,15 +249,11 @@ public class GuiUtils {
                 for (int i = 0; i < textLines.size(); i++) {
                     String textLine = textLines.get(i);
                     List<String> wrappedLine = font.listFormattedStringToWidth(textLine, tooltipTextWidth);
-                    if (i == 0) {
-                        titleLinesCount = wrappedLine.size();
-                    }
+                    if (i == 0) titleLinesCount = wrappedLine.size();
 
                     for (String line : wrappedLine) {
                         int lineWidth = font.getStringWidth(line);
-                        if (lineWidth > wrappedTooltipWidth) {
-                            wrappedTooltipWidth = lineWidth;
-                        }
+                        if (lineWidth > wrappedTooltipWidth) wrappedTooltipWidth = lineWidth;
                         wrappedTextLines.add(line);
                     }
                 }
@@ -307,10 +299,7 @@ public class GuiUtils {
                 String line = textLines.get(lineNumber);
                 font.drawStringWithShadow(line, (float) tooltipX, (float) tooltipY, -1);
 
-                if (lineNumber + 1 == titleLinesCount) {
-                    tooltipY += 2;
-                }
-
+                if (lineNumber + 1 == titleLinesCount) tooltipY += 2;
                 tooltipY += 10;
             }
 
@@ -330,13 +319,11 @@ public class GuiUtils {
         float endRed = (float) (endColor >> 16 & 255) / 255.0F;
         float endGreen = (float) (endColor >> 8 & 255) / 255.0F;
         float endBlue = (float) (endColor & 255) / 255.0F;
-
         GlStateManager.disableTexture2D();
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
         GlStateManager.shadeModel(7425);
-
         Tessellator tessellator = Tessellator.getInstance();
         WorldRenderer worldrenderer = tessellator.getWorldRenderer();
         worldrenderer.begin(7, DefaultVertexFormats.POSITION_COLOR);
@@ -345,7 +332,6 @@ public class GuiUtils {
         worldrenderer.pos(left, bottom, zLevel).color(endRed, endGreen, endBlue, endAlpha).endVertex();
         worldrenderer.pos(right, bottom, zLevel).color(endRed, endGreen, endBlue, endAlpha).endVertex();
         tessellator.draw();
-
         GlStateManager.shadeModel(7424);
         GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
