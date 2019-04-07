@@ -3,7 +3,7 @@ import cc.hyperium.event.InvokeEvent;
 import cc.hyperium.event.ChatEvent;
 public class CommonChatCanceller {
     public String whatToListenFor = "";
-    public CommonChatResponder(String whatToListenFor) {
+    public CommonChatCanceller(String whatToListenFor) {
         this.whatToListenFor = whatToListenFor;
     }
     @InvokeEvent
