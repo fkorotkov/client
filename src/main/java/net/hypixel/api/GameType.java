@@ -17,7 +17,6 @@
 
 package net.hypixel.api;
 
-
 public enum GameType {
     QUAKECRAFT("Quakecraft", "Quake", 2),
     WALLS("Walls", "Walls", 3),
@@ -46,7 +45,6 @@ public enum GameType {
     THE_PIT("The Pit", "PIT", 101);
 
     private static final GameType[] v = values();
-
     private final String name;
     private final String dbName;
     private final Integer id;
@@ -55,7 +53,6 @@ public enum GameType {
         this.name = name;
         this.dbName = dbName;
         this.id = id;
-
     }
 
     /**
@@ -119,9 +116,6 @@ public enum GameType {
         return dbName;
     }
 
-    /**
-     * @return The official name of the GameType
-     */
     public String getName() {
         return name;
     }
