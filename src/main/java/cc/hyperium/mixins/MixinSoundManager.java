@@ -35,7 +35,7 @@ public class MixinSoundManager {
      * focus sounds option is disabled
      *
      * @param sound the sound
-     * @param ci    callback
+     * @param ci callback
      */
     @Inject(
         method = "playSound",
@@ -56,7 +56,6 @@ public class MixinSoundManager {
         hyperiumSoundManager.endUpdate(info);
     }
 
-
     @Inject(method = "playSound", at = @At("HEAD"))
     public void startPlaySound(CallbackInfo info) {
         hyperiumSoundManager.startPlaySound(info);
@@ -75,7 +74,6 @@ public class MixinSoundManager {
     @Inject(method = "stopAllSounds", at = @At("TAIL"))
     public void endStopAllSounds(CallbackInfo info) {
         hyperiumSoundManager.endStopAllSounds(info);
-
     }
 
 }
