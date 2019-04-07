@@ -81,15 +81,12 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
             this.bipedLeftForeArm.mirror = true;
             this.bipedLeftForeArm.addBox(-1.0F, -2.0F, -2.0F, 4, 6, 4, modelSize);
             this.bipedLeftForeArm.setRotationPoint(5.0F, 2.0F + p_i1149_2_, 0.0F);
-
             this.bipedRightLeg = new ModelRenderer(this, 0, 16);
             this.bipedRightLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, modelSize);
             this.bipedRightLeg.setRotationPoint(-1.9F, 12.0F + p_i1149_2_, 0.0F);
             this.bipedRightLowerLeg = new ModelRenderer(this, 0, 22);
             this.bipedRightLowerLeg.addBox(-2.0F, 6.0F, -2.0F, 4, 6, 4, modelSize);
             this.bipedRightLowerLeg.setRotationPoint(-1.9F, 12.0F + p_i1149_2_, 0.0F);
-
-
             this.bipedLeftLeg = new ModelRenderer(this, 0, 16);
             this.bipedLeftLeg.mirror = true;
             this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4, 6, 4, modelSize);
@@ -98,10 +95,7 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
             this.bipedLeftLowerLeg.mirror = true;
             this.bipedLeftLowerLeg.addBox(-2.0F, 6.0F, -2.0F, 4, 6, 4, modelSize);
             this.bipedLeftLowerLeg.setRotationPoint(1.9F, 12.0F + p_i1149_2_, 0.0F);
-
-
-            fixTopAndBottomOfLimbWrongTextures(this.bipedLeftForeArm, this.bipedRightForeArm, this.bipedLeftLowerLeg,
-                this.bipedRightLowerLeg);
+            fixTopAndBottomOfLimbWrongTextures(this.bipedLeftForeArm, this.bipedRightForeArm, this.bipedLeftLowerLeg, this.bipedRightLowerLeg);
         }
     }
 
@@ -117,7 +111,6 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
             ((IMixinModelBox) box).offsetTextureQuad(model, 3, 0.0F, -6.0F);
         }
     }
-
 
     /**
      * @author 9Y0, Mojang
@@ -159,7 +152,6 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
             this.bipedRightLeg.render(scale);
             this.bipedLeftLeg.render(scale);
             this.bipedHeadwear.render(scale);
-
 
             // Adding our parts
             if (getClass().equals(ModelBiped.class))
@@ -299,9 +291,7 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
         copyModelAngles(this.bipedHead, this.bipedHeadwear);
         if (getClass().equals(ModelBiped.class)) {
             boolean isPlayer = entityIn instanceof AbstractClientPlayer;
-            if (isPlayer) {
-                EventBus.INSTANCE.post(new PreCopyPlayerModelAnglesEvent(((AbstractClientPlayer) entityIn), this));
-            }
+            if (isPlayer) EventBus.INSTANCE.post(new PreCopyPlayerModelAnglesEvent(((AbstractClientPlayer) entityIn), this));
 
             copyModelAnglesAndOffest(this.bipedLeftArm, this.bipedLeftForeArm);
             copyModelAnglesAndOffest(this.bipedRightArm, this.bipedRightForeArm);
@@ -309,9 +299,7 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
             copyModelAnglesAndOffest(this.bipedLeftLeg, this.bipedLeftLowerLeg);
             copyModelAnglesAndOffest(this.bipedRightLeg, this.bipedRightLowerLeg);
 
-            if (isPlayer) {
-                EventBus.INSTANCE.post(new PostCopyPlayerModelAnglesEvent(((AbstractClientPlayer) entityIn), this));
-            }
+            if (isPlayer) EventBus.INSTANCE.post(new PostCopyPlayerModelAnglesEvent(((AbstractClientPlayer) entityIn), this));
         }
     }
 
