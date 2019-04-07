@@ -17,7 +17,6 @@
 
 package cc.hyperium.mixins.entity;
 
-
 import cc.hyperium.mixinsimp.entity.HyperiumEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
@@ -40,7 +39,6 @@ import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -93,10 +91,8 @@ public abstract class MixinEntity {
     private int nextStepDistance;
     @Shadow
     private int fire;
-
     @Shadow
     public abstract String getName();
-
     @Shadow
     public abstract UUID getUniqueID();
 
@@ -169,8 +165,7 @@ public abstract class MixinEntity {
             this.setEntityBoundingBox(this.getEntityBoundingBox().offset(x, y, z));
             this.resetPositionToBB();
         } else {
-            if (!((Entity) (Object) this instanceof EntityFX))
-                this.worldObj.theProfiler.startSection("move");
+            if (!((Entity) (Object) this instanceof EntityFX)) this.worldObj.theProfiler.startSection("move");
             double d0 = this.posX;
             double d1 = this.posY;
             double d2 = this.posZ;
@@ -363,26 +358,18 @@ public abstract class MixinEntity {
 
             this.updateFallState(y, this.onGround, block1, blockpos);
 
-            if (d3 != x) {
-                this.motionX = 0.0D;
-            }
+            if (d3 != x) this.motionX = 0.0D;
 
-            if (d5 != z) {
-                this.motionZ = 0.0D;
-            }
+            if (d5 != z) this.motionZ = 0.0D;
 
-            if (d4 != y) {
-                block1.onLanded(this.worldObj, (Entity) (Object) this);
-            }
+            if (d4 != y) block1.onLanded(this.worldObj, (Entity) (Object) this);
 
             if (this.canTriggerWalking() && !flag && this.ridingEntity == null) {
                 double d12 = this.posX - d0;
                 double d13 = this.posY - d1;
                 double d14 = this.posZ - d2;
 
-                if (block1 != Blocks.ladder) {
-                    d13 = 0.0D;
-                }
+                if (block1 != Blocks.ladder) d13 = 0.0D;
 
                 if (block1 != null && this.onGround) {
                     block1.onEntityCollidedWithBlock(this.worldObj, blockpos, (Entity) (Object) this);
@@ -437,8 +424,7 @@ public abstract class MixinEntity {
                 this.playSound("random.fizz", 0.7F, 1.6F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
                 this.fire = -this.fireResistance;
             }
-            if (!((Entity) (Object) this instanceof EntityFX))
-                this.worldObj.theProfiler.endSection();
+            if (!((Entity) (Object) this instanceof EntityFX)) this.worldObj.theProfiler.endSection();
         }
     }
 }
