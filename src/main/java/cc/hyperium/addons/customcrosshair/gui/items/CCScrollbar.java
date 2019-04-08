@@ -41,9 +41,7 @@ public class CCScrollbar extends CCGuiItem {
 
     @Override
     public void drawItem(final int mouseX, final int mouseY) {
-        if (this.contentHeight <= this.getHeight()) {
-            return;
-        }
+        if (this.contentHeight <= this.getHeight()) return;
         int y;
         if (this.mouseDown) {
             y = mouseY - this.offset;
@@ -57,9 +55,7 @@ public class CCScrollbar extends CCGuiItem {
 
     @Override
     public void mouseClicked(final int mouseX, final int mouseY) {
-        if (this.contentHeight <= this.getHeight()) {
-            return;
-        }
+        if (this.contentHeight <= this.getHeight()) return;
         if (this.isMouseOverBox(mouseX, mouseY)) {
             this.mouseDown = true;
             this.offset = mouseY - (this.getPosY() + this.boxPosition);
@@ -82,9 +78,7 @@ public class CCScrollbar extends CCGuiItem {
     }
 
     public void setValue(final int newValue) {
-        if (this.contentHeight <= this.getHeight()) {
-            return;
-        }
+        if (this.contentHeight <= this.getHeight()) return;
         this.value = newValue;
         if (this.value < this.minValue) this.value = this.minValue;
         if (this.value > this.maxValue) this.value = this.maxValue;
