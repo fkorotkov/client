@@ -42,7 +42,6 @@ public class GlobalSettings {
         }).collect(Collectors.toList());
     }
 
-
     public String getHypixelHeader() {
         return hypixelHeader;
     }
@@ -76,39 +75,30 @@ public class GlobalSettings {
     }
 
     public static class GameGroup {
-
         private String name;
         private Set<String> games;
-
         public String getName() {
             return name;
         }
-
         public Set<String> getGames() {
             return games;
         }
-
     }
 
     public static class GameAlias {
 
         private String alias;
         private List<String> aliases;
-
         private String game;
         private List<String> games;
 
         public List<String> getAliases() {
-            if (alias != null) {
-                return Collections.singletonList(alias);
-            }
+            if (alias != null) return Collections.singletonList(alias);
             return aliases;
         }
 
         public List<String> getGames() {
-            if (game != null) {
-                return Collections.singletonList(game);
-            }
+            if (game != null) return Collections.singletonList(game);
             return games;
         }
 
