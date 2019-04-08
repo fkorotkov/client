@@ -16,11 +16,9 @@
  */
 
 package cc.hyperium.utils;
-
 import java.util.regex.Pattern;
 
 public enum ChatColor {
-
     BLACK('0'),
     DARK_BLUE('1'),
     DARK_GREEN('2'),
@@ -45,7 +43,6 @@ public enum ChatColor {
     RESET('r');
 
     public static final char COLOR_CHAR = '\u00A7';
-
     private final char code;
     private final boolean isFormat;
     private final String toString;
@@ -93,5 +90,9 @@ public enum ChatColor {
 
     public boolean isColor() {
         return !isFormat && this != RESET;
+    }
+
+    public static String stripFormatting(String text) {
+        return text == null ? null : PATTERN.matcher(text).replaceAll("");
     }
 }
