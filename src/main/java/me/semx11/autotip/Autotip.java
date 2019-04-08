@@ -38,40 +38,29 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.IChatComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Autotip {
-
     public static final Logger LOGGER = LogManager.getLogger("Autotip");
-
     static final String MOD_ID = "autotip";
     static final String NAME = "Autotip";
     static final String VERSION = "3.0";
     static final String ACCEPTED_VERSIONS = "[1.8, 1.12.2]";
-
     public static IChatComponent tabHeader;
-
     private final List<Event> events = new ArrayList<>();
     private final List<CommandAbstract> commands = new ArrayList<>();
-
     private boolean initialized = false;
-
     private Minecraft minecraft;
     private MinecraftVersion mcVersion;
     private Version version;
-
     private Gson gson;
-
     private FileUtil fileUtil;
     private MessageUtil messageUtil;
-
     private Config config;
     private GlobalSettings globalSettings;
     private LocaleHolder localeHolder;
-
     private TaskManager taskManager;
     private SessionManager sessionManager;
     private MigrationManager migrationManager;
@@ -193,17 +182,13 @@ public class Autotip {
 
     public void reloadGlobalSettings() {
         SettingsReply reply = SettingsRequest.of(this).execute();
-        if (!reply.isSuccess()) {
-            throw new IllegalStateException("Connection error while fetching global settings");
-        }
+        if (!reply.isSuccess()) throw new IllegalStateException("Connection error while fetching global settings");
         this.globalSettings = reply.getSettings();
     }
 
     public void reloadLocale() {
         LocaleReply reply = LocaleRequest.of(this).execute();
-        if (!reply.isSuccess()) {
-            throw new IllegalStateException("Could not fetch locale");
-        }
+        if (!reply.isSuccess()) throw new IllegalStateException("Could not fetch locale");
         this.localeHolder = reply.getLocaleHolder();
     }
 
@@ -236,5 +221,4 @@ public class Autotip {
             this.commands.add(command);
         }
     }
-
 }
