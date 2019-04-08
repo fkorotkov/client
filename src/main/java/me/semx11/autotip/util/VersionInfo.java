@@ -2,10 +2,9 @@ package me.semx11.autotip.util;
 
 import java.util.Arrays;
 import java.util.List;
-import me.semx11.autotip.chat.ChatColor;
+import cc.hyperium.utils.ChatColor;
 
 public class VersionInfo {
-
     private Version version;
     private Severity severity;
     private List<String> changelog;
