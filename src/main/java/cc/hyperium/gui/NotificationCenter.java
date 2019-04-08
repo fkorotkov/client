@@ -31,7 +31,7 @@ public class NotificationCenter extends Gui {
 
     @InvokeEvent
     private void tick(TickEvent ev) {
-        if (currentNotification == null || currentNotification.tick()) currentNotification = notifications.poll()
+        if (currentNotification == null || currentNotification.tick()) currentNotification = notifications.poll();
     }
 
     @InvokeEvent
