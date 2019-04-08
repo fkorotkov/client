@@ -33,19 +33,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 
 public class SessionManager {
-
     private final Autotip autotip;
     private final MessageUtil messageUtil;
     private final TaskManager taskManager;
-
     private final Queue<Tip> tipQueue = new ConcurrentLinkedQueue<>();
-
     private LoginReply reply;
     private SessionKey sessionKey = null;
-
     private boolean onHypixel = false;
     private boolean loggedIn = false;
-
     private long lastTipWave;
     private long nextTipWave;
 
@@ -130,25 +125,17 @@ public class SessionManager {
         }
 
         this.sessionKey = reply.getSessionKey();
-
         this.loggedIn = true;
-
         long keepAlive = reply.getKeepAliveRate();
         long tipWave = reply.getTipWaveRate();
-
         taskManager.addRepeatingTask(TaskType.KEEP_ALIVE, this::keepAlive, keepAlive, keepAlive);
         taskManager.addRepeatingTask(TaskType.TIP_WAVE, this::tipWave, 0, tipWave);
     }
 
     public void logout() {
-        if (!loggedIn) {
-            return;
-        }
+        if (!loggedIn) return;
         LogoutReply reply = LogoutRequest.of(sessionKey).execute();
-        if (!reply.isSuccess()) {
-            Autotip.LOGGER.warn("Error during logout: {}", reply.getCause());
-        }
-
+        if (!reply.isSuccess()) Autotip.LOGGER.warn("Error during logout: {}", reply.getCause());
         this.loggedIn = false;
         this.sessionKey = null;
 
@@ -162,9 +149,7 @@ public class SessionManager {
             return;
         }
         KeepAliveReply r = KeepAliveRequest.of(sessionKey).execute();
-        if (!r.isSuccess()) {
-            Autotip.LOGGER.warn("KeepAliveRequest failed: {}", r.getCause());
-        }
+        if (!r.isSuccess()) Autotip.LOGGER.warn("KeepAliveRequest failed: {}", r.getCause());
     }
 
     private void tipWave() {
