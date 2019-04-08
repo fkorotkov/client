@@ -1,7 +1,6 @@
 package me.semx11.autotip.core;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
-
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -17,10 +16,8 @@ import java.util.concurrent.ThreadFactory;
 import me.semx11.autotip.util.ErrorReport;
 
 public class TaskManager {
-
     private final ExecutorService executor;
     private final ScheduledExecutorService scheduler;
-
     private final Map<TaskType, Future> tasks;
 
     public TaskManager() {
@@ -51,18 +48,14 @@ public class TaskManager {
     }
 
     public void executeTask(TaskType type, Runnable task) {
-        if (tasks.containsKey(type)) {
-            return;
-        }
+        if (tasks.containsKey(type)) return;
         Future<?> future = executor.submit(task);
         tasks.put(type, future);
         this.catchFutureException(type, future);
     }
 
     public void addRepeatingTask(TaskType type, Runnable command, long delay, long period) {
-        if (tasks.containsKey(type)) {
-            return;
-        }
+        if (tasks.containsKey(type)) return;
         ScheduledFuture future = scheduler.scheduleAtFixedRate(command, delay, period, SECONDS);
         tasks.put(type, future);
         this.catchFutureException(type, future);
