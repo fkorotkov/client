@@ -71,6 +71,6 @@ public abstract class MixinAbstractClientPlayer extends EntityPlayer {
     @Inject(method = "getLocationCape", at = @At("HEAD"), cancellable = true)
     public void getLocationCape(CallbackInfoReturnable<ResourceLocation> locationCallbackInfoReturnable) {
         NickHider instance = NickHider.INSTANCE;
-        if (instance != null && instance.isHideSkins()) ocationCallbackInfoReturnable.setReturnValue(null);
+        if (instance != null && instance.isHideSkins()) locationCallbackInfoReturnable.setReturnValue(null);
     }
 }
