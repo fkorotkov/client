@@ -243,7 +243,11 @@ public class ParticleGui extends HyperiumGui implements GuiYesNoCallback {
 
         GlStateManager.scale(2.0, 2.0, 2.0);
         HyperiumPurchase self = PurchaseApi.getInstance().getSelf();
-
+        if (self != null) {
+	        credits = self.getResponse().optInt("remaining_credits");
+	    }
+	    String s = I18n.format("gui.cosmetics.credits") + ": " + credits;
+	    fontRendererObj.drawString(s, ResolutionUtil.current().getScaledWidth() / 4 - fontRendererObj.getStringWidth(s) / 2, 15, Color.MAGENTA.getRGB(), true);
         GlStateManager.scale(.5, .5, .5);
         s = I18n.format("gui.cosmetics.line1");
         fontRendererObj.drawString(s, ResolutionUtil.current().getScaledWidth() / 2 - fontRendererObj.getStringWidth(s) / 2, 50, Color.MAGENTA.getRGB(), true);
