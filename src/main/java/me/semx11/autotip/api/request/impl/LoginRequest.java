@@ -1,5 +1,4 @@
 package me.semx11.autotip.api.request.impl;
-
 import com.mojang.authlib.GameProfile;
 import java.util.Optional;
 import me.semx11.autotip.Autotip;
@@ -12,12 +11,10 @@ import me.semx11.autotip.api.request.Request;
 import org.apache.http.client.methods.HttpUriRequest;
 
 public class LoginRequest implements Request<LoginReply> {
-
     private final Autotip autotip;
     private final GameProfile profile;
     private final String hash;
     private final int tips;
-
     private LoginRequest(Autotip autotip, GameProfile profile, String hash, int tips) {
         this.autotip = autotip;
         this.profile = profile;
@@ -35,10 +32,10 @@ public class LoginRequest implements Request<LoginReply> {
                 .addParameter("username", this.profile.getName())
                 .addParameter("uuid", this.profile.getId().toString().replace("-", ""))
                 .addParameter("tips", this.tips)
-                .addParameter("v", this.autotip.getVersion())
-                .addParameter("mc", this.autotip.getMcVersion())
                 .addParameter("os", System.getProperty("os.name"))
                 .addParameter("hash", this.hash)
+                .addParameter("v", "v3.0")
+                .addParameter("mc", "1.8.9")
                 .build();
 
         Optional<Reply> optional = RequestHandler.getReply(this, request.getURI());
@@ -51,5 +48,4 @@ public class LoginRequest implements Request<LoginReply> {
     public RequestType getType() {
         return RequestType.LOGIN;
     }
-
 }
