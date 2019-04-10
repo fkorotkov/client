@@ -54,7 +54,6 @@ public class HyperiumCosmetics {
         registerCosmetic(topHatCosmetic);
         registerCosmetic(fezCosmetic);
         registerCosmetic(legoCosmetic);
-
     }
     public List<AbstractCosmetic> getCosmeticList() {
         return cosmeticList;
@@ -62,11 +61,6 @@ public class HyperiumCosmetics {
     public DragonCompanion getDragonCompanion() {
         return dragonCompanion;
     }
-    /**
-     * Register Cosmetic - Register a Cosmetic Class
-     *
-     * @param cosmetic - Cosmetic Class
-     */
     private void registerCosmetic(AbstractCosmetic cosmetic) {
         cosmeticList.add(cosmetic);
         EventBus.INSTANCE.register(cosmetic);
