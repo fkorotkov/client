@@ -3,7 +3,7 @@
   "compatibilityLevel": "JAVA_8",
   "package": "cc.hyperium.mixins",
   "refmap": "mixin.hyperium.refmap.json",
-  "verbose": true,
+  "verbose": false,
   "mixins": [
     "IMixinMinecraft",
     "MixinCrashReport",
