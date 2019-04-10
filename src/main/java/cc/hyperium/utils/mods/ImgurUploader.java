@@ -37,7 +37,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 public class ImgurUploader implements Runnable {
-
     public static String url;
     private final String clientID;
     private final File uploadFile;
@@ -92,5 +91,4 @@ public class ImgurUploader implements Runnable {
             GeneralChatHandler.instance().sendMessage("Error occurred while uploading.");
         }
     }
-
 }
