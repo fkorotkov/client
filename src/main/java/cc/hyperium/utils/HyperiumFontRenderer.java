@@ -136,7 +136,6 @@ public class HyperiumFontRenderer {
         GL11.glScaled(givenScale, givenScale, givenScale);
         drawString(text, 0, 0, color);
         GL11.glPopMatrix();
-
     }
 
     public int drawString(String text, float x, float y, int color) {
@@ -144,7 +143,6 @@ public class HyperiumFontRenderer {
 
         x *= 2.0F;
         y *= 2.0F;
-
         float originalX = x;
 
         GL11.glPushMatrix();
@@ -173,7 +171,7 @@ public class HyperiumFontRenderer {
             if (c == '\r') x = originalX;
             if (c == '\n') y += getHeight(Character.toString(c)) * 2.0F;
             if (c != '\247' && (index == 0 || index == characters.length - 1 || characters[index - 1] != '\247')) {
-                //Line causing error
+                // Line causing error
                 unicodeFont.drawString(x, y, Character.toString(c), new org.newdawn.slick.Color(currentColor));
                 x += (getWidth(Character.toString(c)) * 2.0F * antiAliasingFactor);
             } else if (c == ' ') {
@@ -265,12 +263,9 @@ public class HyperiumFontRenderer {
 
                     k = 0;
                 }
-
                 i += k;
 
-                if (flag && k > 0) {
-                    ++i;
-                }
+                if (flag && k > 0) ++i;
             }
 
             return i;
@@ -305,9 +300,7 @@ public class HyperiumFontRenderer {
                 var8 = false;
 
                 if (var11 != 108 && var11 != 76) {
-                    if (var11 == 114 || var11 == 82) {
-                        var9 = false;
-                    }
+                    if (var11 == 114 || var11 == 82) var9 = false;
                 } else {
                     var9 = true;
                 }
@@ -316,9 +309,7 @@ public class HyperiumFontRenderer {
             } else {
                 var5 += var12;
 
-                if (var9) {
-                    ++var5;
-                }
+                if (var9) ++var5;
             }
 
             if (var5 > (float) par2) {
