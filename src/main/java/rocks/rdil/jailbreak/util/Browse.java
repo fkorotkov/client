@@ -5,7 +5,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public class Commons {
+public class Browse {
+    public Browse() {}
     public void BrowseURI(String theURL) {
         final int len = blacklisted.length;
         for(int b = 0; b < len;) {
