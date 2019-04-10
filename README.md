@@ -15,7 +15,8 @@ Because the license requires it, here is a list of changes made:
 * Updated some menus
 * Removed update and shop tab
 * Add new `FPS` mode
+* Removed in-game browser (improves compiling times)
 
 This fork is maintained by [RDIL](https://rdil.rocks). Questions should be put in [GitHub issues](https://github.com/RDIL/Hyperium-Jailbreak/issues).
 
-This fork is not owned or endorsed by the Hyperium developer team or Sk1er LLC.
+This fork is not owned or endorsed by Sk1er LLC.

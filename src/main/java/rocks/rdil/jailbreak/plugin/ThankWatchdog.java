@@ -6,9 +6,9 @@ public class ThankWatchdog {
     public ThankWatchdog() {
         if (Settings.THANK_WATCHDOG && !Settings.FPS) {
             CommonChatResponder c = new CommonChatResponder(
-                    "removed from your game for hacking",
-                    "Thanks Watchdog!",
-                    true
+                "removed from your game for hacking",
+                "Thanks Watchdog!",
+                true
             );
         }
     }

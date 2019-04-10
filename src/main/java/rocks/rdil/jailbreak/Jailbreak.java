@@ -1,5 +1,4 @@
 package rocks.rdil.jailbreak;
-
 import cc.hyperium.Hyperium;
 
 public class Jailbreak {

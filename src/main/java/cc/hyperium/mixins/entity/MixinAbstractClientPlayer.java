@@ -44,13 +44,13 @@ public abstract class MixinAbstractClientPlayer extends EntityPlayer {
     @Inject(method = "<init>", at = @At("RETURN"))
     private void AbstractPlayer(World worldIn, GameProfile playerProfile, CallbackInfo callbackInfo) {
 
-        //Blank get cape call to get the show on the road
+        // Blank get cape call to get the show on the road
         hyperiumAbstractClientPlayer.init();
     }
 
     /**
-     * @author - Kevin & Sk1er
-     * @reason - Custom Cape Support
+     * @author Kevin & Sk1er
+     * @reason Custom Capes
      */
     @Overwrite
     public ResourceLocation getLocationCape() {
@@ -62,20 +62,15 @@ public abstract class MixinAbstractClientPlayer extends EntityPlayer {
         hyperiumAbstractClientPlayer.getFovModifier(ci);
     }
 
-
     @Inject(method = "getLocationSkin()Lnet/minecraft/util/ResourceLocation;", at = @At("HEAD"), cancellable = true)
     public void getLocationSkin(CallbackInfoReturnable<ResourceLocation> locationCallbackInfoReturnable) {
         NickHider instance = NickHider.INSTANCE;
-        if (instance != null && instance.isHideSkins()) {
-            locationCallbackInfoReturnable.setReturnValue(DefaultPlayerSkin.getDefaultSkin(getUniqueID()));
-        }
+        if (instance != null && instance.isHideSkins()) locationCallbackInfoReturnable.setReturnValue(DefaultPlayerSkin.getDefaultSkin(getUniqueID()));
     }
 
     @Inject(method = "getLocationCape", at = @At("HEAD"), cancellable = true)
     public void getLocationCape(CallbackInfoReturnable<ResourceLocation> locationCallbackInfoReturnable) {
         NickHider instance = NickHider.INSTANCE;
-        if (instance != null && instance.isHideSkins()) {
-            locationCallbackInfoReturnable.setReturnValue(null);
-        }
+        if (instance != null && instance.isHideSkins()) locationCallbackInfoReturnable.setReturnValue(null);
     }
 }

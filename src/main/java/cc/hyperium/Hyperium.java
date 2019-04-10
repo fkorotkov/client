@@ -80,7 +80,7 @@ import java.nio.file.StandardCopyOption;
 
 public class Hyperium {
     public static final Hyperium INSTANCE = new Hyperium();
-    public final static Logger LOGGER = LogManager.getLogger(Metadata.getModid());
+    public static final Logger LOGGER = LogManager.getLogger(Metadata.getModid());
     public static final File folder = new File("hyperium");
     public static final DefaultConfig CONFIG = new DefaultConfig(new File(folder, "CONFIG.json"));
     public static int BUILD_ID = -1;
@@ -105,17 +105,17 @@ public class Hyperium {
     private HyperiumScheduler scheduler;
     private InternalAddons internalAddons;
     private AutoGG autogg = new AutoGG();
+    public Jailbreak j = new Jailbreak();
+    public static final String brand = "HyperiumJailbreak";
 
     @InvokeEvent
     public void preinit(PreInitializationEvent event) {
-        /* register language file */
         HyperiumLocale.registerHyperiumLang("en_US");
-        Jailbreak j = new Jailbreak();
-        j.debug();
     }
 
     @InvokeEvent(priority = Priority.HIGH)
     public void init(InitializationEvent event) {
+        this.j.debug();
         try {
             Multithreading.runAsync(() -> {
                 networkHandler = new NetworkHandler();
@@ -123,7 +123,7 @@ public class Hyperium {
                 this.client = new NettyClient(networkHandler);
                 UniversalNetty.getInstance().getPacketManager().register(new LoginReplyHandler());
             });
-            Multithreading.runAsync(() -> new PlayerStatsGui(null)); // Don't remove, we need to generate some stuff with Gl context
+            Multithreading.runAsync(() -> new PlayerStatsGui(null)); // Don't remove
             notification = new NotificationCenter();
             scheduler = new HyperiumScheduler();
             InputStream resourceAsStream = getClass().getResourceAsStream("/build.txt");
@@ -177,7 +177,7 @@ public class Hyperium {
             CONFIG.register(new ToggleSprintContainer());
 
             SplashProgress.setProgress(7, I18n.format("splashprogress.startinghyperium"));
-            Display.setTitle("HyperiumJailbreak");
+            Display.setTitle(this.brand);
 
             // instance does not need to be saved as shit is static ^.^
             SplashProgress.setProgress(9, I18n.format("splashprogress.registeringconfiguration"));
@@ -201,9 +201,7 @@ public class Hyperium {
             //Multithreading.runAsync(Spotify::load);
 
             Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
-            if (!OS.isMacintosh()) {
-            	richPresenceManager.load();
-	    }
+            if (!OS.isMacintosh()) richPresenceManager.load();
 
             if (acceptedTos) {
                 sk1erMod = new Sk1erMod("hyperium", Metadata.getVersion(), object -> {
@@ -220,7 +218,6 @@ public class Hyperium {
             Minecraft.getMinecraft().refreshResources();
 
             SplashProgress.setProgress(13, I18n.format("splashprogress.finishing"));
-
             if (FontFixValues.INSTANCE == null) {
                 FontFixValues.INSTANCE = new FontFixValues();
             }
@@ -265,7 +262,6 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandConfigGui());
         hyperiumCommandHandler.registerCommand(new CustomLevelheadCommand());
         hyperiumCommandHandler.registerCommand(new CommandClearChat());
-        hyperiumCommandHandler.registerCommand(new CommandBrowse());
         hyperiumCommandHandler.registerCommand(new CommandNameHistory());
         hyperiumCommandHandler.registerCommand(new CommandDebug());
         hyperiumCommandHandler.registerCommand(new CommandCoords());
@@ -276,12 +272,14 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandResize());
         hyperiumCommandHandler.registerCommand(new CommandGarbageCollect());
         hyperiumCommandHandler.registerCommand(new CommandMessage());
-        if(!Settings.FPS) hyperiumCommandHandler.registerCommand(new CommandParticleAuras());
         hyperiumCommandHandler.registerCommand(new CommandDisableCommand());
-        if(!Settings.FPS) hyperiumCommandHandler.registerCommand(new AutofriendCommand());
-        hyperiumCommandHandler.registerCommand(new CommandQuests());
+        if(!Settings.FPS) {
+            hyperiumCommandHandler.registerCommand(new AutofriendCommand());
+            hyperiumCommandHandler.registerCommand(new CommandParticleAuras());
+            hyperiumCommandHandler.registerCommand(new CommandStatistics());
+            hyperiumCommandHandler.registerCommand(new CommandQuests());
+        }
         hyperiumCommandHandler.registerCommand(new CommandGuild());
-        hyperiumCommandHandler.registerCommand(new CommandStatistics());
         hyperiumCommandHandler.registerCommand(new CommandKeybinds());
     }
 
@@ -429,5 +427,9 @@ public class Hyperium {
 
     public boolean isDevEnv() {
         return this.isDevEnv;
+    }
+
+    public Jailbreak getJailbreak() {
+        return j;
     }
 }

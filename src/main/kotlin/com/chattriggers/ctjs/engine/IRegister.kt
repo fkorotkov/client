@@ -21,14 +21,11 @@ interface IRegister {
             it.name == "register$capitalizedName"
         }
 
-        //println("params for func ${func?.name}: ${func?.parameters?.toString()}")
-
         return func?.call(this, method) as OnTrigger? ?: throw NoSuchMethodException()
     }
 
     /**
      * Registers a new trigger that runs before a chat message is received.<br></br>
-     *
      *
      * Passes through multiple arguments:<br></br>
      * any number of chat criteria variables<br></br>
@@ -49,7 +46,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before an action bar message is received.<br></br>
      *
-     *
      * Passes through multiple arguments:<br></br>
      * any number of chat criteria variables<br></br>
      * the chat event<br></br>
@@ -69,7 +65,6 @@ interface IRegister {
     /**
      * Registers a trigger that runs before the world loads.<br></br>
      *
-     *
      * Available modifications:<br></br>
      * [OnTrigger.setPriority] Sets the priority
      *
@@ -83,7 +78,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the world unloads.<br></br>
      *
-     *
      * Available modifications:<br></br>
      * [OnTrigger.setPriority] Sets the priority
      *
@@ -96,7 +90,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before a mouse button is being pressed or released.<br></br>
-     *
      *
      * Passes through 4 arguments:<br></br>
      * mouse x<br></br>
@@ -116,7 +109,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs while a mouse button is being held down.<br></br>
      *
-     *
      * Passes through 5 arguments:<br></br>
      * mouse delta x<br></br>
      * mouse delta y<br></br>
@@ -135,7 +127,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before a sound is played.<br></br>
-     *
      *
      * Passes through 6 arguments:<br></br>
      * the sound event<br></br>
@@ -158,7 +149,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before a noteblock is played.<br></br>
      *
-     *
      * Passes through 4 arguments:<br></br>
      * the note block play event<br></br>
      * the note block play event's Vector3d position<br></br>
@@ -176,7 +166,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before a noteblock is changed.<br></br>
-     *
      *
      * Passes through 4 arguments:<br></br>
      * the note block change event<br></br>
@@ -196,7 +185,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before every game tick.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * ticks elapsed<br></br>
      * Available modifications:<br></br>
@@ -211,7 +199,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs in predictable intervals. (60 per second by default)<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * steps elapsed<br></br>
@@ -230,7 +217,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the world is drawn.<br></br>
      *
-     *
      * Available modifications:<br></br>
      * [OnTrigger.setPriority] Sets the priority
      *
@@ -244,7 +230,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the overlay is drawn.<br></br>
      *
-     *
      * Available modifications:<br></br>
      * [OnTrigger.setPriority] Sets the priority
      *
@@ -257,7 +242,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before the player list is being drawn.<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
@@ -275,7 +259,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the crosshair is being drawn.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
      * Available modifications:<br></br>
@@ -291,7 +274,6 @@ interface IRegister {
 
     /**
      * Registers a trigger that runs before the debug screen is being drawn.<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
@@ -309,7 +291,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the boss health bar is being drawn.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
      * Available modifications:<br></br>
@@ -325,7 +306,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before the player's health is being drawn.<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
@@ -343,7 +323,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the player's food is being drawn.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
      * Available modifications:<br></br>
@@ -359,7 +338,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before the player's mount's health is being drawn.<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
@@ -377,7 +355,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the player's experience is being drawn.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
      * Available modifications:<br></br>
@@ -393,7 +370,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before the player's hotbar is drawn.<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
@@ -411,7 +387,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before the player's air level is drawn.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * The render event<br></br>
      * Available modifications:<br></br>
@@ -427,7 +402,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before the block highlight box is drawn.<br></br>
-     *
      *
      * Passes through 2 arguments:<br></br>
      * The draw block highlight event<br></br>
@@ -446,7 +420,6 @@ interface IRegister {
      * Registers a new trigger that runs after the game loads.<br></br>
      * This runs after the initial loading of the game directly after scripts are loaded and after "/ct load" happens.<br></br>
      *
-     *
      * Available modifications:<br></br>
      * [OnTrigger.setPriority] Sets the priority
      *
@@ -461,7 +434,6 @@ interface IRegister {
      * Registers a new trigger that runs before the game unloads.<br></br>
      * This runs before shutdown of the JVM and before "/ct load" happens.<br></br>
      *
-     *
      * Available modifications:<br></br>
      * [OnTrigger.setPriority] Sets the priority
      *
@@ -474,7 +446,6 @@ interface IRegister {
 
     /**
      * Registers a new command that will run the method provided.<br></br>
-     *
      *
      * Passes through multiple arguments:<br></br>
      * The arguments supplied to the command by the user<br></br>
@@ -491,7 +462,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs when a new gui is first opened.<br></br>
-     *
      *
      * Passes through 1 argument:<br></br>
      * the gui opened event<br></br>
@@ -510,7 +480,6 @@ interface IRegister {
      * Maximum is one per tick. Any extras will queue and run in later ticks.<br></br>
      * This trigger is asynchronous.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * the [com.chattriggers.ctjs.minecraft.wrappers.objects.PlayerMP] object<br></br>
      * Available modifications:<br></br>
@@ -528,7 +497,6 @@ interface IRegister {
      * Maximum is one per tick. Any extras will queue and run in later ticks.<br></br>
      * This trigger is asynchronous.<br></br>
      *
-     *
      * Passes through 1 argument:<br></br>
      * the name of the player that left<br></br>
      * Available modifications:<br></br>
@@ -543,7 +511,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before an item is picked up.<br></br>
-     *
      *
      * Passes through 3 arguments:<br></br>
      * the [Item] that is picked up<br></br>
@@ -563,7 +530,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before an item is dropped.<br></br>
      *
-     *
      * Passes through 3 arguments:<br></br>
      * the [Item] that is dropped up<br></br>
      * the [com.chattriggers.ctjs.minecraft.wrappers.objects.PlayerMP] that dropped the item<br></br>
@@ -582,7 +548,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before a screenshot is taken.<br></br>
      *
-     *
      * Passes through 2 arguments:<br></br>
      * the name of the screenshot<br></br>
      * the screenshot event<br></br>
@@ -599,7 +564,6 @@ interface IRegister {
     /**
      * Registers a new trigger that runs before a message is sent in chat.<br></br>
      *
-     *
      * Passes through 2 arguments:<br></br>
      * the message event<br></br>
      * the message<br></br>
@@ -615,7 +579,6 @@ interface IRegister {
 
     /**
      * Registers a new trigger that runs before a message is sent in chat.<br></br>
-     *
      *
      * Passes through 2 arguments:<br></br>
      * the list of lore to modify<br></br>

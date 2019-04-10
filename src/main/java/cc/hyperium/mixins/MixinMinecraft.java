@@ -54,7 +54,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import java.io.File;
 import java.util.List;
 
@@ -127,8 +126,7 @@ public abstract class MixinMinecraft {
     @Shadow
     private Framebuffer framebufferMc;
 
-    protected MixinMinecraft() {
-    }
+    protected MixinMinecraft() {}
 
     /**
      * Invoked once the game is launching
@@ -158,7 +156,7 @@ public abstract class MixinMinecraft {
     }
 
     /**
-     * Invoked every tick (every 50milliseconds)
+     * Invoked every tick (50 milliseconds)
      *
      * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
      */
@@ -194,11 +192,7 @@ public abstract class MixinMinecraft {
     )
     private void dispatchKeypresses(CallbackInfo ci) {
         IChatComponent chatComponent = ScreenShotHelper.saveScreenshot(this.mcDataDir, this.displayWidth, this.displayHeight, this.framebufferMc);
-
-        if (chatComponent != null) {
-            new TextComponent(chatComponent).chat();
-        }
-
+        if (chatComponent != null) new TextComponent(chatComponent).chat();
         ci.cancel();
     }
 
@@ -331,7 +325,6 @@ public abstract class MixinMinecraft {
 
     /**
      * @author Mojang & Cubxity
-     * @reason Hyperium's crash-report screen
      */
     @Overwrite
     public void displayCrashReport(CrashReport crashReportIn) {

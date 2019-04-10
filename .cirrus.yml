@@ -2,10 +2,8 @@ test_task:
   auto_cancellation: true
   container:
     image: gradle:jdk8
-    cpu: 8
+    cpu: 4
     memory: 12G
-  env:
-    GH_TOKEN: ENCRYPTED[4a1baf42ed717adfab076e8cb95e45cd430ffedf6912da4997992073ca1b8695470d1e3cc962843bfc0bff3cd0303437]
   setup_workspace_script: |
     chmod +x ./gradlew
     rm -rf $CIRRUS_WORKING_DIR/src/main/resources/build.txt
@@ -15,30 +13,17 @@ test_task:
     fingerprint_script: |
       cat build.gradle
       cat gradle/wrapper/gradle-wrapper.properties
-      cat settings.gradle
-    populate_script: |
-      ./gradlew setupDevWorkspace
+    populate_script: ./gradlew setupDevWorkspace
   build_script: |
     ./gradlew test
     ./gradlew build
   jar_artifacts:
     path: ./build/libs/**
-  upload_beta_build_link_script: |
-    chmod -x ./gradlew
-    if [ $CIRRUS_BRANCH == 'master' ]; then
-      rm -rf beta.txt
-      echo 'https://api.cirrus-ci.com/v1/artifact/task/'${CIRRUS_BUILD_ID}'/jar/build/libs/Hyperium-2.0.jar' > beta.txt
-      git config --global user.email "support@rdil.rocks"
-      git config --global user.name "RDIL Bot"
-      git pull
-      git checkout master
-      git remote rm origin
-      git add *.txt
-      git commit -m "Added new beta link. [skip ci]"
-      git remote add origin https://RDILBot:${GH_TOKEN}@github.com/RDIL/Hyperium-Jailbreak.git > /dev/null 2>&1
-      git push --set-upstream origin master
-    fi
   always:
     cleanup_before_cache_script: |
+      # Docker image version:
       rm -rf ~/.gradle/caches/$GRADLE_VERSION/
+      # Wrapper version:
+      rm -rf ~/.gradle/caches/4.0.2/
+      # Lockfiles:
       find ~/.gradle/caches/ -name "*.lock" -type f -delete

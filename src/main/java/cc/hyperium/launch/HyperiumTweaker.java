@@ -29,12 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Contains utilities used to subscribe and invoke events
- *
- * @author Kevin
- * @since 10/02/2018
- */
 public class HyperiumTweaker implements ITweaker {
     public static HyperiumTweaker INSTANCE;
     private ArrayList<String> args = new ArrayList<>();
@@ -49,8 +43,7 @@ public class HyperiumTweaker implements ITweaker {
     }
 
     @Override
-    public void acceptOptions(List<String> args, File gameDir, final File assetsDir,
-                              String profile) {
+    public void acceptOptions(List<String> args, File gameDir, final File assetsDir, String profile) {
         this.args.addAll(args);
         addArg("gameDir", gameDir);
         addArg("assetsDir", assetsDir);
@@ -120,10 +113,7 @@ public class HyperiumTweaker implements ITweaker {
     }
 
     private void addArg(String args, File file) {
-        if (file == null) {
-            return;
-        }
-
+        if (file == null) return;
         addArg(args, file.getAbsolutePath());
     }
 

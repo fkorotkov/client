@@ -18,16 +18,12 @@
 package net.hypixel.api.util;
 
 public interface ILeveling {
-
     String EXP_FIELD = "networkExp";
     String LVL_FIELD = "networkLevel";
-
     double BASE = 10_000;
     double GROWTH = 2_500;
-
     /* Constants to generate the total amount of XP to complete a level */
     double HALF_GROWTH = 0.5 * GROWTH;
-
     /* Constants to look up the level from the total amount of XP */
     double REVERSE_PQ_PREFIX = -(BASE - 0.5 * GROWTH) / GROWTH;
     double REVERSE_CONST = REVERSE_PQ_PREFIX * REVERSE_PQ_PREFIX;
@@ -148,5 +144,4 @@ public interface ILeveling {
         double lv = ILeveling.getLevel(exp), x0 = getTotalExpToLevel(lv);
         return (exp - x0) / (ILeveling.getTotalExpToLevel(lv + 1) - x0);
     }
-    //xp - getTotalExpToLevel(ILeveling.getLevel(XP))
 }

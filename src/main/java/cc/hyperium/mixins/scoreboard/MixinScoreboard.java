@@ -24,12 +24,10 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
 import java.util.Map;
 
 @Mixin(Scoreboard.class)
 public abstract class MixinScoreboard {
-
     @Shadow
     @Final
     private Map<String, ScorePlayerTeam> teams;
@@ -37,7 +35,6 @@ public abstract class MixinScoreboard {
     @Shadow
     @Final
     private Map<String, ScorePlayerTeam> teamMemberships;
-
 
     private HyperiumScoreboard hyperiumScoreboard = new HyperiumScoreboard((Scoreboard) (Object) this);
 

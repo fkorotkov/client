@@ -34,7 +34,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.util.List;
 
 @Mixin(EntityRenderer.class)
@@ -53,7 +52,6 @@ public abstract class MixinEntityRenderer {
     @Shadow
     @Final
     public static int shaderCount;
-
     @Shadow
     private int shaderIndex;
 
@@ -93,8 +91,8 @@ public abstract class MixinEntityRenderer {
     }
 
     /**
-     * @author - Sk1er (added forward for distance)
-     * @reason - ReachDisplay
+     * @author Sk1er
+     * @reason ReachDisplay
      */
     @Overwrite
     public void getMouseOver(float partialTicks) {
@@ -113,14 +111,10 @@ public abstract class MixinEntityRenderer {
                     d0 = 6.0D;
                     d1 = 6.0D;
                 } else {
-                    if (d0 > 3.0D) {
-                        flag = true;
-                    }
+                    if (d0 > 3.0D) flag = true;
                 }
 
-                if (this.mc.objectMouseOver != null) {
-                    d1 = this.mc.objectMouseOver.hitVec.distanceTo(vec3);
-                }
+                if (this.mc.objectMouseOver != null) d1 = this.mc.objectMouseOver.hitVec.distanceTo(vec3);
 
                 Vec3 vec31 = entity.getLook(partialTicks);
                 Vec3 vec32 = vec3.addVector(vec31.xCoord * d0, vec31.yCoord * d0, vec31.zCoord * d0);
@@ -165,9 +159,7 @@ public abstract class MixinEntityRenderer {
                     this.pointedEntity = null;
                     this.mc.objectMouseOver = new MovingObjectPosition(MovingObjectPosition.MovingObjectType.MISS, vec33, null, new BlockPos(vec33));
                 }
-                if (v != 0 || this.pointedEntity != null)
-                    ReachDisplay.dis = v;
-
+                if (v != 0 || this.pointedEntity != null) ReachDisplay.dis = v;
 
                 if (this.pointedEntity != null && (d2 < d1 || this.mc.objectMouseOver == null)) {
                     this.mc.objectMouseOver = new MovingObjectPosition(this.pointedEntity, vec33);
