@@ -3,7 +3,7 @@ import cc.hyperium.Hyperium;
 import rocks.rdil.jailbreak.util.Browse;
 public class Jailbreak {
     public Jailbreak() {}
-    public Browse browseUtilInstance = new Browse();
+    public static Browse browseUtilInstance = new Browse();
     public void debug() {
         Hyperium.LOGGER.debug("----------------");
         Hyperium.LOGGER.warn("This project is NOT RUN BY THE HYPERIUM TEAM");
@@ -12,7 +12,7 @@ public class Jailbreak {
         Hyperium.LOGGER.warn("Thanks!");
         Hyperium.LOGGER.debug("----------------");
     }
-    public Browse getBrowseUtil() {
+    public static Browse getBrowseUtil() {
         return browseUtilInstance;
     }
 }
