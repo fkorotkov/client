@@ -26,15 +26,12 @@ import cc.hyperium.event.TickEvent;
 import org.lwjgl.opengl.Display;
 
 public class FPSLimiter {
-
     private static FPSLimiter instance;
-
     private static boolean limbo;
     private static long time = 0L;
 
     public static FPSLimiter getInstance() {
-        if (instance == null)
-            instance = new FPSLimiter();
+        if (instance == null) instance = new FPSLimiter();
         return instance;
     }
 
@@ -60,8 +57,7 @@ public class FPSLimiter {
 
     @InvokeEvent
     public void tick(TickEvent event) {
-        if (limbo)
-            time++;
+        if (limbo) time++;
         else time = 0;
     }
 
