@@ -19,7 +19,6 @@ package cc.hyperium.mixinsimp.client.multiplayer;
 
 import java.io.File;
 import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.multiplayer.ServerList;
@@ -29,7 +28,6 @@ import net.minecraft.nbt.NBTTagList;
 import org.apache.logging.log4j.Logger;
 
 public class HyperiumServerList {
-
     public static void func_147414_b(ServerData p_147414_0_) {
         ServerList serverlist = new ServerList(Minecraft.getMinecraft());
         serverlist.loadServerList();
@@ -42,20 +40,14 @@ public class HyperiumServerList {
                 break;
             }
         }
-
         serverlist.saveServerList();
     }
 
     public void loadServers(List<ServerData> servers, Logger logger, Minecraft mc) {
         try {
             servers.clear();
-            NBTTagCompound nbttagcompound = CompressedStreamTools
-                .read(new File(mc.mcDataDir, "servers.dat"));
-
-            if (nbttagcompound == null) {
-                return;
-            }
-
+            NBTTagCompound nbttagcompound = CompressedStreamTools.read(new File(mc.mcDataDir, "servers.dat"));
+            if (nbttagcompound == null) return;
             NBTTagList nbttaglist = nbttagcompound.getTagList("servers", 10);
 
             for (int i = 0; i < nbttaglist.tagCount(); ++i) {
@@ -63,8 +55,6 @@ public class HyperiumServerList {
             }
         } catch (Exception exception) {
             logger.error("Couldn\'t load server list", exception);
-            System.out.println("Load server list error");
-
         }
     }
 
@@ -81,7 +71,6 @@ public class HyperiumServerList {
             CompressedStreamTools.safeWrite(nbttagcompound, new File(mc.mcDataDir, "servers.dat"));
         } catch (Exception exception) {
             logger.error("Couldn\'t save server list", exception);
-            System.out.println("[ServerListMixin] Save server list error");
         }
     }
 
@@ -89,7 +78,6 @@ public class HyperiumServerList {
         try {
             return servers.get(p_78850_1_);
         } catch (Exception e) {
-            System.out.println("[ServerListMixin] GetServer Data error 1");
             e.printStackTrace();
         }
         return null;
@@ -98,17 +86,13 @@ public class HyperiumServerList {
     public void removeServerData(List<ServerData> servers, int p_78851_1_) {
         try {
             servers.remove(p_78851_1_);
-        } catch (Exception e) {
-            System.out.println("[ServerListMixin] Remove server data error");
-        }
+        } catch (Exception ignored) {}
     }
 
     public void addServerData(List<ServerData> servers, ServerData p_78849_1_) {
         try {
             servers.add(p_78849_1_);
-        } catch (Exception e) {
-            System.out.println("[ServerListMixin] Add server data error");
-        }
+        } catch (Exception ignored) {}
     }
 
     public int countServers(List<ServerData> servers) {
@@ -121,16 +105,12 @@ public class HyperiumServerList {
             servers.set(p_78857_1_, this.getServerData(servers, p_78857_2_));
             servers.set(p_78857_2_, serverdata);
             this.saveServerList(servers, logger, mc);
-        } catch (Exception e) {
-            System.out.println("[ServerListMixin] Swap servers error");
-        }
+        } catch (Exception ignored) {}
     }
 
     public void func_147413_a(List<ServerData> servers, int p_147413_1_, ServerData p_147413_2_) {
         try {
             servers.set(p_147413_1_, p_147413_2_);
-        } catch (Exception e) {
-            System.out.println("[HyperiumServerList] func_147413_a server data error");
-        }
+        } catch (Exception ignored) {}
     }
 }
