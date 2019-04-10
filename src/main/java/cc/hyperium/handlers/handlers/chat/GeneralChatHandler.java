@@ -16,7 +16,6 @@
  */
 
 package cc.hyperium.handlers.handlers.chat;
-
 import cc.hyperium.Hyperium;
 import cc.hyperium.event.ChatEvent;
 import cc.hyperium.event.InvokeEvent;
@@ -29,22 +28,13 @@ import com.google.gson.JsonParser;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
-
 import java.io.InputStreamReader;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.regex.Pattern;
 
-/**
- * A util which allows the client to queue messages for the client to see when the join a game.
- * <p>
- * If the client is already playing, the message will be send instantly
- *
- * @author Sk1er
- */
 public class GeneralChatHandler {
-
     private static GeneralChatHandler instance = null;
     private final List<HyperiumChatHandler> handlerList;
 
@@ -55,7 +45,6 @@ public class GeneralChatHandler {
 
     public GeneralChatHandler(List<HyperiumChatHandler> handlerList) {
         this.handlerList = handlerList;
-
         instance = this;
     }
 
@@ -66,10 +55,7 @@ public class GeneralChatHandler {
      * @param component the component to send.
      */
     public void sendMessage(IChatComponent component) {
-        if (component == null) {
-            component = new ChatComponentText("");
-        }
-
+        if (component == null) component = new ChatComponentText("");
         this.messages.add(component);
     }
 
@@ -80,18 +66,15 @@ public class GeneralChatHandler {
      * @param addHeader if true, the message will show a Hyperium prefix before it
      */
     public void sendMessage(String message, boolean addHeader) {
-        if (message == null) {
-            return;
-        }
+        if (message == null) return;
 
         if (addHeader) {
             if (Settings.HYPERIUM_CHAT_PREFIX) {
-                message = ChatColor.RED + "[Hyperium] " + ChatColor.WHITE.toString() + message;
+                message = ChatColor.RED + "[HyperiumJailbreak] " + ChatColor.WHITE.toString() + message;
             } else {
                 message = ChatColor.WHITE.toString() + message;
             }
         }
-
         sendMessage(new ChatComponentText(message));
     }
 
@@ -137,9 +120,7 @@ public class GeneralChatHandler {
             }
         }
 
-        if (state) {
-            event.setCancelled(true);
-        }
+        if (state) event.setCancelled(true);
     }
 
     public void post() {
