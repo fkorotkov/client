@@ -7,10 +7,11 @@ import java.net.URISyntaxException;
 
 public class Browse {
     public Browse() {}
+    private Desktop d = Desktop.getDesktop();
     public void BrowseURI(String theURL) {
-        if(theURL != null && !theURL.equals("") && !theURL.isEmpty()) {
+        if(theURL != null && !theURL.equals("") && !theURL.isEmpty() && d != null) {
             try {
-                Desktop.getDesktop().browse(new URI(theURL));
+                d.browse(new URI(theURL));
             } catch (IOException | URISyntaxException e) {
                 e.printStackTrace();
             }
