@@ -21,13 +21,10 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
-
 import java.awt.*;
-
 import static org.lwjgl.opengl.GL11.GL_LINE_STRIP;
 
 public class RenderUtils {
-
     public static void drawFilledCircle(int xx, int yy, float radius, int col) {
         float f = (col >> 24 & 0xFF) / 255.0F;
         float f2 = (col >> 16 & 0xFF) / 255.0F;
@@ -153,8 +150,7 @@ public class RenderUtils {
     }
 
     public static void glColor(Color color) {
-        GlStateManager.color(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F,
-            color.getAlpha() / 255.0F);
+        GlStateManager.color(color.getRed() / 255.0F, color.getGreen() / 255.0F, color.getBlue() / 255.0F, color.getAlpha() / 255.0F);
     }
 
     public static void drawLine(float x, float y, float x1, float y1, float width, int colour) {
@@ -176,7 +172,6 @@ public class RenderUtils {
         GL11.glVertex2f(x1, y1);
         GL11.glEnd();
         GL11.glPopMatrix();
-
         GL11.glEnable(GL11.GL_TEXTURE_2D);
         GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_LINE_SMOOTH);
@@ -197,10 +192,8 @@ public class RenderUtils {
 
         RenderUtils.drawFilledCircle(left, top + circleSize, circleSize, color);
         RenderUtils.drawFilledCircle(left, bottom - circleSize, circleSize, color);
-
         RenderUtils.drawFilledCircle(right, top + circleSize, circleSize, color);
         RenderUtils.drawFilledCircle(right, bottom - circleSize, circleSize, color);
-
     }
 
     public static void drawArc(float cx, float cy, float r, float startAngle, float angle, int segments, int color) {
