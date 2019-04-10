@@ -62,7 +62,7 @@ import net.minecraft.crash.CrashReport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
-import org.cef.OS;
+import rocks.rdil.jailbreak.util.OS;
 import rocks.rdil.jailbreak.plugin.ThankWatchdog;
 import rocks.rdil.jailbreak.Jailbreak;
 import java.io.BufferedReader;
