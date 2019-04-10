@@ -6,7 +6,6 @@ import cc.hyperium.utils.JsonHolder;
 public class PurchaseSettings {
     private JsonHolder source;
 
-    private boolean buttDisabled;
     private boolean wingsDisabled;
     private String wingsType;
     private double wingsScale;
