@@ -16,9 +16,8 @@ import org.lwjgl.opengl.GL11;
  * Created by ScottehBoeh - 10/13/2018
  */
 public class CosmeticHat extends AbstractCosmetic {
-
-    public ModelBase hatModel; /* Model for Hat */
-    public ResourceLocation hatTexture; /* Texture for Hat */
+    public ModelBase hatModel;
+    public ResourceLocation hatTexture;
 
     /**
      * Default Hat Cosmetic Constructor
@@ -45,18 +44,14 @@ public class CosmeticHat extends AbstractCosmetic {
 
     @InvokeEvent
     public void onPlayerRender(RenderPlayerEvent e) {
-
         Minecraft mc = Minecraft.getMinecraft();
         AbstractClientPlayer player = e.getEntity();
-        if (CosmeticsUtil.shouldHide(getPurchaseType()))
-            return;
+        if (CosmeticsUtil.shouldHide(getPurchaseType())) return;
 
         if (this.isPurchasedBy(player.getUniqueID()) && !player.isInvisible()) {
 
             HyperiumPurchase packageIfReady = PurchaseApi.getInstance().getPackageIfReady(player.getUniqueID());
-            if (packageIfReady.getCachedSettings().getCurrentHatType() != getPurchaseType()) {
-                return;
-            }
+            if (packageIfReady.getCachedSettings().getCurrentHatType() != getPurchaseType()) return;
 
             GlStateManager.pushMatrix();
             GlStateManager.translate(e.getX(), e.getY(), e.getZ());
@@ -73,17 +68,14 @@ public class CosmeticHat extends AbstractCosmetic {
 
             GlStateManager.translate(0, -.45, 0);
 
-            /* Bind the hat texture and render the model */
             mc.getTextureManager().bindTexture(this.hatTexture);
             hatModel.render(player, 0.0F, 0.0F, -0.1F, 0.0F, 0.0F, 0.0625F);
 
             GlStateManager.popMatrix();
         }
-
     }
 
     private boolean shouldRender(AbstractClientPlayer entity) {
         return !entity.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer);
     }
-
 }
