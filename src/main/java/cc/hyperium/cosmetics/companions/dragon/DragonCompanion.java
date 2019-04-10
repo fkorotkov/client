@@ -19,12 +19,10 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.boss.EntityDragon;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
-
 import java.util.HashMap;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class DragonCompanion extends AbstractCosmetic {
-
     private float scale;
     private HashMap<EntityPlayer, CustomDragon> dragonHashMap = new HashMap<>();
 
@@ -35,23 +33,19 @@ public class DragonCompanion extends AbstractCosmetic {
     @InvokeEvent
     public void renderEntities(RenderEntitiesEvent entitiesEvent) {
         if (Settings.SHOW_COMPANION_IN_1ST_PERSON) {
-            renderPlayer(new RenderPlayerEvent(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().getRenderManager(), 0, 0, 0,
+            renderPlayer(new RenderPlayerEvent(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().getRenderManager(),
+                0, 0, 0,
                 entitiesEvent.getPartialTicks()));
         }
     }
 
     @InvokeEvent
     public void renderPlayer(RenderPlayerEvent event) {
-        if (Minecraft.getMinecraft().theWorld == null)
-            return;
-        if (!isPurchasedBy(event.getEntity().getUniqueID()))
-            return;
+        if (Minecraft.getMinecraft().theWorld == null) return;
+        if (!isPurchasedBy(event.getEntity().getUniqueID())) return;
         HyperiumPurchase packageIfReady = PurchaseApi.getInstance().getPackageIfReady(event.getEntity().getUniqueID());
-        if (packageIfReady == null)
-            return;
-        if (packageIfReady.getCachedSettings().getCurrentCompanion() != EnumPurchaseType.DRAGON_COMPANION) {
-            return;
-        }
+        if (packageIfReady == null) return;
+        if (packageIfReady.getCachedSettings().getCurrentCompanion() != EnumPurchaseType.DRAGON_COMPANION) return;
         scale = .1F;
         AbstractClientPlayer player = event.getEntity();
         CustomDragon customDragon = dragonHashMap.computeIfAbsent(event.getEntity(), player1 -> {
@@ -62,8 +56,6 @@ public class DragonCompanion extends AbstractCosmetic {
         Entity entity = customDragon.dragon;
         RenderManager renderManager = Minecraft.getMinecraft().getRenderManager();
 
-        //Manage pos here;
-
         float partialTicks = event.getPartialTicks();
 
         double d0 = player.lastTickPosX + (player.posX - player.lastTickPosX) * (double) partialTicks;
@@ -72,7 +64,6 @@ public class DragonCompanion extends AbstractCosmetic {
 
         GlStateManager.pushMatrix();
 
-//        GlStateManager.translate(event.getX(), event.getY(), event.getZ());
         EntityDragon entityDragon = customDragon.dragon;
         AnimationState animationState = customDragon.animationState;
         AnimationPoint current = animationState.getCurrent(player);
@@ -88,7 +79,6 @@ public class DragonCompanion extends AbstractCosmetic {
 
         renderManager.renderEntitySimple(entity, event.getPartialTicks());
         GlStateManager.popMatrix();
-        //render
     }
 
     @InvokeEvent
@@ -102,8 +92,7 @@ public class DragonCompanion extends AbstractCosmetic {
     }
 
     public void tick() {
-        if (Minecraft.getMinecraft().theWorld == null)
-            return;
+        if (Minecraft.getMinecraft().theWorld == null) return;
 
         for (EntityPlayer player : dragonHashMap.keySet()) {
             CustomDragon customDragon = dragonHashMap.get(player);
@@ -112,9 +101,7 @@ public class DragonCompanion extends AbstractCosmetic {
             if (entityDragon != null) {
                 entityDragon.setWorld(player.getEntityWorld());
                 double v = animationState.next.distanceSqTo(new AnimationPoint(player.posX, player.posY, player.posZ));
-                if (v > 7 * 7) {
-                    animationState.switchToNext(player, true);
-                }
+                if (v > 7 * 7) animationState.switchToNext(player, true);
 
                 entityDragon.lastTickPosX = entityDragon.posX;
                 entityDragon.lastTickPosY = entityDragon.posY;
@@ -147,7 +134,6 @@ public class DragonCompanion extends AbstractCosmetic {
                 entityDragon.onLivingUpdate();
             }
         }
-
     }
 
     class CustomDragon {
@@ -183,7 +169,6 @@ public class DragonCompanion extends AbstractCosmetic {
         AnimationPoint last;
         AnimationPoint next;
         AnimationPoint nextNext;
-        //Speed in blocks per second
         private double speed = 3D;
         private long start = 0L;
         private double currentDistance = 0;
@@ -204,18 +189,16 @@ public class DragonCompanion extends AbstractCosmetic {
             currentDistance = next.distanceTo(last);
             if (toofar) {
                 speed = currentDistance;
-            } else
+            } else {
                 speed = 3;
+            }
             totalTime = (long) (currentDistance / speed * 1000);
             endTime = start + totalTime;
-
         }
 
         public AnimationPoint getCurrent(EntityPlayer player) {
             long l = System.currentTimeMillis();
-            if (l > endTime) {
-                switchToNext(player, false);
-            }
+            if (l > endTime) switchToNext(player, false);
             double percent = (double) (l - start) / (double) totalTime;
             return new AnimationPoint(interpolate(this.last.x, next.x, percent),
                 interpolate(this.last.y, next.y, percent),
@@ -225,9 +208,7 @@ public class DragonCompanion extends AbstractCosmetic {
         public boolean nextFrameisNewPoint(EntityPlayer player) {
             long endTime = this.endTime;
             boolean b = System.currentTimeMillis() + 50L >= endTime;
-            if (b) {
-                nextNext = generateRandom(player);
-            }
+            if (b) nextNext = generateRandom(player);
             return b;
         }
 
@@ -245,7 +226,5 @@ public class DragonCompanion extends AbstractCosmetic {
                 y,
                 current.nextDouble(-BOUNDS + posZ, BOUNDS + posZ));
         }
-
     }
-
 }
