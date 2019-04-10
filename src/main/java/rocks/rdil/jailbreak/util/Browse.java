@@ -8,15 +8,12 @@ import java.net.URISyntaxException;
 public class Browse {
     public Browse() {}
     public void BrowseURI(String theURL) {
-        final int len = blacklisted.length;
-        for(int b = 0; b < len;) {
-            if(theURL != null && !theURL.equals("") && !theURL.contains(blacklisted[b])) {
-                try {
-                    Desktop.getDesktop().browse(new URI(theURL));
-                } catch (IOException | URISyntaxException e) {
-                    e.printStackTrace();
-                }
-            } else b++;
+        if(theURL != null && !theURL.equals("") && !theURL.isEmpty()) {
+            try {
+                Desktop.getDesktop().browse(new URI(theURL));
+            } catch (IOException | URISyntaxException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
