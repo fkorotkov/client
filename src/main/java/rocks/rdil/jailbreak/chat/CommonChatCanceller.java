@@ -8,8 +8,6 @@ public class CommonChatCanceller {
     }
     @InvokeEvent
     public void onChat(ChatEvent event) {
-        if(event.getChat().getUnformattedText().contains(this.whatToListenFor)) {
-            event.setCancelled(true);
-        }
+        if(event.getChat().getUnformattedText().contains(this.whatToListenFor)) event.setCancelled(true);
     }
 }
