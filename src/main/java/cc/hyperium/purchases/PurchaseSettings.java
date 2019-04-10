@@ -6,7 +6,6 @@ import cc.hyperium.utils.JsonHolder;
 public class PurchaseSettings {
     private JsonHolder source;
 
-    private boolean buttDisabled;
     private boolean wingsDisabled;
     private String wingsType;
     private double wingsScale;
@@ -17,7 +16,6 @@ public class PurchaseSettings {
     public PurchaseSettings(JsonHolder source) {
         this.source = source;
 
-        this.buttDisabled = source.optJSONObject("butt").optBoolean("disabled");
         this.wingsDisabled = source.optJSONObject("wings").optBoolean("disabled");
         this.wingsType = source.optJSONObject("wings").optString("type");
         this.wingsScale = source.optJSONObject("wings")
@@ -42,11 +40,6 @@ public class PurchaseSettings {
     public boolean isWingsDisabled() {
         return wingsDisabled;
     }
-
-    public boolean isButtDisabled() {
-        return buttDisabled;
-    }
-
 
     public EnumPurchaseType getCurrentHatType() {
         return currentHatType;

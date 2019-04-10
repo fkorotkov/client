@@ -1,8 +1,9 @@
 package rocks.rdil.jailbreak;
 import cc.hyperium.Hyperium;
-
+import rocks.rdil.jailbreak.util.Browse;
 public class Jailbreak {
     public Jailbreak() {}
+    public static Browse browseUtilInstance = new Browse();
     public void debug() {
         Hyperium.LOGGER.debug("----------------");
         Hyperium.LOGGER.warn("This project is NOT RUN BY THE HYPERIUM TEAM");
@@ -10,5 +11,8 @@ public class Jailbreak {
         Hyperium.LOGGER.warn("or by emailing me@rdil.rocks");
         Hyperium.LOGGER.warn("Thanks!");
         Hyperium.LOGGER.debug("----------------");
+    }
+    public static Browse getBrowseUtil() {
+        return browseUtilInstance;
     }
 }

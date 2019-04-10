@@ -26,11 +26,7 @@ import java.awt.image.BufferedImage;
  */
 public class GraphicsUtil {
     public static GraphicsUtil INSTANCE = new GraphicsUtil();
-
-    private GraphicsUtil() {
-
-    }
-
+    private GraphicsUtil() {}
 
     private void createGraphics() {
         BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_RGB);
@@ -47,10 +43,7 @@ public class GraphicsUtil {
     }
 
     private Color hslColorToRgb(double hue, double saturation, double lightness) {
-        if (saturation == 0.0) {
-            int grey = percToColor(lightness);
-            return new Color(grey, grey, grey);
-        }
+        if (saturation == 0.0) return new Color(percToColor(lightness), percToColor(lightness), percToColor(lightness));
 
         double q;
         if (lightness < 0.5) {
@@ -69,27 +62,15 @@ public class GraphicsUtil {
     }
 
     private double hueToRgb(double p, double q, double t) {
-        if (t < 0) {
-            t += 1;
-        }
-        if (t > 1) {
-            t -= 1;
-        }
-
-        if (t < 1.0 / 6) {
-            return p + (q - p) * 6 * t;
-        }
-        if (t < 1.0 / 2) {
-            return q;
-        }
-        if (t < 2.0 / 3) {
-            return p + (q - p) * (2.0 / 3 - t) * 6;
-        }
+        if (t < 0) t += 1;
+        if (t > 1) t -= 1;
+        if (t < 1.0 / 6) return p + (q - p) * 6 * t;
+        if (t < 1.0 / 2) return q;
+        if (t < 2.0 / 3) return p + (q - p) * (2.0 / 3 - t) * 6;
         return p;
     }
 
     private int percToColor(double percentage) {
         return (int) Math.round(percentage * 255);
     }
-
 }

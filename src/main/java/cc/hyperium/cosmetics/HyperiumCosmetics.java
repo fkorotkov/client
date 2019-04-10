@@ -37,14 +37,12 @@ public class HyperiumCosmetics {
     private final Deadmau5Cosmetic deadmau5Cosmetic;
     private final WingsCosmetic wingsCosmetic;
     private final DragonCosmetic dragonCosmetic;
-    private final ButtCosmetic buttCosmetic;
     private DragonCompanion dragonCompanion;
     private HamsterCompanion hamsterCompanion;
     private final CosmeticHat topHatCosmetic = new CosmeticHat(false, EnumPurchaseType.HAT_TOPHAT).setModel(new ModelHatTophat(), new ResourceLocation("textures/cosmetics/hats/tophat.png"));
     private final CosmeticHat fezCosmetic = new CosmeticHat(false, EnumPurchaseType.HAT_FEZ).setModel(new ModelHatFez(), new ResourceLocation("textures/cosmetics/hats/fez.png"));
     private final CosmeticHat legoCosmetic = new CosmeticHat(false, EnumPurchaseType.HAT_LEGO).setModel(new ModelHatLego(), new ResourceLocation("textures/cosmetics/hats/lego.png"));
     public HyperiumCosmetics() {
-        registerCosmetic(buttCosmetic = new ButtCosmetic());
         registerCosmetic(flipCosmetic = new FlipCosmetic());
         registerCosmetic(deadmau5Cosmetic = new Deadmau5Cosmetic());
         registerCosmetic(wingsCosmetic = new WingsCosmetic());
@@ -54,7 +52,6 @@ public class HyperiumCosmetics {
         registerCosmetic(topHatCosmetic);
         registerCosmetic(fezCosmetic);
         registerCosmetic(legoCosmetic);
-
     }
     public List<AbstractCosmetic> getCosmeticList() {
         return cosmeticList;
@@ -62,11 +59,6 @@ public class HyperiumCosmetics {
     public DragonCompanion getDragonCompanion() {
         return dragonCompanion;
     }
-    /**
-     * Register Cosmetic - Register a Cosmetic Class
-     *
-     * @param cosmetic - Cosmetic Class
-     */
     private void registerCosmetic(AbstractCosmetic cosmetic) {
         cosmeticList.add(cosmetic);
         EventBus.INSTANCE.register(cosmetic);
@@ -76,7 +68,6 @@ public class HyperiumCosmetics {
     }
     public enum EnumCosmeticType {
         DAB,
-        BUTT,
         FLIP,
         DEALWITHIT,
         DEADMAU5,
@@ -94,8 +85,6 @@ public class HyperiumCosmetics {
      */
     public AbstractCosmetic getCosmetic(EnumCosmeticType givenType) {
         switch (givenType) {
-            case BUTT:
-                return this.buttCosmetic;
             case FLIP:
                 return this.flipCosmetic;
             case DEADMAU5:
@@ -111,9 +100,6 @@ public class HyperiumCosmetics {
             default:
                 return null;
         }
-    }
-    public ButtCosmetic getButtCosmetic() {
-        return this.buttCosmetic;
     }
     public DragonCosmetic getDragonCosmetic() {
         return this.dragonCosmetic;

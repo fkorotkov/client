@@ -71,7 +71,6 @@ import java.util.List;
  * A class containing most of Hyperium's internal handlers
  */
 public class HyperiumHandlers {
-
     private LocationHandler locationHandler;
     private HypixelDetector hypixelDetector;
     private CommandQueue commandQueue;
@@ -108,7 +107,6 @@ public class HyperiumHandlers {
     private YeetHandler yeetHandler;
 
     public HyperiumHandlers() {
-        System.out.println("[Handlers] Loading handlers");
         register(network = new HyperiumNetwork());
         settingsHandler = new SettingsHandler();
         chatHandlers = new ArrayList<>();
@@ -143,18 +141,13 @@ public class HyperiumHandlers {
         commandQueue = new CommandQueue();
         dataHandler = new HypixelAPI();
         // Chat Handlers
-        System.out.println("Loading chat handlers");
         registerChatHandler(new RankedRatingChatHandler());
         registerChatHandler(new DMChatHandler());
         registerChatHandler(questTracking = new QuestTrackingChatHandler());
         registerChatHandler(new WinTrackingChatHandler());
         registerChatHandler(new FriendRequestChatHandler());
         registerChatHandler(new PartyInviteChatHandler());
-        System.out.println("[Handlers] Registering events");
         EventBus.INSTANCE.register(this);
-        System.out.println("[Handlers] Done");
-
-        // Command Handler
         register(commandHandler = new HyperiumCommandHandler());
     }
 
@@ -227,15 +220,10 @@ public class HyperiumHandlers {
     public void tick(TickEvent event) {
         // Runs first tick
         IntegratedServer integratedServer = Minecraft.getMinecraft().getIntegratedServer();
-        if (integratedServer == null) {
-            return;
-        }
+        if (integratedServer == null) return;
         ICommandManager commandManager = integratedServer.getCommandManager();
-        if (commandManager == null) {
-            return;
-        }
+        if (commandManager == null) return;
         EventBus.INSTANCE.unregister(HyperiumHandlers.class);
-
     }
 
     private void register(Object object) {
@@ -278,7 +266,6 @@ public class HyperiumHandlers {
     public KeyBindHandler getKeybindHandler() {
         return keybindHandler;
     }
-
 
     public TPoseHandler gettPoseHandler() {
         return tPoseHandler;

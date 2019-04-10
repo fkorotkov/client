@@ -33,20 +33,15 @@ import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.util.ResourceLocation;
 import java.awt.Color;
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
+import rocks.rdil.jailbreak.Jailbreak;
 import java.util.regex.Pattern;
 
 public class HypixelDetector {
-
     private static final Pattern HYPIXEL_PATTERN =
         Pattern.compile("^(?:(?:(?:.+\\.)?hypixel\\.net)|(?:209\\.222\\.115\\.\\d{1,3})|(?:99\\.198\\.123\\.[123]?\\d?))\\.?(?::\\d{1,5}\\.?)?$", Pattern.CASE_INSENSITIVE);
 
     private static HypixelDetector instance;
     private boolean hypixel = false;
-
     public HypixelDetector() {
         instance = this;
     }
@@ -95,18 +90,12 @@ public class HypixelDetector {
     @InvokeEvent
     public void join(JoinHypixelEvent event) {
         if (Settings.HYPIXEL_ZOO) {
-            Hyperium.INSTANCE.getNotification().display("Welcome to the Hypixel Zoo.", "Click to visit https://hypixel.net/", 5f,
-                null, () -> {
-                    try {
-                        Desktop.getDesktop().browse(new URI("https://hypixel.net/"));
-                    } catch (IOException | URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                }, new Color(200, 150, 50));
+            Hyperium.INSTANCE.getNotification().display("Welcome to the Hypixel Zoo.", "Click to visit https://hypixel.net/",
+                5f, null, () -> { Jailbreak.getBrowseUtil().BrowseURI("https://hypixel.net"); },
+                new Color(200, 150, 50));
 
             SoundHandler soundHandler = Minecraft.getMinecraft().getSoundHandler();
-            if (soundHandler == null || Minecraft.getMinecraft().theWorld == null)
-                return;
+            if (soundHandler == null || Minecraft.getMinecraft().theWorld == null) return;
             soundHandler.playSound(PositionedSoundRecord.create(new ResourceLocation("zoo"), (float) Minecraft.getMinecraft().thePlayer.posX, (float) Minecraft.getMinecraft().thePlayer.posY, (float) Minecraft.getMinecraft().thePlayer.posZ));
         }
     }
@@ -124,5 +113,4 @@ public class HypixelDetector {
     public boolean isHypixel() {
         return hypixel;
     }
-
 }

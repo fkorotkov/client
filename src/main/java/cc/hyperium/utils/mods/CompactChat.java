@@ -26,18 +26,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiNewChat;
 
 public class CompactChat {
-
     private static CompactChat instance;
-
     private String lastMessage = "";
-
     private int line = 0;
     private int amount = 0;
 
     public static CompactChat getInstance() {
-        if (instance == null) {
-            instance = new CompactChat();
-        }
+        if (instance == null) instance = new CompactChat();
         return instance;
     }
 
@@ -55,14 +50,9 @@ public class CompactChat {
                 this.lastMessage = event.getChat().getUnformattedText();
             }
             this.line++;
-            if (!event.isCancelled()) {
-                guiNewChat.printChatMessageWithOptionalDeletion(event.getChat(), line);
-            }
-            if (line > 256) {
-                line = 0; // yeah...
-            }
+            if (!event.isCancelled()) guiNewChat.printChatMessageWithOptionalDeletion(event.getChat(), line);
+            if (line > 256) line = 0;
             event.setCancelled(true);
         }
     }
-
 }
