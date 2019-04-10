@@ -3,7 +3,6 @@ package cc.hyperium.utils;
 import com.google.common.collect.Sets;
 import net.minecraft.client.resources.AbstractResourcePack;
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
-
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
