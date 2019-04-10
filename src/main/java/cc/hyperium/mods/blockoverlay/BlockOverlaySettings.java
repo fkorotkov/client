@@ -18,7 +18,6 @@
 package cc.hyperium.mods.blockoverlay;
 
 import cc.hyperium.utils.BetterJsonObject;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -37,9 +36,7 @@ public class BlockOverlaySettings {
     private int chromaSpeed = 5;
 
     public BlockOverlaySettings(File directory) {
-        if (!directory.exists()) {
-            directory.mkdirs();
-        }
+        if (!directory.exists()) directory.mkdirs();
         this.configFile = new File(directory, "blockoverlay.json");
     }
 
@@ -69,20 +66,13 @@ public class BlockOverlaySettings {
                 this.overlayAlpha = (float) json.optDouble("overlayAlpha");
                 this.chromaSpeed = json.optInt("chromaSpeed");
             }
-        } catch (Exception exception) {
-            System.out.println("[BlockOverlay] Error occurred while loading configuration!");
-        }
+        } catch (Exception e) {}
     }
 
     public void save() {
         try {
-            if (!this.configFile.getParentFile().exists()) {
-                this.configFile.getParentFile().mkdirs();
-            }
-            if (!this.configFile.exists()) {
-                //noinspection ResultOfMethodCallIgnored
-                this.configFile.createNewFile();
-            }
+            if (!this.configFile.getParentFile().exists()) this.configFile.getParentFile().mkdirs();
+            if (!this.configFile.exists()) this.configFile.createNewFile();
 
             BetterJsonObject json = new BetterJsonObject();
             json.addProperty("overlayMode", this.overlayMode.getName());
@@ -95,9 +85,7 @@ public class BlockOverlaySettings {
             json.addProperty("overlayAlpha", this.overlayAlpha);
             json.addProperty("chromaSpeed", this.chromaSpeed);
             json.writeToFile(this.configFile);
-        } catch (Exception exception) {
-            System.out.println("[BlockOverlay] Error occurred while saving configuration!");
-        }
+        } catch (Exception exception) {}
     }
 
     public BlockOverlayMode getOverlayMode() {

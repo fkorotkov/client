@@ -11,21 +11,10 @@ public class UriScheme {
     private static final int PORT = 21965;
 
     public static void main(String[] args) {
-        if (Settings.FPS) return;
+        if (args.length < 1) return;
+        if (!args[0].startsWith(PROTOCOL)) return;
 
-        if (args.length < 1) {
-            System.out.println("[ChatTriggers] No URL found, aborting...");
-            return;
-        }
-
-        if (!args[0].startsWith(PROTOCOL)) {
-            System.out.println("[ChatTriggers] URL found is not supported, aborting...");
-            System.out.println(args[0]);
-            return;
-        }
-
-        String url = args[0];
-        String module = url.substring(PROTOCOL.length()).replace("/", "");
+        String module = args[0].substring(PROTOCOL.length()).replace("/", "");
 
         try {
             connectWithSockets(module);
@@ -50,8 +39,6 @@ public class UriScheme {
             PrintWriter pw = new PrintWriter(new FileWriter(toDownload, true));
             pw.append(module).append(",");
             pw.close();
-        } catch (Exception e) {
-            System.out.println("[ChatTriggers] Error writing to file.");
-        }
+        } catch (Exception e) {}
     }
 }

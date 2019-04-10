@@ -39,33 +39,21 @@ public class LayerDeadmau5HeadHandler {
         try {
 
             k = 1;
-            if (entitylivingbaseIn == null)
-                return;
-            if (entitylivingbaseIn.isInvisible())
-                return;
-            if (entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer))
-                return;
+            if (entitylivingbaseIn == null) return;
+            if (entitylivingbaseIn.isInvisible()) return;
+            if (entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer)) return;
             k = 2;
-            if (!Settings.SHOW_COSMETICS_EVERYWHERE) {
-                if (!(Hyperium.INSTANCE.getMinigameListener().getCurrentMinigameName().equalsIgnoreCase("HOUSING") || Hyperium.INSTANCE.getHandlers().getLocationHandler().getLocation().contains("lobby")))
-                    return;
-            }
+            if (!Settings.SHOW_COSMETICS_EVERYWHERE && !(Hyperium.INSTANCE.getMinigameListener().getCurrentMinigameName().equalsIgnoreCase("HOUSING") || Hyperium.INSTANCE.getHandlers().getLocationHandler().getLocation().contains("lobby"))) return;
             k = 3;
             String name = entitylivingbaseIn.getName();
-            if (name == null) {
-                return;
-            }
+            if (name == null) return;
             k = 5;
             if (Hyperium.INSTANCE.getCosmetics().getDeadmau5Cosmetic().isPurchasedBy(entitylivingbaseIn.getUniqueID())) {
                 HyperiumPurchase packageIfReady = PurchaseApi.getInstance().getPackageIfReady(entitylivingbaseIn.getUniqueID());
-                if (packageIfReady == null) {
-                    return;
-                }
+                if (packageIfReady == null) return;
                 k = 6;
                 AbstractHyperiumPurchase purchase = packageIfReady.getPurchase(EnumPurchaseType.DEADMAU5_COSMETIC);
-                if (purchase == null) {
-                    return;
-                }
+                if (purchase == null) return;
                 k = 7;
                 EntityPlayerSP thePlayer = Minecraft.getMinecraft().thePlayer;
                 if (thePlayer != null && entitylivingbaseIn.getUniqueID() != thePlayer.getUniqueID()) {
@@ -73,12 +61,10 @@ public class LayerDeadmau5HeadHandler {
                         k = -5;
                         return;
                     }
-                } else if (!Settings.EARS_STATE.equalsIgnoreCase("yes"))
-                    return;
+                } else if (!Settings.EARS_STATE.equalsIgnoreCase("yes")) return;
                 k = 8;
                 ResourceLocation locationSkin = entitylivingbaseIn.getLocationSkin();
-                if (locationSkin != null)
-                    playerRenderer.bindTexture(locationSkin);
+                if (locationSkin != null) playerRenderer.bindTexture(locationSkin);
                 k = 9;
                 GlStateManager.disableCull();
 
@@ -105,18 +91,15 @@ public class LayerDeadmau5HeadHandler {
                         playerRenderer.getMainModel().renderDeadmau5Head(0.0625F);
                         g++;
                     } catch (Exception e) {
-                        System.out.println("[Deadmau5Handler] Failed to render deadmau5 at g " + g);
                         e.printStackTrace();
                     } finally {
                         GlStateManager.popMatrix();
-
                     }
                 }
                 k = 10;
             }
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("[Deadmau5Handler] Failed to render Deadmau5 at point " + k);
         }
     }
 }
