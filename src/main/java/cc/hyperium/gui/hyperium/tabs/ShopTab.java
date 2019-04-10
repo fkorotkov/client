@@ -15,17 +15,12 @@ import cc.hyperium.purchases.PurchaseApi;
 import cc.hyperium.utils.JsonHolder;
 import cc.hyperium.utils.UUIDUtil;
 import net.minecraft.client.Minecraft;
-
-import java.awt.Desktop;
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import rocks.rdil.jailbreak.Jailbreak;
 
 public class ShopTab extends AbstractTab {
-
     private JsonHolder personData = null;
     private JsonHolder cosmeticCallback = null;
     private boolean purchasing = false;
@@ -62,29 +57,10 @@ public class ShopTab extends AbstractTab {
         infoTab.addChild(new ButtonComponent(this, new ArrayList<>(), "Particles",
             () -> new ParticleGui().show()));
         infoTab.addChild(new ButtonComponent(this, new ArrayList<>(), "Open in browser",
-            () -> {
-                Desktop desktop = Desktop.getDesktop();
-                if (desktop != null) {
-                    try {
-                        desktop.browse(new URI("https://hyperium.sk1er.club"));
-                    } catch (IOException | URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }));
+            () -> Jailbreak.getBrowseUtil().BrowseURI("https://hyperium.sk1er.club")));
         infoTab.addChild(new ButtonComponent(this, new ArrayList<>(), "Purchase credits",
-            () -> {
-                Desktop desktop = Desktop.getDesktop();
-                if (desktop != null) {
-                    try {
-                        desktop.browse(new URI("https://purchase.sk1er.club/category/1125808"));
-                    } catch (IOException | URISyntaxException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }));
-        infoTab
-            .addChild(new ButtonComponent(this, new ArrayList<>(), "Refresh", this::refreshData));
+            () -> Jailbreak.getBrowseUtil().BrowseURI("https://purchase.sk1er.club/category/1125808")));
+        infoTab.addChild(new ButtonComponent(this, new ArrayList<>(), "Refresh", this::refreshData));
 
         CollapsibleTabComponent purchaseTab = new CollapsibleTabComponent(this,
             Arrays.asList("Purchase", "Shop"), "Purchase");
@@ -107,8 +83,6 @@ public class ShopTab extends AbstractTab {
                         "You have already purchased " + cosmetic.optString("name") + ".");
                     return;
                 }
-
-                System.out.println("Attempting to purchase " + key);
                 purchasing = true;
                 NettyClient client = NettyClient.getClient();
                 if (client != null) {
