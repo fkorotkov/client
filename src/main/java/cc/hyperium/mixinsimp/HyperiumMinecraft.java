@@ -61,6 +61,7 @@ import java.nio.ByteBuffer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import rocks.rdil.jailbreak.util.OS;
 
 public class HyperiumMinecraft {
     private Minecraft parent;
@@ -74,11 +75,10 @@ public class HyperiumMinecraft {
 
         defaultResourcePacks.add(mcDefaultResourcePack);
         for (File file : AddonBootstrap.getAddonResourcePacks()) {
-            defaultResourcePacks
-                .add(file == null ? new AddonWorkspaceResourcePack() : new FileResourcePack(file));
+            defaultResourcePacks.add(file == null ? new AddonWorkspaceResourcePack() : new FileResourcePack(file));
         }
         AddonMinecraftBootstrap.init();
-        CTJS.loadIntoJVM();
+        if(!Settings.FPS) CTJS.loadIntoJVM();
         EventBus.INSTANCE.post(new PreInitializationEvent());
     }
 
@@ -176,7 +176,7 @@ public class HyperiumMinecraft {
     }
 
     public void setWindowIcon() {
-        if (Util.getOSType() != Util.EnumOS.OSX) {
+        if (!OS.isMacintosh()) {
             try (InputStream inputStream16x = Minecraft.class
                 .getResourceAsStream("/assets/hyperium/icons/icon-16x.png");
                  InputStream inputStream32x = Minecraft.class
@@ -213,9 +213,7 @@ public class HyperiumMinecraft {
 
         if (guiScreenIn instanceof GuiHyperiumScreenMainMenu) {
             gameSettings.showDebugInfo = false;
-            if (!Settings.PERSISTENT_CHAT) {
-                ingameGUI.getChatGUI().clearChatMessages();
-            }
+            if (!Settings.PERSISTENT_CHAT) ingameGUI.getChatGUI().clearChatMessages();
         }
 
         ((IMixinMinecraft) parent).setCurrentScreen(guiScreenIn);
@@ -232,15 +230,11 @@ public class HyperiumMinecraft {
             parent.setIngameFocus();
         }
 
-        if (Hyperium.INSTANCE.getHandlers() != null) {
-            Hyperium.INSTANCE.getHandlers().getKeybindHandler().releaseAllKeybinds();
-        }
+        if (Hyperium.INSTANCE.getHandlers() != null) Hyperium.INSTANCE.getHandlers().getKeybindHandler().releaseAllKeybinds();
     }
 
     public void getLimitFramerate(CallbackInfoReturnable<Integer> ci) {
-        if (FPSLimiter.shouldLimitFramerate()) {
-            ci.setReturnValue(FPSLimiter.getInstance().getFpsLimit());
-        }
+        if (FPSLimiter.shouldLimitFramerate()) ci.setReturnValue(FPSLimiter.getInstance().getFpsLimit());
     }
 
     public void onStartGame(CallbackInfo ci) {
@@ -270,10 +264,8 @@ public class HyperiumMinecraft {
         int i = Mouse.getEventButton();
         boolean state = Mouse.getEventButtonState();
         if (state) {
-            // Mouse clicked.
             EventBus.INSTANCE.post(new MouseButtonEvent(i, true));
         } else {
-            // Mouse released.
             EventBus.INSTANCE.post(new MouseButtonEvent(i, false));
         }
     }
@@ -284,17 +276,15 @@ public class HyperiumMinecraft {
         File crashReportDir;
         String crashReportPrefix = "crash-";
         if (data.contains("hyperium")) {
-            crashReportDir = new File(Minecraft.getMinecraft().mcDataDir, "hyperium-crash-reports");
-            if (!crashReportDir.exists()) {
-                crashReportDir.mkdir();
-            }
-            crashReportPrefix = "hyperium-crash-";
+            crashReportDir = new File(Minecraft.getMinecraft().mcDataDir, "jb-crash-reports");
+            if (!crashReportDir.exists()) crashReportDir.mkdir();
+            crashReportPrefix = "jb-crash-";
         } else {
             crashReportDir = new File(Minecraft.getMinecraft().mcDataDir, "crash-reports");
         }
 
         File crashReportFile = new File(crashReportDir,
-            crashReportPrefix + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-client.txt"
+            crashReportPrefix + (new SimpleDateFormat("yyyy-MM-dd_HH.mm.ss")).format(new Date()) + "-jbc.txt"
         );
 
         crashReportIn.saveToFile(crashReportFile);
@@ -312,16 +302,6 @@ public class HyperiumMinecraft {
 
         // Intercept the crash with Hyperium crash report GUI.
         int crashAction = CrashReportGUI.handle(crashReportIn);
-
-        if (crashReportIn.getFile() != null) {
-            Bootstrap.printToSYSOUT(
-                "#@!@# Game crashed! Crash report saved to: #@!@# " + crashReportIn.getFile());
-        } else if (crashReportIn.saveToFile(crashReportFile)) {
-            Bootstrap.printToSYSOUT(
-                "#@!@# Game crashed! Crash report saved to: #@!@# " + crashReportFile.getAbsolutePath());
-        } else {
-            Bootstrap.printToSYSOUT("#@?@# Game crashed! Crash report could not be saved. #@?@#");
-        }
 
         switch (crashAction) {
             case 0:
@@ -358,18 +338,14 @@ public class HyperiumMinecraft {
                     }
                     Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                         try {
-                            System.out.println("## RESTARTING ##");
-                            System.out.println("cmd=" + cmd.toString());
                             Runtime.getRuntime().exec(cmd.toString());
                         } catch (IOException e) {
                             e.printStackTrace();
-                            System.out.println("## FAILED TO RESTART ##");
                         }
                     }));
                     parent.shutdown();
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    System.out.println("## FAILED TO RESTART ##");
                 }
                 break;
         }
