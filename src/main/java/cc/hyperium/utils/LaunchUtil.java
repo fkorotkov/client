@@ -12,7 +12,7 @@ import rocks.rdil.jailbreak.util.OS;
  */
 public class LaunchUtil {
     public static void launch() {
-        String cs;
+        String cs = "";
         try {
             for (URL u : ((URLClassLoader) Hyperium.class.getClassLoader()).getURLs()) {
                 if (u.getPath().contains("Hyperium")) cs = u.getPath();
