@@ -73,12 +73,6 @@ public class HyperiumCommandHandler {
         }
     }
 
-    /**
-     * Execute the provided command, if it exists. Initial leading slash will be removed if it is sent.
-     *
-     * @param command Command to attempt to execute
-     * @return Whether the command was successfully executed
-     */
     public boolean executeCommand(String command) {
         final String commandLine = command.startsWith("/") ? command.substring(1) : command;
         String commandName;
@@ -89,15 +83,12 @@ public class HyperiumCommandHandler {
             String[] syntax = commandLine.split(" ");
             commandName = syntax[0];
             args = Arrays.copyOfRange(syntax, 1, syntax.length);
-            // SpotifyInformation: If command is "/print hello 2", commandName will equal "print" and args will equal ["hello","2"]
         } else {
             commandName = commandLine;
         }
 
         // Disabled commands will be ignored
-        if (isCommandDisabled(commandName)) {
-            return false;
-        }
+        if (isCommandDisabled(commandName)) return false;
 
         // Loop through our commands, if the identifier matches the expected command, active the base
         String[] finalArgs = args;
@@ -123,12 +114,6 @@ public class HyperiumCommandHandler {
         }).orElse(false);
     }
 
-    /**
-     * Registers the command to this CommandHandler instance.
-     * also registers any aliases if applicable
-     *
-     * @param command The command to register
-     */
     public void registerCommand(BaseCommand command) {
         this.commands.put(command.getName(), command);
 
@@ -139,11 +124,6 @@ public class HyperiumCommandHandler {
         }
     }
 
-    /**
-     * Removes a register command & all aliases
-     *
-     * @param command the command to unregister
-     */
     public void removeCommand(BaseCommand command) {
         for (Entry<String, BaseCommand> entry : this.commands.entrySet()) {
             if (entry.getValue().equals(command)) {
@@ -152,12 +132,6 @@ public class HyperiumCommandHandler {
         }
     }
 
-    /**
-     * Returns true if this command is in the disabled list. Used to ignore commands
-     *
-     * @param input the command to check
-     * @return true if the command should be ignored
-     */
     public boolean isCommandDisabled(String input) {
         if (input == null || input.isEmpty() || input.trim().isEmpty() ||
             input.equalsIgnoreCase("disablecommand") || input.equalsIgnoreCase("hyperium")) {
@@ -167,14 +141,6 @@ public class HyperiumCommandHandler {
         return this.disabledCommands.contains(input.trim());
     }
 
-    /**
-     * If this command is already disabled, we'll remove it from the disabled list
-     * and return false to indicate the command is not disabled anymore. If the list
-     * does not contain the command we'll add it and return true to indicate it now is.
-     *
-     * @param input the command to add to the ignored list
-     * @return true if now disabled or false if it no longer is
-     */
     public boolean addOrRemoveCommand(String input) {
         if (input == null || input.isEmpty() || input.trim().isEmpty() ||
             input.equalsIgnoreCase("disablecommand") || input.equalsIgnoreCase("hyperium")) {
@@ -190,9 +156,6 @@ public class HyperiumCommandHandler {
         }
     }
 
-    /**
-     * @author Forge
-     */
     public void autoComplete(String leftOfCursor) {
         latestAutoComplete = null;
         if (leftOfCursor.length() == 0)
@@ -214,9 +177,6 @@ public class HyperiumCommandHandler {
         }
     }
 
-    /**
-     * @author Forge
-     */
     private List<String> getTabCompletionOptions(String input) {
         String[] astring = input.split(" ", -1);
         String s = astring[0];
@@ -233,17 +193,12 @@ public class HyperiumCommandHandler {
         } else {
             BaseCommand command = this.commands.get(s);
 
-            if (command != null) {
-                return command.onTabComplete(dropFirstString(astring));
-            }
+            if (command != null) return command.onTabComplete(dropFirstString(astring));
 
             return null;
         }
     }
 
-    /**
-     * @author Forge
-     */
     private String[] dropFirstString(String[] input) {
         String[] astring = new String[input.length - 1];
         System.arraycopy(input, 1, astring, 0, input.length - 1);
