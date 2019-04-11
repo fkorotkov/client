@@ -16,19 +16,11 @@
  */
 
 package club.sk1er.website.api.requests;
-
-
 import cc.hyperium.utils.JsonHolder;
 
-/**
- * @author Sk1er
- */
 public interface HypixelApiObject {
-
     boolean isValid();
-
     JsonHolder getData();
-
     default boolean isLoaded() {
         return getData().optBoolean("loaded");
     }
