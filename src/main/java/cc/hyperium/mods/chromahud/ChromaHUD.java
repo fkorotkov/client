@@ -38,7 +38,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.util.EnumChatFormatting;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -49,17 +48,12 @@ import java.util.List;
 public class ChromaHUD extends AbstractMod {
     public static final String MODID = "ChromaHUD";
     public static final String VERSION = "3.0";
-    /**
-     * The metadata of ChromaHUD
-     */
     private final Metadata meta;
     private File suggestedConfigurationFile;
 
     public ChromaHUD() {
         Metadata metadata = new Metadata(this, "ChromaHUD", "3.0", "Sk1er");
-
         metadata.setDisplayName(ChatColor.AQUA + "ChromaHUD");
-
         this.meta = metadata;
     }
 
@@ -79,13 +73,11 @@ public class ChromaHUD extends AbstractMod {
             if (displayItem1.precision > 4)
                 displayItem1.precision = 0;
             int next = displayItem1.precision + 1;
-            if (next > 4)
-                next = 0;
+            if (next > 4) next = 0;
             guiButton.displayString = EnumChatFormatting.RED.toString() + "Change to " + next + " decimal" + (next != 1 ? "s" : "");
         }, new GuiButton(0, 0, 0, "Coords Precision"), (guiButton, displayItem) -> {
             int next = ((CordsDisplay) displayItem).precision + 1;
-            if (next > 4)
-                next = 0;
+            if (next > 4) next = 0;
             guiButton.displayString = EnumChatFormatting.RED.toString() + "Change to " + next + " decimal" + (next != 1 ? "s" : "");
         }));
 
@@ -120,37 +112,22 @@ public class ChromaHUD extends AbstractMod {
             "ss - Second\n" +
             "For more options, Google \"Date Format\""));
 
-        ChromaHUDApi.getInstance().registerButtonConfig("SCOREBOARD", new ButtonConfig((guiButton, displayItem) -> displayItem.getData().put("numbers", !displayItem.getData().optBoolean("numbers")), new GuiButton(0, 0, 0, "Toggle Number"), (guiButton, displayItem) -> {
-        }));
-
+        ChromaHUDApi.getInstance().registerButtonConfig("SCOREBOARD", new ButtonConfig((guiButton, displayItem) -> displayItem.getData().put("numbers", !displayItem.getData().optBoolean("numbers")), new GuiButton(0, 0, 0, "Toggle Number"), (guiButton, displayItem) -> {}));
         ChromaHUDApi.getInstance().registerTextConfig("SPRINT_STATUS", new TextConfig((guiTextField, displayItem) -> ((ToggleSprintStatus) displayItem).setSprintEnabledText(guiTextField.getText()), textTextField, (guiTextField, displayItem) -> guiTextField.setText(((ToggleSprintStatus) displayItem).getStatusText())));
-
         ChromaHUDApi.getInstance().registerButtonConfig("COINS", new ButtonConfig((guiButton, displayItem) -> {
             JsonHolder data = displayItem.getData();
             int state = data.optInt("state");
             state++;
-            if (state < 0 || state > 2) {
-                state = 0;
-            }
+            if (state < 0 || state > 2) state = 0;
             data.put("state", state);
 
         }, new GuiButton(0, 0, 0, "Toggle Number"), (guiButton, displayItem) -> {
             JsonHolder data = displayItem.getData();
             int state = data.optInt("state");
-            if (state < 0 || state > 2) {
-                state = 0;
-            }
-            if (state == 0) {
-                guiButton.displayString = "Daily Coins";
-            }
-
-            if (state == 1) {
-                guiButton.displayString = "Monthly Coins";
-            }
-
-            if (state == 2) {
-                guiButton.displayString = "Lifetime Coins";
-            }
+            if (state < 0 || state > 2) state = 0;
+            if (state == 0) guiButton.displayString = "Daily Coins";
+            if (state == 1) guiButton.displayString = "Monthly Coins";
+            if (state == 2) guiButton.displayString = "Lifetime Coins";
         }));
         setup();
         EventBus.INSTANCE.register(new ElementRenderer(this));
@@ -167,8 +144,7 @@ public class ChromaHUD extends AbstractMod {
         JsonHolder data = new JsonHolder();
         try {
             if (!suggestedConfigurationFile.exists()) {
-                if (!suggestedConfigurationFile.getParentFile().exists())
-                    suggestedConfigurationFile.getParentFile().mkdirs();
+                if (!suggestedConfigurationFile.getParentFile().exists()) suggestedConfigurationFile.getParentFile().mkdirs();
                 saveState();
             }
             FileReader fr = new FileReader(suggestedConfigurationFile);
@@ -194,9 +170,6 @@ public class ChromaHUD extends AbstractMod {
         return new GeneralConfigGui(this);
     }
 
-    /*
-    Saves current state of all elements to file
-     */
     public void saveState() {
         JsonHolder master = new JsonHolder();
         boolean enabled = true;
@@ -215,17 +188,12 @@ public class ChromaHUD extends AbstractMod {
             tmp.putArray("items", items);
         }
         try {
-            if (!suggestedConfigurationFile.exists())
-                suggestedConfigurationFile.createNewFile();
+            if (!suggestedConfigurationFile.exists()) suggestedConfigurationFile.createNewFile();
             FileWriter fw = new FileWriter(suggestedConfigurationFile);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(master.toString());
             bw.close();
             fw.close();
-        } catch (Exception ignored) {
-
-        }
-
+        } catch (Exception ignored) {}
     }
-
 }
