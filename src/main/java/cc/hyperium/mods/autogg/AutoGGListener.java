@@ -28,7 +28,7 @@ public class AutoGGListener {
         if (this.mod.getConfig().ANTI_GG && invoked && (e.getChat().getUnformattedText().toLowerCase().endsWith("gg") || e.getChat().getUnformattedText().endsWith("Good Game"))) e.setCancelled(true);
         if (!this.mod.getConfig().isToggled() || this.mod.isRunning() || this.mod.getTriggers().isEmpty()) return;
 
-        String unformattedMessage = ChatColor.stripColor(event.getChat().getUnformattedText());
+        String unformattedMessage = ChatColor.stripColor(e.getChat().getUnformattedText());
 
         if (this.mod.getTriggers().stream().anyMatch(unformattedMessage::contains) && unformattedMessage.startsWith(" ")) {
             this.mod.setRunning(true);
@@ -37,8 +37,8 @@ public class AutoGGListener {
             Multithreading.runAsync(() -> {
                 try {
                     Thread.sleep(250);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
                 }
                 VictoryRoyale.getInstance().gameEnded();
             });
