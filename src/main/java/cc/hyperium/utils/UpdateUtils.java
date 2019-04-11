@@ -1,6 +1,5 @@
 package cc.hyperium.utils;
 import cc.hyperium.Hyperium;
-import cc.hyperium.Metadata;
 import com.google.common.base.Charsets;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
