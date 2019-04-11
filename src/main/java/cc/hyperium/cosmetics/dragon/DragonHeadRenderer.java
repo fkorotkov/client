@@ -37,7 +37,6 @@ import net.minecraft.util.BlockPos;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.chunk.Chunk;
 import org.lwjgl.opengl.GL11;
-
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -89,7 +88,6 @@ public class DragonHeadRenderer extends ModelBase {
         this.jaw.setRotationPoint(0.0F, 4.0F, 8.0F + f);
         this.jaw.addBox("jaw", -6.0F, 0.0F, -16.0F, 12, 4, 16);
         this.head.addChild(this.jaw);
-
     }
 
     @InvokeEvent
@@ -104,11 +102,8 @@ public class DragonHeadRenderer extends ModelBase {
         EntityPlayer entity = event.getEntity();
         if (dragonCosmetic.isPurchasedBy(entity.getUniqueID()) && !entity.isInvisible()) {
             HyperiumPurchase packageIfReady = PurchaseApi.getInstance().getPackageIfReady(event.getEntity().getUniqueID());
-            if (packageIfReady == null)
-                return;
-            if (packageIfReady.getCachedSettings().isDragonHeadDisabled()) {
-                return;
-            }
+            if (packageIfReady == null) return;
+            if (packageIfReady.getCachedSettings().isDragonHeadDisabled()) return;
 
             GlStateManager.pushMatrix();
             GlStateManager.translate(event.getX(), event.getY(), event.getZ());
@@ -119,7 +114,6 @@ public class DragonHeadRenderer extends ModelBase {
     }
 
     private void renderHead(final EntityPlayer player, final float partialTicks) {
-
         final double scale = 1.0F;
         final double rotate = this.interpolate(player.prevRotationYawHead, player.rotationYawHead, partialTicks);
         final double rotate1 = this.interpolate(player.prevRotationPitch, player.rotationPitch, partialTicks);
@@ -131,9 +125,7 @@ public class DragonHeadRenderer extends ModelBase {
         GlStateManager.translate(0.0D, 0.0D, .05 / scale);
         GL11.glRotated(rotate1, 1.0D, 0.0D, 0.0D);
         GL11.glTranslated(0.0, -0.3 / scale, .06);
-        if (player.isSneaking()) {
-            GL11.glTranslated(0.0, 0.125 / scale, 0.0);
-        }
+        if (player.isSneaking()) GL11.glTranslated(0.0, 0.125 / scale, 0.0);
         final float[] colors = new float[]{1.0f, 1.0f, 1.0f};
 
         if (player.onGround) {
@@ -166,7 +158,6 @@ public class DragonHeadRenderer extends ModelBase {
         this.mc.getTextureManager().bindTexture(this.selectedLoc);
         GL11.glScaled(.5, .5, .5);
         this.head.render(.1F);
-
         GL11.glCullFace(1029);
         GL11.glDisable(2884);
         GL11.glColor3f(255.0f, 255.0f, 255.0f);
@@ -174,9 +165,7 @@ public class DragonHeadRenderer extends ModelBase {
 
     private float interpolate(final float yaw1, final float yaw2, final float percent) {
         float f = (yaw1 + (yaw2 - yaw1) * percent) % 360.0f;
-        if (f < 0.0f) {
-            f += 360.0f;
-        }
+        if (f < 0.0f) f += 360.0f;
         return f;
     }
 
