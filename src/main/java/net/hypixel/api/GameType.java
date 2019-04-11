@@ -55,10 +55,6 @@ public enum GameType {
         this.id = id;
     }
 
-    /**
-     * @param id The internal id
-     * @return The GameType associated with that id, or null if there isn't one.
-     */
     public static GameType fromId(int id) {
         for (GameType gameType : v) {
             if (gameType.id == id) {
@@ -77,10 +73,6 @@ public enum GameType {
         return null;
     }
 
-    /**
-     * @param dbName The key used in the database
-     * @return The GameType associated with that key, or null if there isn't one.
-     */
     public static GameType fromDatabase(String dbName) {
         for (GameType gameType : v) {
             if (gameType.dbName.equals(dbName)) {
@@ -100,15 +92,9 @@ public enum GameType {
     }
 
     public String getQuestName() {
-        if (this == MURDER_MYSTERY) {
-            return "murdermystery";
-        }
-        if (this == QUAKECRAFT) {
-            return "quake";
-        }
-        if (this == SURVIVAL_GAMES) {
-            return "hungergames";
-        }
+        if (this == MURDER_MYSTERY) return "murdermystery";
+        if (this == QUAKECRAFT) return "quake";
+        if (this == SURVIVAL_GAMES) return "hungergames";
         return name().toLowerCase().replace("_","");
     }
 
@@ -120,9 +106,6 @@ public enum GameType {
         return name;
     }
 
-    /**
-     * @return The internal ID that is occasionally used in various database schemas
-     */
     public int getId() {
         return id;
     }
