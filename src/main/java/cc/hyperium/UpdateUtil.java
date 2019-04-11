@@ -53,9 +53,6 @@ public class UpdateUtil {
         return r.toString();
     }
 
-    /**
-     * Get a file's checksum.
-     */
     private static byte[] checksum(final File input, final String name) {
         try (final InputStream in = new FileInputStream(input)) {
             final MessageDigest digest = MessageDigest.getInstance(name);

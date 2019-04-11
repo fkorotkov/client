@@ -8,7 +8,6 @@ package cc.hyperium.internal.addons;
  * @since 1.0
  */
 public interface IAddon {
-
     /**
      * Invoked once the plugin has successfully loaded
      * {@see cc.hyperium.internal.addons.AddonMinecraftBootstrap#init}
@@ -21,12 +20,10 @@ public interface IAddon {
      */
     void onClose();
 
-
     /**
      * Invoked on debug call. Can be used to add things into crash reports
      * <p>
      * This does not need to be overriden if it's not needed
      */
-    default void sendDebugInfo() {
-    }
+    default void sendDebugInfo() {}
 }

@@ -29,15 +29,12 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ReportedException;
 import net.minecraft.util.ResourceLocation;
 import org.apache.logging.log4j.Logger;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class HyperiumTextureManager {
-
-
     public static HyperiumTextureManager INSTANCE;
     private TextureManager parent;
     private ConcurrentHashMap<String, ITextureObject> textures = new ConcurrentHashMap<>();
@@ -72,7 +69,7 @@ public class HyperiumTextureManager {
 
                 String name = location.getResourcePath();
 
-                // Prevent conflicts with Optifine.
+                // Prevent conflicts with OptiFine.
                 if (name.startsWith("mcpatcher/") || name.startsWith("optifine/")) {
                     ITextureObject textureObject = textures.get(location);
 
@@ -198,8 +195,7 @@ public class HyperiumTextureManager {
                 for (String s : textures.keySet()) {
                     if (s.contains(":")) {
                         String[] split = s.split(":");
-                        if (split.length < 2)
-                            continue;
+                        if (split.length < 2) continue;
                         ResourceLocation textureLocation = new ResourceLocation(split[0], split[1]);
                         if (split[1].startsWith("skins/")) {
                             ResourceLocation locationCape = Minecraft.getMinecraft().thePlayer != null ? Minecraft.getMinecraft().thePlayer.getLocationCape() : null;
@@ -210,8 +206,7 @@ public class HyperiumTextureManager {
                             deleteTexture(textureLocation);
                         }
 
-                        if (split[1].startsWith("capeof/"))
-                            deleteTexture(textureLocation);
+                        if (split[1].startsWith("capeof/")) deleteTexture(textureLocation);
                     }
 
                 }
@@ -221,19 +216,9 @@ public class HyperiumTextureManager {
         }
     }
 
-    public void print() {
-        for (String s : textures.keySet()) {
-            System.out.println(s + " -> " + textures.get(s).getClass());
-        }
-    }
-
     public void deleteTexture(ResourceLocation textureLocation) {
         ITextureObject itextureobject = this.getTexture(textureLocation);
-        if (itextureobject != null) {
-            TextureUtil.deleteTexture(itextureobject.getGlTextureId());
-        }
-        if (textureLocation != null)
-            textures.remove(textureLocation.toString());
+        if (itextureobject != null) TextureUtil.deleteTexture(itextureobject.getGlTextureId());
+        if (textureLocation != null) textures.remove(textureLocation.toString());
     }
-
 }

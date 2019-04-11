@@ -21,7 +21,6 @@ import me.semx11.autotip.gson.adapter.impl.SessionKeyAdapter;
 import org.apache.commons.io.IOUtils;
 
 public class RequestHandler {
-
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Locale.class, new LocaleAdapter())
             .registerTypeAdapter(Pattern.class, new PatternAdapter())
@@ -29,7 +28,6 @@ public class RequestHandler {
             .create();
 
     private static Autotip autotip;
-
     public static void setAutotip(Autotip autotip) {
         RequestHandler.autotip = autotip;
     }
@@ -57,5 +55,4 @@ public class RequestHandler {
             return Optional.empty();
         }
     }
-
 }

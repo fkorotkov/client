@@ -7,7 +7,6 @@ import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.SoundManager;
 import org.lwjgl.opengl.Display;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.util.concurrent.locks.ReentrantLock;
 
 public class HyperiumSoundManager {
@@ -41,13 +40,9 @@ public class HyperiumSoundManager {
     }
 
 
-    public void startPlaySound(CallbackInfo info) {
-//        lock.lock();
-    }
+    public void startPlaySound(CallbackInfo info) {}
 
-    public void endPlaySound(CallbackInfo info) {
-//        lock.unlock();
-    }
+    public void endPlaySound(CallbackInfo info) {}
 
     public void startStopAllSounds(CallbackInfo info) {
         lock.lock();

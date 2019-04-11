@@ -16,7 +16,6 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
 import java.io.File;
 import java.nio.IntBuffer;
 
@@ -27,7 +26,6 @@ public class HyperiumScreenshotHelper {
     public HyperiumScreenshotHelper(ScreenShotHelper parent) {
         this.parent = parent;
     }
-
 
     public static IChatComponent saveScreenshot(File gameDirectory, String screenshotName, int width, int height, Framebuffer buffer, IntBuffer pixelBuffer, int[] pixelValues) {
         final File file1 = new File(Minecraft.getMinecraft().mcDataDir, "screenshots");
