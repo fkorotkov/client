@@ -23,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 
 public final class HypixelWinEvent extends Event {
     @NotNull
-    private final List winners
+    private final List winners;
 
     public HypixelWinEvent(@NotNull List winners) {
         Preconditions.checkNotNull(winners, "winners");
