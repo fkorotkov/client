@@ -1,9 +1,5 @@
 package cc.hyperium.mods.chunkanimator;
 
-/*
- * Ported by Cubxity on 12/1/2018
- */
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.chunk.RenderChunk;
@@ -25,9 +21,7 @@ public class AnimationHandler {
             zeroedPlayerPosition = zeroedPlayerPosition.add(0, -zeroedPlayerPosition.getY(), 0);
             BlockPos zeroedCenteredChunkPos = bp.add(8, -bp.getY(), 8);
 
-            if (ChunkAnimatorConfig.disableAroundPlayer) {
-                flag = zeroedPlayerPosition.distanceSq(zeroedCenteredChunkPos) > (64 * 64);
-            }
+            if (ChunkAnimatorConfig.disableAroundPlayer) flag = zeroedPlayerPosition.distanceSq(zeroedCenteredChunkPos) > (64 * 64);
 
             if (flag) {
                 EnumFacing chunkFacing = null;
