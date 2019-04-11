@@ -1,5 +1,5 @@
 task:
-  auto_cancellation: $CIRRUS_PR == ''
+  auto_cancellation: $CIRRUS_PR != ''
   container:
     image: gradle:jdk8
     cpu: 4
