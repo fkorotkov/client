@@ -1,7 +1,6 @@
 package cc.hyperium.event;
 
 import java.util.UUID;
-
 import com.google.common.base.Preconditions;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
