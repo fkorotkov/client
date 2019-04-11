@@ -9,14 +9,10 @@ import cc.hyperium.mods.victoryroyale.VictoryRoyale;
 import cc.hyperium.utils.ChatColor;
 import net.minecraft.client.Minecraft;
 
-/**
- * Main listener for AutoGG
- */
 public class AutoGGListener {
     private final Minecraft mc = Minecraft.getMinecraft();
     private final AutoGG mod;
     boolean invoked = false;
-
 
     public AutoGGListener(AutoGG mod) {
         this.mod = mod;
@@ -54,8 +50,8 @@ public class AutoGGListener {
 
                     // We are referring to it from a different thread, thus we need to do this
                     Hyperium.INSTANCE.getModIntegration().getAutoGG().setRunning(false);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             });
         }
