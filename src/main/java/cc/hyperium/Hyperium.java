@@ -53,7 +53,6 @@ import cc.hyperium.purchases.PurchaseApi;
 import cc.hyperium.utils.HyperiumScheduler;
 import cc.hyperium.utils.LaunchUtil;
 import cc.hyperium.utils.StaffUtils;
-import cc.hyperium.utils.UpdateUtils;
 import cc.hyperium.utils.mods.CompactChat;
 import cc.hyperium.utils.mods.FPSLimiter;
 import net.minecraft.client.Minecraft;
