@@ -29,12 +29,6 @@ public class UpdateUtils {
     }
 
     public boolean isAbsoluteLatest() {
-        JsonObject json = apiUtils.getJson();
-        int version = apiUtils.getVersion(json);
-        return version <= Metadata.getVersionID();
-    }
-
-    public int getLatestProperVersion() {
-        return apiUtils.getJson().get(Hyperium.IS_BETA ? "latest_beta" : "latest").getAsJsonObject().get("id").getAsInt();
+        return true;
     }
 }
