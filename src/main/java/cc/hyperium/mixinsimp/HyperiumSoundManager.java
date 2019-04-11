@@ -11,7 +11,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 public class HyperiumSoundManager {
     private ReentrantLock lock = new ReentrantLock();
-
     private SoundManager parent;
 
     public HyperiumSoundManager(SoundManager parent) {
@@ -39,7 +38,6 @@ public class HyperiumSoundManager {
         lock.unlock();
     }
 
-
     public void startPlaySound(CallbackInfo info) {}
 
     public void endPlaySound(CallbackInfo info) {}
@@ -51,5 +49,4 @@ public class HyperiumSoundManager {
     public void endStopAllSounds(CallbackInfo info) {
         lock.unlock();
     }
-
 }
