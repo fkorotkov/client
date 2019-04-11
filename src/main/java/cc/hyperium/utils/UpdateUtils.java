@@ -34,14 +34,6 @@ public class UpdateUtils {
         return version <= Metadata.getVersionID();
     }
 
-    public boolean isBeta() {
-        for (JsonElement element : apiUtils.getJson().get("versions").getAsJsonArray()) {
-            JsonHolder holder = new JsonHolder(element.getAsJsonObject());
-            if (holder.optInt("id") == Metadata.getVersionID()) return holder.optBoolean("beta");
-        }
-        return false;
-    }
-
     public int getLatestProperVersion() {
         return apiUtils.getJson().get(Hyperium.IS_BETA ? "latest_beta" : "latest").getAsJsonObject().get("id").getAsInt();
     }
