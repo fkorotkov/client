@@ -1,11 +1,6 @@
 package cc.hyperium.mods.chunkanimator;
 
-/*
- * Created by Cubxity on 12/1/2018
- */
-
 import cc.hyperium.config.*;
-
 import static cc.hyperium.config.Category.CHUNK_ANIMATOR;
 
 public class ChunkAnimatorConfig {
