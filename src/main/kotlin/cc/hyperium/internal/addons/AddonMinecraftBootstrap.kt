@@ -4,44 +4,24 @@ import cc.hyperium.Hyperium
 import cc.hyperium.internal.addons.misc.AddonLoadException
 import java.util.concurrent.ConcurrentHashMap
 
-/**
- * Instance created on the classloader {@link net.minecraft.launchwrapper.LaunchClassLoader}
- *
- * @since 1.0
- * @author Kevin Brewster
- */
 object AddonMinecraftBootstrap {
-
-
     @JvmStatic
     val LOADED_ADDONS = ArrayList<IAddon>()
         @JvmName("getLoadedAddons") get
     @JvmStatic
     val ADDON_ERRORS = ArrayList<Throwable>()
         @JvmName("getAddonLoadErrors") get
-
     @JvmStatic
     val MISSING_DEPENDENCIES_MAP = ConcurrentHashMap<AddonManifest, ArrayList<String>>()
         @JvmName("getMissingDependenciesMap") get
-
     @JvmStatic
     val DEPENDENCIES_LOOP_MAP = ConcurrentHashMap<AddonManifest, ArrayList<AddonManifest>>()
         @JvmName("getDependenciesLoopMap") get
 
-    /**
-     * The <i>init</i> phase of the bootstrap where the
-     * instances are created and loaded to {@link me.kbrewster.blazeapi.BlazeAPI#LOADED_ADDONS}
-     * and then sets the phase to {@link Phase#DEFAULT}.
-     *
-     * This should be called when <i>Minecraft</i> is starting
-     * In this case we use the start of {@link net.minecraft.client.Minecraft#init}
-     */
     @JvmStatic
     fun init() {
         try {
-            if (AddonBootstrap.phase != AddonBootstrap.Phase.INIT) {
-                throw AddonLoadException("Bootstrap is currently at Phase.${AddonBootstrap.phase} when it should be at Phase.INIT")
-            }
+            if (AddonBootstrap.phase != AddonBootstrap.Phase.INIT) throw AddonLoadException("Bootstrap is currently at Phase.${AddonBootstrap.phase} when it should be at Phase.INIT")
 
             val toLoadMap = AddonBootstrap.addonManifests.map { it.name to it }.toMap().toMutableMap()
             val iterator = toLoadMap.iterator()
@@ -159,7 +139,7 @@ object AddonMinecraftBootstrap {
                 toLoad.remove(addon)
             }
 
-            val loaded = ArrayList<IAddon>() // sorry Kevin but I want to put all errors in an arraylist
+            val loaded = ArrayList<IAddon>()
             for (addon in toLoad) {
                 try {
                     val o = Class.forName(addon.mainClass).newInstance()
@@ -173,12 +153,9 @@ object AddonMinecraftBootstrap {
                     ADDON_ERRORS.add(e)
                 }
             }
-
             LOADED_ADDONS.addAll(loaded)
             LOADED_ADDONS.forEach(IAddon::onLoad)
             AddonBootstrap.phase = AddonBootstrap.Phase.DEFAULT
-        } catch (e: Exception) {
-        }
+        } catch (ignored: Exception) {}
     }
-
 }
