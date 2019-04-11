@@ -1,14 +1,12 @@
 package club.sk1er.website.utils;
 
 import com.google.gson.JsonObject;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
 public class WebsiteUtils {
-
     public static final List<String> blitz_kits = new ArrayList<>();
     public static final TreeMap<Integer, String> numerals = new TreeMap<>();
 
@@ -54,14 +52,12 @@ public class WebsiteUtils {
         blitz_kits.add("Wolftamer");
         blitz_kits.add("Hype Train");
         blitz_kits.add("Jockey");
-
     }
 
     public static String numeral(int amount) {
         try {
             int l = numerals.floorKey(amount);
-            if (l == amount)
-                return numerals.get(l);
+            if (l == amount) return numerals.get(l);
             return numerals.get(l) + numeral(amount - l);
         } catch (Exception e) {
             return "-";
@@ -74,18 +70,11 @@ public class WebsiteUtils {
     }
 
     public static String buildRatio(int a, int b) {
-
         double c = (double) a;
         double d = (double) b;
-        if (a + b == 0) {
-            return "0";
-        }
-        if (b == 0) {
-            return Character.toString('\u221e');
-        }
-        if (a == 0) {
-            return "0";
-        }
+        if (a + b == 0) return "0";
+        if (b == 0) return Character.toString('\u221e');
+        if (a == 0) return "0";
         double e = c / d;
         DecimalFormat df = new DecimalFormat("#.###");
         return df.format(e);
@@ -150,9 +139,7 @@ public class WebsiteUtils {
                 }
             } else {
                 return tmp.has(path) ? tmp.get(path).getAsLong() : 0;
-
             }
-
             return 0;
         } catch (Exception e) {
             return 0;
@@ -169,7 +156,6 @@ public class WebsiteUtils {
                 "        handler.write(strongBr(\"Final Kill / Normal deaths: \", getUtils().buildRatio(bedwars.optInt(\"final_kills_bedwars\"), bedwars.optInt(\"deaths_bedwars\"))));\n";
         for (String s : in.split("\n")) {
             s = s.replace("handler.write(", "items.add(new DisplayLine(").replace(";", ");").replace("strongBr", "bold").replace("<br>", "");
-            System.out.println(s);
         }
     }
 
@@ -186,9 +172,7 @@ public class WebsiteUtils {
         } else if (exp < 9000) {
             return 4;
         }
-
         exp -= 9000;
         return exp / 5000 + 4;
     }
-
 }
