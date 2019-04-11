@@ -1,10 +1,6 @@
 package cc.hyperium.event;
 
-/**
- * Invoked once a mouse button is pressed
- */
 public class MouseButtonEvent extends Event {
-
     private final int value;
     private final boolean state;
 
