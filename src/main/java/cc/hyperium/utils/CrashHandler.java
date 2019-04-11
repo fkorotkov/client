@@ -10,10 +10,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-/*
- * Created by Cubxity on 19/07/2018
- */
-@SuppressWarnings("unused")
 public class CrashHandler {
     // DON'T TOUCH THIS
     public static void handle(Exception ex) {

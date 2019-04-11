@@ -69,7 +69,6 @@ public class SplashProgress {
 
         if (splash == null) splash = new ResourceLocation("textures/hyperium-splash.png");
         tm.bindTexture(splash);
-
         GlStateManager.resetColor();
         GlStateModifier.INSTANCE.reset();
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
@@ -87,7 +86,6 @@ public class SplashProgress {
         if (sfr == null) sfr = new HyperiumFontRenderer("Arial", Font.PLAIN, 20);
 
         ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
-
         double nProgress = (double) PROGRESS;
         double calc = (nProgress / MAX) * sr.getScaledWidth();
 

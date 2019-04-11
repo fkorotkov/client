@@ -279,9 +279,6 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandKeybinds());
     }
 
-    /**
-     * Called when Hyperium shuts down
-     */
     private void shutdown() {
         CONFIG.save();
         richPresenceManager.shutdown();
@@ -370,15 +367,10 @@ public class Hyperium {
     }
 
     public void copyNatives(String nativePath, File newFolder) {
-        if (!newFolder.exists()) {
-            newFolder.mkdir();
-        }
+        if (!newFolder.exists()) newFolder.mkdir();
 
         File tempNatives = new File(nativePath);
-        if (!tempNatives.exists()) {
-            System.out.println("[Error] Natives are missing.");
-        } else {
-            System.out.println("[Hyperium] Copying natives to hyperium directory.");
+        if (tempNatives.exists()) {
             try {
                 for (File fileEntry : tempNatives.listFiles()) {
                     Files.copy(fileEntry.toPath(), Paths.get(newFolder.getPath() + File.separator + fileEntry.getName()), StandardCopyOption.REPLACE_EXISTING);

@@ -7,13 +7,11 @@ import cc.hyperium.purchases.EnumPurchaseType;
 import cc.hyperium.purchases.HyperiumPurchase;
 import cc.hyperium.purchases.PurchaseApi;
 import cc.hyperium.purchases.packages.EarsCosmetic;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
 import javax.imageio.ImageIO;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +21,6 @@ import org.lwjgl.input.Cursor;
 import org.lwjgl.input.Mouse;
 
 public class Utils {
-
     public static final Utils INSTANCE = new Utils();
 
     public ByteBuffer readImageToBuffer(InputStream inputStream) throws IOException {
@@ -63,9 +60,6 @@ public class Utils {
 
     }
 
-    /*
-     * @return the entity name offset
-     * */
     public <T extends Entity> float calculateDeadmauEarsOffset(T entity) {
         try {
             if (entity instanceof EntityPlayer && Hyperium.INSTANCE.getCosmetics().getDeadmau5Cosmetic().isPurchasedBy(entity.getUniqueID())) {
@@ -88,5 +82,4 @@ public class Utils {
         }
         return 0F;
     }
-
 }
