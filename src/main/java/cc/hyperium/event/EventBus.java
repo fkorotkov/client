@@ -43,12 +43,8 @@ public class EventBus {
             for (Method method : clazz.getDeclaredMethods()) {
                 // all the information and error checking before the method is added such
                 // as if it even is an event before the element even touches the HashMap
-                if (method.getAnnotation(InvokeEvent.class) == null) {
-                    continue;
-                }
-                if (method.getParameters()[0] == null) {
-                    throw new IllegalArgumentException("Couldn't find parameter inside of " + method.getName() + "!");
-                }
+                if (method.getAnnotation(InvokeEvent.class) == null) continue;
+                if (method.getParameters()[0] == null) throw new IllegalArgumentException("Couldn't find parameter inside of " + method.getName() + "!");
 
                 Class<?> event = method.getParameters()[0].getType();
                 Priority priority = method.getAnnotation(InvokeEvent.class).priority();
@@ -86,10 +82,9 @@ public class EventBus {
         if (event instanceof RenderTickEvent)
             ALLOW_PROFILE = false;
         /*
-            DO NOT, I REPEAT, DO NOT SIMPLIFY ANY OF THE PROFILER CALLS USING
+            DO NOT, SIMPLIFY ANY OF THE PROFILER CALLS USING
             Profiler mcProfiler = Minecraft.getMinecraft().mcProfiler;
             OR REMOVE THE ALLOW PROFILING FIELD.
-
             DOING SO WILL CAUSE THE PROFILER CLASS TO BE LOADED BEFORE OPTIFINE PATCHES THE CLASS.
             THIS WILL CAUSE THE ARM IN WALL BUG AND BREAKING OF FAST RENDER.
          */
