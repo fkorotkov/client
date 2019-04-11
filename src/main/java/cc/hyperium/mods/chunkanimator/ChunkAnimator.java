@@ -3,12 +3,7 @@ package cc.hyperium.mods.chunkanimator;
 import cc.hyperium.Hyperium;
 import cc.hyperium.mods.AbstractMod;
 
-/*
- * Created by Cubxity on 12/1/2018
- */
-
 public class ChunkAnimator extends AbstractMod {
-
     private final Metadata meta;
     private final AnimationHandler animationHandler = new AnimationHandler();
     private final ChunkAnimatorConfig config;
