@@ -18,14 +18,11 @@
 package cc.hyperium.event;
 
 import com.google.common.base.Preconditions;
-
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-
+import net.minecraft.entity.player.
 import org.jetbrains.annotations.NotNull;
 
-public final class ItemTossEvent extends Event {
-
+public final class ItemTossEvent extends Event 
     @NotNull
     private final EntityPlayer player;
 
@@ -35,7 +32,6 @@ public final class ItemTossEvent extends Event {
     public ItemTossEvent(@NotNull EntityPlayer player, @NotNull EntityItem item) {
         Preconditions.checkNotNull(player, "player");
         Preconditions.checkNotNull(item, "item");
-
         this.player = player;
         this.item = item;
     }
