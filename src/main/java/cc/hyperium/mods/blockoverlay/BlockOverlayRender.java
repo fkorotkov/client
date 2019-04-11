@@ -2,9 +2,7 @@ package cc.hyperium.mods.blockoverlay;
 
 import cc.hyperium.event.DrawBlockHighlightEvent;
 import cc.hyperium.event.InvokeEvent;
-
 import java.awt.Color;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderGlobal;
@@ -25,13 +23,9 @@ public class BlockOverlayRender {
 
     @InvokeEvent
     public void onRenderBlockOverlay(DrawBlockHighlightEvent event) {
-        if (BlockOverlay.mc.thePlayer == null || BlockOverlay.mc.theWorld == null || this.mod.getSettings().getOverlayMode() == BlockOverlayMode.DEFAULT) {
-            return;
-        }
+        if (BlockOverlay.mc.thePlayer == null || BlockOverlay.mc.theWorld == null || this.mod.getSettings().getOverlayMode() == BlockOverlayMode.DEFAULT) return;
         event.setCancelled(true);
-        if (this.mod.getSettings().getOverlayMode() == BlockOverlayMode.NONE) {
-            return;
-        }
+        if (this.mod.getSettings().getOverlayMode() == BlockOverlayMode.NONE) return;
 
         this.drawOverlay(event.getPartialTicks());
         GL11.glLineWidth(1.0F);
@@ -54,9 +48,7 @@ public class BlockOverlayRender {
         GlStateManager.pushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
-        if (lineWidth != 0.0f) {
-            GL11.glLineWidth(this.mod.getSettings().getLineWidth());
-        }
+        if (lineWidth != 0.0f) GL11.glLineWidth(this.mod.getSettings().getLineWidth());
         GlStateManager.disableTexture2D();
         GlStateManager.depthMask(false);
         AxisAlignedBB box = block.getSelectedBoundingBox(BlockOverlay.mc.theWorld, position.getBlockPos()).expand(0.0020000000949949026D, 0.0020000000949949026D, 0.0020000000949949026D).offset(-BlockOverlay.mc.getRenderManager().viewerPosX, -BlockOverlay.mc.getRenderManager().viewerPosY, -BlockOverlay.mc.getRenderManager().viewerPosZ);
@@ -69,10 +61,7 @@ public class BlockOverlayRender {
             } else {
                 GL11.glColor4f(this.mod.getSettings().getOverlayRed(), this.mod.getSettings().getOverlayGreen(), this.mod.getSettings().getOverlayBlue(), this.mod.getSettings().getOverlayAlpha());
             }
-            if (lineWidth != 0.0f) {
-                RenderGlobal.drawSelectionBoundingBox(box);
-            }
-
+            if (lineWidth != 0.0f) RenderGlobal.drawSelectionBoundingBox(box);
         } else if (this.mod.getSettings().isChroma()) {
             float time = System.currentTimeMillis() % (10000L / this.mod.getSettings().getChromaSpeed()) / (10000.0f / this.mod.getSettings().getChromaSpeed());
             Color color = Color.getHSBColor(time, 1.0f, 1.0f);
@@ -90,7 +79,6 @@ public class BlockOverlayRender {
             GL11.glColor4f(this.mod.getSettings().getOverlayRed(), this.mod.getSettings().getOverlayGreen(), this.mod.getSettings().getOverlayBlue(), this.mod.getSettings().getOverlayAlpha());
             this.drawFilledBoundingBox(box);
         }
-
         GlStateManager.depthMask(true);
         GlStateManager.enableTexture2D();
         GlStateManager.disableBlend();
