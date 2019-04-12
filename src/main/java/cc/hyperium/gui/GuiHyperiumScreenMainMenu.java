@@ -344,8 +344,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
                 break;
         }
 
-        if (button.id == 17)
-            Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(new ChangeBackgroundGui(this));
         if (button.id == 100) {
             HyperiumMainGui.INSTANCE.setTab(2);
             Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(HyperiumMainGui.INSTANCE);
@@ -382,7 +380,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
 
     @Override
     public void drawHyperiumStyleScreen(int mouseX, int mouseY, float partialTicks) {
-
         GlStateManager.pushMatrix();
 
         super.drawHyperiumStyleScreen(mouseX, mouseY, partialTicks);
@@ -401,13 +398,5 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
         drawScaledCustomSizeModalRect(this.width / 2 + getIntendedWidth(195), this.height / 2 - getIntendedHeight(45), 0, 0, 192, 192, getIntendedWidth(90), getIntendedHeight(90), 192, 192);
 
         GlStateManager.popMatrix();
-
-    }
-
-    @Override
-    protected void keyTyped(char typedChar, int keyCode) throws IOException {
-        if (keyCode == Keyboard.KEY_B) {
-            Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(new ChangeBackgroundGui(this));
-        }
     }
 }
