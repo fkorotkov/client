@@ -207,7 +207,7 @@ public class HyperiumMinecraft {
         if (event.isCancelled()) return;
 
         guiScreenIn = event.getGui();
-        if (old != null && guiScreenIn != old) old.onGuiClosed();
+        if (old != null && !guiScreenIn.equals(old)) old.onGuiClosed();
         if (old != null) EventBus.INSTANCE.unregister(old);
 
         if (guiScreenIn instanceof GuiHyperiumScreenMainMenu) {
