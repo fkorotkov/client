@@ -34,14 +34,12 @@ import cc.hyperium.handlers.handlers.keybinds.keybinds.NamesKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.RearCamKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.TPoseKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.TogglePerspectiveKeybind;
-import cc.hyperium.handlers.handlers.keybinds.keybinds.ToggleSpotifyKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.ToggleSprintKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.TwerkDanceKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.UploadScreenshotKeybind;
 import cc.hyperium.handlers.handlers.keybinds.keybinds.ViewStatsKeybind;
 import net.minecraft.client.Minecraft;
 import org.lwjgl.input.Keyboard;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,7 +71,6 @@ public class KeyBindHandler {
         registerKeyBinding(new FlipKeybind());
         registerKeyBinding(new ViewStatsKeybind());
         registerKeyBinding(new FlossKeybind());
-        registerKeyBinding(new ToggleSpotifyKeybind());
         registerKeyBinding(toggleSprintKeybind = new ToggleSprintKeybind());
         registerKeyBinding(new TogglePerspectiveKeybind());
         registerKeyBinding(new FortniteDefaultDanceKeybind());
