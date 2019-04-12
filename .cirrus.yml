@@ -5,7 +5,6 @@ task:
     cpu: 4
     memory: 12G
   setup_workspace_script: |
-    chmod +x ./gradlew
     rm -rf $CIRRUS_WORKING_DIR/src/main/resources/build.txt
     echo $CIRRUS_BUILD_ID > $CIRRUS_WORKING_DIR/src/main/resources/build.txt
   gradle_cache:
