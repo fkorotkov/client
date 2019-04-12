@@ -112,7 +112,6 @@ public class PlayerStatsGui extends HyperiumGui {
                         e.printStackTrace();
                     }
             });
-
         }
     }
 
@@ -125,8 +124,7 @@ public class PlayerStatsGui extends HyperiumGui {
                 flag = true;
         }
         boolean flag2 = focused == null;
-        if (!flag && flag2)
-            focused = null;
+        if (!flag && flag2) focused = null;
 
         ScaledResolution current = ResolutionUtil.current();
         if (focused != null && new GuiBlock((current.getScaledWidth() / 2 - 22 - 64), (current.getScaledWidth() / 2 - 22), 73, 73 + 64).isMouseOver(mouseX, mouseY)) {
