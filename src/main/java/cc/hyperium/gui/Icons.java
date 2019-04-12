@@ -3,11 +3,7 @@ package cc.hyperium.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-/*
- * Created by Cubxity on 01/06/2018
- */
 public enum Icons {
-
     SETTINGS(new ResourceLocation("textures/material/settings.png")),
     EXTENSION(new ResourceLocation("textures/material/extension.png")),
     ERROR(new ResourceLocation("textures/material/error.png")),

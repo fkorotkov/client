@@ -19,7 +19,6 @@ package cc.hyperium.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
-
 import java.awt.Color;
 
 public class HyperiumSlider extends GuiButton {
@@ -35,7 +34,6 @@ public class HyperiumSlider extends GuiButton {
         this.y = y;
         this.width = width;
         this.height = height;
-
     }
 
     public double getValue() {

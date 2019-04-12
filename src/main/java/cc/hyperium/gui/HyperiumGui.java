@@ -78,18 +78,6 @@ public abstract class HyperiumGui extends GuiScreen {
         }
     }
 
-    /**
-     * Trim a string to a specified width with the specified font renderer
-     *
-     * @param str            String to trim
-     * @param width          width to trim to
-     * @param font           Font renderer to get width from, if null then default font renderer is used
-     * @param appendEllipsis Whether "..." should be appended to the end of the string before returning
-     * @return Trimmed string
-     * @throws IllegalArgumentException If <code>width</code> is less than or equal to 0
-     * @throws IllegalArgumentException if <code>str</code> is null or has a length less than or equal to 0
-     * @throws IllegalStateException    <code>font</code> is null and default couldn't be used
-     */
     public static String trimString(String str, int width, FontRenderer font, boolean appendEllipsis) {
         if (width <= 0) {
             throw new IllegalArgumentException("String width cannot be less than or equal to 0.");
@@ -128,29 +116,17 @@ public abstract class HyperiumGui extends GuiScreen {
         }
     }
 
-    /**
-     * Draws an animated rainbow box in the specified range
-     *
-     * @param left   the x1 position
-     * @param top    the y1 position
-     * @param right  the x2 position
-     * @param bottom the y2 position
-     * @param alpha  the alpha the box should be drawn at
-     * @author boomboompower
-     */
     public static void drawChromaBox(int left, int top, int right, int bottom, float alpha) {
         if (left < right) {
             int i = left;
             left = right;
             right = i;
         }
-
         if (top < bottom) {
             int j = top;
             top = bottom;
             bottom = j;
         }
-
         int startColor = Color.HSBtoRGB(System.currentTimeMillis() % 5000L / 5000.0f, 0.8f, 0.8f);
         int endColor = Color.HSBtoRGB((System.currentTimeMillis() + 500) % 5000L / 5000.0f, 0.8f, 0.8f);
         float f1 = (float) (startColor >> 16 & 255) / 255.0F;
