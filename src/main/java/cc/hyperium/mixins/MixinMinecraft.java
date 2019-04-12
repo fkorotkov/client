@@ -24,7 +24,6 @@ import cc.hyperium.event.EventBus;
 import cc.hyperium.event.RenderTickEvent;
 import cc.hyperium.event.WorldLoadEvent;
 import cc.hyperium.mixinsimp.HyperiumMinecraft;
-import com.chattriggers.ctjs.minecraft.objects.message.TextComponent;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.FontRenderer;
@@ -178,22 +177,6 @@ public abstract class MixinMinecraft {
     @Inject(method = "dispatchKeypresses", at = @At(value = "INVOKE_ASSIGN", target = "Lorg/lwjgl/input/Keyboard;getEventKeyState()Z"))
     private void runTickKeyboard(CallbackInfo ci) {
         hyperiumMinecraft.runTickKeyboard(ci);
-    }
-
-    @Inject(
-        method = "dispatchKeypresses",
-        at = @At(
-            value = "INVOKE",
-            shift = At.Shift.BEFORE,
-            target = "Lnet/minecraft/client/gui/GuiNewChat;printChatMessage(Lnet/minecraft/util/IChatComponent;)V",
-            ordinal = 1
-        ),
-        cancellable = true
-    )
-    private void dispatchKeypresses(CallbackInfo ci) {
-        IChatComponent chatComponent = ScreenShotHelper.saveScreenshot(this.mcDataDir, this.displayWidth, this.displayHeight, this.framebufferMc);
-        if (chatComponent != null) new TextComponent(chatComponent).chat();
-        ci.cancel();
     }
 
     /**

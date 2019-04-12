@@ -19,7 +19,6 @@ package cc.hyperium.mixins.gui;
 
 import cc.hyperium.Hyperium;
 import cc.hyperium.mixinsimp.gui.HyperiumGuiScreen;
-import com.chattriggers.ctjs.triggers.TriggerType;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -32,7 +31,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import java.io.IOException;
 
 @Mixin(GuiScreen.class)
@@ -94,15 +92,6 @@ public abstract class MixinGuiScreen {
     private void actionPerformed(GuiButton button, CallbackInfo info) {
         if (hyperiumGuiScreen.actionPerformed(button))
             info.cancel();
-    }
-
-    @Inject(
-        method = "sendChatMessage(Ljava/lang/String;Z)V",
-        at = @At("HEAD"),
-        cancellable = true
-    )
-    private void onSendChatMessage(String msg, boolean addToChat, CallbackInfo ci) {
-        TriggerType.MESSAGE_SENT.triggerAll(ci, msg);
     }
 
     @Inject(

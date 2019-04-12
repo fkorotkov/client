@@ -27,7 +27,6 @@ import cc.hyperium.mixins.IMixinMinecraft;
 import cc.hyperium.utils.AddonWorkspaceResourcePack;
 import cc.hyperium.utils.Utils;
 import cc.hyperium.utils.mods.FPSLimiter;
-import com.chattriggers.ctjs.CTJS;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.GuiGameOver;
@@ -77,7 +76,6 @@ public class HyperiumMinecraft {
             defaultResourcePacks.add(file == null ? new AddonWorkspaceResourcePack() : new FileResourcePack(file));
         }
         AddonMinecraftBootstrap.init();
-        if(!Settings.FPS) CTJS.loadIntoJVM();
         EventBus.INSTANCE.post(new PreInitializationEvent());
     }
 

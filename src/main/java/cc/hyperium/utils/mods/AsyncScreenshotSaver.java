@@ -17,8 +17,6 @@
 
 package cc.hyperium.utils.mods;
 import cc.hyperium.utils.ChatColor;
-import com.chattriggers.ctjs.triggers.TriggerType;
-import com.chattriggers.ctjs.utils.Cancellable;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.shader.Framebuffer;
@@ -82,13 +80,6 @@ public class AsyncScreenshotSaver implements Runnable {
         processPixelValues(this.pixelValues, this.width, this.height);
         BufferedImage bufferedimage = null;
         final File file2 = getTimestampedPNGFileForDirectory(this.screenshotDir);
-
-        Cancellable cancellable = new Cancellable();
-        TriggerType.SCREENSHOT_TAKEN.triggerAll(file2, cancellable);
-
-        if (cancellable.isCancelled()) {
-            return;
-        }
 
         try {
             if (OpenGlHelper.isFramebufferEnabled()) {
