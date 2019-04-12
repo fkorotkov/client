@@ -127,12 +127,7 @@ public abstract class MixinMinecraft {
     private Framebuffer framebufferMc;
 
     protected MixinMinecraft() {}
-
-    /**
-     * Invoked once the game is launching
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
+    
     @Inject(method = "startGame", at = @At("HEAD"))
     private void preinit(CallbackInfo ci) {
         hyperiumMinecraft.preinit(ci, defaultResourcePacks, mcDefaultResourcePack, defaultResourcePacks);
@@ -143,23 +138,13 @@ public abstract class MixinMinecraft {
         hyperiumMinecraft.loop(info, inGameHasFocus, theWorld, thePlayer, renderManager, timer);
     }
 
-    /**
-     * Invoked once the game has be launched
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
     @Inject(method = "startGame", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
-        //Accessor not needed since its only set once
+        // Accessor not needed since its only set once
         enableGLErrorChecking = Metadata.isDevelopment();
         hyperiumMinecraft.startGame(ci);
     }
 
-    /**
-     * Invoked every tick (50 milliseconds)
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
     @Inject(method = "runTick", at = @At("RETURN"))
     private void runTick(CallbackInfo ci) {
         hyperiumMinecraft.runTick(ci, mcProfiler);
@@ -170,11 +155,6 @@ public abstract class MixinMinecraft {
         hyperiumMinecraft.startTick(info, mcProfiler);
     }
 
-    /**
-     * Invoked once the player has pressed a key
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
     @Inject(method = "dispatchKeypresses", at = @At(value = "INVOKE_ASSIGN", target = "Lorg/lwjgl/input/Keyboard;getEventKeyState()Z"))
     private void runTickKeyboard(CallbackInfo ci) {
         hyperiumMinecraft.runTickKeyboard(ci);
@@ -196,42 +176,21 @@ public abstract class MixinMinecraft {
         ci.cancel();
     }
 
-    /**
-     * Invoked once the player has pressed mouse button 1
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
     @Inject(method = "clickMouse", at = @At("RETURN"))
     private void clickMouse(CallbackInfo ci) {
         hyperiumMinecraft.clickMouse(ci);
     }
 
-    /**
-     * Invoked once the player has pressed mouse button 1
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
     @Inject(method = "rightClickMouse", at = @At("RETURN"))
     private void rightClickMouse(CallbackInfo ci) {
         hyperiumMinecraft.rightClickMouse(ci);
     }
 
-    /**
-     * Invoked once the player has joined a singleplayer world
-     *
-     * @param ci {@see org.spongepowered.asm.mixin.injection.callback.CallbackInfo}
-     */
     @Inject(method = "launchIntegratedServer", at = @At("HEAD"))
     private void launchIntegratedServer(String folderName, String worldName, WorldSettings worldSettingsIn, CallbackInfo ci) {
         hyperiumMinecraft.launchIntegratedServer(folderName, worldName, worldSettingsIn, ci);
     }
 
-    /**
-     * Fixes bug MC-68754 and MC-111254
-     *
-     * @param ci
-     * @author Kevin Brewster
-     */
     @Inject(method = "setInitialDisplayMode", at = @At(value = "HEAD"), cancellable = true)
     private void displayFix(CallbackInfo ci) throws LWJGLException {
         hyperiumMinecraft.displayFix(ci, fullscreen, displayWidth, displayHeight);
@@ -242,19 +201,11 @@ public abstract class MixinMinecraft {
         hyperiumMinecraft.fullScreenFix(ci, fullscreen, displayWidth, displayHeight);
     }
 
-    /**
-     * @author Cubxity
-     * @reason Set Minecraft icon to Hyperium icon
-     */
     @Overwrite
     private void setWindowIcon() {
         hyperiumMinecraft.setWindowIcon();
     }
 
-    /**
-     * @author boomboompower
-     * @reason GuiOpenEvent post
-     */
     @Overwrite
     public void displayGuiScreen(GuiScreen guiScreenIn) {
         hyperiumMinecraft.displayGuiScreen(guiScreenIn, currentScreen, theWorld, thePlayer, gameSettings, ingameGUI);
@@ -274,15 +225,10 @@ public abstract class MixinMinecraft {
     @Shadow
     public EffectRenderer effectRenderer;
 
-    /**
-     * @author Cubxity
-     * @reason Change splash screen
-     */
     @Overwrite
     private void drawSplashScreen(TextureManager tm) {
         SplashProgress.drawSplash(tm);
     }
-
 
     @Inject(method = "startGame", at = @At("HEAD"))
     private void onStartGame(CallbackInfo ci) {
@@ -323,14 +269,10 @@ public abstract class MixinMinecraft {
         hyperiumMinecraft.runTickMouseButton(ci);
     }
 
-    /**
-     * @author Mojang & Cubxity
-     */
     @Overwrite
     public void displayCrashReport(CrashReport crashReportIn) {
         hyperiumMinecraft.displayCrashReport(crashReportIn);
     }
-
 
     @Inject(method = "shutdown", at = @At("HEAD"))
     private void shutdown(CallbackInfo ci) {
