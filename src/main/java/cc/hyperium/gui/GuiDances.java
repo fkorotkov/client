@@ -18,14 +18,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.util.MathHelper;
 import org.lwjgl.opengl.GL11;
-
 import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Consumer;
 
 public class GuiDances extends HyperiumGui {
-
     String foc = null;
     private HashMap<String, Consumer<Boolean>> handlers = new HashMap<>();
     private HashMap<String, Runnable> cancel = new HashMap<>();
@@ -49,7 +47,6 @@ public class GuiDances extends HyperiumGui {
                         e.printStackTrace();
                     }
                     client.write(ServerCrossDataPacket.build(new JsonHolder().put("type", "floss_update").put("flossing", false)));
-
                 });
             }
         });
@@ -60,9 +57,7 @@ public class GuiDances extends HyperiumGui {
                 client.write(ServerCrossDataPacket.build(new JsonHolder().put("type", "yeet").put("yeeting", true)));
             }
         });
-        this.cancel.put("Yeet", () -> {
-
-        });
+        this.cancel.put("Yeet", () -> {});
         this.cancel.put("Floss", () -> {
             AbstractAnimationHandler abstractAnimationHandler = Hyperium.INSTANCE.getHandlers().getFlossDanceHandler();
             abstractAnimationHandler.get(Minecraft.getMinecraft().thePlayer.getUniqueID()).stopAnimation();
@@ -80,7 +75,6 @@ public class GuiDances extends HyperiumGui {
                         e.printStackTrace();
                     }
                     client.write(ServerCrossDataPacket.build(new JsonHolder().put("type", "dab_update").put("dabbing", false)));
-
                 });
             }
         });
@@ -107,15 +101,11 @@ public class GuiDances extends HyperiumGui {
 
             Hyperium.INSTANCE.getHandlers().getFortniteDefaultDance().getStates().put(UUIDUtil.getClientUUID(), System.currentTimeMillis());
             NettyClient client = NettyClient.getClient();
-            if (client != null && netty)
-                client.write(ServerCrossDataPacket.build(new JsonHolder().put("type", "fortnite_default_dance")));
+            if (client != null && netty) client.write(ServerCrossDataPacket.build(new JsonHolder().put("type", "fortnite_default_dance")));
         });
         this.cancel.put("Fortnite Default Dance", () -> {
             AbstractAnimationHandler abstractAnimationHandler = Hyperium.INSTANCE.getHandlers().getFortniteDefaultDance();
             abstractAnimationHandler.get(Minecraft.getMinecraft().thePlayer.getUniqueID()).stopAnimation();
-
-//            Hyperium.INSTANCE.getHandlers().getFortniteDefaultDance().getStates().put(UUIDUtil.getClientUUID(), System.currentTimeMillis() * 2);
-
         });
 
         this.handlers.put("T-Pose", (netty) -> {
@@ -159,23 +149,17 @@ public class GuiDances extends HyperiumGui {
                         client.write(ServerCrossDataPacket.build(new JsonHolder().put("type", "flip_update").put("flip_state", 0)));
                     }
                     Hyperium.INSTANCE.getHandlers().getFlipHandler().state(UUIDUtil.getClientUUID(), 0);
-
-
                 });
                 Hyperium.INSTANCE.getHandlers().getFlipHandler().resetTick();
             });
             this.cancel.put("Flip", () -> {
                 Hyperium.INSTANCE.getHandlers().getFlipHandler().state(UUIDUtil.getClientUUID(), 0);
-
             });
         }
-
     }
 
     @Override
-    protected void pack() {
-
-    }
+    protected void pack() {}
 
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
@@ -184,7 +168,6 @@ public class GuiDances extends HyperiumGui {
             mc.displayGuiScreen(null);
             handlers.get(foc).accept(true);
         }
-
     }
 
     @Override
@@ -211,7 +194,6 @@ public class GuiDances extends HyperiumGui {
             float startTheta = (float) (i / (float) count * Math.PI * 2);
             float endTheta = (float) ((i + 1) / (float) count * Math.PI * 2);
             float diff = endTheta - startTheta;
-
             int mouseDeltaX = mouseX - centerX;
             int mouseDeltaY = mouseY - centerY;
             double sqrt = Math.sqrt(Math.pow(mouseDeltaX, 2) + Math.pow(mouseDeltaY, 2));
@@ -270,11 +252,9 @@ public class GuiDances extends HyperiumGui {
         GlStateManager.translate(current.getScaledWidth() / 2, current.getScaledHeight() / 2, 5);
         RenderHelper.enableStandardItemLighting();
         GlStateManager.enableAlpha();
-
         GlStateManager.shadeModel(7424);
         GlStateManager.enableAlpha();
         GlStateManager.enableDepth();
-
         GlStateManager.translate(0, 50, 0);
 
         float v = 3000F;

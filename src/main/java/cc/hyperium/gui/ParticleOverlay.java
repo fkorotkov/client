@@ -181,7 +181,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.inventory.GuiInventory;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -257,7 +256,6 @@ public class ParticleOverlay {
                         float x2 = ((float) ResolutionUtil.current().getScaledWidth_double()) * particle1.x;
                         float y2 = ((float) ResolutionUtil.current().getScaledHeight_double()) * particle1.y;
                         double alpha = 100 + ((0.02 / 155) * v);
-//
                         boolean flag = false;
                         if (((v1 >= guiLeft && v1 <= guiRight) || (x2 >= guiLeft && x2 <= guiRight))
                             && ((v2 >= guiTop && v2 <= guiBottom) || (y2 >= guiTop && y2 <= guiBottom))) {
@@ -266,7 +264,6 @@ public class ParticleOverlay {
                             alpha /= 4;
                             flag = true;
                         }
-
 
                         int color = Color.HSBtoRGB(h, 0.8F, 0.8F);
                         Color eee = new Color(color);
@@ -290,15 +287,12 @@ public class ParticleOverlay {
                     }
                 }
 
-
                 if (h >= 1.0F)
                     h = 0.0F;
                 h += step;
-                if (!Settings.PARTICLES_INV)
-                    continue;
+                if (!Settings.PARTICLES_INV) continue;
                 w = Math.sqrt(w) / 10D;
                 Gui.drawRect((int) v1, (int) v2, (int) (v1 + w), (int) (v2 + w), Color.WHITE.getRGB());
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -307,13 +301,11 @@ public class ParticleOverlay {
 
     @InvokeEvent
     public void tick(TickEvent event) {
-        if (!purchased())
-            return;
+        if (!purchased()) return;
         if (System.currentTimeMillis() - last < 1000)
             for (Particle particle : particles) {
                 particle.update();
             }
-
     }
 
     public Mode getMode() {
@@ -361,7 +353,6 @@ public class ParticleOverlay {
                 y = y - 1.0F;
             if (y < 0)
                 y = 1.0F - y;
-
         }
 
         public double distSqTo(Particle other) {

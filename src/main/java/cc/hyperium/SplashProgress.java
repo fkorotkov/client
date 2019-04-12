@@ -26,8 +26,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.ResourceLocation;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
 public class SplashProgress {
     public static final int DEFAULT_MAX = 13;

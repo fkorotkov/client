@@ -9,12 +9,10 @@ import com.google.gson.JsonElement;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-
 import java.awt.Color;
 import java.text.DecimalFormat;
 
 public class ViewCosmeticsGui extends HyperiumGui {
-
     private int cooldownTicks = 0;
     private DecimalFormat formatter = new DecimalFormat("#,###");
 
@@ -37,7 +35,6 @@ public class ViewCosmeticsGui extends HyperiumGui {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-
         super.drawScreen(mouseX, mouseY, partialTicks);
 
         if (PurchaseApi.getInstance() == null || PurchaseApi.getInstance().getSelf() == null || PurchaseApi.getInstance().getSelf().getResponse() == null) {
@@ -72,7 +69,5 @@ public class ViewCosmeticsGui extends HyperiumGui {
             fontRendererObj.drawString(tmp, width / 2 - fontRendererObj.getStringWidth(tmp) / 2, 135 + 10 * i, Color.RED.getRGB(), true);
             i++;
         }
-
     }
-
 }
