@@ -11,7 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import rocks.rdil.Jailbreak;
+import rocks.rdil.jailbreak.Jailbreak;
 
 public class CommandLogs implements BaseCommand {
     @Override
