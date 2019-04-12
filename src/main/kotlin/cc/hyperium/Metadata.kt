@@ -25,11 +25,11 @@ val MODID
 
 val VERSION
     @JvmName("getVersion")
-    get() = "2.0"
+    get() = "2.0.1"
 
 val AUTHORS
     @JvmName("getAuthors")
-    get() = arrayOf("Kevin", "CoalOres", "Sk1er", "Cubxity", "boomboompower", "RDIL")
+    get() = arrayOf("Kevin", "CoalOres", "Sk1er", "Cubxity", "boomboompower", "jumbo/RDIL")
 
 val VERSION_ID
     @JvmName("getVersionID")
