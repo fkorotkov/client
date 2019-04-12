@@ -28,7 +28,7 @@ public class StaffUtils {
             UUID uuid = UUID.fromString(item.get("uuid").getAsString());
             String colourStr = item.get("color").getAsString().toUpperCase();
             DotColour colour;
-            if (colourStr.equals("CHROMA")) {
+            if ("CHROMA".equals(colourStr)) {
                 colour = new DotColour(true, ChatColor.WHITE);
             } else {
                 colour = new DotColour(false, ChatColor.valueOf(colourStr));
