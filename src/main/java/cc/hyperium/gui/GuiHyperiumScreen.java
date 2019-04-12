@@ -143,7 +143,7 @@ public class GuiHyperiumScreen extends GuiScreen {
         GlStateManager.pushMatrix();
         swing++;
 
-        if (mc.theWorld == null && !Settings.BACKGROUND.equals("DEFAULT")) {
+        if (mc.theWorld == null && !"DEFAULT".equals(Settings.BACKGROUND)) {
             GlStateManager.disableAlpha();
             ScaledResolution sr = new ScaledResolution(mc);
             this.renderHyperiumBackground(sr);
