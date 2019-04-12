@@ -42,6 +42,6 @@ public class CommandLogs implements BaseCommand {
         message = new StringBuilder(message.toString().replaceAll(System.getProperty("user.name"), "{USERNAME}"));
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(message.toString()), null);
         GeneralChatHandler.instance().sendMessage("Data copied to clipboard. Please paste in hastebin.com (This has been opened), save and send in Discord");
-        Jailbreak.getBrowseUtil().Browse("https://hastebin.com");
+        Jailbreak.getBrowseUtil().BrowseURI("https://hastebin.com");
     }
 }
