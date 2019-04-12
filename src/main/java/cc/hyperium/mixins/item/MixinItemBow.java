@@ -18,14 +18,9 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(ItemBow.class)
 public abstract class MixinItemBow extends Item {
-
     @Shadow
     public abstract int getMaxItemUseDuration(ItemStack p_getMaxItemUseDuration_1_);
 
-    /**
-     * @author Amp
-     * @reason Events
-     */
     @Overwrite
     public void onPlayerStoppedUsing(ItemStack p_onPlayerStoppedUsing_1_, World p_onPlayerStoppedUsing_2_, EntityPlayer p_onPlayerStoppedUsing_3_, int p_onPlayerStoppedUsing_4_) {
         boolean lvt_5_1_ = p_onPlayerStoppedUsing_3_.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantment.infinity.effectId, p_onPlayerStoppedUsing_1_) > 0;
@@ -37,9 +32,7 @@ public abstract class MixinItemBow extends Item {
                 return;
             }
 
-            if (lvt_7_1_ > 1.0F) {
-                lvt_7_1_ = 1.0F;
-            }
+            if (lvt_7_1_ > 1.0F) lvt_7_1_ = 1.0F;
 
             EntityArrow lvt_8_1_ = new EntityArrow(p_onPlayerStoppedUsing_2_, p_onPlayerStoppedUsing_3_, lvt_7_1_ * 2.0F);
             if (lvt_7_1_ == 1.0F) {
