@@ -32,7 +32,6 @@ import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.EnumChatFormatting;
 import org.apache.commons.io.IOUtils;
-
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -46,7 +45,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
 public class PurchaseApi {
-
     public final static String url = "https://api.hyperium.cc/purchases/";
     private static final PurchaseApi instance = new PurchaseApi();
     private final Map<UUID, HyperiumPurchase> purchasePlayers = new ConcurrentHashMap<>();
@@ -202,5 +200,4 @@ public class PurchaseApi {
         purchasePlayers.put(uuid, value);
         Hyperium.INSTANCE.getHandlers().getCapeHandler().deleteCape(uuid);
     }
-
 }
