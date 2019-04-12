@@ -1,24 +1,26 @@
 # Jailbroken Hyperium
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/a29d5c59b9b846468f84aedd4f99d2d7)](https://app.codacy.com/app/hyperiumjailbreak/client?utm_source=github.com&utm_medium=referral&utm_content=hyperiumjailbreak/client&utm_campaign=Badge_Grade_Settings)
+
 Jailbroken Hyperium is a fork of [HyperiumClient](https://hyperium.cc) with enhancements and misc. fixes.
 
 Because the license requires it, here is a list of changes made:
-* Replaced Travis CI with Cirrus CI
-* Fixed OS X Discord RP bug
-* Removed playtime addon
-* Disabled tray icon
-* Removed background selection as it was problematic
-* Remove autotip error reporting
-* Updated default settings
-* Fully disabled the `(BETA)` improvements
-* Code cleanups
-* Updated some menus
-* Removed update and shop tab
-* Add new `FPS` mode
-* Removed in-game browser (improves compiling times)
-* Removed some cosmetics
-* Disabled Xlint warning in compileJava phase
-* Removed SpotifyMod
+  * Replaced Travis CI with Cirrus CI
+  * Fixed OS X Discord RP bug
+  * Removed playtime addon
+  * Disabled tray icon
+  * Removed background selection as it was problematic
+  * Remove autotip error reporting
+  * Updated default settings
+  * Fully disabled the `(BETA)` improvements
+  * Code cleanups
+  * Updated some menus
+  * Removed update and shop tab
+  * Add new `FPS` mode
+  * Removed in-game browser (improves compiling times)
+  * Removed some cosmetics
+  * Disabled Xlint warning in compileJava phase
+  * Removed SpotifyMod
 
 This fork is maintained by [RDIL](https://rdil.rocks). Questions should be put in [GitHub issues](https://github.com/RDIL/Hyperium-Jailbreak/issues).
 

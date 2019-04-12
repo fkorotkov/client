@@ -8,44 +8,28 @@ import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.StringUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
-
 import java.util.UUID;
 
 @Mixin(NBTUtil.class)
 public class MixinNBTUtil {
-
-    /**
-     * @author Sk1er
-     * @reason Not proper null checks
-     */
     @Overwrite
     public static GameProfile readGameProfileFromNBT(NBTTagCompound compound) {
         String s = null;
         String s1 = null;
-
-        if (compound.hasKey("Name", 8)) {
-            s = compound.getString("Name");
-        }
-
-        if (compound.hasKey("Id", 8)) {
-            s1 = compound.getString("Id");
-        }
-
+        if (compound.hasKey("Name", 8)) s = compound.getString("Name");
+        if (compound.hasKey("Id", 8)) s1 = compound.getString("Id");
         if (StringUtils.isNullOrEmpty(s) && StringUtils.isNullOrEmpty(s1)) {
             return null;
         } else {
             UUID uuid = null;
-            if (s1 != null)
+            if (s1 != null) {
                 try {
                     uuid = UUID.fromString(s1);
-                } catch (Throwable ignored) {
-                }
-
+                } catch (Throwable ignored) {}
+            }
             GameProfile gameprofile = new GameProfile(uuid, s);
-
             if (compound.hasKey("Properties", 10)) {
                 NBTTagCompound nbttagcompound = compound.getCompoundTag("Properties");
-
                 for (String s2 : nbttagcompound.getKeySet()) {
                     NBTTagList nbttaglist = nbttagcompound.getTagList(s2, 10);
 
@@ -61,7 +45,6 @@ public class MixinNBTUtil {
                     }
                 }
             }
-
             return gameprofile;
         }
     }

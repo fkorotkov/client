@@ -5,10 +5,7 @@ import cc.hyperium.Hyperium;
 import cc.hyperium.Metadata;
 import cc.hyperium.config.Settings;
 import cc.hyperium.gui.playerrenderer.GuiPlayerRenderer;
-import cc.hyperium.purchases.PurchaseApi;
 import cc.hyperium.utils.HyperiumFontRenderer;
-import cc.hyperium.utils.JsonHolder;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -146,13 +143,11 @@ public class GuiHyperiumScreen extends GuiScreen {
         GlStateManager.pushMatrix();
         swing++;
 
-        if (mc.theWorld == null) {
-            if (!Settings.BACKGROUND.equals("DEFAULT")) {
-                GlStateManager.disableAlpha();
-                ScaledResolution sr = new ScaledResolution(mc);
-                this.renderHyperiumBackground(sr);
-                GlStateManager.enableAlpha();
-            }
+        if (mc.theWorld == null && !"DEFAULT".equals(Settings.BACKGROUND)) {
+            GlStateManager.disableAlpha();
+            ScaledResolution sr = new ScaledResolution(mc);
+            this.renderHyperiumBackground(sr);
+            GlStateManager.enableAlpha();
         }
 
         /* Render shadowed bar at top of screen */

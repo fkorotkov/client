@@ -13,21 +13,16 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(CrashReport.class)
 public abstract class MixinCrashReport {
-
     private HyperiumCrashReport hyperiumCrashReport = new HyperiumCrashReport((CrashReport) (Object) this);
-
     @Final
     @Shadow
     private CrashReportCategory theReportCategory;
-
     @Inject(method = "populateEnvironment", at = @At("HEAD"))
     public void add(CallbackInfo info) {
         this.theReportCategory.addCrashSectionCallable(
             "ct.js modules",
             () -> ModuleManager.INSTANCE.getCachedModules().toString()
         );
-
         hyperiumCrashReport.add(info);
     }
-
 }
