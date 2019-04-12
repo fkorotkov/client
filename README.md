@@ -17,6 +17,8 @@ Because the license requires it, here is a list of changes made:
 * Add new `FPS` mode
 * Removed in-game browser (improves compiling times)
 * Removed some cosmetics
+* Disabled Xlint warning in compileJava phase
+* Removed SpotifyMod
 
 This fork is maintained by [RDIL](https://rdil.rocks). Questions should be put in [GitHub issues](https://github.com/RDIL/Hyperium-Jailbreak/issues).
 
