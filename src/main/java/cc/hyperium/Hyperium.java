@@ -240,10 +240,7 @@ public class Hyperium {
                 }
             });
 
-            Multithreading.runAsync(() -> {
-                isLatestVersion = UpdateUtils.INSTANCE.isAbsoluteLatest();
-                IS_BETA = UpdateUtils.INSTANCE.isBeta();
-            });
+            IS_BETA = false;
             // Check if OptiFine is installed.
             try {
                 Class.forName("optifine.OptiFineTweaker");
