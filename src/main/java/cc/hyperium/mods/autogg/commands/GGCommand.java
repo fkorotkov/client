@@ -9,7 +9,6 @@ import cc.hyperium.mods.autogg.AutoGG;
 import cc.hyperium.utils.ChatColor;
 
 public class GGCommand implements BaseCommand {
-
     private final AutoGG mod;
 
     public GGCommand(AutoGG mod) {
@@ -28,20 +27,14 @@ public class GGCommand implements BaseCommand {
 
     @Override
     public void onExecute(String[] args) throws CommandException {
-        if (args.length == 0 || args.length > 2) {
-            throw new CommandUsageException();
-        }
+        if (args.length == 0 || args.length > 2) throw new CommandUsageException();
 
-        final String s = args[0];
-
-        switch (s) {
+        switch (args[0]) {
             case "toggle":
             case "t": {
                 this.mod.getConfig().flipToggle();
 
-                this.showMessage(
-                    ChatColor.GRAY + "AutoGG: " + (this.mod.getConfig().isToggled() ? (
-                        ChatColor.GREEN + "On") : (ChatColor.RED + "Off")));
+                this.showMessage(ChatColor.GRAY + "AutoGG: " + (this.mod.getConfig().isToggled() ? (ChatColor.GREEN + "On") : (ChatColor.RED + "Off")));
 
                 saveConfig();
                 break;
@@ -52,15 +45,11 @@ public class GGCommand implements BaseCommand {
                 if (args.length == 2) {
                     try {
                         final int delay = Integer.parseInt(args[1]);
-                        if (delay < 0 || delay > 5) {
-                            throw new NumberFormatException("Invalid integer");
-                        }
+                        if (delay < 0 || delay > 5) throw new NumberFormatException("Invalid integer");
                         this.mod.getConfig().setDelay(delay);
-
                         saveConfig();
-
                         this.showMessage(ChatColor.GRAY + "AutoGG delay set to "
-                            + ChatColor.GREEN + this.mod.getConfig().getDelay() + "s");
+                            + ChatColor.GREEN + this.mod.getConfig().getDelay() + " seconds");
                     } catch (NumberFormatException e) {
                         showMessage(ChatColor.RED + "Error: Please use an integer between 1 and 5 seconds.");
                     }
@@ -76,18 +65,10 @@ public class GGCommand implements BaseCommand {
         }
     }
 
-    /**
-     * Sends a message to the client
-     *
-     * @param message the message to send
-     */
     private void showMessage(final String message) {
         GeneralChatHandler.instance().sendMessage(message, false);
     }
 
-    /**
-     * Saves the config
-     */
     private void saveConfig() {
         Hyperium.CONFIG.save();
     }

@@ -31,7 +31,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -40,9 +39,6 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 
-/**
- * Created by mitchellkatz on 6/24/18. Designed for production use on Sk1er.club
- */
 @Mixin(EffectRenderer.class)
 public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
 
@@ -73,10 +69,6 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason Improved Particle Handler
-     */
     @Overwrite
     private void moveToLayer(EntityFX effect, int p_178924_2_, int p_178924_3_) {
         for (int i = 0; i < 4; ++i) {
@@ -87,10 +79,6 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason Fix NPE
-     */
     @Overwrite
     private void tickParticle(EntityFX p_178923_1_) {
         if (p_178923_1_ == null)
@@ -109,10 +97,6 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason add concurrency
-     */
     @Overwrite
     private void updateEffectLayer(int p_178922_1_) {
         for (int i = 0; i < 2; ++i) {
@@ -166,28 +150,15 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
                     latch.countDown();
                 });
             }
-//            try {
-//                latch.await();
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
         } else queue.forEach(this::tickParticle);
         queue.removeIf(entityFX -> entityFX.isDead);
     }
 
-    /**
-     * @author Sk1er
-     * @reason Concurrency
-     */
     @Overwrite
     public void emitParticleAtEntity(Entity entityIn, EnumParticleTypes particleTypes) {
         this.modifiedParticlEmmiters.add(new EntityParticleEmitter(this.worldObj, entityIn, particleTypes));
     }
 
-    /**
-     * @author Sk1er
-     * @reason Concurrency
-     */
     @Overwrite
     public void addEffect(EntityFX effect) {
         int i = effect.getFXLayer();
@@ -200,10 +171,6 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
         this.modifiedFxLayer[i][j].add(effect);
     }
 
-    /**
-     * @author Sk1er
-     * @reason Support concurrent
-     */
     @Overwrite
     public void renderLitParticles(Entity entityIn, float p_78872_2_) {
         float f = 0.017453292F;
@@ -226,10 +193,6 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason Concurrency
-     */
     @Overwrite
     public void clearEffects(World worldIn) {
         this.worldObj = worldIn;
@@ -243,10 +206,6 @@ public abstract class MixinEffectRenderer implements IMixinEffectRenderer {
         this.modifiedParticlEmmiters.clear();
     }
 
-    /**
-     * @author Sk1er
-     * @reason Concurrency
-     */
     @Overwrite
     public String getStatistics() {
         int i = 0;

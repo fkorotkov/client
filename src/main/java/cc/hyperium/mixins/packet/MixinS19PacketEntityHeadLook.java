@@ -9,17 +9,11 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(S19PacketEntityHeadLook.class)
 public class MixinS19PacketEntityHeadLook {
-
     @Shadow
     private int entityId;
 
-    /**
-     * @author boomboompower
-     * @reason Fix internal NPE from odd packets
-     */
     @Overwrite
     public Entity getEntity(World worldIn) {
         return worldIn != null ? worldIn.getEntityByID(this.entityId) : null;
     }
 }
-

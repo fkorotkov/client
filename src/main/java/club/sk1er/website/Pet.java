@@ -1,12 +1,9 @@
 package club.sk1er.website;
 
-
 import cc.hyperium.utils.JsonHolder;
-
 import java.util.HashMap;
 
 public class Pet {
-
     private static final HashMap<Integer, Integer> petLevels = new HashMap<>();
 
     static {
@@ -119,20 +116,14 @@ public class Pet {
     public Pet(JsonHolder tmp) {
         this.xp = tmp.optInt("experience");
         this.level = getLevel(this.xp);
-
     }
 
     private int getLevel(int xp) {
-        if (xp < 200) {
-            return 1;
-        }
-
+        if (xp < 200) return 1;
         int t = 1;
         while (true) {
             t++;
-            if (t == 101) {
-                return 100;
-            }
+            if (t == 101) return 100;
             if (xp <= petLevels.get(t)) {
                 return t - 1;
             } else {

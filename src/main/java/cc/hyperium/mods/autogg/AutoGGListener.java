@@ -9,15 +9,10 @@ import cc.hyperium.mods.victoryroyale.VictoryRoyale;
 import cc.hyperium.utils.ChatColor;
 import net.minecraft.client.Minecraft;
 
-/**
- * Main listener for AutoGG
- */
 public class AutoGGListener {
-
     private final Minecraft mc = Minecraft.getMinecraft();
     private final AutoGG mod;
     boolean invoked = false;
-
 
     public AutoGGListener(AutoGG mod) {
         this.mod = mod;
@@ -29,20 +24,11 @@ public class AutoGGListener {
     }
 
     @InvokeEvent
-    public void onChat(final ChatEvent event) {
-        if (this.mod.getConfig().ANTI_GG && invoked) {
-            if (event.getChat().getUnformattedText().toLowerCase().endsWith("gg") || event.getChat().getUnformattedText().endsWith("Good Game"))
-                event.setCancelled(true);
-        }
-        // Make sure the mod is enabled
-        if (
-//            !this.mod.isHypixel() ||
-            !this.mod.getConfig().isToggled() || this.mod.isRunning() || this.mod.getTriggers().isEmpty()) {
-            return;
-        }
+    public void onChat(final ChatEvent e) {
+        if (this.mod.getConfig().ANTI_GG && invoked && (e.getChat().getUnformattedText().toLowerCase().endsWith("gg") || e.getChat().getUnformattedText().endsWith("Good Game"))) e.setCancelled(true);
+        if (!this.mod.getConfig().isToggled() || this.mod.isRunning() || this.mod.getTriggers().isEmpty()) return;
 
-        // Double parse to remove hypixel formatting codes
-        String unformattedMessage = ChatColor.stripColor(event.getChat().getUnformattedText());
+        String unformattedMessage = ChatColor.stripColor(e.getChat().getUnformattedText());
 
         if (this.mod.getTriggers().stream().anyMatch(unformattedMessage::contains) && unformattedMessage.startsWith(" ")) {
             this.mod.setRunning(true);
@@ -51,8 +37,8 @@ public class AutoGGListener {
             Multithreading.runAsync(() -> {
                 try {
                     Thread.sleep(250);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
                 }
                 VictoryRoyale.getInstance().gameEnded();
             });
@@ -64,8 +50,8 @@ public class AutoGGListener {
 
                     // We are referring to it from a different thread, thus we need to do this
                     Hyperium.INSTANCE.getModIntegration().getAutoGG().setRunning(false);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (Exception ex) {
+                    ex.printStackTrace();
                 }
             });
         }

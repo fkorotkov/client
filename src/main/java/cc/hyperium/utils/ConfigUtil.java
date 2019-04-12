@@ -4,7 +4,6 @@ import cc.hyperium.Hyperium;
 import com.google.gson.JsonObject;
 
 public class ConfigUtil {
-
     public static boolean getOptionWithDefault(String settingName, String classPath, boolean defaultObject) {
         JsonObject generalJsonObject = Hyperium.CONFIG.getConfig().get(classPath).getAsJsonObject();
         if (!generalJsonObject.has(settingName)) {

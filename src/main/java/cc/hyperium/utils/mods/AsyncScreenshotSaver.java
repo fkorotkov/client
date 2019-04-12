@@ -32,11 +32,6 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Lagless screenshots
- *
- * @author OrangeMarshall
- */
 public class AsyncScreenshotSaver implements Runnable {
     private final int width;
     private final int height;

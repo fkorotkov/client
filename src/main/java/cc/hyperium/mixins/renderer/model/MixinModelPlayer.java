@@ -132,7 +132,6 @@ public class MixinModelPlayer extends MixinModelBiped implements IMixinModelPlay
         this.bipedRightLowerLegwear.addBox(-2.0F, 6.0F, -2.0F, 4, 6, 4, modelSize + 0.25F);
         this.bipedRightLowerLegwear.setRotationPoint(-1.9F, 12.0F, 0.0F);
 
-
         fixTopAndBottomOfLimbWrongTextures(
             this.bipedLeftForeArm, this.bipedLeftForeArmwear, //
             this.bipedRightForeArm, this.bipedRightForeArmwear, //
@@ -141,10 +140,6 @@ public class MixinModelPlayer extends MixinModelBiped implements IMixinModelPlay
         );
     }
 
-    /**
-     * @author 9Y0, Mojang
-     * @reason body parts
-     */
     @Overwrite
     public void render(Entity entityIn, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float scale) {
         super.render(entityIn, p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale);

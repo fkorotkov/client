@@ -12,7 +12,6 @@ import cc.hyperium.netty.packet.packets.serverbound.UpdateLocationPacket;
 import cc.hyperium.utils.JsonHolder;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
-
 import java.util.Arrays;
 import java.util.Iterator;
 
@@ -26,10 +25,8 @@ public class LoginReplyHandler implements PacketHandler<LoginReplyPacket> {
             NettyClient client = NettyClient.getClient();
             if (client != null) {
                 client.write(UpdateLocationPacket.build("Other"));
-                if (Settings.SEND_SERVER)
-                    client.write(ServerCrossDataPacket.build(new JsonHolder().put("internal", true).put("server_update", currentServerData.serverIP)));
+                if (Settings.SEND_SERVER) client.write(ServerCrossDataPacket.build(new JsonHolder().put("internal", true).put("server_update", currentServerData.serverIP)));
             }
-
         }
         if (loginReplyPacket.isAdmin()) {
             Hyperium.INSTANCE.getHandlers().getHyperiumCommandHandler().registerCommand(new BaseCommand() {
@@ -37,12 +34,10 @@ public class LoginReplyHandler implements PacketHandler<LoginReplyPacket> {
                 public String getName() {
                     return "hyperiumadmin";
                 }
-
                 @Override
                 public String getUsage() {
                     return "/hyperiumadmin";
                 }
-
                 @Override
                 public void onExecute(String[] args) {
                     if (args.length == 1 && args[0].equalsIgnoreCase("show_messages")) {
@@ -57,12 +52,9 @@ public class LoginReplyHandler implements PacketHandler<LoginReplyPacket> {
                     }
 
                     NettyClient.getClient().dispatchCommand(builder.toString());
-
                 }
             });
-
         }
-
     }
 
     @Override

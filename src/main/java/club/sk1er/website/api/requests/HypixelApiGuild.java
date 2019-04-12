@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by mitchellkatz on 6/4/17.
- */
 public class HypixelApiGuild implements HypixelApiObject {
     private JsonHolder guild;
     private List<GuildRank> ranks;

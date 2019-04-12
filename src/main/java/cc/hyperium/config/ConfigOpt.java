@@ -22,20 +22,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * @author Sk1er
- */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface ConfigOpt {
-
     String comment() default "";
-
     boolean ignore() default false;
-
-    /**
-     * alternate json key, used for migrating old config
-     */
     String alt() default "";
-
 }

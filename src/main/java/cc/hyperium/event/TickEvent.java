@@ -17,9 +17,4 @@
 
 package cc.hyperium.event;
 
-/**
- * Invoked every tick
- */
-public class TickEvent extends Event {
-
-}
+public class TickEvent extends Event {}

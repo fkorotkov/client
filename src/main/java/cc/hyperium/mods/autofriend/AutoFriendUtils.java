@@ -3,9 +3,6 @@ package cc.hyperium.mods.autofriend;
 import net.minecraft.event.*;
 import net.minecraft.util.*;
 
-/*
-credit to 2PI for help
-*/
 public class AutoFriendUtils {
     private final IChatComponent parent;
     private String text;

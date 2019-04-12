@@ -53,7 +53,6 @@ import cc.hyperium.purchases.PurchaseApi;
 import cc.hyperium.utils.HyperiumScheduler;
 import cc.hyperium.utils.LaunchUtil;
 import cc.hyperium.utils.StaffUtils;
-import cc.hyperium.utils.UpdateUtils;
 import cc.hyperium.utils.mods.CompactChat;
 import cc.hyperium.utils.mods.FPSLimiter;
 import net.minecraft.client.Minecraft;
@@ -198,8 +197,6 @@ public class Hyperium {
                 } catch (IOException ignored) {}
             });
 
-            //Multithreading.runAsync(Spotify::load);
-
             Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
             if (!OS.isMacintosh()) richPresenceManager.load();
 
@@ -242,8 +239,7 @@ public class Hyperium {
             });
 
             Multithreading.runAsync(() -> {
-                isLatestVersion = UpdateUtils.INSTANCE.isAbsoluteLatest();
-                IS_BETA = UpdateUtils.INSTANCE.isBeta();
+                IS_BETA = false;
             });
             // Check if OptiFine is installed.
             try {
@@ -283,9 +279,6 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandKeybinds());
     }
 
-    /**
-     * Called when Hyperium shuts down
-     */
     private void shutdown() {
         CONFIG.save();
         richPresenceManager.shutdown();
@@ -374,15 +367,10 @@ public class Hyperium {
     }
 
     public void copyNatives(String nativePath, File newFolder) {
-        if (!newFolder.exists()) {
-            newFolder.mkdir();
-        }
+        if (!newFolder.exists()) newFolder.mkdir();
 
         File tempNatives = new File(nativePath);
-        if (!tempNatives.exists()) {
-            System.out.println("[Error] Natives are missing.");
-        } else {
-            System.out.println("[Hyperium] Copying natives to hyperium directory.");
+        if (tempNatives.exists()) {
             try {
                 for (File fileEntry : tempNatives.listFiles()) {
                     Files.copy(fileEntry.toPath(), Paths.get(newFolder.getPath() + File.separator + fileEntry.getName()), StandardCopyOption.REPLACE_EXISTING);

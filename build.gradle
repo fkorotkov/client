@@ -62,13 +62,15 @@ version = "2.0"
 group = "cc.hyperium"
 archivesBaseName = "Hyperium"
 
+compileJava.options.compilerArgs << "-Xlint:none"
+
 minecraft {
     version = "1.8.9"
     tweakClass = "cc.hyperium.launch.HyperiumTweaker"
     mappings = "stable_20"
     runDir = 'run'
     clientJvmArgs = ["-XX:-DisableExplicitGC"] // fast world loading
-    makeObfSourceJar = true
+    makeObfSourceJar = false
 }
 
 dependencies {

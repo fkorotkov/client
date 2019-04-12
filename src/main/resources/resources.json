@@ -3,11 +3,10 @@
     "chat_regex": {
       "cache_time": 0,
       "urls": [
-        "chat_regex.json",
-        "https://raw.githubusercontent.com/HyperiumClient/Hyperium-Repo/master/files/chat_regex.json"
+        "https://raw.githubusercontent.com/hyperiumjailbreak/tools/master/cregex.json"
       ],
       "preload": false,
-      "preload_url": "https://raw.githubusercontent.com/HyperiumClient/Hyperium-Repo/master/files/chat_regex.json",
+      "preload_url": "https://raw.githubusercontent.com/hyperiumjailbreak/tools/master/cregex.json",
       "type": "TEXT"
     }
   }

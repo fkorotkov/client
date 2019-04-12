@@ -20,7 +20,6 @@ package cc.hyperium.purchases;
 import cc.hyperium.utils.JsonHolder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonPrimitive;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -51,9 +50,7 @@ public class HyperiumPurchase {
                         .optJSONObject(parse.name().toLowerCase()));
                     if (parse1 != null)
                         this.purchases.add(parse1);
-                } catch (Exception wtf) {
-//                    wtf.printStackTrace();
-                }
+                } catch (Exception ignored) {}
         }
         if (everything) {
             for (EnumPurchaseType enumPurchaseType : EnumPurchaseType.values()) {

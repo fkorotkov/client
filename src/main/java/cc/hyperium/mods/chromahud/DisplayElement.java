@@ -23,11 +23,9 @@ import cc.hyperium.utils.JsonHolder;
 import com.google.gson.JsonArray;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
-
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
@@ -44,7 +42,6 @@ public class DisplayElement extends Dimension {
     private boolean shadow;
     private boolean highlighted;
     private boolean rightSided = false;
-    // Used for rainbox rendering
     private boolean selected;
     private boolean chroma;
     private boolean rgb;
@@ -125,14 +122,6 @@ public class DisplayElement extends Dimension {
         ScaledResolution resolution = new ScaledResolution(Minecraft.getMinecraft());
         int x = (int) (xloc * resolution.getScaledWidth_double());
         double y = (int) (yloc * resolution.getScaledHeight_double());
-//        if (this.isHighlighted()) {
-//            Gui.drawRect(
-//                    x - 2,
-//                    (int) y - 2,
-//                    (int) (x + getDimensions().getWidth()) + 2,
-//                    (int) (y + getDimensions().getHeight()),
-//                    new Color(0, 0, 0, 120).getRGB());
-//        }
 
         for (DisplayItem iDisplayItem : displayItems) {
             try {

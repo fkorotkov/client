@@ -22,11 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 
-/**
- * Used to store information about events and index them so they can be easily accessed by ASM
- */
 public final class EventSubscriber {
-
     @NotNull
     private final Object instance;
     @NotNull
@@ -72,7 +68,6 @@ public final class EventSubscriber {
         Preconditions.checkNotNull(instance, "instance");
         Preconditions.checkNotNull(method, "method");
         Preconditions.checkNotNull(priority, "priority");
-
         return new EventSubscriber(instance, method, priority);
     }
 
@@ -95,12 +90,10 @@ public final class EventSubscriber {
         if (this != subscriberIn) {
             if (subscriberIn instanceof EventSubscriber) {
                 EventSubscriber eventSubscriber = (EventSubscriber) subscriberIn;
-
                 return this.instance.equals(eventSubscriber.instance) &&
                     this.method.equals(eventSubscriber.method) &&
                     this.priority.equals(eventSubscriber.priority);
             }
-
             return false;
         } else {
             return true;

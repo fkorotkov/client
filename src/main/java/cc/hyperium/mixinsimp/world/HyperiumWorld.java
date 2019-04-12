@@ -21,7 +21,6 @@ import net.minecraft.world.border.WorldBorder;
 import net.minecraft.world.storage.WorldInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -288,9 +287,7 @@ public class HyperiumWorld {
             Entity entity2 = loadedEntityList.get(i1);
 
             if (entity2.ridingEntity != null) {
-                if (!entity2.ridingEntity.isDead && entity2.ridingEntity.riddenByEntity == entity2) {
-                    continue;
-                }
+                if (!entity2.ridingEntity.isDead && entity2.ridingEntity.riddenByEntity == entity2) continue;
 
                 entity2.ridingEntity.riddenByEntity = null;
                 entity2.ridingEntity = null;

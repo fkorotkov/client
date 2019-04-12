@@ -1,10 +1,6 @@
 package cc.hyperium.event;
 
-/**
- * Invoked once the player has joined a server
- */
 public class ServerJoinEvent extends Event {
-
     private final String server;
     private final int port;
 

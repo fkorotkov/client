@@ -59,39 +59,6 @@ object WorldListener {
                 ""
         )
     }
-    
-    //TODO: DETERMINE IF THESE ARE NEEDED OR NOT
-    /*@InvokeEvent
-    fun noteBlockEventPlay(event: NoteBlockEvent.Play) {
-        val position = Vector3d(
-                event.pos.x.toDouble(),
-                event.pos.y.toDouble(),
-                event.pos.z.toDouble()
-        )
-
-        TriggerType.NOTE_BLOCK_PLAY.triggerAll(
-                event,
-                position,
-                event.note.name,
-                event.octave
-        )
-    }*/
-
-    /*@SubscribeEvent
-    fun noteBlockEventChange(event: NoteBlockEvent.Change) {
-        val position = Vector3d(
-                event.pos.x.toDouble(),
-                event.pos.y.toDouble(),
-                event.pos.z.toDouble()
-        )
-
-        TriggerType.NOTE_BLOCK_CHANGE.triggerAll(
-                event,
-                position,
-                event.note.name,
-                event.octave
-        )
-    }*/
 
     @InvokeEvent
     fun updatePlayerList(event: TickEvent) {

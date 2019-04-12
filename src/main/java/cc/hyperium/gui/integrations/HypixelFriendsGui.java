@@ -72,7 +72,6 @@ public class HypixelFriendsGui extends HyperiumGui {
     public void initGui() {
         columnWidth = fontRendererObj.getStringWidth("[YOUTUBER] Zyphalopagus1245");
         super.initGui();
-        //TODO remove direct address to MC font renderer
     }
 
     protected void pack() {

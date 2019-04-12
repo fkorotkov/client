@@ -33,18 +33,13 @@ import java.util.concurrent.TimeUnit;
  * Created by Mitchell Katz on 6/8/2017.
  */
 public class Sk1erMod {
-    /*
-        Sk1erMod 5.0
-        Dabbing intensifies
-     */
     private static Sk1erMod instance;
     private String modid = "";
     private String version = "";
     private boolean enabled = true;
     private String apiKey = "";
     private JsonHolder en = new JsonHolder();
-    private GenKeyCallback callback = object -> {
-    };
+    private GenKeyCallback callback = object -> {};
 
     public Sk1erMod(String modid, String version) {
         this.modid = modid;
@@ -85,18 +80,14 @@ public class Sk1erMod {
                 + "&modver=" + version
                 + "&mod=" + modid
             ));
-            if (callback != null)
-                callback.call(en);
+            if (callback != null) callback.call(en);
             enabled = en.optBoolean("enabled");
             apiKey = en.optString("key");
         }, 0, 5, TimeUnit.MINUTES);
     }
 
     public String rawWithAgent(String url) {
-        System.out.println("[Sk1erMod] Fetching " + url);
-        if (!Hyperium.INSTANCE.isAcceptedTos()) {
-            return new JsonHolder().put("success", false).put("cause", "TOS_NOT_ACCEPTED").toString();
-        }
+        if (!Hyperium.INSTANCE.isAcceptedTos()) return new JsonHolder().put("success", false).put("cause", "TOS_NOT_ACCEPTED").toString();
         url = url.replace(" ", "%20");
         try {
             URL u = new URL(url);
@@ -117,5 +108,4 @@ public class Sk1erMod {
         object.addProperty("cause", "Exception");
         return object.toString();
     }
-
 }

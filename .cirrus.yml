@@ -1,24 +1,27 @@
-test_task:
-  auto_cancellation: true
+task:
+  auto_cancellation: $CIRRUS_PR != ''
   container:
     image: gradle:jdk8
     cpu: 4
     memory: 12G
-  setup_workspace_script: |
-    chmod +x ./gradlew
-    rm -rf $CIRRUS_WORKING_DIR/src/main/resources/build.txt
-    echo $CIRRUS_BUILD_ID > $CIRRUS_WORKING_DIR/src/main/resources/build.txt
+  setup_workspace_script: chmod +x ./gradlew
   gradle_cache:
     folder: ~/.gradle/caches
     fingerprint_script: |
       cat build.gradle
       cat gradle/wrapper/gradle-wrapper.properties
     populate_script: ./gradlew setupDevWorkspace
-  build_script: |
-    ./gradlew test
-    ./gradlew build
-  jar_artifacts:
-    path: ./build/libs/**
+  matrix:
+  - name: Build Job
+    script: |
+      rm -rf $CIRRUS_WORKING_DIR/src/main/resources/build.txt
+      echo $CIRRUS_BUILD_ID > $CIRRUS_WORKING_DIR/src/main/resources/build.txt
+      ./gradlew build
+    jar_artifacts:
+      path: ./build/libs/**
+  - name: Test Job
+    script: |
+      ./gradlew test
   always:
     cleanup_before_cache_script: |
       # Docker image version:

@@ -1,17 +1,12 @@
 package cc.hyperium.event;
 
 import java.util.UUID;
-
 import com.google.common.base.Preconditions;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Invoked once player swings
- */
 public final class PlayerSwingEvent extends Event {
-
     @NotNull
     private final UUID player;
 
@@ -29,7 +24,6 @@ public final class PlayerSwingEvent extends Event {
         Preconditions.checkNotNull(posVec, "posVec");
         Preconditions.checkNotNull(lookVec, "lookVec");
         Preconditions.checkNotNull(pos, "pos");
-
         this.player = player;
         this.posVec = posVec;
         this.lookVec = lookVec;

@@ -54,28 +54,10 @@ public class NotificationCenter extends Gui {
         }
     }
 
-    /**
-     * Create a notification queued to be displayed
-     *
-     * @param title       Title of the notification
-     * @param description Description of the notification
-     * @param seconds     Seconds the notification should be displayed for
-     * @return The new notification
-     */
     public Notification display(String title, String description, float seconds) {
         return this.display(title, description, seconds, null, null, null);
     }
 
-    /**
-     * Create a notification queued to be displayed
-     *
-     * @param title       Title of the notification
-     * @param description Description of the notification
-     * @param seconds     Seconds the notification should be displayed for
-     * @param img         Image to be displayed with the notification
-     * @param callback    Callback to be ran when the user clicks on the notification
-     * @return The new notification
-     */
     public Notification display(String title, String description, float seconds, @Nullable BufferedImage img, @Nullable Runnable callback, @Nullable Color highlightColor) {
         final Notification notif = new Notification(title, description, (int) (seconds * 20), img, callback, highlightColor);
 

@@ -26,9 +26,7 @@ public enum RequestType {
     public String getEndpoint() {
         return endpoint;
     }
-
     public Class<?> getReplyClass() {
         return replyClass;
     }
-
 }

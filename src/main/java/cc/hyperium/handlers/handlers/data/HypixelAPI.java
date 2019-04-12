@@ -50,7 +50,7 @@ public class HypixelAPI {
     public HypixelAPI() {
         Multithreading.schedule(this::updatePersonalData, 10L, 305, TimeUnit.SECONDS);
         INSTANCE = this;
-        Multithreading.runAsync(() -> {getQuests(true);});
+        Multithreading.runAsync(() -> getQuests(true));
     }
 
     @InvokeEvent
@@ -84,10 +84,7 @@ public class HypixelAPI {
         return getFriends(getKeyForCurrentUser()).whenComplete((data, error) -> {
             if (error != null) return;
             friendsForCurrentUser.clear();
-
-            data.getFriends().forEach(
-                friend -> friendsForCurrentUser.add(Utils.dashMeUp(new JsonHolder(friend.getAsJsonObject()).optString("uuid")))
-            );
+            data.getFriends().forEach(friend -> friendsForCurrentUser.add(Utils.dashMeUp(new JsonHolder(friend.getAsJsonObject()).optString("uuid"))));
         });
     }
 
@@ -118,9 +115,7 @@ public class HypixelAPI {
     }
 
     public CompletableFuture<JsonHolder> getLeaderboardWithID(String ID) {
-        return CompletableFuture.supplyAsync(() -> new JsonHolder(
-            Sk1erMod.getInstance().rawWithAgent("https://api.sk1er.club/leaderboard/" + ID)
-        ), Multithreading.POOL);
+        return CompletableFuture.supplyAsync(() -> new JsonHolder(Sk1erMod.getInstance().rawWithAgent("https://api.sk1er.club/leaderboard/" + ID)), Multithreading.POOL);
     }
 
     public CompletableFuture<JsonHolder> getQuests(boolean refresh) {
@@ -189,11 +184,8 @@ public class HypixelAPI {
 
     private HypixelApiGuild getApiGuild(String key) {
         GuildKey guildKey = GuildKey.fromSerialized(key);
-
         return new HypixelApiGuild(new JsonHolder(
-            Sk1erMod.getInstance().rawWithAgent(
-                String.format(guildKey.type.getUrl(), (Object[]) guildKey.formatStrings)
-            )
+            Sk1erMod.getInstance().rawWithAgent(String.format(guildKey.type.getUrl(), (Object[]) guildKey.formatStrings))
         ));
     }
 

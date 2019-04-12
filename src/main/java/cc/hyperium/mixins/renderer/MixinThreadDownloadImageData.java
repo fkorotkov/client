@@ -9,13 +9,10 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 @Mixin(ThreadDownloadImageData.class)
 public abstract class MixinThreadDownloadImageData extends SimpleTexture {
-
     @Shadow
     @Final
     private String imageUrl;
@@ -34,10 +31,6 @@ public abstract class MixinThreadDownloadImageData extends SimpleTexture {
         super(textureResourceLocation);
     }
 
-    /**
-     * @author Sk1er
-     * @reason Create thread pool for ThreadDownloadImageData to stop excessive concurrency and not create thousands
-     */
     @Overwrite
     protected void loadTextureFromServer() {
         hyperiumThreadDownloadImageData.loadTextureFromServer(imageUrl, cacheFile, imageBuffer, (ThreadDownloadImageData) (Object) this, textureLocation);
