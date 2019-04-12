@@ -131,7 +131,7 @@ public class MixinModelPlayer extends MixinModelBiped implements IMixinModelPlay
         this.bipedRightLowerLegwear = new ModelRenderer(this, 0, 38);
         this.bipedRightLowerLegwear.addBox(-2.0F, 6.0F, -2.0F, 4, 6, 4, modelSize + 0.25F);
         this.bipedRightLowerLegwear.setRotationPoint(-1.9F, 12.0F, 0.0F);
-        
+
         fixTopAndBottomOfLimbWrongTextures(
             this.bipedLeftForeArm, this.bipedLeftForeArmwear, //
             this.bipedRightForeArm, this.bipedRightForeArmwear, //

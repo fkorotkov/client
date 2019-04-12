@@ -23,7 +23,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(ModelBiped.class)
 public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
-
     @Shadow
     public ModelRenderer bipedHead;
 
@@ -99,11 +98,6 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
         }
     }
 
-    /**
-     * Fixes boxes having the wrong textures, when they are the second part of a limb
-     *
-     * @param models The {@link ModelRenderer} parts you want to fix
-     */
     protected void fixTopAndBottomOfLimbWrongTextures(ModelRenderer... models) {
         for (ModelRenderer model : models) {
             // We only need the first box since we know there only is one
@@ -112,10 +106,6 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
         }
     }
 
-    /**
-     * @author 9Y0, Mojang
-     * @reason body parts
-     */
     @Overwrite
     public void render(Entity entityIn, float p_78088_2_, float p_78088_3_, float p_78088_4_, float p_78088_5_, float p_78088_6_, float scale) {
         this.setRotationAngles(p_78088_2_, p_78088_3_, p_78088_4_, p_78088_5_, p_78088_6_, scale, entityIn);
@@ -135,7 +125,6 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
             this.bipedRightLeg.render(scale);
             this.bipedLeftLeg.render(scale);
             this.bipedHeadwear.render(scale);
-
 
             // Adding our parts
             if (getClass().equals(ModelBiped.class))
@@ -168,10 +157,6 @@ public class MixinModelBiped extends ModelBase implements IMixinModelBiped {
         this.bipedRightLowerLeg.render(scale);
     }
 
-    /**
-     * @author Amplifiable
-     * @reason 1.7 Blocking & Item Held
-     */
     @Overwrite
     public void setRotationAngles(final float limbSwing, final float limbSwingAmount, final float ageInTicks, final float netHeadYaw, final float headPitch, final float scaleFactor, final Entity entityIn) {
         this.bipedHead.rotateAngleY = netHeadYaw / 57.295776f;
