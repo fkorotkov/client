@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -26,19 +25,11 @@ public abstract class MixinMultiMap<T> {
     @Shadow
     protected abstract Class<?> func_181157_b(Class<?> p_181157_1_);
 
-    /**
-     * @author FalseHonesty
-     * @reason ChatTriggers
-     */
     @Overwrite
     public Iterator<T> iterator() {
         return field_181745_e.isEmpty() ? (UnmodifiableListIterator<T>) Utils.EMPTY_ITERATOR : Iterators.unmodifiableIterator(this.field_181745_e.iterator());
     }
 
-    /**
-     * @author FalseHonesty
-     * @reason ChatTriggers
-     */
     @Overwrite
     public <S> Iterable<S> getByClass(final Class<S> clazz) {
         return () -> {

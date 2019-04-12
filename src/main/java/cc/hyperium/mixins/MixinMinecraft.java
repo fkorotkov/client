@@ -127,7 +127,7 @@ public abstract class MixinMinecraft {
     private Framebuffer framebufferMc;
 
     protected MixinMinecraft() {}
-    
+
     @Inject(method = "startGame", at = @At("HEAD"))
     private void preinit(CallbackInfo ci) {
         hyperiumMinecraft.preinit(ci, defaultResourcePacks, mcDefaultResourcePack, defaultResourcePacks);

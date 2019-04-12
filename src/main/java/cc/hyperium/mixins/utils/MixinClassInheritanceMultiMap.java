@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.util.AbstractSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -38,10 +37,6 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     protected void createLookup(Class<?> clazz) {
         field_181158_a1.add(clazz);
@@ -55,10 +50,6 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         this.knownKeys1.add(clazz);
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     protected Class<?> func_181157_b(Class<?> p_181157_1_) {
         if (this.baseClass.isAssignableFrom(p_181157_1_)) {
@@ -72,10 +63,6 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     public boolean add(T p_add_1_) {
         for (Class<?> oclass : this.knownKeys1) {
@@ -87,10 +74,6 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         return true;
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     private void func_181743_a(T p_181743_1_, Class<?> p_181743_2_) {
         ConcurrentLinkedQueue<T> queue = this.map1.get(p_181743_2_);
@@ -104,10 +87,6 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         }
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     public boolean remove(Object p_remove_1_) {
         T t = (T) p_remove_1_;
@@ -126,19 +105,11 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         return flag;
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     public boolean contains(Object p_contains_1_) {
         return Iterators.contains(this.getByClass(p_contains_1_.getClass()).iterator(), p_contains_1_);
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     public <S> Iterable<S> getByClass(Class<S> clazz) {
         return () -> {
@@ -153,19 +124,11 @@ public abstract class MixinClassInheritanceMultiMap<T> extends AbstractSet<T> {
         };
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     public Iterator<T> iterator() {
         return this.queue.isEmpty() ? Iterators.emptyIterator() : Iterators.unmodifiableIterator(this.queue.iterator());
     }
 
-    /**
-     * @author Sk1er
-     * @reason Add concurrent
-     */
     @Overwrite
     public int size() {
         return this.queue.size();
