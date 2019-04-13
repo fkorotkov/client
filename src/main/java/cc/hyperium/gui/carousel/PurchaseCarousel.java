@@ -13,9 +13,6 @@ import net.minecraft.client.resources.I18n;
 import java.awt.Color;
 import java.awt.Font;
 
-/**
- * Created by mitchellkatz on 6/25/18. Designed for production use on Sk1er.club
- */
 public class PurchaseCarousel {
     private final HyperiumFontRenderer fr = new HyperiumFontRenderer("Arial", Font.PLAIN, 60);
     private int index;

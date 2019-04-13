@@ -3,11 +3,7 @@ package cc.hyperium.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
-/*
- * Created by Cubxity on 01/06/2018
- */
 public enum Icons {
-
     SETTINGS(new ResourceLocation("textures/material/settings.png")),
     EXTENSION(new ResourceLocation("textures/material/extension.png")),
     ERROR(new ResourceLocation("textures/material/error.png")),
@@ -23,15 +19,12 @@ public enum Icons {
     LIGHTBULB_SOLID(new ResourceLocation("textures/material/lightbulb-solid.png"));
 
     private ResourceLocation res;
-
     Icons(ResourceLocation res) {
         this.res = res;
     }
-
     public void bind() {
         Minecraft.getMinecraft().getTextureManager().bindTexture(res);
     }
-
     public ResourceLocation getResource() {
         return res;
     }
