@@ -1,7 +1,5 @@
 package cc.hyperium.mods.hgames.minigames;
 
-import cc.hyperium.Hyperium;
-import cc.hyperium.mods.chromahud.ElementRenderer;
 import cc.hyperium.mods.chromahud.displayitems.hyperium.MinigameDisplay;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IChatComponent;
@@ -16,16 +14,7 @@ public class Walls3 extends Minigame {
     public void draw(MinigameDisplay display, int starX, double startY, boolean config) {
         display.setHeight(10);
         display.setWidth(10);
-
-//        ElementRenderer.draw(starX, startY + getMultiplier(), "Testing: " + Hyperium.INSTANCE.getMinigameListener().getCurrentMinigameName());
-//        ElementRenderer.draw(starX, startY + getMultiplier(), "Map: " + currentMap);
-//        ElementRenderer.draw(starX, startY + getMultiplier(), "Testing 3");
-
         timesCalled = 0;
-    }
-
-    private int getMultiplier() {
-        return timesCalled++ * 10;
     }
 
     @Override

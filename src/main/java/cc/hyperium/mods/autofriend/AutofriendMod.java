@@ -6,7 +6,6 @@ import cc.hyperium.event.HypixelFriendRequestEvent;
 import cc.hyperium.event.InvokeEvent;
 import cc.hyperium.mods.AbstractMod;
 import net.minecraft.client.Minecraft;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,13 +13,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class AutofriendMod extends AbstractMod {
-
     private Minecraft mc = Minecraft.getMinecraft();
     public static List<String> blacklist = new ArrayList<>();
-    public static final List<String> recent = new ArrayList<>();
+    private static final List<String> recent = new ArrayList<>();
 
     @Override
     public AbstractMod init() {
@@ -66,16 +63,12 @@ public class AutofriendMod extends AbstractMod {
         try {
             final File blacklistFile = new File("config/autofriend.cfg");
 
-            if (!blacklistFile.getParentFile().exists()) {
-                if (!blacklistFile.getParentFile().mkdirs()) {
-                    return;
-                }
+            if (!blacklistFile.getParentFile().exists() && !blacklistFile.getParentFile().mkdirs()) {
+                return;
             }
 
-            if (!blacklistFile.exists()) {
-                if (!blacklistFile.createNewFile()) {
-                    return;
-                }
+            if (!blacklistFile.exists() && !blacklistFile.createNewFile()) {
+                return;
             }
 
             final FileWriter writer = new FileWriter(blacklistFile);

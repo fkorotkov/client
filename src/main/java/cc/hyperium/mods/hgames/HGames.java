@@ -13,15 +13,12 @@ import cc.hyperium.mods.hgames.minigames.Walls3;
 import cc.hyperium.utils.ChatColor;
 
 public class HGames extends AbstractMod {
-
     private final Metadata metadata;
-
     private Minigame minigame;
 
     public HGames() {
         metadata = new Metadata(this, "Hypixel Minigames", "1.0", "Kevin");
         metadata.setDisplayName(ChatColor.GOLD + "Hypixel Minigames");
-
     }
 
     @InvokeEvent

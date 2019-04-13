@@ -31,7 +31,6 @@ import me.semx11.autotip.gson.exclusion.AnnotationExclusionStrategy;
 import me.semx11.autotip.stats.StatsDaily;
 import me.semx11.autotip.universal.UniversalUtil;
 import me.semx11.autotip.util.FileUtil;
-import me.semx11.autotip.util.MinecraftVersion;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IChatComponent;
 import org.apache.logging.log4j.LogManager;
@@ -49,7 +48,6 @@ public class Autotip {
     private final List<CommandAbstract> commands = new ArrayList<>();
     private boolean initialized = false;
     private Minecraft minecraft;
-    private MinecraftVersion mcVersion;
     private Gson gson;
     private FileUtil fileUtil;
     private MessageUtil messageUtil;
@@ -71,10 +69,6 @@ public class Autotip {
 
     public GameProfile getGameProfile() {
         return minecraft.getSession().getProfile();
-    }
-
-    public MinecraftVersion getMcVersion() {
-        return mcVersion;
     }
 
     public Gson getGson() {
@@ -130,8 +124,7 @@ public class Autotip {
                     .registerTypeAdapter(Config.class, new ConfigCreator(this))
                     .registerTypeAdapter(StatsDaily.class, new StatsDailyCreator(this))
                     .setExclusionStrategies(new AnnotationExclusionStrategy())
-                    .setPrettyPrinting()
-                    .create();
+                    .setPrettyPrinting().create();
 
             this.config = new Config(this);
             this.reloadGlobalSettings();
@@ -158,10 +151,8 @@ public class Autotip {
             );
             Runtime.getRuntime().addShutdownHook(new Thread(sessionManager::logout));
             this.initialized = true;
-        } catch (IOException e) {
-            messageUtil.send("Autotip is disabled because it couldn't create the required files.");
-        } catch (IllegalStateException e) {
-            messageUtil.send("Autotip is disabled because it couldn't connect to the API.");
+        } catch (IllegalStateException | IOException e) {
+            messageUtil.send("Autotip is disabled.");
         }
     }
 
@@ -181,16 +172,14 @@ public class Autotip {
     public <T extends Event> T getEvent(Class<T> clazz) {
         return (T) events.stream()
                 .filter(event -> event.getClass().equals(clazz))
-                .findFirst()
-                .orElse(null);
+                .findFirst().orElse(null);
     }
 
     @SuppressWarnings("unchecked")
     public <T extends CommandAbstract> T getCommand(Class<T> clazz) {
         return (T) commands.stream()
                 .filter(command -> command.getClass().equals(clazz))
-                .findFirst()
-                .orElse(null);
+                .findFirst().orElse(null);
     }
 
     private void registerEvents(Event... events) {

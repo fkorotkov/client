@@ -8,9 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by mitchellkatz on 6/4/17.
- */
 public class HypixelApiGuild implements HypixelApiObject {
     private JsonHolder guild;
     private List<GuildRank> ranks;
@@ -27,7 +24,7 @@ public class HypixelApiGuild implements HypixelApiObject {
         return guild.has("guild");
     }
 
-    public JsonHolder getRoot() {
+    private JsonHolder getRoot() {
         return guild.optJSONObject("guild");
     }
 
@@ -37,10 +34,6 @@ public class HypixelApiGuild implements HypixelApiObject {
 
     public boolean isLoaded() {
         return guild.optBoolean("loaded");
-    }
-
-    public String getID() {
-        return getRoot().optString("_id");
     }
 
     public String getFormatedTag() {
@@ -59,28 +52,12 @@ public class HypixelApiGuild implements HypixelApiObject {
         return getRoot().optInt("legacyRanking") + 1;
     }
 
-    public String getDiscord() {
-        return getRoot().optString("discord");
-    }
-
-    public boolean hasDiscord() {
-        return !(getDiscord().isEmpty() || getDiscord().equalsIgnoreCase("null"));
-    }
-
     public String getDescription() {
         return getRoot().optString("description");
     }
 
-    public boolean canTag() {
-        return getRoot().optBoolean("canTag");
-    }
-
     public JsonArray getMembers() {
         return getRoot().optJSONArray("members");
-    }
-
-    public int getCurrentGuildCoins() {
-        return getRoot().optInt("coins");
     }
 
     public int getTotalGuildCoins() {
@@ -91,10 +68,6 @@ public class HypixelApiGuild implements HypixelApiObject {
         return getRoot().optLong("created");
     }
 
-    public boolean isJoinable() {
-        return getRoot().optBoolean("joinable");
-    }
-
     public double getLevel() {
         return getRoot().optDouble("level_calc");
     }
@@ -102,19 +75,6 @@ public class HypixelApiGuild implements HypixelApiObject {
     public int getWins() {
         return getRoot().optJSONObject("achievements").optInt("WINNERS");
     }
-
-    public List<String> getMembersUUID() {
-        ArrayList<String> builtArray = new ArrayList<>();
-        for (JsonElement element : getMembers()) {
-            builtArray.add(new JsonHolder(element.getAsJsonObject()).optString("uuid"));
-        }
-        return builtArray;
-    }
-
-    public int getLevelPosition() {
-        return getRoot().optInt("level_pos");
-    }
-
     public List<GuildPlayer> getInOrder() {
         List<GuildPlayer> players = new ArrayList<>();
         for (JsonElement element : getMembers()) {
@@ -130,7 +90,7 @@ public class HypixelApiGuild implements HypixelApiObject {
         return holder.optInt(item);
     }
 
-    public int getPriorityForRank(String rank) {
+    private int getPriorityForRank(String rank) {
         for (GuildRank guildRank : getCustomRanks()) {
             if (guildRank.name.equals(rank)) {
                 return guildRank.priority;
@@ -139,7 +99,7 @@ public class HypixelApiGuild implements HypixelApiObject {
         return -1;
     }
 
-    public List<GuildRank> getCustomRanks() {
+    private List<GuildRank> getCustomRanks() {
         if (ranks == null) {
             ranks = new ArrayList<>();
             ranks.add(new GuildRank("GUILDMASTER", Integer.MAX_VALUE));
@@ -156,7 +116,7 @@ public class HypixelApiGuild implements HypixelApiObject {
     public class GuildPlayer {
         private JsonHolder object;
 
-        public GuildPlayer(JsonHolder object) {
+        private GuildPlayer(JsonHolder object) {
             this.object = object;
         }
 
@@ -180,18 +140,13 @@ public class HypixelApiGuild implements HypixelApiObject {
     public class GuildRank {
         private String name;
         private int priority;
-        public GuildRank(String name, int priority) {
+        private GuildRank(String name, int priority) {
             this.name = name;
             this.priority = priority;
         }
 
         public String getName() {
             return name;
-        }
-
-
-        public int getPriority() {
-            return priority;
         }
     }
 }

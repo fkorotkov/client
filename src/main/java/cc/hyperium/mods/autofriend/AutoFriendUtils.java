@@ -3,9 +3,6 @@ package cc.hyperium.mods.autofriend;
 import net.minecraft.event.*;
 import net.minecraft.util.*;
 
-/*
-credit to 2PI for help
-*/
 public class AutoFriendUtils {
     private final IChatComponent parent;
     private String text;
@@ -48,26 +45,6 @@ public class AutoFriendUtils {
         return this;
     }
 
-    public AutoFriendUtils setItalic(final boolean italic) {
-        this.style.setItalic(italic);
-        return this;
-    }
-
-    public AutoFriendUtils setStrikethrough(final boolean strikethrough) {
-        this.style.setStrikethrough(strikethrough);
-        return this;
-    }
-
-    public AutoFriendUtils setUnderlined(final boolean underlined) {
-        this.style.setUnderlined(underlined);
-        return this;
-    }
-
-    public AutoFriendUtils setObfuscated(final boolean obfuscated) {
-        this.style.setObfuscated(obfuscated);
-        return this;
-    }
-
     public AutoFriendUtils setClickEvent(final ClickEvent.Action action, final String value) {
         this.style.setChatClickEvent(new ClickEvent(action, value));
         return this;
@@ -77,7 +54,7 @@ public class AutoFriendUtils {
         return this.setHoverEvent(new ChatComponentText(value));
     }
 
-    public AutoFriendUtils setHoverEvent(final IChatComponent value) {
+    private AutoFriendUtils setHoverEvent(final IChatComponent value) {
         return this.setHoverEvent(HoverEvent.Action.SHOW_TEXT, value);
     }
 

@@ -36,7 +36,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.scoreboard.Team;
-
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,7 +46,6 @@ import java.util.Set;
 import java.util.UUID;
 
 public class Levelhead extends AbstractMod {
-
     public final String MODID = "LEVEL_HEAD";
     public final String VERSION = "5.0";
     public final Map<UUID, LevelheadTag> levelCache = new HashMap<>();
@@ -64,7 +62,6 @@ public class Levelhead extends AbstractMod {
     private int updates = 0;
     private Sk1erMod mod;
     private LevelheadConfig config;
-    private boolean levelHeadInfoFailed = false;
     private JsonHolder types = new JsonHolder();
 
     public Levelhead() {
@@ -87,8 +84,6 @@ public class Levelhead extends AbstractMod {
         mod = new Sk1erMod(MODID, VERSION, object -> {
             count = object.optInt("count");
             this.wait = object.optInt("wait", Integer.MAX_VALUE);
-            //                GeneralChatHandler.instance().sendMessage("An error occurred whilst loading internal Levelhead info. ");
-            this.levelHeadInfoFailed = count == 0 || wait == Integer.MAX_VALUE;
         });
         Multithreading.runAsync(() -> types = new JsonHolder(mod.rawWithAgent("https://api.sk1er.club/levelhead_config")));
         this.mod.checkStatus();

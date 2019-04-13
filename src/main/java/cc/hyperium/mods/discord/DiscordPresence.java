@@ -34,7 +34,6 @@ import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.gui.GuiSelectWorld;
 
 public class DiscordPresence {
-
     private long startTime;
 
     public void load() {

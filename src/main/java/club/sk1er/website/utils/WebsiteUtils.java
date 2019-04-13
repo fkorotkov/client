@@ -1,7 +1,6 @@
 package club.sk1er.website.utils;
 
 import com.google.gson.JsonObject;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +9,7 @@ import java.util.TreeMap;
 public class WebsiteUtils {
 
     public static final List<String> blitz_kits = new ArrayList<>();
-    public static final TreeMap<Integer, String> numerals = new TreeMap<>();
+    private static final TreeMap<Integer, String> numerals = new TreeMap<>();
 
     static {
         numerals.put(100, "C");

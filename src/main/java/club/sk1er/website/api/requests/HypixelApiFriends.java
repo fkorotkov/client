@@ -5,9 +5,6 @@ import com.google.gson.JsonElement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mitchellkatz on 6/4/17.
- */
 public class HypixelApiFriends implements HypixelApiObject {
     private JsonHolder master;
 
@@ -42,9 +39,5 @@ public class HypixelApiFriends implements HypixelApiObject {
         List<JsonHolder> friends = new ArrayList<>();
         for (JsonElement tmp1 : getFriends()) friends.add(new JsonHolder(tmp1.getAsJsonObject()));
         return friends;
-    }
-
-    public int getCount() {
-        return getFriends().size();
     }
 }

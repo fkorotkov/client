@@ -3,9 +3,7 @@ package cc.hyperium.mods.autofriend.command;
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.mods.autofriend.AutoFriendUtils;
 import cc.hyperium.mods.autofriend.AutofriendMod;
-
 import java.util.regex.Pattern;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.event.ClickEvent;
 import net.minecraft.event.HoverEvent;
@@ -13,9 +11,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 public class AutofriendCommand implements BaseCommand {
-
     private Pattern username;
-    private AutofriendMod mod;
     private Minecraft mc = Minecraft.getMinecraft();
     private String usage = "/autofriend blacklist add/remove <username>";
 
@@ -23,7 +19,7 @@ public class AutofriendCommand implements BaseCommand {
         this.username = Pattern.compile("\\w{1,16}");
     }
 
-    public void throwError(final String error) {
+    private void throwError(final String error) {
         mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + "Error: " + error));
     }
 
