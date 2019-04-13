@@ -15,73 +15,32 @@ import org.apache.commons.io.FileUtils
 import java.io.File
 import java.util.jar.JarFile
 
-/**
- * Instance created on the classloader sun.misc.Launcher$AppClassLoader
- *
- * @since 1.0
- * @author Kevin Brewster
- */
 object AddonBootstrap {
-
-    /**
-     * Directory where all the addonManifests are stored
-     */
     private val modDirectory = File("addons")
 
-    /**
-     * Directory where all pending addons are stored
-     */
     private val pendingDirectory = File("pending-addons")
 
-    /**
-     * Current (active) environment phase, set to NULL until the
-     * phases have been populated
-     */
     var phase: Phase = Phase.NOT_STARTED
 
-    /**
-     * Addons as resource packs to load
-     */
     @JvmStatic
     val addonResourcePacks: ArrayList<File?> = ArrayList()
 
-    /**
-     * All the filtered jars inside of the {@link #modDirectory} folder,
-     */
     private lateinit var jars: ArrayList<File>
 
-    /**
-     * Method of loading all the valid addonManifests to the classloader
-     */
     private val loader = DefaultAddonLoader()
 
-    /**
-     * Method of loading the addon if inside of the dev env
-     */
     private val workspaceLoader = WorkspaceAddonLoader()
 
-    /**
-     * Translators which can change, add or parse an addons manifest
-     * at a certain phase
-     */
     internal val translators = arrayListOf(
             InstanceTranslator(),
             MixinTranslator(),
             TransformerTranslator()
     )
 
-    /**
-     * Once the {@link #init} has called it will then be populated
-     */
     val addonManifests = ArrayList<AddonManifest>()
 
     val pendingManifests = ArrayList<AddonManifest>()
 
-    /**
-     * Loads of the files inside {@link #modDirectory} folder or
-     * creates the directory if not already made and then adds
-     * all the valid jar files to {@link #jars}
-     */
     init {
         if (!modDirectory.mkdirs() && !modDirectory.exists()) {
             throw AddonLoadException("Unable to create addon directory!")
@@ -92,14 +51,6 @@ object AddonBootstrap {
                 .toCollection(ArrayList())
     }
 
-    /**
-     * The Preinit phase of the bootstrap where all the
-     * Addon Manifests are loaded into {@link #addonManifests}
-     * and then sets the phase to {@link Phase#INIT}.
-     *
-     * This should be called before Minecraft's classes are loaded.
-     * In this case we use {@link net.minecraft.launchwrapper.ITweaker}
-     */
     fun init() {
         if (phase != Phase.NOT_STARTED) {
             throw AddonLoadException("Cannot initialise bootstrap twice")
@@ -125,12 +76,6 @@ object AddonBootstrap {
         phase = Phase.INIT
     }
 
-    /**
-     * This loads the internal addon meaning that this must be inside of a development
-     * environment.
-     *
-     * @return returns the addon manifest
-     */
     private fun loadWorkspaceAddon(): AddonManifest? {
         return try {
             loadAddon(workspaceLoader, null)
@@ -140,13 +85,6 @@ object AddonBootstrap {
         }
     }
 
-    /**
-     * Loads external jars using {@link me.kbrewster.blazeapi.internal.addons.strategy.AddonLoaderStrategy}
-     * This extracts the <i>addon.json</i> from the addon and returns the parsed manifest
-     *
-     * @param loader Addon loader
-     * @return returns a list of the addon manifests
-     */
     private fun loadAddons(loader: AddonLoaderStrategy): List<AddonManifest> {
         val addons = ArrayList<AddonManifest>()
         var pendings = if(pendingDirectory.exists()) pendingDirectory.listFiles() else arrayOf()
@@ -183,39 +121,15 @@ object AddonBootstrap {
         return addons
     }
 
-    /**
-     * Loads a jar using {@link me.kbrewster.blazeapi.internal.addons.strategy.AddonLoaderStrategy}
-     * This extracts the <i>addon.json</i> from the addon and returns the parsed manifest
-     *
-     * @param loader Addon loader strategy
-     * @param addon The file which is to be loaded, can be left null if [loader] does not need it
-     * @return returns the addon manifest
-     */
     @Throws(Exception::class)
     private fun loadAddon(loader: AddonLoaderStrategy, addon: File?): AddonManifest? {
         return loader.load(addon)
     }
 
-    /**
-     * Phase the bootstrap is currently in
-     */
     enum class Phase {
         NOT_STARTED,
-
-        /**
-         * Loading classes into classloader
-         * Executing AddonManifest {@link net.minecraft.launchwrapper.ITweaker} classes
-         */
         PREINIT,
-
-        /**
-         * Creates instances of main classes and executes onLoad
-         */
         INIT,
-
-        /**
-         * If this all phases goes successfully it will end up at default
-         */
         DEFAULT;
     }
 }

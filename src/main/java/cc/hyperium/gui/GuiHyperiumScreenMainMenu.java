@@ -196,10 +196,7 @@ import net.minecraft.world.storage.ISaveFormat;
 import net.minecraft.world.storage.WorldInfo;
 import org.lwjgl.input.Keyboard;
 
-import java.io.IOException;
-
 public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiYesNoCallback {
-
     public static boolean FIRST_START = true;
     private final ResourceLocation exit = new ResourceLocation("textures/material/exit.png");
     private final ResourceLocation people_outline = new ResourceLocation("textures/material/people-outline.png");
@@ -221,14 +218,7 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
         }
     }
 
-    /**
-     * Override initGui
-     *
-     * @author Cubxity
-     */
-
     public void initGui() {
-
         viewportTexture = new DynamicTexture(256, 256);
         int j = this.height / 4 + 48;
 
@@ -257,12 +247,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
         }
     }
 
-    /**
-     * Override buttons
-     *
-     * @author Cubxity
-     */
-
     public void addSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
         switch (getStyle()) {
             case DEFAULT:
@@ -274,11 +258,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
         }
     }
 
-    /**
-     * Override drawScreen method
-     *
-     * @author Cubxity
-     */
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         super.drawScreen(mouseX, mouseY, partialTicks);
@@ -348,14 +327,12 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
             HyperiumMainGui.INSTANCE.setTab(2);
             Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(HyperiumMainGui.INSTANCE);
         }
-
     }
 
     public void addHyperiumStyleSingleplayerMultiplayerButtons() {
         this.buttonList.add(new GuiButton(1, this.width / 2 - getIntendedWidth(295), this.height / 2 - getIntendedHeight(55), getIntendedWidth(110), getIntendedHeight(110), ""));
         this.buttonList.add(new GuiButton(2, this.width / 2 - getIntendedWidth(175), this.height / 2 - getIntendedHeight(55), getIntendedWidth(110), getIntendedHeight(110), ""));
         this.buttonList.add(new GuiButton(15, this.width / 2 + getIntendedWidth(65), this.height / 2 - getIntendedHeight(55), getIntendedWidth(110), getIntendedHeight(110), ""));
-        this.buttonList.add(new GuiButton(100, this.width / 2 - 100, this.height / 2 - getIntendedHeight(-60), I18n.format("button.menu.cosmeticshop")));
     }
 
     public void addDefaultStyleSingleplayerMultiplayerButtons(int p_73969_1_, int p_73969_2_) {
@@ -375,7 +352,6 @@ public class GuiHyperiumScreenMainMenu extends GuiHyperiumScreen implements GuiY
     public void addDefaultStyleOptionsButton(int j) {
         this.buttonList.add(new GuiButton(0, this.width / 2 - 100, j + 56 + 12 + 24 - 5, 98, 20, I18n.format("menu.options")));
         this.buttonList.add(new GuiButton(4, this.width / 2 + 2, j + 56 + 12 + 24 - 5, 98, 20, I18n.format("menu.quit")));
-        this.buttonList.add(new GuiButton(100, this.width / 2 - 100, j + 78 + 12 + 24 - 5, 98, 20, I18n.format("button.menu.cosmeticshop")));
     }
 
     @Override
