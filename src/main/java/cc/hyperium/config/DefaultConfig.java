@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * @author Sk1er, RDIL
- */
 public class DefaultConfig {
 
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
