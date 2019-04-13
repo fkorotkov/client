@@ -20,8 +20,6 @@ package cc.hyperium.event;
 import com.google.common.base.Preconditions;
 
 public final class AchievementGetEvent extends Event {
-
-    @NotNull
     private final String achievement;
 
     public AchievementGetEvent(String achievement) {
@@ -30,7 +28,6 @@ public final class AchievementGetEvent extends Event {
         this.achievement = achievement;
     }
 
-    @NotNull
     public final String getAchievement() {
         return this.achievement;
     }
