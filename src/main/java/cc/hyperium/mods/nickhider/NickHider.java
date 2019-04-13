@@ -40,7 +40,6 @@ import java.util.stream.Collectors;
 
 public class NickHider {
     public static final String MOD_ID = "nick_hider";
-    public static final String MOD_NAME = "Sk1er NickHider Cracked";
     public static final String VERSION = "3.0";
     @Instance
     public static NickHider INSTANCE;
@@ -81,12 +80,7 @@ public class NickHider {
     }
 
     public void init() {
-        sk1erMod = new Sk1erMod(MOD_ID, VERSION, object -> {
-            if (!object.optBoolean("enabled")) {
-                forceDown = true;
-            }
-        });
-        sk1erMod.checkStatus();
+        sk1erMod = new Sk1erMod(MOD_ID, VERSION);
         Multithreading.runAsync(() -> {
             String s = sk1erMod.rawWithAgent("https://sk1er.club/words.txt");
             namesDatabase.addAll(Arrays.asList(s.split("\n")));
@@ -131,10 +125,6 @@ public class NickHider {
                 e.printStackTrace();
             }
         }));
-    }
-
-    public boolean isExtendedUse() {
-        return extendedUse;
     }
 
     @InvokeEvent

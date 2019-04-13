@@ -14,9 +14,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
-/**
- * @author ConorTheDev
- */
 public class Downloader {
     public File download(URL url, File dstFile) {
         CloseableHttpClient httpclient = HttpClients.custom()

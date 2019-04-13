@@ -7,7 +7,6 @@ public class BossbarConfig {
     public BossbarConfig() {
         Hyperium.CONFIG.register(this);
     }
-
     @ConfigOpt
     public static boolean bossBarEnabled = true;
     @ConfigOpt
@@ -18,5 +17,4 @@ public class BossbarConfig {
     public static int x = -1;
     @ConfigOpt
     public static int y = 12;
-
 }

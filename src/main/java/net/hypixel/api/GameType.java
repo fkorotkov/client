@@ -55,19 +55,6 @@ public enum GameType {
         this.id = id;
     }
 
-    /**
-     * @param id The internal id
-     * @return The GameType associated with that id, or null if there isn't one.
-     */
-    public static GameType fromId(int id) {
-        for (GameType gameType : v) {
-            if (gameType.id == id) {
-                return gameType;
-            }
-        }
-        return null;
-    }
-
     public static GameType fromRealName(String id) {
         for (GameType gameType : v) {
             if (gameType.name.equalsIgnoreCase(id)) {
@@ -77,10 +64,6 @@ public enum GameType {
         return null;
     }
 
-    /**
-     * @param dbName The key used in the database
-     * @return The GameType associated with that key, or null if there isn't one.
-     */
     public static GameType fromDatabase(String dbName) {
         for (GameType gameType : v) {
             if (gameType.dbName.equals(dbName)) {
@@ -120,9 +103,6 @@ public enum GameType {
         return name;
     }
 
-    /**
-     * @return The internal ID that is occasionally used in various database schemas
-     */
     public int getId() {
         return id;
     }

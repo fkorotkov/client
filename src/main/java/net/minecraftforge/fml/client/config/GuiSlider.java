@@ -20,25 +20,11 @@ package net.minecraftforge.fml.client.config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 
-/**
- * This class is blatantly stolen from iChunUtils with permission.
- *
- * @author iChun
- */
 public class GuiSlider extends GuiButtonExt {
-    /**
-     * The value of this slider control.
-     */
     public double sliderValue = 1.0F;
-
     public String dispString = "";
-
-    /**
-     * Is this slider control being dragged.
-     */
     public boolean dragging = false;
     public boolean showDecimal = true;
-
     public double minValue = 0.0D;
     public double maxValue = 5.0D;
     public int precision = 1;
@@ -84,25 +70,11 @@ public class GuiSlider extends GuiButtonExt {
         this(id, xPos, yPos, 150, 20, displayStr, "", minVal, maxVal, currentVal, true, true, par);
     }
 
-    /**
-     * Returns 0 if the button is disabled, 1 if the mouse is NOT hovering over this button and 2 if it IS hovering over
-     * this button.
-     */
-    /**
-     * Returns 0 if the button is disabled, 1 if the mouse is NOT hovering over this button and 2 if it IS hovering over
-     * this button.
-     */
     @Override
     public int getHoverState(boolean par1) {
         return 0;
     }
 
-    /**
-     * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
-     */
-    /**
-     * Fired when the mouse button is dragged. Equivalent of MouseListener.mouseDragged(MouseEvent e).
-     */
     @Override
     protected void mouseDragged(Minecraft par1Minecraft, int par2, int par3) {
         if (this.visible) {
@@ -117,14 +89,6 @@ public class GuiSlider extends GuiButtonExt {
         }
     }
 
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
-    /**
-     * Returns true if the mouse has been pressed on this control. Equivalent of MouseListener.mousePressed(MouseEvent
-     * e).
-     */
     @Override
     public boolean mousePressed(Minecraft par1Minecraft, int par2, int par3) {
         if (super.mousePressed(par1Minecraft, par2, par3)) {
@@ -175,12 +139,6 @@ public class GuiSlider extends GuiButtonExt {
         }
     }
 
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
-    /**
-     * Fired when the mouse button is released. Equivalent of MouseListener.mouseReleased(MouseEvent e).
-     */
     @Override
     public void mouseReleased(int par1, int par2) {
         this.dragging = false;

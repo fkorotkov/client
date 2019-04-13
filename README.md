@@ -22,3 +22,8 @@ Because the license requires it, here is a list of changes made:
 This fork is maintained by [RDIL](https://rdil.rocks). Questions should be put in [GitHub issues](https://github.com/RDIL/Hyperium-Jailbreak/issues).
 
 This fork is not owned or endorsed by Sk1er LLC.
+
+## ToS
+
+By downloading this client, you agree **it is use at your own risk**.
+The developers are not responsible if you get punished for using it.

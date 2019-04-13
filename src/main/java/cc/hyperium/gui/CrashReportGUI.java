@@ -38,9 +38,6 @@ import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
 
-/*
- * Created by Cubxity on 04/05/2018
- */
 public class CrashReportGUI extends JDialog {
     private CrashReport report;
 
@@ -74,11 +71,6 @@ public class CrashReportGUI extends JDialog {
             Bootstrap.printToSYSOUT("## FAILED TO HANDLE CRASH WITH HYPERIUM CRASH REPORT GUI ##");
         }
         return 0;
-    }
-
-    public static void main(String[] args) {
-        // For testing
-        handle(CrashReport.makeCrashReport(null, "Debug"));
     }
 
     public static String haste(String txt) {
@@ -138,20 +130,16 @@ public class CrashReportGUI extends JDialog {
         report.addActionListener(e -> Multithreading.runAsync(() -> {
             // Need a better solution, we miss a lot of valid reports
             // And it'd be better to get as much info as possible
-            if (false) { //!update.isSupported() || !Metadata.isDevelopment()) {
-                report.setText("Outdated Build");
-            } else {
+            report.setEnabled(false);
+            report.setText("REPORTING...");
+            if (sendReport()) {
                 report.setEnabled(false);
-                report.setText("REPORTING...");
-                if (sendReport()) {
-                    report.setEnabled(false);
-                    report.setText("REPORTED");
-                } else if (copyReport()) {
-                    report.setEnabled(false);
-                    report.setText("COPIED TO CLIPBOARD");
-                } else {
-                    report.setText("FAILED TO REPORT");
-                }
+                report.setText("REPORTED");
+            } else if (copyReport()) {
+                report.setEnabled(false);
+                report.setText("COPIED TO CLIPBOARD");
+            } else {
+                report.setText("FAILED TO REPORT");
             }
         }));
 

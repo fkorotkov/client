@@ -28,10 +28,7 @@ import cc.hyperium.event.InitializationEvent;
 import cc.hyperium.event.InvokeEvent;
 import cc.hyperium.event.Priority;
 import cc.hyperium.event.minigames.MinigameListener;
-import cc.hyperium.gui.BlurHandler;
-import cc.hyperium.gui.ColourOptions;
-import cc.hyperium.gui.ConfirmationPopup;
-import cc.hyperium.gui.NotificationCenter;
+import cc.hyperium.gui.*;
 import cc.hyperium.handlers.HyperiumHandlers;
 import cc.hyperium.handlers.handlers.stats.PlayerStatsGui;
 import cc.hyperium.mixinsimp.client.resources.HyperiumLocale;
@@ -42,7 +39,6 @@ import cc.hyperium.mods.autogg.AutoGG;
 import cc.hyperium.mods.common.ToggleSprintContainer;
 import cc.hyperium.mods.discord.DiscordPresence;
 import cc.hyperium.mods.sk1ercommon.Multithreading;
-import cc.hyperium.mods.sk1ercommon.Sk1erMod;
 import cc.hyperium.mods.statistics.GeneralStatisticsTracking;
 import cc.hyperium.netty.NettyClient;
 import cc.hyperium.netty.UniversalNetty;
@@ -60,8 +56,8 @@ import net.minecraft.crash.CrashReport;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.opengl.Display;
+import rocks.rdil.jailbreak.chat.CommonChatResponder;
 import rocks.rdil.jailbreak.util.OS;
-import rocks.rdil.jailbreak.plugin.ThankWatchdog;
 import rocks.rdil.jailbreak.Jailbreak;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -75,7 +71,9 @@ import java.lang.management.ManagementFactory;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.lang.SuppressWarnings;
 
+@SuppressWarnings("unused")
 public class Hyperium {
     public static final Hyperium INSTANCE = new Hyperium();
     public static final Logger LOGGER = LogManager.getLogger(Metadata.getModid());
@@ -93,10 +91,8 @@ public class Hyperium {
     private HyperiumHandlers handlers;
     private HyperiumModIntegration modIntegration;
     private MinigameListener minigameListener;
-    private boolean acceptedTos = false;
     private boolean optifineInstalled = false;
     public boolean isDevEnv;
-    private Sk1erMod sk1erMod;
     private NettyClient client;
     private NetworkHandler networkHandler;
     private boolean firstLaunch = false;
@@ -138,16 +134,11 @@ public class Hyperium {
 
             if(!Settings.FPS) {
                 cosmetics = new HyperiumCosmetics();
-                ThankWatchdog w = new ThankWatchdog();
+                if (Settings.THANK_WATCHDOG && !Settings.FPS) new CommonChatResponder("removed from your game for hacking", "Thanks Watchdog!", true);
             }
 
             // Creates the accounts dir
             firstLaunch = new File(folder.getAbsolutePath() + "/accounts").mkdirs();
-
-            // Has the user accepted the TOS?
-            this.acceptedTos = new File(
-                folder.getAbsolutePath() + "/accounts/" + Minecraft.getMinecraft().getSession()
-                    .getPlayerID() + ".lck").exists();
 
             SplashProgress.setProgress(5, I18n.format("splashprogress.loadinghandlers"));
             EventBus.INSTANCE.register(autogg);
@@ -191,21 +182,8 @@ public class Hyperium {
                 } catch (IOException ignored) {}
             });
 
-            //Multithreading.runAsync(Spotify::load);
-
             Runtime.getRuntime().addShutdownHook(new Thread(this::shutdown));
             if (!OS.isMacintosh()) richPresenceManager.load();
-
-            if (acceptedTos) {
-                sk1erMod = new Sk1erMod("hyperium", Metadata.getVersion(), object -> {
-                    //Callback
-                    if (object.has("enabled") && !object.optBoolean("enabled")) {
-                        //Disable stuff
-                        getHandlers().getHyperiumCommandHandler().clear();
-                    }
-                });
-                sk1erMod.checkStatus();
-            }
 
             SplashProgress.setProgress(12, I18n.format("splashprogress.reloadingresourcemanager"));
             Minecraft.getMinecraft().refreshResources();
@@ -299,11 +277,6 @@ public class Hyperium {
     }
 
     public void acceptTos() {
-        acceptedTos = true;
-        if (sk1erMod == null) {
-            sk1erMod = new Sk1erMod("hyperium", Metadata.getVersion());
-            sk1erMod.checkStatus();
-        }
         try {
             new File(folder.getAbsolutePath() + "/accounts/" + Minecraft.getMinecraft().getSession()
                 .getPlayerID() + ".lck").createNewFile();
@@ -410,9 +383,5 @@ public class Hyperium {
 
     public NotificationCenter getNotification() {
         return notification;
-    }
-
-    public boolean isAcceptedTos() {
-        return acceptedTos;
     }
 }

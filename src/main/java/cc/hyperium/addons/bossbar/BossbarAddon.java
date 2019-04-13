@@ -15,10 +15,6 @@ public class BossbarAddon extends AbstractAddon {
         return guiBossBarSetting;
     }
 
-    public CommandBossbar getCommandBossbar() {
-        return commandBossbar;
-    }
-
     @Override
     public AbstractAddon init() {
         bossbarConfig = new BossbarConfig();

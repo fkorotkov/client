@@ -18,7 +18,6 @@
 package cc.hyperium.styles;
 
 public enum GuiStyle {
-
     DEFAULT,
     HYPERIUM
 }

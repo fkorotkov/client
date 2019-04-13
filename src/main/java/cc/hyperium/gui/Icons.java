@@ -28,5 +28,4 @@ public enum Icons {
     public ResourceLocation getResource() {
         return res;
     }
-
 }

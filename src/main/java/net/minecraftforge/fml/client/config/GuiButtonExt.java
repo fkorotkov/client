@@ -20,16 +20,6 @@ package net.minecraftforge.fml.client.config;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
-/**
- * This class provides a button that fixes several bugs present in the vanilla GuiButton drawing code.
- * The gist of it is that it allows buttons of any size without gaps in the graphics and with the
- * borders drawn properly. It also prevents button text from extending out of the sides of the button by
- * trimming the end of the string and adding an ellipsis.<br/><br/>
- * <p>
- * The code that handles drawing the button is in GuiUtils.
- *
- * @author bspkrs
- */
 public class GuiButtonExt extends GuiButton {
     public GuiButtonExt(int id, int xPos, int yPos, String displayString) {
         super(id, xPos, yPos, displayString);
@@ -39,12 +29,6 @@ public class GuiButtonExt extends GuiButton {
         super(id, xPos, yPos, width, height, displayString);
     }
 
-    /**
-     * Draws this button to the screen.
-     */
-    /**
-     * Draws this button to the screen.
-     */
     @Override
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (this.visible) {

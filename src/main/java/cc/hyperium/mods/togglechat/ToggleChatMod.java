@@ -25,48 +25,26 @@ import cc.hyperium.mods.togglechat.config.ToggleChatConfig;
 import cc.hyperium.mods.togglechat.toggles.ToggleBaseHandler;
 import cc.hyperium.utils.ChatColor;
 
-/**
- * Basically just a lightweight version of ToggleChat
- *
- * @author boomboompower
- */
 public final class ToggleChatMod extends AbstractMod {
-
-    /**
-     * The metadata of ToggleChat
-     */
     private final Metadata meta;
 
-    /**
-     * A basic CONFIG loader
-     */
     private ToggleChatConfig configLoader;
 
-    /**
-     * A different implementation to the normal ToggleChat, just manages all toggles
-     */
     private ToggleBaseHandler toggleHandler;
 
     public ToggleChatMod() {
         Metadata metadata = new Metadata(this, "ToggleChatLite", "1.0", "boomboompower");
-
         metadata.setDisplayName(ChatColor.AQUA + "ToggleChatLite");
-
         this.meta = metadata;
     }
 
     public AbstractMod init() {
         this.configLoader = new ToggleChatConfig(this, Hyperium.folder);
-
         this.toggleHandler = new ToggleBaseHandler();
         this.toggleHandler.remake();
-
         EventBus.INSTANCE.register(new ToggleChatEvents(this));
-
         Hyperium.INSTANCE.getHandlers().getHyperiumCommandHandler().registerCommand(new CommandToggleChat(this));
-
         this.configLoader.loadToggles();
-
         return this;
     }
 
@@ -75,20 +53,10 @@ public final class ToggleChatMod extends AbstractMod {
         return this.meta;
     }
 
-    /**
-     * Getter for ToggleChat's configuration
-     *
-     * @return the configuration
-     */
     public ToggleChatConfig getConfigLoader() {
         return this.configLoader;
     }
 
-    /**
-     * Getter for ToggleChat's ToggleHandler
-     *
-     * @return the handlers instance
-     */
     public ToggleBaseHandler getToggleHandler() {
         return this.toggleHandler;
     }

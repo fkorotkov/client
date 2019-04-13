@@ -21,10 +21,6 @@ APP_BASE_NAME=`basename "$0"`
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD="maximum"
 
-warn () {
-    echo "$*"
-}
-
 die () {
     echo
     echo "$*"
@@ -61,11 +57,6 @@ MAX_FD_LIMIT=`ulimit -H -n`
 if [ $? -eq 0 ] ; then
     MAX_FD="$MAX_FD_LIMIT"
     ulimit -n "maximum"
-    if [ $? -ne 0 ] ; then
-        warn "Could not set maximum file descriptor limit: $MAX_FD"
-    fi
-else
-    warn "Could not query maximum file descriptor limit: $MAX_FD_LIMIT"
 fi
 
 # Escape application args

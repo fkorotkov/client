@@ -9,14 +9,12 @@ import java.io.IOException;
 
 public class GuiBossbarPosition extends GuiScreen {
     private GuiScreen parent;
-    private BossbarAddon addon;
     private String oldBossName;
     private int oldStatusBarTime;
     private float oldHealthScale;
 
     public GuiBossbarPosition(GuiScreen parent, BossbarAddon addon) {
         this.parent = parent;
-        this.addon = addon;
     }
 
     @Override

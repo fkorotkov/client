@@ -10,7 +10,6 @@ import java.io.IOException;
 
 public class GuiBossbarSetting extends GuiScreen {
     private BossbarAddon addon;
-    private GuiSlider sliderScale;
 
     public GuiBossbarSetting(BossbarAddon addon) {
         this.addon = addon;

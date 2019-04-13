@@ -25,9 +25,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-
 public class Multithreading {
-
     public static final ExecutorService POOL = Executors.newFixedThreadPool(100, new ThreadFactory() {
         final AtomicInteger counter = new AtomicInteger(0);
 
