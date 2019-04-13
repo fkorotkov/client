@@ -22,11 +22,7 @@ import cc.hyperium.styles.ButtonType;
 import cc.hyperium.styles.GuiStyle;
 import static cc.hyperium.config.Category.*;
 
-/*
- * Created by Cubxity on 03/06/2018
- */
 public class Settings {
-
     public static final Settings INSTANCE = new Settings();
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;JailbreakFPSMode")
@@ -318,7 +314,6 @@ public class Settings {
 
     public static boolean IMPROVE_PARTICLES = false;
     public static boolean IMPROVE_ENTITY_HANDLING = false;
-
     public static boolean IMPROVE_PARTICLE_RUN = false; /* any reason why this isnt used at all? */
 
     @ConfigOpt()
@@ -380,14 +375,8 @@ public class Settings {
     public static String PAUSE_STYLE = GuiStyle.HYPERIUM.name();
 
     @ConfigOpt
-    public static boolean SPOTIFY_NOTIFICATIONS = false;
-
-    @ConfigOpt
-    public static boolean SPOTIFY_FORCE_DISABLE = true;
-
-    @ConfigOpt
     @ToggleSetting(name = "gui.settings.updatenotificationsinhyperiumsettings", category = MISC)
-    public static boolean UPDATE_NOTIFICATIONS = true;
+    public static boolean UPDATE_NOTIFICATIONS = false;
 
     @ConfigOpt
     @ToggleSetting(name = "gui.settings.fastworldswitching", category = IMPROVEMENTS)
@@ -405,7 +394,6 @@ public class Settings {
         "10000",
         "20000",
         "50000",
-
     })
     public static String MAX_WORLD_PARTICLES_STRING = "10000";
 
@@ -421,39 +409,39 @@ public class Settings {
     public static boolean SHOW_HIT_DISTANCES = false;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.motionblurenabled", category = Category.MOTION_BLUR, mods = true)
+    @ToggleSetting(name = "gui.settings.motionblurenabled", category = MOTION_BLUR, mods = true)
     public static boolean MOTION_BLUR_ENABLED = false;
 
     @ConfigOpt
-    @SliderSetting(name = "gui.settings.motionblurintensity", min = 0F, max = 7F, category = Category.MOTION_BLUR, mods = true)
+    @SliderSetting(name = "gui.settings.motionblurintensity", min = 0F, max = 7F, category = MOTION_BLUR, mods = true)
     public static double MOTION_BLUR_AMOUNT = 4.0F;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.autofriendenabled", category = Category.AUTOFRIEND, mods = true)
+    @ToggleSetting(name = "gui.settings.autofriendenabled", category = AUTOFRIEND, mods = true)
     public static boolean AUTOFRIEND_TOGGLE = false;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.showfriendmessages", category = Category.AUTOFRIEND, mods = true)
+    @ToggleSetting(name = "gui.settings.showfriendmessages", category = AUTOFRIEND, mods = true)
     public static boolean AUTOFRIEND_MESSAGES = true;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.fortnitecompassenabled", category = Category.FNCOMPASS, mods = true)
+    @ToggleSetting(name = "gui.settings.fortnitecompassenabled", category = FNCOMPASS, mods = true)
     public static boolean FNCOMPASS_ENABLED = false;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.showbackground", category = Category.FNCOMPASS, mods = true)
+    @ToggleSetting(name = "gui.settings.showbackground", category = FNCOMPASS, mods = true)
     public static boolean FNCOMPASS_BACKGROUND = true;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.chroma", category = Category.FNCOMPASS, mods = true)
+    @ToggleSetting(name = "gui.settings.chroma", category = FNCOMPASS, mods = true)
     public static boolean FNCOMPASS_CHROMA = false;
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.shadow", category = Category.FNCOMPASS, mods = true)
+    @ToggleSetting(name = "gui.settings.shadow", category = FNCOMPASS, mods = true)
     public static boolean FNCOMPASS_SHADOW = true;
 
     @ConfigOpt
-    @SelectorSetting(category = Category.FNCOMPASS, name = "gui.settings.details", items = {
+    @SelectorSetting(category = FNCOMPASS, name = "gui.settings.details", items = {
         "0",
         "1",
         "2"
