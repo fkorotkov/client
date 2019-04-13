@@ -128,7 +128,6 @@ public abstract class AbstractAnimationHandler {
                 player.getBipedRightUpperArm().offsetY = 0;
                 player.getBipedLeftUpperArm().offsetY = 0;
 
-
                 player.getBipedHead().offsetZ = 0;
                 player.getBipedHead().offsetY = 0;
                 player.getBipedHeadwear().offsetZ = 0;
@@ -146,7 +145,6 @@ public abstract class AbstractAnimationHandler {
                     player1.getBipedRightUpperLegwear().offsetY = 0;
                     player1.getBipedRightLowerLegwear().offsetY = 0;
 
-
                     player1.getBipedLeftUpperArmwear().offsetZ = 0;
                     player1.getBipedRightUpperArmwear().offsetZ = 0;
                     player1.getBipedBodywear().offsetZ = 0;
@@ -154,15 +152,13 @@ public abstract class AbstractAnimationHandler {
                     player1.getBipedLeftLowerLegwear().offsetZ = 0;
                     player1.getBipedRightUpperLegwear().offsetZ = 0;
                     player1.getBipedRightLowerLegwear().offsetZ = 0;
-
-
                 }
             }
             return;
         }
 
         float heldPercent = state / 100F;
-        if (CosmeticsUtil.shouldHide(null))
+        if (CosmeticsUtil.shouldHide())
             return;
         if (player instanceof IMixinModelPlayer) {
             modifyPlayer(entity, ((IMixinModelPlayer) player), heldPercent);

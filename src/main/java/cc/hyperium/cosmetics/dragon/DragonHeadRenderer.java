@@ -22,7 +22,6 @@ import cc.hyperium.cosmetics.DragonCosmetic;
 import cc.hyperium.event.InvokeEvent;
 import cc.hyperium.event.RenderPlayerEvent;
 import cc.hyperium.event.WorldChangeEvent;
-import cc.hyperium.purchases.EnumPurchaseType;
 import cc.hyperium.purchases.HyperiumPurchase;
 import cc.hyperium.purchases.PurchaseApi;
 import net.minecraft.block.Block;
@@ -99,7 +98,7 @@ public class DragonHeadRenderer extends ModelBase {
 
     @InvokeEvent
     private void onRenderPlayer(RenderPlayerEvent event) {
-        if (CosmeticsUtil.shouldHide(EnumPurchaseType.DRAGON_HEAD))
+        if (CosmeticsUtil.shouldHide())
             return;
         EntityPlayer entity = event.getEntity();
         if (dragonCosmetic.isPurchasedBy(entity.getUniqueID()) && !entity.isInvisible()) {
@@ -119,7 +118,6 @@ public class DragonHeadRenderer extends ModelBase {
     }
 
     private void renderHead(final EntityPlayer player, final float partialTicks) {
-
         final double scale = 1.0F;
         final double rotate = this.interpolate(player.prevRotationYawHead, player.rotationYawHead, partialTicks);
         final double rotate1 = this.interpolate(player.prevRotationPitch, player.rotationPitch, partialTicks);

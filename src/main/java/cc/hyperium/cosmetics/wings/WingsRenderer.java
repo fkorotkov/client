@@ -34,7 +34,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class WingsRenderer extends ModelBase {
-
     private Minecraft mc;
     private ModelRenderer wing;
     private ModelRenderer wingTip;
@@ -61,16 +60,12 @@ public class WingsRenderer extends ModelBase {
 
     @InvokeEvent
     public void onRenderPlayer(RenderPlayerEvent event) {
-        if (CosmeticsUtil.shouldHide(EnumPurchaseType.WING_COSMETIC))
-            return;
+        if (CosmeticsUtil.shouldHide()) return;
         EntityPlayer player = event.getEntity();
         if (wingsCosmetic.isPurchasedBy(event.getEntity().getUniqueID()) && !player.isInvisible()) {
             HyperiumPurchase packageIfReady = PurchaseApi.getInstance().getPackageIfReady(event.getEntity().getUniqueID());
-            if (packageIfReady == null)
-                return;
-            if (packageIfReady.getCachedSettings().isWingsDisabled()) {
-                return;
-            }
+            if (packageIfReady == null) return;
+            if (packageIfReady.getCachedSettings().isWingsDisabled()) return;
 
             this.renderWings(player, event.getPartialTicks(), event.getX(), event.getY(), event.getZ());
         }
@@ -82,14 +77,11 @@ public class WingsRenderer extends ModelBase {
         if (packageIfReady == null) {
             return;
         }
-        String s = packageIfReady.getCachedSettings().getWingsType();
-        ResourceLocation location = wingsCosmetic.getLocation(s);
+        ResourceLocation location = wingsCosmetic.getLocation();
 
-        // Wings scale as defined in the settings.
         double v = packageIfReady.getCachedSettings().getWingsScale();
         double scale = v / 100.0;
-        double rotate = this
-            .interpolate(player.prevRenderYawOffset, player.renderYawOffset, partialTicks);
+        double rotate = this.interpolate(player.prevRenderYawOffset, player.renderYawOffset, partialTicks);
 
         GlStateManager.pushMatrix();
         // Displaces the wings by a custom value.
@@ -122,7 +114,6 @@ public class WingsRenderer extends ModelBase {
 
         if (rotateState == 2) {
             // Spinning rotate mode.
-
             // Translate to centre of the player.
             float difference = scaledHeight - (scaledPlayerHeight / 2);
             GlStateManager.translate(0.0F, difference, 0.0F);
@@ -131,7 +122,7 @@ public class WingsRenderer extends ModelBase {
             double l = System.currentTimeMillis() % (360 * 1.75) / 1.75;
             GlStateManager.rotate((float) -l, 0.1F, 0.0F, 0.0F);
 
-            //Translate back up to the correct position.
+            // Translate back up to the correct position.
             GlStateManager.translate(0.0F, -difference, 0.0F);
         } else if (rotateState == 1) {
             // Flip rotate mode.
@@ -163,7 +154,7 @@ public class WingsRenderer extends ModelBase {
         GL11.glPopMatrix();
     }
 
-    public float interpolate(float yaw1, float yaw2, final float percent) {
+    private float interpolate(float yaw1, float yaw2, final float percent) {
         float f = (yaw1 + (yaw2 - yaw1) * percent) % 360.0F;
         if (f < 0.0F) {
             f += 360.0F;

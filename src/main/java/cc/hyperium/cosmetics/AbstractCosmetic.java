@@ -12,18 +12,12 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * Created by mitchellkatz on 3/17/18. Designed for production use on Sk1er.club
- */
 public abstract class AbstractCosmetic {
-    private final boolean selfOnly;
     private final EnumPurchaseType purchaseType;
     private final Map<UUID, Boolean> purchasedBy = new ConcurrentHashMap<>();
     private boolean selfUnlocked;
-    private boolean checkDevEnv;
 
     public AbstractCosmetic(boolean selfOnly, EnumPurchaseType purchaseType) {
-        this.selfOnly = selfOnly;
         this.purchaseType = purchaseType;
         try {
             PurchaseApi.getInstance().getPackageAsync(UUIDUtil.getClientUUID(), hyperiumPurchase -> {
@@ -57,10 +51,6 @@ public abstract class AbstractCosmetic {
             Multithreading.runAsync(() -> purchasedBy.put(uuid, PurchaseApi.getInstance().getPackageSync(uuid).hasPurchased(purchaseType)));
             return false;
         }
-    }
-
-    public boolean isSelfOnly() {
-        return selfOnly;
     }
 
     public EnumPurchaseType getPurchaseType() {

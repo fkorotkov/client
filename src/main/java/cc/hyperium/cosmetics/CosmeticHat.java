@@ -12,30 +12,12 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-/**
- * Created by ScottehBoeh - 10/13/2018
- */
 public class CosmeticHat extends AbstractCosmetic {
     public ModelBase hatModel;
     public ResourceLocation hatTexture;
-
-    /**
-     * Default Hat Cosmetic Constructor
-     *
-     * @param selfOnly     - Should be rendered on self only? (boolean)
-     * @param purchaseType - Given Type of Purchase (EnumPurchaseType)
-     */
     public CosmeticHat(boolean selfOnly, EnumPurchaseType purchaseType) {
         super(selfOnly, purchaseType);
     }
-
-    /**
-     * Set Model - Set the Hat Model and Texture
-     *
-     * @param givenModel   - Given Model (ModelBase)
-     * @param givenTexture - Given Texture (ResourceLocation)
-     * @return - Returns initial instance
-     */
     public CosmeticHat setModel(ModelBase givenModel, ResourceLocation givenTexture) {
         this.hatModel = givenModel;
         this.hatTexture = givenTexture;
@@ -46,7 +28,7 @@ public class CosmeticHat extends AbstractCosmetic {
     public void onPlayerRender(RenderPlayerEvent e) {
         Minecraft mc = Minecraft.getMinecraft();
         AbstractClientPlayer player = e.getEntity();
-        if (CosmeticsUtil.shouldHide(getPurchaseType())) return;
+        if (CosmeticsUtil.shouldHide()) return;
 
         if (this.isPurchasedBy(player.getUniqueID()) && !player.isInvisible()) {
 

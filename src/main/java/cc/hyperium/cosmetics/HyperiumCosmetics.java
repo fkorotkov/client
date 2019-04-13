@@ -28,9 +28,6 @@ import net.minecraft.util.ResourceLocation;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by mitchellkatz on 3/17/18. Designed for production use on Sk1er.club
- */
 public class HyperiumCosmetics {
     private final List<AbstractCosmetic> cosmeticList = new ArrayList<>();
     private final FlipCosmetic flipCosmetic;
@@ -53,18 +50,9 @@ public class HyperiumCosmetics {
         registerCosmetic(fezCosmetic);
         registerCosmetic(legoCosmetic);
     }
-    public List<AbstractCosmetic> getCosmeticList() {
-        return cosmeticList;
-    }
-    public DragonCompanion getDragonCompanion() {
-        return dragonCompanion;
-    }
     private void registerCosmetic(AbstractCosmetic cosmetic) {
         cosmeticList.add(cosmetic);
         EventBus.INSTANCE.register(cosmetic);
-    }
-    public HamsterCompanion getHamsterCompanion() {
-        return hamsterCompanion;
     }
     public enum EnumCosmeticType {
         DAB,
@@ -77,12 +65,7 @@ public class HyperiumCosmetics {
         HAT_FEZ,
         HAT_LEGO
     }
-    /**
-     * Get Cosmetic - Get a specific cosmetic from Enum Value
-     *
-     * @param givenType - Given Cosmetic Enum
-     * @return - Given Abstract Cosmetic Class
-     */
+
     public AbstractCosmetic getCosmetic(EnumCosmeticType givenType) {
         switch (givenType) {
             case FLIP:
@@ -101,16 +84,10 @@ public class HyperiumCosmetics {
                 return null;
         }
     }
-    public DragonCosmetic getDragonCosmetic() {
-        return this.dragonCosmetic;
-    }
     public FlipCosmetic getFlipCosmetic() {
         return this.flipCosmetic;
     }
     public Deadmau5Cosmetic getDeadmau5Cosmetic() {
         return this.deadmau5Cosmetic;
-    }
-    public WingsCosmetic getWingsCosmetic() {
-        return this.wingsCosmetic;
     }
 }

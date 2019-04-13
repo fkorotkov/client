@@ -25,7 +25,6 @@ import cc.hyperium.purchases.EnumPurchaseType;
 import net.minecraft.client.entity.AbstractClientPlayer;
 
 public class DragonCosmetic extends AbstractCosmetic {
-
     private DragonHeadRenderer renderer;
 
     public DragonCosmetic() {
