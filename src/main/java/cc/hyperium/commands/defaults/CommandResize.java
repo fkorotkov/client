@@ -38,6 +38,5 @@ public class CommandResize implements BaseCommand {
         Display.setResizable(false);
         Display.setResizable(true);
         ((IMixinMinecraft) Minecraft.getMinecraft()).callResize(displayWidth, displayHeight);
-
     }
 }

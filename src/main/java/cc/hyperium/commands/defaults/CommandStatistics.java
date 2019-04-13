@@ -17,12 +17,10 @@
 
 package cc.hyperium.commands.defaults;
 
-
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.handlers.handlers.tracking.StatisticViewingGui;
 
 public class CommandStatistics implements BaseCommand {
-
     @Override
     public String getName() {
         return "statistics";

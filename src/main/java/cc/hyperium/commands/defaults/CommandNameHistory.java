@@ -20,17 +20,10 @@ package cc.hyperium.commands.defaults;
 import cc.hyperium.Hyperium;
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.gui.NameHistoryGui;
-
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Command to open the NameHistory gui
- *
- * @author CoalOres
- */
 public class CommandNameHistory implements BaseCommand {
-
     @Override
     public String getName() {
         return "namehistory";
