@@ -35,7 +35,6 @@ import java.io.IOException;
 
 @Mixin(GuiScreen.class)
 public abstract class MixinGuiScreen {
-
     @Shadow
     private Minecraft mc;
 
@@ -50,10 +49,6 @@ public abstract class MixinGuiScreen {
     @Shadow
     protected abstract void keyTyped(char typedChar, int keyCode) throws IOException;
 
-    /**
-     * @author SiroQ
-     * @reason Fix input bug (MC-2781)
-     **/
     @Overwrite
     public void handleKeyboardInput() throws IOException {
         char character = Keyboard.getEventCharacter();
