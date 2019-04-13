@@ -22,12 +22,11 @@ import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 
 public class ModelHatFez extends ModelBase {
-
-    ModelRenderer Part_0; // Box_0
-    ModelRenderer Part_1; // Box_1
-    ModelRenderer Part_2; // Box_2
-    ModelRenderer Part_3; // Box_3
-    ModelRenderer Part_4; // Box_4
+    private ModelRenderer Part_0; // Box_0
+    private ModelRenderer Part_1; // Box_1
+    private ModelRenderer Part_2; // Box_2
+    private ModelRenderer Part_3; // Box_3
+    private ModelRenderer Part_4; // Box_4
 
     public ModelHatFez() {
         textureWidth = 64;
