@@ -111,7 +111,6 @@ public class Settings {
 
     public static boolean OPTIMIZED_ITEM_RENDERER = false;
     public static boolean OPTIMIZED_TEXTURE_LOADING = false;
-    public static boolean OPTIMIZED_FONT_RENDERER = false;
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;windowedFullScreen")
     @ToggleSetting(name = "gui.settings.windowedfullscreen", category = IMPROVEMENTS)
@@ -143,9 +142,6 @@ public class Settings {
     @ConfigOpt
     @SelectorSetting(name = "Companion Type", category = COSMETICS, items = "NONE")
     public static String COMPANION_TYPE = "NONE";
-
-    @ConfigOpt
-    public static boolean SPOTIFY_CONTROLS = false;
 
     @ConfigOpt(alt = "cc.hyperium.gui.settings.items.GeneralSetting;hypixelZooEnabled")
     @ToggleSetting(name = "gui.settings.welcometothehypixelzoo", category = HYPIXEL)
@@ -375,10 +371,6 @@ public class Settings {
     public static String PAUSE_STYLE = GuiStyle.HYPERIUM.name();
 
     @ConfigOpt
-    @ToggleSetting(name = "gui.settings.updatenotificationsinhyperiumsettings", category = MISC)
-    public static boolean UPDATE_NOTIFICATIONS = false;
-
-    @ConfigOpt
     @ToggleSetting(name = "gui.settings.fastworldswitching", category = IMPROVEMENTS)
     public static boolean FAST_WORLD_LOADING = true;
     @ConfigOpt
@@ -501,9 +493,6 @@ public class Settings {
 
     @ConfigOpt
     public static String GUI_FONT = "Roboto Condensed";
-
-    @ConfigOpt
-    public static boolean BROWSER_DOWNLOAD = false;
 
     @ConfigOpt
     @ToggleSetting(name = "gui.settings.victoryroyale", category = VICTORYROYALE, mods = true)

@@ -26,7 +26,6 @@ import cc.hyperium.event.EventBus;
 import cc.hyperium.event.GameShutDownEvent;
 import cc.hyperium.event.InitializationEvent;
 import cc.hyperium.event.InvokeEvent;
-import cc.hyperium.event.PreInitializationEvent;
 import cc.hyperium.event.Priority;
 import cc.hyperium.event.minigames.MinigameListener;
 import cc.hyperium.gui.BlurHandler;
@@ -83,7 +82,7 @@ public class Hyperium {
     public static final File folder = new File("hyperium");
     public static final DefaultConfig CONFIG = new DefaultConfig(new File(folder, "CONFIG.json"));
     public static int BUILD_ID = -1;
-    public static boolean IS_BETA;
+    private static final boolean IS_BETA = false;
     private static boolean updateQueue = false;
     private final GeneralStatisticsTracking statTrack = new GeneralStatisticsTracking();
     private final DiscordPresence richPresenceManager = new DiscordPresence();
@@ -105,15 +104,10 @@ public class Hyperium {
     private InternalAddons internalAddons;
     private AutoGG autogg = new AutoGG();
     public Jailbreak j = new Jailbreak();
-    public static final String brand = "HyperiumJailbreak";
-
-    @InvokeEvent
-    public void preinit(PreInitializationEvent event) {
-        HyperiumLocale.registerHyperiumLang("en_US");
-    }
 
     @InvokeEvent(priority = Priority.HIGH)
     public void init(InitializationEvent event) {
+        HyperiumLocale.registerHyperiumLang("en_US");
         this.j.debug();
         try {
             Multithreading.runAsync(() -> {
@@ -176,7 +170,7 @@ public class Hyperium {
             CONFIG.register(new ToggleSprintContainer());
 
             SplashProgress.setProgress(7, I18n.format("splashprogress.startinghyperium"));
-            Display.setTitle(this.brand);
+            Display.setTitle("HyperiumJailbreak");
 
             // instance does not need to be saved as shit is static ^.^
             SplashProgress.setProgress(9, I18n.format("splashprogress.registeringconfiguration"));
@@ -240,7 +234,6 @@ public class Hyperium {
                 }
             });
 
-            IS_BETA = false;
             // Check if OptiFine is installed.
             try {
                 Class.forName("optifine.OptiFineTweaker");
@@ -256,7 +249,6 @@ public class Hyperium {
     private void registerCommands() {
         HyperiumCommandHandler hyperiumCommandHandler = getHandlers().getHyperiumCommandHandler();
         hyperiumCommandHandler.registerCommand(new CommandConfigGui());
-        hyperiumCommandHandler.registerCommand(new CustomLevelheadCommand());
         hyperiumCommandHandler.registerCommand(new CommandClearChat());
         hyperiumCommandHandler.registerCommand(new CommandNameHistory());
         hyperiumCommandHandler.registerCommand(new CommandDebug());
@@ -270,6 +262,7 @@ public class Hyperium {
         hyperiumCommandHandler.registerCommand(new CommandMessage());
         hyperiumCommandHandler.registerCommand(new CommandDisableCommand());
         if(!Settings.FPS) {
+            hyperiumCommandHandler.registerCommand(new CustomLevelheadCommand());
             hyperiumCommandHandler.registerCommand(new AutofriendCommand());
             hyperiumCommandHandler.registerCommand(new CommandParticleAuras());
             hyperiumCommandHandler.registerCommand(new CommandStatistics());
@@ -303,22 +296,6 @@ public class Hyperium {
         LOGGER.info("Shutting down Hyperium..");
 
         if (updateQueue) { LaunchUtil.launch(); }
-    }
-
-    public HyperiumHandlers getHandlers() {
-        return handlers;
-    }
-
-    public HyperiumModIntegration getModIntegration() {
-        return modIntegration;
-    }
-
-    public NotificationCenter getNotification() {
-        return notification;
-    }
-
-    public boolean isAcceptedTos() {
-        return acceptedTos;
     }
 
     public void acceptTos() {
@@ -421,5 +398,21 @@ public class Hyperium {
 
     public Jailbreak getJailbreak() {
         return j;
+    }
+
+    public HyperiumHandlers getHandlers() {
+        return handlers;
+    }
+
+    public HyperiumModIntegration getModIntegration() {
+        return modIntegration;
+    }
+
+    public NotificationCenter getNotification() {
+        return notification;
+    }
+
+    public boolean isAcceptedTos() {
+        return acceptedTos;
     }
 }
