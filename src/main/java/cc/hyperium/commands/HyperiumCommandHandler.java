@@ -43,7 +43,6 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class HyperiumCommandHandler {
-    // If a command is in this
     private final Set<String> disabledCommands = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
     private final Map<String, BaseCommand> commands = new HashMap<>();
     private final GeneralChatHandler chatHandler;
@@ -156,7 +155,7 @@ public class HyperiumCommandHandler {
             return true;
         }
     }
-    
+
     public void autoComplete(String leftOfCursor) {
         latestAutoComplete = null;
         if (leftOfCursor.length() == 0)
@@ -217,7 +216,7 @@ public class HyperiumCommandHandler {
     }
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
-    public void loadDisabledCommands() {
+    private void loadDisabledCommands() {
         File disabledCommandFile = new File(Hyperium.folder, "disabledcommands.txt");
 
         try {
