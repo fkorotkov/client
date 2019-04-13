@@ -31,7 +31,6 @@ import cc.hyperium.mods.levelhead.Levelhead;
 import cc.hyperium.mods.motionblur.MotionBlurMod;
 import cc.hyperium.mods.nickhider.NickHider;
 import cc.hyperium.mods.oldanimations.OldAnimations;
-//import cc.hyperium.mods.spotify.SpotifyControls;
 import cc.hyperium.mods.tabtoggle.TabToggleMod;
 import cc.hyperium.mods.timechanger.TimeChanger;
 import cc.hyperium.mods.togglechat.ToggleChatMod;
@@ -49,7 +48,6 @@ public class HyperiumModIntegration {
     private final HGames hgames;
     private final GlintColorizer glintcolorizer;
     private final BlockOverlay blockOverlay;
-    //private final SpotifyControls spotifyControls;
     private final MotionBlurMod motionBlur;
     private final OldAnimations oldanimations;
     private final AutofriendMod autofriend;
@@ -68,7 +66,6 @@ public class HyperiumModIntegration {
         this.autogg = ((AutoGG) new AutoGG().init());
         this.hgames = ((HGames) new HGames().init());
         this.oldanimations = ((OldAnimations) new OldAnimations().init());
-        //this.spotifyControls = ((SpotifyControls) new SpotifyControls().init());
         NickHider nickHider = new NickHider();
         nickHider.init();
         this.tabToggle = (TabToggleMod) new TabToggleMod().init();

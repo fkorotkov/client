@@ -24,17 +24,13 @@ public class RenderNameTagEvent {
     public static boolean CANCEL = false;
     private AbstractClientPlayer entity;
     private RenderManager renderManager;
-
     public RenderNameTagEvent(AbstractClientPlayer player, RenderManager renderManager) {
         this.entity = player;
         this.renderManager = renderManager;
-
     }
-
     public RenderManager getRenderManager() {
         return renderManager;
     }
-
     public AbstractClientPlayer getEntity() {
         return entity;
     }

@@ -1,5 +1,3 @@
 package cc.hyperium.event;
 
-public class WorldLoadEvent extends Event {
-
-}
+public class WorldLoadEvent extends Event {}
