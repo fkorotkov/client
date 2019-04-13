@@ -34,15 +34,13 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
     private String title;
 
     public GuiCustomCrosshairEditColour(CustomCrosshairAddon addon, final Color colour) {
-        this(addon, colour, "Edit Colour...");
+        this(addon, colour, "Edit Color...");
     }
 
     public GuiCustomCrosshairEditColour(CustomCrosshairAddon addon, final Color colour, final String text) {
         super(addon);
-
         this.editColour = colour;
         this.title = text;
-
         this.addon = addon;
     }
 
@@ -50,24 +48,21 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
         this.itemList.clear();
         this.itemList.add(this.slider_red = new CCSlider(this, 1, "Red", 0, 0, 255, 10, 0, 255)
             .setCallback(() -> {
-                this.editColour = new Color(this.slider_red.getValue(), this.editColour.getGreen(),
-                    this.editColour.getBlue(), this.editColour.getAlpha());
+                this.editColour = new Color(this.slider_red.getValue(), this.editColour.getGreen(), this.editColour.getBlue(), this.editColour.getAlpha());
             }));
         this.slider_red.setValue(this.editColour.getRed());
         this.slider_red.setBoxColour(new Color(255, 0, 0, 128));
         this.slider_red.getHelpText().add("Changes how red the colour is.");
         this.itemList.add(this.slider_green = new CCSlider(this, 2, "Green", 0, 0, 255, 10, 0, 255)
             .setCallback(() -> {
-                this.editColour = new Color(this.editColour.getRed(), this.slider_green.getValue(),
-                    this.editColour.getBlue(), this.editColour.getAlpha());
+                this.editColour = new Color(this.editColour.getRed(), this.slider_green.getValue(), this.editColour.getBlue(), this.editColour.getAlpha());
             }));
         this.slider_green.setValue(this.editColour.getGreen());
         this.slider_green.setBoxColour(new Color(0, 255, 0, 128));
         this.slider_green.getHelpText().add("Changes how green the colour is.");
         this.itemList.add(this.slider_blue = new CCSlider(this, 3, "Blue", 0, 0, 255, 10, 0, 255)
             .setCallback(() -> {
-                this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(),
-                    this.slider_blue.getValue(), this.editColour.getAlpha());
+                this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(), this.slider_blue.getValue(), this.editColour.getAlpha());
             }));
         this.slider_blue.setValue(this.editColour.getBlue());
         this.slider_blue.setBoxColour(new Color(0, 0, 255, 128));
@@ -75,9 +70,7 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
         this.itemList.add(
             this.slider_opacity = new CCSlider(this, 4, "Opacity", 0, 0, 255, 10, 0, 255)
                 .setCallback(() -> {
-                    this.editColour = new Color(this.editColour.getRed(),
-                        this.editColour.getGreen(), this.editColour.getBlue(),
-                        this.slider_opacity.getValue());
+                    this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(), this.editColour.getBlue(), this.slider_opacity.getValue());
                 }));
         this.slider_opacity.setValue(this.editColour.getAlpha());
         this.slider_opacity.getHelpText().add("Changes the opacity of the colour.");
@@ -87,14 +80,11 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
                 super.mouseClicked(mouseX, mouseY);
                 CustomCrosshairAddon.getCrosshairMod().getCrosshair().setRainbowCrosshair(tickbox_rainbow.getChecked());
             }
-
         });
         this.tickbox_rainbow.setChecked(this.addon.getCrosshair().getRainbowCrosshair());
         this.tickbox_rainbow.getHelpText().add("Make crosshair rainbow.");
         this.itemList.add(this.slider_rainbowspeed = new CCSlider(this, 6, "Rainbow Speed", 0, 0, 255, 10, 0, 5000)
-            .setCallback(() -> {
-                CustomCrosshairAddon.getCrosshairMod().getCrosshair().setRainbowSpeed(slider_rainbowspeed.getValue());
-            }));
+            .setCallback(() -> CustomCrosshairAddon.getCrosshairMod().getCrosshair().setRainbowSpeed(slider_rainbowspeed.getValue())));
         this.slider_rainbowspeed.setValue(this.addon.getCrosshair().getRainbowSpeed());
         this.slider_rainbowspeed.getHelpText().add("Change speed of rainbow.");
         int y = 71;
@@ -124,7 +114,6 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         this.drawDefaultBackground();
         final String titleText = "Custom Crosshair Addon" + " v0.5.3 Jailbreak";
-
         CustomCrosshairGraphics.drawBorderedRectangle(0, 0, this.width - 1, 25, CustomCrosshairAddon.PRIMARY, CustomCrosshairAddon.SECONDARY);
         drawString(this.fontRendererObj, titleText, 5, 10, 16777215);
         drawString(this.fontRendererObj, this.title, 5, 32, 16777215);

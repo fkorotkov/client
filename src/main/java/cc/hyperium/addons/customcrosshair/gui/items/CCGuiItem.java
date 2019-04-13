@@ -18,7 +18,6 @@
 package cc.hyperium.addons.customcrosshair.gui.items;
 
 import net.minecraft.client.gui.GuiScreen;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,10 +110,6 @@ public class CCGuiItem {
 
     public String getDisplayText() {
         return this.displayText;
-    }
-
-    public void setDisplayText(final String newDisplayText) {
-        this.displayText = newDisplayText;
     }
 
     public List<String> getHelpText() {
