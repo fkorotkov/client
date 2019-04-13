@@ -18,17 +18,14 @@
 package cc.hyperium.event;
 
 public enum Priority {
-
-    HIGH(-1), // Called first
+    HIGH(-1),
     NORMAL(0),
-    LOW(1); // Called last
+    LOW(1);
 
     public final int value;
-
     Priority(int value) {
         this.value = value;
     }
-
     public int getValue() {
         return this.value;
     }

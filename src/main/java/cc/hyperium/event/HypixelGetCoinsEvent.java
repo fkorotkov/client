@@ -18,7 +18,6 @@
 package cc.hyperium.event;
 
 public final class HypixelGetCoinsEvent extends Event {
-
     private final int coins;
 
     public HypixelGetCoinsEvent(int coins) {

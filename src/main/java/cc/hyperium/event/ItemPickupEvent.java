@@ -33,7 +33,6 @@ public final class ItemPickupEvent extends Event {
     public ItemPickupEvent(@NotNull EntityPlayer player, @NotNull EntityItem item) {
         Preconditions.checkNotNull(player, "player");
         Preconditions.checkNotNull(item, "item");
-
         this.player = player;
         this.item = item;
     }

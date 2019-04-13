@@ -26,7 +26,6 @@ public class GuiDrawScreenEvent {
     private float partialTicks;
 
     public GuiDrawScreenEvent(GuiScreen screen, int mouseX, int mouseY, float partialTicks) {
-
         this.screen = screen;
         this.mouseX = mouseX;
         this.mouseY = mouseY;

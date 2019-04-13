@@ -19,9 +19,6 @@ package cc.hyperium.event;
 
 import net.minecraft.util.IChatComponent;
 
-/**
- * Invoked once a chat message is sent
- */
 public class ChatEvent extends CancellableEvent {
 
     private final IChatComponent chat;

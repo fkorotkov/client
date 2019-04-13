@@ -22,7 +22,6 @@ import net.minecraft.entity.Entity;
 import org.jetbrains.annotations.NotNull;
 
 public final class EntityRenderEvent extends CancellableEvent {
-
     @NotNull
     private final Entity entityIn;
     private final float posX;

@@ -18,7 +18,6 @@
 package cc.hyperium.event;
 
 import java.util.List;
-
 import com.google.common.base.Preconditions;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;

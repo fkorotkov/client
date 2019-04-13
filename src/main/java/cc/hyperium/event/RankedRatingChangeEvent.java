@@ -1,7 +1,6 @@
 package cc.hyperium.event;
 
 public final class RankedRatingChangeEvent extends Event {
-
     private final int rating;
     private final int delta;
 

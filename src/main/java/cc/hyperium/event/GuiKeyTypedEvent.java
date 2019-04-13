@@ -20,7 +20,6 @@ package cc.hyperium.event;
 import net.minecraft.client.gui.GuiScreen;
 
 public class GuiKeyTypedEvent {
-
     private GuiScreen screen;
     private char typedChar;
     private int keyCode;

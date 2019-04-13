@@ -1,18 +1,11 @@
 package cc.hyperium.event;
 
 import com.google.common.base.Preconditions;
-
 import java.util.UUID;
-
 import net.minecraft.entity.Entity;
-
 import org.jetbrains.annotations.NotNull;
 
-/**
- * Called when this player attacks an entity
- */
 public final class PlayerAttackEntityEvent extends Event {
-
     @NotNull
     private final UUID uuid;
 

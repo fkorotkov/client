@@ -19,14 +19,9 @@ package cc.hyperium.event;
 
 import com.google.common.base.Preconditions;
 import org.jetbrains.annotations.NotNull;
-
 import java.lang.reflect.Method;
 
-/**
- * Used to store information about events and index them so they can be easily accessed by ASM
- */
 public final class EventSubscriber {
-
     @NotNull
     private final Object instance;
     @NotNull
