@@ -144,7 +144,7 @@ public class HyperiumCommandHandler {
 
     public boolean addOrRemoveCommand(String input) {
         if (input == null || input.isEmpty() || input.trim().isEmpty() ||
-            input.equalsIgnoreCase("disablecommand") || input.equalsIgnoreCase("hyperium")) {
+                input.equalsIgnoreCase("disablecommand") || input.equalsIgnoreCase("hyperium")) {
             return false;
         }
         input = input.trim();
@@ -155,6 +155,7 @@ public class HyperiumCommandHandler {
             this.disabledCommands.add(input);
             return true;
         }
+    }
     
     public void autoComplete(String leftOfCursor) {
         latestAutoComplete = null;

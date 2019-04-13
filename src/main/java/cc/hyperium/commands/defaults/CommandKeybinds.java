@@ -19,12 +19,10 @@ package cc.hyperium.commands.defaults;
 
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.gui.keybinds.GuiKeybinds;
-
 import java.util.Collections;
 import java.util.List;
 
 public class CommandKeybinds implements BaseCommand {
-
     @Override
     public String getName() {
         return "keybinds";

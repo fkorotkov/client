@@ -4,7 +4,6 @@ import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.commands.CommandException;
 import cc.hyperium.handlers.handlers.chat.GeneralChatHandler;
 import net.minecraft.client.Minecraft;
-
 import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.net.URL;
 
 public class CommandLogs implements BaseCommand {
-
     @Override
     public String getName() {
         return "logs";

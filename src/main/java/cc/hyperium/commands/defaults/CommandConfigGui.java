@@ -20,17 +20,10 @@ package cc.hyperium.commands.defaults;
 import cc.hyperium.commands.BaseCommand;
 import cc.hyperium.gui.hyperium.HyperiumMainGui;
 import cc.hyperium.utils.ChatColor;
-
 import java.util.Collections;
 import java.util.List;
 
-/**
- * A command to open the clients main configuration menu
- *
- * @author Sk1er
- */
 public class CommandConfigGui implements BaseCommand {
-
     @Override
     public String getName() {
         return "hyperiumconfig";
