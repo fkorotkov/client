@@ -47,31 +47,22 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
     public void initGui() {
         this.itemList.clear();
         this.itemList.add(this.slider_red = new CCSlider(this, 1, "Red", 0, 0, 255, 10, 0, 255)
-            .setCallback(() -> {
-                this.editColour = new Color(this.slider_red.getValue(), this.editColour.getGreen(), this.editColour.getBlue(), this.editColour.getAlpha());
-            }));
+            .setCallback(() -> this.editColour = new Color(this.slider_red.getValue(), this.editColour.getGreen(), this.editColour.getBlue(), this.editColour.getAlpha())));
         this.slider_red.setValue(this.editColour.getRed());
         this.slider_red.setBoxColour(new Color(255, 0, 0, 128));
         this.slider_red.getHelpText().add("Changes how red the colour is.");
         this.itemList.add(this.slider_green = new CCSlider(this, 2, "Green", 0, 0, 255, 10, 0, 255)
-            .setCallback(() -> {
-                this.editColour = new Color(this.editColour.getRed(), this.slider_green.getValue(), this.editColour.getBlue(), this.editColour.getAlpha());
-            }));
+            .setCallback(() -> this.editColour = new Color(this.editColour.getRed(), this.slider_green.getValue(), this.editColour.getBlue(), this.editColour.getAlpha())));
         this.slider_green.setValue(this.editColour.getGreen());
         this.slider_green.setBoxColour(new Color(0, 255, 0, 128));
         this.slider_green.getHelpText().add("Changes how green the colour is.");
         this.itemList.add(this.slider_blue = new CCSlider(this, 3, "Blue", 0, 0, 255, 10, 0, 255)
-            .setCallback(() -> {
-                this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(), this.slider_blue.getValue(), this.editColour.getAlpha());
-            }));
+            .setCallback(() -> this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(), this.slider_blue.getValue(), this.editColour.getAlpha())));
         this.slider_blue.setValue(this.editColour.getBlue());
         this.slider_blue.setBoxColour(new Color(0, 0, 255, 128));
         this.slider_blue.getHelpText().add("Changes how blue the colour is.");
-        this.itemList.add(
-            this.slider_opacity = new CCSlider(this, 4, "Opacity", 0, 0, 255, 10, 0, 255)
-                .setCallback(() -> {
-                    this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(), this.editColour.getBlue(), this.slider_opacity.getValue());
-                }));
+        this.itemList.add(this.slider_opacity = new CCSlider(this, 4, "Opacity", 0, 0, 255, 10, 0, 255)
+            .setCallback(() -> this.editColour = new Color(this.editColour.getRed(), this.editColour.getGreen(), this.editColour.getBlue(), this.slider_opacity.getValue())));
         this.slider_opacity.setValue(this.editColour.getAlpha());
         this.slider_opacity.getHelpText().add("Changes the opacity of the colour.");
         this.itemList.add(this.tickbox_rainbow = new CCTickbox(this, 5, "Rainbow", 0, 0) {
@@ -84,22 +75,18 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
         this.tickbox_rainbow.setChecked(this.addon.getCrosshair().getRainbowCrosshair());
         this.tickbox_rainbow.getHelpText().add("Make crosshair rainbow.");
         this.itemList.add(this.slider_rainbowspeed = new CCSlider(this, 6, "Rainbow Speed", 0, 0, 255, 10, 0, 5000)
-            .setCallback(() -> CustomCrosshairAddon.getCrosshairMod().getCrosshair().setRainbowSpeed(slider_rainbowspeed.getValue())));
+                        .setCallback(() -> CustomCrosshairAddon.getCrosshairMod().getCrosshair().setRainbowSpeed(slider_rainbowspeed.getValue())));
         this.slider_rainbowspeed.setValue(this.addon.getCrosshair().getRainbowSpeed());
         this.slider_rainbowspeed.getHelpText().add("Change speed of rainbow.");
         int y = 71;
         for (int i = 0; i < this.itemList.size(); ++i) {
-            if (i > 0) {
-                y += this.itemList.get(i - 1).getHeight() + 6;
-            }
+            if (i > 0) y += this.itemList.get(i - 1).getHeight() + 6;
             this.itemList.get(i).setPosition(21, y);
         }
         y = 71;
         for (int size = this.itemList.size(), j = 0; j < size; ++j) {
             this.itemList.add(new CCHelpButton(this, this.itemList.get(j).getHelpText()));
-            if (j > 0) {
-                y += this.itemList.get(j - 1).getHeight() + 6;
-            }
+            if (j > 0) y += this.itemList.get(j - 1).getHeight() + 6;
             this.itemList.get(size + j).setPosition(5, y);
         }
         this.itemList.add(new CCButton(this, 0, "<- Return", this.width - 56, 0, 55, 25) {
