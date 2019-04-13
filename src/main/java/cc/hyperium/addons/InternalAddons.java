@@ -5,7 +5,6 @@ import cc.hyperium.addons.customcrosshair.CustomCrosshairAddon;
 import cc.hyperium.addons.sidebar.SidebarAddon;
 
 public class InternalAddons {
-
     private final CustomCrosshairAddon customCrosshairAddon;
     private final SidebarAddon sidebarAddon;
     private final BossbarAddon bossbarAddon;

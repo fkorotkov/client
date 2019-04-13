@@ -25,7 +25,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.client.config.GuiSlider;
 
 public class GuiScreenBackground extends GuiScreenSidebar {
-
     private byte byte0;
     private GuiScreen parent;
     private GuiButton buttonDone;

@@ -32,7 +32,6 @@ import java.util.List;
 import org.lwjgl.input.Mouse;
 
 public class GuiCustomCrosshairEditCrosshair extends CustomCrosshairScreen {
-
     private CCTickbox tickbox_visibleDefault;
     private CCTickbox tickbox_visibleHiddenGui;
     private CCTickbox tickbox_visibleDebug;
@@ -269,7 +268,7 @@ public class GuiCustomCrosshairEditCrosshair extends CustomCrosshairScreen {
             aHelpButtonList.drawItem(mouseX, mouseY);
         }
 
-        final String titleText = "Custom Crosshair Addon" + " v" + CustomCrosshairAddon.VERSION;
+        final String titleText = "Custom Crosshair Addon" + " v0.5.3 Jailbreak";
         CustomCrosshairGraphics.drawBorderedRectangle(0, 0, this.width - 1, 25, CustomCrosshairAddon.PRIMARY,
             CustomCrosshairAddon.SECONDARY);
         CustomCrosshairGraphics.drawStringWithShadow(titleText, 5, 10, 16777215);

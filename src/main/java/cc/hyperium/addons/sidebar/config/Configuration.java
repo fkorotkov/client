@@ -2,15 +2,13 @@ package cc.hyperium.addons.sidebar.config;
 
 import cc.hyperium.addons.sidebar.gui.GuiSidebar;
 import com.google.gson.GsonBuilder;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class Configuration {
-    private Configuration() {
-    }
+    private Configuration() {}
 
     public boolean enabled = true;
     public int offsetX = 0;

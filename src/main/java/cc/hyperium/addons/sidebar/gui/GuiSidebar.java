@@ -35,11 +35,9 @@ public class GuiSidebar extends Gui {
         THREE("Text 1", 2),
         FOUR("Text 2", 3);
         private String name;
-        private int index;
 
         ChromaType(String name, int index) {
             this.name = name;
-            this.index = index;
         }
 
         public String getName() {
@@ -67,7 +65,6 @@ public class GuiSidebar extends Gui {
     public boolean chromaEnabled;
     public ChromaType chromaType;
     public int chromaSpeed;
-
     public GuiSidebar() {
         this.fr = Minecraft.getMinecraft().fontRendererObj;
     }

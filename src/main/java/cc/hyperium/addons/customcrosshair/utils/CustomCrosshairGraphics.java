@@ -18,9 +18,7 @@
 package cc.hyperium.addons.customcrosshair.utils;
 
 import cc.hyperium.addons.customcrosshair.CustomCrosshairAddon;
-
 import java.awt.Color;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
@@ -29,9 +27,7 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
 public class CustomCrosshairGraphics {
-
     private static FontRenderer fontRenderer = Minecraft.getMinecraft().fontRendererObj;
-
     public static void drawHorizontalLine(final int y, final int x1, final int x2,
                                           final Color colour) {
 

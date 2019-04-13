@@ -24,24 +24,19 @@ import cc.hyperium.commands.BaseCommand;
 
 public class CommandSidebar implements BaseCommand {
     private SidebarAddon addon;
-
     public CommandSidebar(SidebarAddon addon) {
         this.addon = addon;
     }
-
     @Override
     public String getName() {
         return "sidebaraddon";
     }
-
     @Override
     public String getUsage() {
         return "/sidebaraddon";
     }
-
     @Override
     public void onExecute(String[] strings) {
         Hyperium.INSTANCE.getHandlers().getGuiDisplayHandler().setDisplayNextTick(new GuiScreenSettings(this.addon));
     }
-
 }

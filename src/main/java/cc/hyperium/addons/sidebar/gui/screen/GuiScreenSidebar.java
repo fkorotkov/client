@@ -22,11 +22,9 @@ import cc.hyperium.addons.sidebar.gui.GuiSidebar;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.scoreboard.ScoreObjective;
-
 import java.io.IOException;
 
 public class GuiScreenSidebar extends GuiScreen {
-
     protected SidebarAddon addon;
     protected GuiSidebar sidebar;
     private boolean dragging;

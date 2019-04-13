@@ -20,14 +20,11 @@ package cc.hyperium.addons.customcrosshair.gui;
 import cc.hyperium.addons.customcrosshair.gui.items.CCGuiItem;
 import cc.hyperium.addons.customcrosshair.CustomCrosshairAddon;
 import cc.hyperium.addons.customcrosshair.utils.CustomCrosshairGraphics;
-
 import net.minecraft.client.gui.GuiScreen;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomCrosshairScreen extends GuiScreen {
-
     public List<CCGuiItem> itemList = new ArrayList<>();
     public List<String> toolTip = new ArrayList<>();
 

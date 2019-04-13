@@ -20,13 +20,10 @@ package cc.hyperium.addons.customcrosshair.gui;
 import cc.hyperium.addons.customcrosshair.gui.items.*;
 import cc.hyperium.addons.customcrosshair.CustomCrosshairAddon;
 import cc.hyperium.addons.customcrosshair.utils.CustomCrosshairGraphics;
-
 import java.awt.Color;
-
 import java.io.IOException;
 
 public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
-
     private Color editColour;
     private CCSlider slider_red;
     private CCSlider slider_green;
@@ -126,7 +123,7 @@ public class GuiCustomCrosshairEditColour extends CustomCrosshairScreen {
     @Override
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         this.drawDefaultBackground();
-        final String titleText = "Custom Crosshair Addon" + " v" + CustomCrosshairAddon.VERSION;
+        final String titleText = "Custom Crosshair Addon" + " v0.5.3 Jailbreak";
 
         CustomCrosshairGraphics.drawBorderedRectangle(0, 0, this.width - 1, 25, CustomCrosshairAddon.PRIMARY, CustomCrosshairAddon.SECONDARY);
         drawString(this.fontRendererObj, titleText, 5, 10, 16777215);
