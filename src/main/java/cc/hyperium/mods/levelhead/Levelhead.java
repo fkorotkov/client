@@ -228,8 +228,6 @@ public class Levelhead extends AbstractMod {
         JsonHolder headerObj = new JsonHolder();
         JsonHolder footerObj = new JsonHolder();
         JsonHolder construct = new JsonHolder();
-        //Support for serverside override for Custom Levelhead
-        //Apply values from server if present
         if (object.has("header_obj")) {
             headerObj = object.optJSONObject("header_obj");
             headerObj.put("custom", true);
@@ -249,11 +247,9 @@ public class Levelhead extends AbstractMod {
         } catch (Exception ignored) {
             footerObj.put("custom", true);
         }
-        //Get CONFIG based values and merge
         headerObj.merge(getHeaderConfig(), false);
         footerObj.merge(getFooterConfig().put("footer", object.optString("strlevel", object.optInt("level") + "")), false);
 
-        //Ensure text values are present
         construct.put("header", headerObj).put("footer", footerObj);
         value.construct(construct);
         return value;
@@ -300,7 +296,6 @@ public class Levelhead extends AbstractMod {
         return levelCache.getOrDefault(uuid, null);
     }
 
-    //Remote runaway memory leak from storing levels in ram.
     private void clearCache() {
         if (levelCache.size() > Math.max(config.getPurgeSize(), 150)) {
             List<UUID> safePlayers = new ArrayList<>();
@@ -317,7 +312,6 @@ public class Levelhead extends AbstractMod {
                     levelCache.remove(uuid);
                 }
             }
-            System.out.println("Cache cleared!");
         }
     }
 
@@ -329,10 +323,6 @@ public class Levelhead extends AbstractMod {
 
     public LevelheadConfig getConfig() {
         return config;
-    }
-
-    public Sk1erMod getSk1erMod() {
-        return mod;
     }
 
     public HashMap<UUID, String> getTrueValueCache() {

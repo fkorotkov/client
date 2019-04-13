@@ -33,7 +33,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.network.NetHandlerPlayClient;
-import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -48,8 +47,6 @@ import net.minecraft.network.play.server.*;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.IChatComponent;
-import org.apache.logging.log4j.Logger;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -58,22 +55,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
-import java.util.Map;
-import java.util.UUID;
 
-/**
- * Provides code that may be used in mods that require it
- */
 @Mixin(NetHandlerPlayClient.class)
 public abstract class MixinNetHandlerPlayClient {
-
     @Shadow
     private WorldClient clientWorldController;
 
@@ -82,9 +72,6 @@ public abstract class MixinNetHandlerPlayClient {
 
     private TimeChanger timeChanger = Hyperium.INSTANCE.getModIntegration().getTimeChanger();
 
-    /**
-     * Adds the tab completions of the client to the tab completions received from the server.
-     */
     @ModifyArg(method = "handleTabComplete", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/GuiChat;onAutocompleteResponse([Ljava/lang/String;)V"))
     private String[] addClientTabCompletions(String[] currentCompletions) {
         String[] modCompletions = Hyperium.INSTANCE.getHandlers().getHyperiumCommandHandler().getLatestAutoComplete();
@@ -94,10 +81,6 @@ public abstract class MixinNetHandlerPlayClient {
         return currentCompletions;
     }
 
-    /**
-     * @author boomboompower
-     * @reason TimeChanger - changes the way time packets are handled
-     */
     @Overwrite
     public void handleTimeUpdate(S03PacketTimeUpdate packet) {
         if (this.timeChanger == null) {
@@ -125,11 +108,6 @@ public abstract class MixinNetHandlerPlayClient {
         }
     }
 
-    /**
-     * The actual logic of the packet, may be spoofed.
-     *
-     * @param packetIn the packet
-     */
     private void handleActualPacket(S03PacketTimeUpdate packetIn) {
         if (this.gameController == null || this.gameController.theWorld == null) {
             return;
@@ -141,13 +119,6 @@ public abstract class MixinNetHandlerPlayClient {
         this.gameController.theWorld.setWorldTime(packetIn.getWorldTime());
     }
 
-    /**
-     * Renders a specified animation: Waking up a player, a living entity swinging its currently held item, being hurt
-     * or receiving a critical hit by normal or magical means
-     *
-     * @author boomboompower
-     * @reason Fixes internal NPE
-     */
     @Overwrite
     public void handleAnimation(S0BPacketAnimation packetIn) {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, (INetHandlerPlayClient) getNetworkManager().getNetHandler(), this.gameController);
@@ -238,7 +209,6 @@ public abstract class MixinNetHandlerPlayClient {
             }
             url = URLDecoder.decode(url.substring("level://".length()), StandardCharsets.UTF_8.toString());
             if (isLevelProtocol && (url.contains("..") || !url.endsWith("/resources.zip"))) {
-                System.out.println("[Resource Exploit Fix Warning] Malicious server tried to access " + url);
                 EntityPlayerSP thePlayer = Minecraft.getMinecraft().thePlayer;
                 if (thePlayer != null) {
                     thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + EnumChatFormatting.BOLD.toString() + "[EXPLOIT FIX WARNING] The current server has attempted to be malicious but we have stopped them!"));

@@ -10,17 +10,10 @@ import org.spongepowered.asm.lib.tree.AbstractInsnNode;
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.lib.tree.MethodInsnNode;
 import org.spongepowered.asm.lib.tree.MethodNode;
-
 import java.util.Iterator;
 import java.util.function.BiConsumer;
 
-/**
- * Optifine capes memory leak
- *
- * @author prplz
- */
 public class ClassTransformer implements IClassTransformer {
-
     @Override
     public byte[] transform(String name, String transformedName, byte[] bytes) {
         switch (name) {
