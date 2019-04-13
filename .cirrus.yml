@@ -15,18 +15,13 @@ task:
     populate_script: ./gradlew setupDevWorkspace
   matrix:
   - name: Build Job
-    script: |
-      ./gradlew build
+    script: ./gradlew build
     jar_artifacts:
       path: ./build/libs/**
   - name: Test Job
-    script: |
-      ./gradlew test
+    script: ./gradlew test
   always:
     cleanup_before_cache_script: |
-      # Docker image version:
       rm -rf ~/.gradle/caches/$GRADLE_VERSION/
-      # Wrapper version:
-      rm -rf ~/.gradle/caches/4.0.2/
-      # Lockfiles:
+      rm -rf ~/.gradle/caches/4.10.3/
       find ~/.gradle/caches/ -name "*.lock" -type f -delete
