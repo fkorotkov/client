@@ -60,6 +60,7 @@ import java.net.URISyntaxException;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import jb.Metadata;
 
 @Mixin(NetHandlerPlayClient.class)
 public abstract class MixinNetHandlerPlayClient {
@@ -210,7 +211,7 @@ public abstract class MixinNetHandlerPlayClient {
             if (isLevelProtocol && (url.contains("..") || !url.endsWith("/resources.zip"))) {
                 EntityPlayerSP thePlayer = Minecraft.getMinecraft().thePlayer;
                 if (thePlayer != null) {
-                    thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + EnumChatFormatting.BOLD.toString() + "[EXPLOIT FIX WARNING] The current server has attempted to be malicious but we have stopped them!"));
+                    thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.RED + EnumChatFormatting.BOLD.toString() + "[WARNING] The current server has tried to hack your client, but HyperiumJailbreak stopped it."));
                 }
                 throw new URISyntaxException(url, "Invalid levelstorage resourcepack path");
             }
@@ -226,17 +227,6 @@ public abstract class MixinNetHandlerPlayClient {
     @Shadow
     public abstract void addToSendQueue(Packet p_147297_1_);
 
-    /**
-     * Allows detection of incoming chat packets from the server (includes actionbars)
-     * <p>
-     * Byte values for the event
-     * 0 : Standard Text Message, displayed in chat
-     * 1 : 'System' message, displayed as standard text in the chat.
-     * 2 : 'Status' message, displayed as an action bar above the hotbar
-     *
-     * @author boomboompower
-     * @reason Detect incoming chat packets being sent from the server
-     */
     @Overwrite
     public void handleChat(S02PacketChat packetIn) {
         PacketThreadUtil.checkThreadAndEnqueue(packetIn, (INetHandlerPlayClient) getNetworkManager().getNetHandler(), this.gameController);
