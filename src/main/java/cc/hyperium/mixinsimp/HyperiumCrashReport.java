@@ -4,6 +4,7 @@ import cc.hyperium.commands.defaults.CommandDebug;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import jb.Metadata;
 
 public class HyperiumCrashReport {
     private CrashReport parent;
@@ -17,5 +18,4 @@ public class HyperiumCrashReport {
         category.addCrashSection("Hyperium Version", Metadata.getVersion() + " (" + Metadata.getVersionID() + ")");
         category.addCrashSection("Everything else", CommandDebug.get());
     }
-
 }
