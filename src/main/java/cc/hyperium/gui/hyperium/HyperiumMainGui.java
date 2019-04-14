@@ -32,12 +32,9 @@ import java.util.List;
 import java.util.Queue;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import jb.Metadata;
 
-/*
- * Created by Cubxity on 27/08/2018
- */
 public class HyperiumMainGui extends HyperiumGui {
-
     public static HyperiumMainGui INSTANCE = new HyperiumMainGui();
     private static int tabIndex = 0; // save tab position
     public boolean show = false;
@@ -53,7 +50,6 @@ public class HyperiumMainGui extends HyperiumGui {
     private List<RGBFieldSet> rgbFields = new ArrayList<>();
     private Alert currentAlert;
     private MaterialTextField searchField;
-
     private Queue<Alert> alerts = new ArrayDeque<>();
 
     public HyperiumMainGui() {
