@@ -18,7 +18,6 @@
 package cc.hyperium.mixins.packet;
 
 import cc.hyperium.Hyperium;
-import cc.hyperium.Metadata;
 import cc.hyperium.event.EventBus;
 import cc.hyperium.event.ServerChatEvent;
 import cc.hyperium.handlers.handlers.chat.GeneralChatHandler;

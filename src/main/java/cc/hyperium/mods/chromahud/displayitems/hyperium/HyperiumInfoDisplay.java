@@ -17,7 +17,6 @@
 
 package cc.hyperium.mods.chromahud.displayitems.hyperium;
 
-import cc.hyperium.Metadata;
 import cc.hyperium.config.Settings;
 import cc.hyperium.mods.chromahud.ElementRenderer;
 import cc.hyperium.mods.chromahud.api.DisplayItem;

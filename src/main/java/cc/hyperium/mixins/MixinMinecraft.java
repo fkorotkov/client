@@ -17,7 +17,6 @@
 
 package cc.hyperium.mixins;
 
-import cc.hyperium.Metadata;
 import cc.hyperium.SplashProgress;
 import cc.hyperium.config.Settings;
 import cc.hyperium.event.EventBus;
@@ -40,8 +39,6 @@ import net.minecraft.client.settings.GameSettings;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.profiler.Profiler;
-import net.minecraft.util.IChatComponent;
-import net.minecraft.util.ScreenShotHelper;
 import net.minecraft.util.Timer;
 import net.minecraft.world.WorldSettings;
 import org.lwjgl.LWJGLException;

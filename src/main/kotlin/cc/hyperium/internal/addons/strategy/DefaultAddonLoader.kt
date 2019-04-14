@@ -1,6 +1,6 @@
 package cc.hyperium.internal.addons.strategy
 
-import cc.hyperium.BLACKLISTED
+import BLACKLISTED
 import cc.hyperium.internal.addons.AddonBootstrap
 import cc.hyperium.internal.addons.AddonManifest
 import cc.hyperium.internal.addons.misc.AddonLoadException

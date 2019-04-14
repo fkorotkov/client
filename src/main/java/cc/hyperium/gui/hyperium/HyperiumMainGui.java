@@ -1,6 +1,5 @@
 package cc.hyperium.gui.hyperium;
 import cc.hyperium.Hyperium;
-import cc.hyperium.Metadata;
 import cc.hyperium.config.Category;
 import cc.hyperium.config.Settings;
 import cc.hyperium.gui.HyperiumGui;

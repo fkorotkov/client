@@ -17,7 +17,7 @@
 
 @file:JvmName("Metadata")
 
-package cc.hyperium
+import cc.hyperium.Hyperium
 
 val MODID
     @JvmName("getModid")

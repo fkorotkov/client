@@ -1,6 +1,5 @@
 package cc.hyperium.mixinsimp;
 
-import cc.hyperium.Metadata;
 import cc.hyperium.commands.defaults.CommandDebug;
 import net.minecraft.crash.CrashReport;
 import net.minecraft.crash.CrashReportCategory;

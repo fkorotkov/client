@@ -1,6 +1,5 @@
 package cc.hyperium.gui;
 import cc.hyperium.Hyperium;
-import cc.hyperium.Metadata;
 import cc.hyperium.installer.InstallerMain;
 import cc.hyperium.internal.addons.AddonBootstrap;
 import cc.hyperium.mods.sk1ercommon.Multithreading;
