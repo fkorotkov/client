@@ -24,6 +24,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import jb.Metadata;
 
 public class GuiHyperiumScreen extends GuiScreen {
     public static ResourceLocation background = new ResourceLocation("textures/material/backgrounds/1.png");
