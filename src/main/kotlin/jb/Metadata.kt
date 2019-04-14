@@ -17,6 +17,8 @@
 
 @file:JvmName("Metadata")
 
+package jb
+
 import cc.hyperium.Hyperium
 
 val MODID

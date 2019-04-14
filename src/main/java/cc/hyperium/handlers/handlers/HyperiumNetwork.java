@@ -23,6 +23,7 @@ import cc.hyperium.launch.HyperiumTweaker;
 import cc.hyperium.mods.sk1ercommon.Multithreading;
 import cc.hyperium.utils.JsonHolder;
 import io.netty.buffer.Unpooled;
+import jb.Metadata;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.network.PacketBuffer;
