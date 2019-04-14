@@ -55,7 +55,6 @@ import java.util.List;
 
 @Mixin(Minecraft.class)
 public abstract class MixinMinecraft {
-
     @Shadow
     public FontRenderer fontRendererObj;
 
@@ -137,7 +136,7 @@ public abstract class MixinMinecraft {
     @Inject(method = "startGame", at = @At("RETURN"))
     private void init(CallbackInfo ci) {
         //Accessor not needed since its only set once
-        enableGLErrorChecking = Metadata.isDevelopment();
+        enableGLErrorChecking = false;
         hyperiumMinecraft.startGame(ci);
     }
 
