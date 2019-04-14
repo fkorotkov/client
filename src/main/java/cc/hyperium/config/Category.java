@@ -7,7 +7,6 @@ public enum Category {
     IMPROVEMENTS("Improvements"),
     INTEGRATIONS("Integrations"),
     COSMETICS("Cosmetics"),
-    SPOTIFY("Spotify"),
     ANIMATIONS("Animations"),
     MISC("Misc"),
     MODS("Mods"),
