@@ -30,30 +30,48 @@ import me.semx11.autotip.gson.creator.StatsDailyCreator;
 import me.semx11.autotip.gson.exclusion.AnnotationExclusionStrategy;
 import me.semx11.autotip.stats.StatsDaily;
 import me.semx11.autotip.universal.UniversalUtil;
+import me.semx11.autotip.util.ErrorReport;
 import me.semx11.autotip.util.FileUtil;
+import me.semx11.autotip.util.MinecraftVersion;
+import me.semx11.autotip.util.Version;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.IChatComponent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Autotip {
+
     public static final Logger LOGGER = LogManager.getLogger("Autotip");
+
     static final String MOD_ID = "autotip";
     static final String NAME = "Autotip";
+    static final String VERSION = "3.0";
+    static final String ACCEPTED_VERSIONS = "[1.8, 1.12.2]";
+
     public static IChatComponent tabHeader;
+
     private final List<Event> events = new ArrayList<>();
     private final List<CommandAbstract> commands = new ArrayList<>();
+
     private boolean initialized = false;
+
     private Minecraft minecraft;
+    private MinecraftVersion mcVersion;
+    private Version version;
+
     private Gson gson;
+
     private FileUtil fileUtil;
     private MessageUtil messageUtil;
+
     private Config config;
     private GlobalSettings globalSettings;
     private LocaleHolder localeHolder;
+
     private TaskManager taskManager;
     private SessionManager sessionManager;
     private MigrationManager migrationManager;
@@ -69,6 +87,14 @@ public class Autotip {
 
     public GameProfile getGameProfile() {
         return minecraft.getSession().getProfile();
+    }
+
+    public MinecraftVersion getMcVersion() {
+        return mcVersion;
+    }
+
+    public Version getVersion() {
+        return version;
     }
 
     public Gson getGson() {
@@ -112,9 +138,13 @@ public class Autotip {
     }
 
     public void init() {
+        ErrorReport.setAutotip(this);
         RequestHandler.setAutotip(this);
         UniversalUtil.setAutotip(this);
         this.minecraft = Minecraft.getMinecraft();
+        this.mcVersion = UniversalUtil.getMinecraftVersion();
+        this.version = new Version(VERSION);
+
         this.messageUtil = new MessageUtil(this);
         this.registerEvents(new EventClientTick(this));
 
@@ -124,7 +154,8 @@ public class Autotip {
                     .registerTypeAdapter(Config.class, new ConfigCreator(this))
                     .registerTypeAdapter(StatsDaily.class, new StatsDailyCreator(this))
                     .setExclusionStrategies(new AnnotationExclusionStrategy())
-                    .setPrettyPrinting().create();
+                    .setPrettyPrinting()
+                    .create();
 
             this.config = new Config(this);
             this.reloadGlobalSettings();
@@ -151,20 +182,28 @@ public class Autotip {
             );
             Runtime.getRuntime().addShutdownHook(new Thread(sessionManager::logout));
             this.initialized = true;
-        } catch (IllegalStateException | IOException e) {
-            messageUtil.send("Autotip is disabled.");
+        } catch (IOException e) {
+            messageUtil.send("Autotip is disabled because it couldn't create the required files.");
+            ErrorReport.reportException(e);
+        } catch (IllegalStateException e) {
+            messageUtil.send("Autotip is disabled because it couldn't connect to the API.");
+            ErrorReport.reportException(e);
         }
     }
 
     public void reloadGlobalSettings() {
         SettingsReply reply = SettingsRequest.of(this).execute();
-        if (!reply.isSuccess()) throw new IllegalStateException("Connection error while fetching global settings");
+        if (!reply.isSuccess()) {
+            throw new IllegalStateException("Connection error while fetching global settings");
+        }
         this.globalSettings = reply.getSettings();
     }
 
     public void reloadLocale() {
         LocaleReply reply = LocaleRequest.of(this).execute();
-        if (!reply.isSuccess()) throw new IllegalStateException("Could not fetch locale");
+        if (!reply.isSuccess()) {
+            throw new IllegalStateException("Could not fetch locale");
+        }
         this.localeHolder = reply.getLocaleHolder();
     }
 
@@ -172,14 +211,16 @@ public class Autotip {
     public <T extends Event> T getEvent(Class<T> clazz) {
         return (T) events.stream()
                 .filter(event -> event.getClass().equals(clazz))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
     @SuppressWarnings("unchecked")
     public <T extends CommandAbstract> T getCommand(Class<T> clazz) {
         return (T) commands.stream()
                 .filter(command -> command.getClass().equals(clazz))
-                .findFirst().orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
     private void registerEvents(Event... events) {
@@ -195,4 +236,5 @@ public class Autotip {
             this.commands.add(command);
         }
     }
+
 }

@@ -1,5 +1,7 @@
 package me.semx11.autotip.util;
+
 import static java.time.format.DateTimeFormatter.ISO_LOCAL_DATE;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,9 +15,12 @@ import me.semx11.autotip.Autotip;
 import org.apache.commons.io.FilenameUtils;
 
 public class FileUtil {
+
     private static final DateTimeFormatter OLD_FORMAT = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+
     private final Path userDir;
     private final Path statsDir;
+
     private LocalDate firstDate;
 
     public FileUtil(Autotip autotip) {
@@ -24,7 +29,9 @@ public class FileUtil {
     }
 
     public void createDirectories() throws IOException {
-        if (!Files.exists(statsDir)) Files.createDirectories(statsDir);
+        if (!Files.exists(statsDir)) {
+            Files.createDirectories(statsDir);
+        }
     }
 
     public Path getUserDir() {
@@ -111,4 +118,5 @@ public class FileUtil {
     private String separator(String s) {
         return s.replaceAll("///", File.separator);
     }
+
 }

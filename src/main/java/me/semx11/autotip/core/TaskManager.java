@@ -1,6 +1,7 @@
 package me.semx11.autotip.core;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
+
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import java.util.Map;
 import java.util.concurrent.Callable;
@@ -13,10 +14,13 @@ import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ThreadFactory;
+import me.semx11.autotip.util.ErrorReport;
 
 public class TaskManager {
+
     private final ExecutorService executor;
     private final ScheduledExecutorService scheduler;
+
     private final Map<TaskType, Future> tasks;
 
     public TaskManager() {
@@ -32,7 +36,8 @@ public class TaskManager {
     public void schedule(Runnable runnable, long delay) {
         try {
             scheduler.schedule(runnable, delay, SECONDS).get();
-        } catch (InterruptedException | ExecutionException ignored) {
+        } catch (InterruptedException | ExecutionException e) {
+            ErrorReport.reportException(e);
         }
     }
 
@@ -40,19 +45,24 @@ public class TaskManager {
         try {
             return scheduler.schedule(callable, delay, SECONDS).get();
         } catch (InterruptedException | ExecutionException e) {
+            ErrorReport.reportException(e);
             return null;
         }
     }
 
     public void executeTask(TaskType type, Runnable task) {
-        if (tasks.containsKey(type)) return;
+        if (tasks.containsKey(type)) {
+            return;
+        }
         Future<?> future = executor.submit(task);
         tasks.put(type, future);
         this.catchFutureException(type, future);
     }
 
     public void addRepeatingTask(TaskType type, Runnable command, long delay, long period) {
-        if (tasks.containsKey(type)) return;
+        if (tasks.containsKey(type)) {
+            return;
+        }
         ScheduledFuture future = scheduler.scheduleAtFixedRate(command, delay, period, SECONDS);
         tasks.put(type, future);
         this.catchFutureException(type, future);
@@ -71,7 +81,9 @@ public class TaskManager {
                 future.get();
             } catch (CancellationException ignored) {
                 // Manual cancellation of a repeating task.
-            } catch (InterruptedException | ExecutionException ignoredd) {} finally {
+            } catch (InterruptedException | ExecutionException e) {
+                ErrorReport.reportException(e);
+            } finally {
                 tasks.remove(type);
             }
         });
@@ -80,6 +92,7 @@ public class TaskManager {
     private ThreadFactory getFactory(String name) {
         return new ThreadFactoryBuilder()
                 .setNameFormat(name)
+                .setUncaughtExceptionHandler((t, e) -> ErrorReport.reportException(e))
                 .build();
     }
 

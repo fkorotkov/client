@@ -3,7 +3,7 @@ package me.semx11.autotip.universal;
 import cc.hyperium.event.ServerChatEvent;
 import cc.hyperium.event.ServerJoinEvent;
 import me.semx11.autotip.Autotip;
-import cc.hyperium.utils.ChatColor;
+import me.semx11.autotip.chat.ChatColor;
 import me.semx11.autotip.util.MinecraftVersion;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.event.ClickEvent;
@@ -14,6 +14,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 
 public class UniversalUtil {
+
     private static Autotip autotip;
 
     public static void setAutotip(Autotip autotip) {
@@ -21,6 +22,7 @@ public class UniversalUtil {
     }
 
     public static MinecraftVersion getMinecraftVersion() {
+
         return MinecraftVersion.V1_8_9;
     }
 
@@ -33,7 +35,9 @@ public class UniversalUtil {
     }
 
     public static String getUnformattedText(Object component) {
-        if (component == null) return null;
+        if (component == null) {
+            return null;
+        }
 
         String unformattedText = ((IChatComponent) component).getUnformattedText();
         return ChatColor.stripFormatting(unformattedText);

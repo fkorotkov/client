@@ -25,20 +25,27 @@ import me.semx11.autotip.chat.MessageUtil;
 import me.semx11.autotip.core.TaskManager.TaskType;
 import me.semx11.autotip.event.impl.EventClientConnection;
 import me.semx11.autotip.stats.StatsRange;
+import me.semx11.autotip.util.ErrorReport;
 import me.semx11.autotip.util.HashUtil;
+import me.semx11.autotip.util.VersionInfo;
 import net.minecraft.util.Session;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 
 public class SessionManager {
+
     private final Autotip autotip;
     private final MessageUtil messageUtil;
     private final TaskManager taskManager;
+
     private final Queue<Tip> tipQueue = new ConcurrentLinkedQueue<>();
+
     private LoginReply reply;
     private SessionKey sessionKey = null;
+
     private boolean onHypixel = false;
     private boolean loggedIn = false;
+
     private long lastTipWave;
     private long nextTipWave;
 
@@ -76,6 +83,26 @@ public class SessionManager {
         return nextTipWave;
     }
 
+    public void checkVersions() {
+        List<VersionInfo> versions = autotip.getGlobalSettings()
+                .getHigherVersionInfo(autotip.getVersion());
+        if (versions.size() > 0) {
+            messageUtil.separator();
+            messageUtil.getKeyHelper("update")
+                    .withKey("message", context -> context.getBuilder()
+                            .setUrl(context.getKey("url"))
+                            .setHover(context.getKey("hover"))
+                            .send())
+                    .sendKey("changelogHeader");
+            versions.forEach(info -> {
+                messageUtil.sendKey("update.version", info.getVersion(),
+                        info.getSeverity().toColoredString());
+                info.getChangelog().forEach(s -> messageUtil.sendKey("update.logEntry", s));
+            });
+            messageUtil.separator();
+        }
+    }
+
     public void login() {
         Session session = autotip.getMinecraft().getSession();
         GameProfile profile = session.getProfile();
@@ -103,17 +130,25 @@ public class SessionManager {
         }
 
         this.sessionKey = reply.getSessionKey();
+
         this.loggedIn = true;
+
         long keepAlive = reply.getKeepAliveRate();
         long tipWave = reply.getTipWaveRate();
+
         taskManager.addRepeatingTask(TaskType.KEEP_ALIVE, this::keepAlive, keepAlive, keepAlive);
         taskManager.addRepeatingTask(TaskType.TIP_WAVE, this::tipWave, 0, tipWave);
     }
 
     public void logout() {
-        if (!loggedIn) return;
+        if (!loggedIn) {
+            return;
+        }
         LogoutReply reply = LogoutRequest.of(sessionKey).execute();
-        if (!reply.isSuccess()) Autotip.LOGGER.warn("Error during logout: {}", reply.getCause());
+        if (!reply.isSuccess()) {
+            Autotip.LOGGER.warn("Error during logout: {}", reply.getCause());
+        }
+
         this.loggedIn = false;
         this.sessionKey = null;
 
@@ -127,7 +162,9 @@ public class SessionManager {
             return;
         }
         KeepAliveReply r = KeepAliveRequest.of(sessionKey).execute();
-        if (!r.isSuccess()) Autotip.LOGGER.warn("KeepAliveRequest failed: {}", r.getCause());
+        if (!r.isSuccess()) {
+            Autotip.LOGGER.warn("KeepAliveRequest failed: {}", r.getCause());
+        }
     }
 
     private void tipWave() {
@@ -188,6 +225,7 @@ public class SessionManager {
 
             return conn.getResponseCode();
         } catch (IOException e) {
+            ErrorReport.reportException(e);
             return HttpStatus.SC_BAD_REQUEST;
         }
     }

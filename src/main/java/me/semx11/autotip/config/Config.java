@@ -75,7 +75,8 @@ public class Config {
 
     public Config save() {
         try {
-            FileUtils.writeStringToFile(configFile, autotip.getGson().toJson(this), StandardCharsets.UTF_8);
+            String json = autotip.getGson().toJson(this);
+            FileUtils.writeStringToFile(configFile, json, StandardCharsets.UTF_8);
         } catch (IOException e) {
             Autotip.LOGGER.error("Could not write config to " + configFile, e);
         }
@@ -101,7 +102,9 @@ public class Config {
 
         // Check if legacy config file exists
         File legacyFile = fileUtil.getFile("options.at");
-        if (!legacyFile.exists()) return this;
+        if (!legacyFile.exists()) {
+            return this;
+        }
 
         try {
             List<String> lines = Files.readAllLines(fileUtil.getPath("options.at"));

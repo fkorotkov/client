@@ -18,16 +18,22 @@ import me.semx11.autotip.api.request.Request;
 import me.semx11.autotip.gson.adapter.impl.LocaleAdapter;
 import me.semx11.autotip.gson.adapter.impl.PatternAdapter;
 import me.semx11.autotip.gson.adapter.impl.SessionKeyAdapter;
+import me.semx11.autotip.gson.adapter.impl.VersionAdapter;
+import me.semx11.autotip.util.ErrorReport;
+import me.semx11.autotip.util.Version;
 import org.apache.commons.io.IOUtils;
 
 public class RequestHandler {
+
     private static final Gson GSON = new GsonBuilder()
             .registerTypeAdapter(Locale.class, new LocaleAdapter())
             .registerTypeAdapter(Pattern.class, new PatternAdapter())
             .registerTypeAdapter(SessionKey.class, new SessionKeyAdapter())
+            .registerTypeAdapter(Version.class, new VersionAdapter())
             .create();
 
     private static Autotip autotip;
+
     public static void setAutotip(Autotip autotip) {
         RequestHandler.autotip = autotip;
     }
@@ -36,7 +42,7 @@ public class RequestHandler {
         String json = null;
         try {
             HttpURLConnection conn = (HttpURLConnection) uri.toURL().openConnection();
-            conn.setRequestProperty("User-Agent", "Autotip v3.0");
+            conn.setRequestProperty("User-Agent", "Autotip v" + autotip.getVersion());
 
             InputStream input;
             if (conn.getResponseCode() < HttpURLConnection.HTTP_BAD_REQUEST) {
@@ -51,8 +57,10 @@ public class RequestHandler {
 
             return Optional.ofNullable(reply);
         } catch (IOException | JsonParseException e) {
+            ErrorReport.reportException(e);
             Autotip.LOGGER.info(request.getType() + " JSON: " + json);
             return Optional.empty();
         }
     }
+
 }
