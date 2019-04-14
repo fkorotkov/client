@@ -66,9 +66,7 @@ public class Levelhead extends AbstractMod {
 
     public Levelhead() {
         Metadata metadata = new Metadata(this, "LevelHead", "5.0", "Sk1er");
-
         metadata.setDisplayName(ChatColor.AQUA + "LevelHead");
-
         this.meta = metadata;
     }
 
@@ -86,7 +84,6 @@ public class Levelhead extends AbstractMod {
             this.wait = object.optInt("wait", Integer.MAX_VALUE);
         });
         Multithreading.runAsync(() -> types = new JsonHolder(mod.rawWithAgent("https://api.sk1er.club/levelhead_config")));
-        this.mod.checkStatus();
         this.config = new LevelheadConfig();
         Hyperium.CONFIG.register(config);
         register(mod);
