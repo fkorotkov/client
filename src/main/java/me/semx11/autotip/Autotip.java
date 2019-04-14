@@ -42,10 +42,9 @@ import java.util.List;
 public class Autotip {
     public static final Logger LOGGER = Hyperium.LOGGER;
 
-    static final String MOD_ID = "autotip";
-    static final String NAME = "Autotip";
-    static final String VERSION = "3.0";
-    static final String ACCEPTED_VERSIONS = "[1.8, 1.12.2]";
+    private static final String MOD_ID = "autotip";
+    private static final String NAME = "Autotip";
+    private static final String VERSION = "3.0";
 
     public static IChatComponent tabHeader;
 
@@ -214,6 +213,10 @@ public class Autotip {
             EventBus.INSTANCE.register(event);
             this.events.add(event);
         }
+    }
+
+    public static String getVersion() {
+        return VERSION;
     }
 
     private void registerCommands(CommandAbstract... commands) {

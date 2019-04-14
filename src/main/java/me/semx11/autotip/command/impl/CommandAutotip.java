@@ -10,7 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
 import cc.hyperium.commands.CommandException;
 import me.semx11.autotip.Autotip;
 import me.semx11.autotip.chat.MessageOption;
@@ -26,7 +25,6 @@ import me.semx11.autotip.event.impl.EventClientConnection;
 import me.semx11.autotip.stats.StatsDaily;
 import me.semx11.autotip.universal.UniversalUtil;
 import me.semx11.autotip.util.MinecraftVersion;
-import net.minecraft.command.ICommandSender;
 
 import static net.minecraft.command.CommandBase.getListOfStringsMatchingLastWord;
 
@@ -236,15 +234,6 @@ public class CommandAutotip extends CommandAbstract {
                         .separator()
                         .sendKey("nextWave", next)
                         .sendKey("lastWave", last)
-                        .separator();
-                break;
-            case "changelog":
-                messageUtil.getKeyHelper("command.changelog")
-                        .separator()
-                        .sendKey("version", autotip.getVersion())
-                        .withKey("entry", context -> settings.getVersionInfo(autotip.getVersion())
-                                .getChangelog()
-                                .forEach(context::send))
                         .separator();
                 break;
             case "debug":
