@@ -50,6 +50,7 @@ import cc.hyperium.utils.LaunchUtil;
 import cc.hyperium.utils.StaffUtils;
 import cc.hyperium.utils.mods.CompactChat;
 import cc.hyperium.utils.mods.FPSLimiter;
+import jb.Metadata;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.crash.CrashReport;

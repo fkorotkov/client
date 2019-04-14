@@ -21,7 +21,7 @@ import cc.hyperium.config.Settings;
 import cc.hyperium.mods.chromahud.ElementRenderer;
 import cc.hyperium.mods.chromahud.api.DisplayItem;
 import cc.hyperium.utils.JsonHolder;
-
+import jb.Metadata;
 import java.util.ArrayList;
 import java.util.List;
 

@@ -36,6 +36,7 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicReference;
+import jb.Metadata;
 
 public class CrashReportGUI extends JDialog {
     private CrashReport report;
