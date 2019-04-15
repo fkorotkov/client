@@ -50,6 +50,7 @@ public class Autotip {
     private final List<CommandAbstract> commands = new ArrayList<>();
     private boolean initialized = false;
     private Minecraft minecraft;
+    private MinecraftVersion mcVersion;
     private Gson gson;
     private FileUtil fileUtil;
     private MessageUtil messageUtil;
@@ -73,6 +74,9 @@ public class Autotip {
         return minecraft.getSession().getProfile();
     }
 
+    public MinecraftVersion getMcVersion() {
+        return mcVersion;
+    }
     public Gson getGson() {
         return gson;
     }
