@@ -45,26 +45,17 @@ public class Autotip {
     private static final String MOD_ID = "autotip";
     private static final String NAME = "Autotip";
     private static final String VERSION = "3.0";
-
     public static IChatComponent tabHeader;
-
     private final List<Event> events = new ArrayList<>();
     private final List<CommandAbstract> commands = new ArrayList<>();
-
     private boolean initialized = false;
-
     private Minecraft minecraft;
-    private MinecraftVersion mcVersion;
-
     private Gson gson;
-
     private FileUtil fileUtil;
     private MessageUtil messageUtil;
-
     private Config config;
     private GlobalSettings globalSettings;
     private LocaleHolder localeHolder;
-
     private TaskManager taskManager;
     private SessionManager sessionManager;
     private MigrationManager migrationManager;
@@ -80,10 +71,6 @@ public class Autotip {
 
     public GameProfile getGameProfile() {
         return minecraft.getSession().getProfile();
-    }
-
-    public MinecraftVersion getMcVersion() {
-        return mcVersion;
     }
 
     public Gson getGson() {
@@ -155,9 +142,7 @@ public class Autotip {
 
             this.fileUtil.createDirectories();
             this.config.load();
-            this.taskManager.getExecutor().execute(() -> {
-                this.migrationManager.migrateLegacyFiles();
-            });
+            this.taskManager.getExecutor().execute(() -> this.migrationManager.migrateLegacyFiles());
 
             this.registerEvents(
                     new EventClientConnection(this),
@@ -169,26 +154,20 @@ public class Autotip {
             );
             Runtime.getRuntime().addShutdownHook(new Thread(sessionManager::logout));
             this.initialized = true;
-        } catch (IOException e) {
-            messageUtil.send("Autotip is disabled because it couldn't create the required files.");
-        } catch (IllegalStateException e) {
-            messageUtil.send("Autotip is disabled because it couldn't connect to the API.");
+        } catch (IllegalStateException | IOException e) {
+            messageUtil.send("Autotip is disabled because of an error.");
         }
     }
 
     public void reloadGlobalSettings() {
         SettingsReply reply = SettingsRequest.of(this).execute();
-        if (!reply.isSuccess()) {
-            throw new IllegalStateException("Connection error while fetching global settings");
-        }
+        if (!reply.isSuccess()) throw new IllegalStateException("Connection error while fetching global settings");
         this.globalSettings = reply.getSettings();
     }
 
     public void reloadLocale() {
         LocaleReply reply = LocaleRequest.of(this).execute();
-        if (!reply.isSuccess()) {
-            throw new IllegalStateException("Could not fetch locale");
-        }
+        if (!reply.isSuccess()) throw new IllegalStateException("Could not fetch locale");
         this.localeHolder = reply.getLocaleHolder();
     }
 
@@ -225,5 +204,4 @@ public class Autotip {
             this.commands.add(command);
         }
     }
-
 }
