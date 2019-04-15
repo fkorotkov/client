@@ -216,13 +216,12 @@ public class LevelHeadGui extends GuiScreen {
     }
 
     private void updateCustom() {
-        Jailbreak jb = Hyperium.getJailbreak().getBrowseUtil();
         lock.lock();
         reg(new GuiButton(13, this.width / 2 - 155, this.height - 44, 310, 20, (isCustom ? ChatColor.YELLOW + "Click to change custom Levelhead." : ChatColor.YELLOW + "Click to purchase a custom Levelhead message")), button -> {
             if (isCustom) {
-                jb.BrowseURI("https://sk1er.club/user");
+                Hyperium.getJailbreak().getBrowseUtil().BrowseURI("https://sk1er.club/user");
             } else {
-                jb.BrowseURI("https://sk1er.club/customlevelhead");
+                Hyperium.getJailbreak().getBrowseUtil().BrowseURI("https://sk1er.club/customlevelhead");
             }
         });
         if (isCustom) {
