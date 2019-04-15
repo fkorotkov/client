@@ -42,13 +42,9 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.fml.client.config.GuiSlider;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.lwjgl.input.Keyboard;
-
 import java.awt.Color;
-import java.awt.Desktop;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,14 +53,7 @@ import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Consumer;
 
-/**
- * @author Sk1er
- * <p>
- * Modified by boomboompower on 14/6/2017
- */
 public class LevelHeadGui extends GuiScreen {
-
-
     private final String ENABLED = ChatColor.GREEN + "Enabled";
     private final String DISABLED = ChatColor.RED + "Disabled";
     private final String COLOR_CHAR = String.valueOf("\u00a7");
@@ -147,12 +136,10 @@ public class LevelHeadGui extends GuiScreen {
             button.displayString = "Header Mode: " + getMode(false);
         });
 
-
         reg(this.prefixButton = new GuiButton(6, this.width / 2 + 5, calculateHeight(1), 150, 20, "Set Prefix"), button -> changePrefix());
 
         this.textField = new GuiTextField(0, mc.fontRendererObj, this.width / 2 - 154, calculateHeight(1), 148, 20);
 
-        //Color rotate
         reg(this.headerColorButton = new GuiButton(4, this.width / 2 - 155, calculateHeight(5), 150, 20, "Rotate Color"), button -> {
             int primaryId = colors.indexOf(removeColorChar(config.getHeaderColor()));
             if (++primaryId == colors.length()) {
@@ -176,7 +163,6 @@ public class LevelHeadGui extends GuiScreen {
             config.setPurgeSize(slider.getValueInt());
             slider.dragging = false;
         }), null);
-
 
         JsonHolder types = instance.getTypes();
         reg(this.buttonType = new GuiButton(4, this.width / 2 - 155, calculateHeight(3), 150 * 2 + 10, 20, "Current Type: " + types.optJSONObject(instance.getType()).optString("name")), button -> {
@@ -212,7 +198,6 @@ public class LevelHeadGui extends GuiScreen {
             slider.dragging = false;
         }), null);
 
-
         regSlider(new GuiSlider(10, this.width / 2 + 5, calculateHeight(5), 150, 20, "Footer Red: ", "", 0, 255, config.getFooterRed(), false, true, slider -> {
             config.setFooterRed(slider.getValueInt());
             updatePeopleToValues();
@@ -228,23 +213,17 @@ public class LevelHeadGui extends GuiScreen {
             updatePeopleToValues();
             slider.dragging = false;
         }), null);
-
     }
 
     private void updateCustom() {
+        Jailbreak jb = Hyperium.getJailbreak().getBrowseUtil();
         lock.lock();
         reg(new GuiButton(13, this.width / 2 - 155, this.height - 44, 310, 20, (isCustom ? ChatColor.YELLOW + "Click to change custom Levelhead." : ChatColor.YELLOW + "Click to purchase a custom Levelhead message")), button -> {
-
-            try {
-                if (isCustom) {
-                    Desktop.getDesktop().browse(new URI("https://sk1er.club/user"));
-                } else {
-                    Desktop.getDesktop().browse(new URI("https://sk1er.club/customlevelhead"));
-                }
-            } catch (IOException | URISyntaxException e) {
-                e.printStackTrace();
+            if (isCustom) {
+                jb.BrowseURI("https://sk1er.club/user");
+            } else {
+                jb.BrowseURI("https://sk1er.club/customlevelhead");
             }
-
         });
         if (isCustom) {
             GuiButton button1 = new GuiButton(16, this.width / 2 - 155, this.height - 22, 310, 20, ChatColor.YELLOW + "Export these colors to my custom Levelhead");
@@ -280,7 +259,6 @@ public class LevelHeadGui extends GuiScreen {
         slider.yPosition += 30;
         reg(slider, but);
         sliders.add(slider);
-
     }
 
     @Override
@@ -405,7 +383,7 @@ public class LevelHeadGui extends GuiScreen {
         if (!textField.getText().isEmpty()) {
             this.mod.getConfig().setCustomHeader(textField.getText());
             this.mod.levelCache.clear();
-            sendChatMessage(String.format("LevelHead prefix is now %s!", ChatColor.GOLD + textField.getText() + ChatColor.YELLOW));
+            sendChatMessage(String.format("Levelhead prefix is now %s!", ChatColor.GOLD + textField.getText() + ChatColor.YELLOW));
         } else {
             sendChatMessage("No prefix supplied!");
         }
@@ -413,7 +391,7 @@ public class LevelHeadGui extends GuiScreen {
     }
 
     private void drawTitle() {
-        String text = "Sk1er LevelHead v5.0";
+        String text = "Levelhead Jailbreak";
 
         drawCenteredString(mc.fontRendererObj, text, this.width / 2, 5, Color.WHITE.getRGB());
         drawHorizontalLine(this.width / 2 - mc.fontRendererObj.getStringWidth(text) / 2 - 5, this.width / 2 + mc.fontRendererObj.getStringWidth(text) / 2 + 5, 15, Color.WHITE.getRGB());
